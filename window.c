@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Tue Mar 21 10:10:03 2017 Nicolas Polomack
+** Last update Fri Mar 24 15:15:36 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -55,10 +55,10 @@ int		main(int ac, char **av, char **ae)
   //if (!my_strcmp(av[1], "-h") || !my_strcmp(av[1], "--help"))
   //return (disp_guide());
   //params.seed = init_seed(ac, av, ae, (void *)&main);
-  params.screen_size.x = 1920;
-  params.screen_size.y = 1080;
+  params.screen_size.x = 1280;
+  params.screen_size.y = 720;
   create_window(&w.window, "raytracer2", params.screen_size);
-  w.buffer = load_bmp("../raytracer1/multithread/capture.bmp", &w.sprite, &w.texture);
+  w.buffer = load_bmp("resources/loading.bmp", &w.sprite, &w.texture);
   sfTexture_updateFromPixels(w.texture, w.buffer->pixels,
 			     w.buffer->width, w.buffer->height, 0, 0);
   sfRenderWindow_drawSprite(w.window, w.sprite, NULL);

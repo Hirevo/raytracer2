@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Tue Mar 21 09:56:51 2017 Nicolas Polomack
+** Last update Fri Mar 24 15:12:21 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -103,5 +103,32 @@ typedef struct		s_menu
   t_my_framebuffer	*option;
   int			menu_id;
 }			t_menu;
+
+/*
+** intersect_sphere.c
+*/
+float	intersect_sphere(sfVector3f, sfVector3f, float);
+
+/*
+** intersect_plane.c
+*/
+float	intersect_plane(sfVector3f *restrict, sfVector3f *restrict);
+
+/*
+** intersect_cyl.c
+*/
+float	intersect_cyl(sfVector3f *restrict, sfVector3f *restrict, t_obj *);
+float	intersect_closed_cyl(sfVector3f *restrict, sfVector3f *restrict, t_obj *, float);
+
+/*
+** intersect_cone.c
+*/
+float	intersect_cone(sfVector3f *restrict, sfVector3f *restrict, t_obj *);
+float	intersect_closed_cone(sfVector3f *restrict, sfVector3f *restrict, t_obj *, float);
+
+/*
+** intersect_disk.c
+*/
+float	intersect_disk(sfVector3f *restrict, sfVector3f *restrict, float);
 
 #endif /* !RAYTRACER_H_ */
