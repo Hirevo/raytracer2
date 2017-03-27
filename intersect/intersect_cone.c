@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Fri Mar 24 15:10:45 2017 Nicolas Polomack
+** Last update Mon Mar 27 03:02:24 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -42,7 +42,7 @@ void	calc_abcd(float *abcd, sfVector3f *restrict eye_pos,
 float	ret_value(float *abcd, float *root,
 		  float pos, float dir)
 {
-  if (root[2] == -1 || ((root[3] == 'o' || root[3] == 'u') &&
+  if (root[2] == -1 || ((root[3] == 5 || root[3] == 6) &&
 			(roundf(pos + dir * root[2]) > 0)))
     {
       if (abcd[3])
@@ -57,8 +57,8 @@ float	ret_value(float *abcd, float *root,
   return (root[2]);
 }
 
-float	intersect_cone(sfVector3f *restrict eye_pos,
-		       sfVector3f *restrict dir_vector,
+float	intersect_cone(sfVector3f eye_pos,
+		       sfVector3f dir_vector,
 		       t_obj *obj)
 {
   float	abcd[4];
@@ -67,7 +67,7 @@ float	intersect_cone(sfVector3f *restrict eye_pos,
   root[0] = 0;
   root[1] = 0;
   root[2] = -1;
-  calc_abcd(abcd, eye_pos, dir_vector, obj);
+  calc_abcd(abcd, &eye_pos, &dir_vector, obj);
   if (abcd[3] <= 0)
     return (-1.0F);
   else if (abcd[3])
@@ -77,26 +77,25 @@ float	intersect_cone(sfVector3f *restrict eye_pos,
       root[2] = get_value(root);
     }
   root[3] = obj->type;
-  root[2] = ret_value(abcd, root, eye_pos->z, dir_vector->z);
-  if (obj->type == 'u' && root[2] != -1)
+  root[2] = ret_value(abcd, root, eye_pos.z, dir_vector.z);
+  if (obj->type == 6 && root[2] != -1)
     return (intersect_closed_cone(eye_pos, dir_vector, obj, root[2]));
   return (root[2]);
 }
 
-float	intersect_closed_cone(sfVector3f *restrict eye_pos,
-			      sfVector3f *restrict dir_vector,
+float	intersect_closed_cone(sfVector3f eye_pos,
+			      sfVector3f dir_vector,
 			      t_obj *obj, float dist)
 {
   float	impz;
 
-  impz = eye_pos->z + dir_vector->z * dist;
+  impz = eye_pos.z + dir_vector.z * dist;
   if (roundf(impz) == 0)
     return (-1);
   if (roundf(impz) >= -obj->height)
     return (dist);
-  eye_pos->z += (obj->height);
-  dist = intersect_disk(eye_pos, dir_vector, tanr(obj->aper) *
-			obj->height);
-  eye_pos->z -= (obj->height);
+  eye_pos.z += (obj->height);
+  obj->rad = tanr(obj->aper) * obj->height;
+  dist = intersect_disk(eye_pos, dir_vector, obj);
   return (dist);
 }

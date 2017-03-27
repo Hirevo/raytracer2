@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Fri Mar 24 15:12:21 2017 Nicolas Polomack
+** Last update Mon Mar 27 03:21:41 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -60,7 +60,12 @@ typedef struct		s_params
 {
   sfVector2i		screen_size;
   sfVector2i		screen_pos;
-  t_light		*light;
+  sfVector3f		normal;
+  sfVector3f		impact;
+  sfVector3f		start;
+  t_light		*lights;
+  float			(*intersect[7])(sfVector3f, sfVector3f, t_obj *);
+  void			(*get_normal[7])(t_params *, t_obj *);
   int			ssaa;
   int			bmp;
   int			live;
@@ -70,7 +75,7 @@ typedef struct		s_params
   int			progress;
   int			reflect_depth;
   int			nb_lights;
-  int			nb_obj;
+  int			nb_objs;
   t_ray			ray;
   t_obj			*objs;
   float			ambient;
@@ -107,28 +112,60 @@ typedef struct		s_menu
 /*
 ** intersect_sphere.c
 */
-float	intersect_sphere(sfVector3f, sfVector3f, float);
+float	intersect_sphere(sfVector3f, sfVector3f, t_obj *);
 
 /*
 ** intersect_plane.c
 */
-float	intersect_plane(sfVector3f *restrict, sfVector3f *restrict);
+float	intersect_plane(sfVector3f, sfVector3f, t_obj *);
 
 /*
 ** intersect_cyl.c
 */
-float	intersect_cyl(sfVector3f *restrict, sfVector3f *restrict, t_obj *);
-float	intersect_closed_cyl(sfVector3f *restrict, sfVector3f *restrict, t_obj *, float);
+float	intersect_cyl(sfVector3f, sfVector3f, t_obj *);
+float	intersect_closed_cyl(sfVector3f, sfVector3f, t_obj *, float);
 
 /*
 ** intersect_cone.c
 */
-float	intersect_cone(sfVector3f *restrict, sfVector3f *restrict, t_obj *);
-float	intersect_closed_cone(sfVector3f *restrict, sfVector3f *restrict, t_obj *, float);
+float	intersect_cone(sfVector3f, sfVector3f, t_obj *);
+float	intersect_closed_cone(sfVector3f, sfVector3f, t_obj *, float);
 
 /*
 ** intersect_disk.c
 */
-float	intersect_disk(sfVector3f *restrict, sfVector3f *restrict, float);
+float	intersect_disk(sfVector3f, sfVector3f, t_obj *);
+
+/*
+** normals.c
+*/
+void	get_normal_sphere(t_params *, t_obj *);
+void	get_normal_plane(t_params *, t_obj *);
+void	get_normal_cyl(t_params *, t_obj *);
+void	get_normal_cone(t_params *, t_obj *);
+
+/*
+** calc_dir_vector.c
+*/
+sfVector3f	calc_dir_vector(sfVector2i, float, float, int);
+
+/*
+** raytrace.c
+*/
+float		gather_dist(t_params *, int);
+sfColor		raytrace(t_params *);
+
+/*
+** light.c
+*/
+sfColor		eval_luminosity(t_params *, sfColor);
+int		is_obstructed(t_params *, t_obj *);
+float		get_light_coef(sfVector3f, sfVector3f);
+
+/*
+** rotation.c
+*/
+void	rotation(sfVector3f *, t_obj *);
+void	anti_rotation(sfVector3f *, t_obj *);
 
 #endif /* !RAYTRACER_H_ */
