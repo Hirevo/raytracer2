@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Mon Mar 27 03:21:41 2017 Nicolas Polomack
+** Last update Tue Mar 28 21:38:10 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -52,6 +52,16 @@ typedef struct	s_obj
 
 typedef struct s_thread
 {
+  sfVector2i	screen_pos;
+  sfVector3f	normal;
+  sfVector3f	dir;
+  sfVector3f	impact;
+  sfVector3f	start;
+  sfVector2i	offs;
+  sfVector2i	end;
+  t_ray		ray;
+  t_obj		*from;
+  int		depth;
   t_window	*w;
   t_params      *params;
 }               t_thread;
@@ -59,13 +69,13 @@ typedef struct s_thread
 typedef struct		s_params
 {
   sfVector2i		screen_size;
-  sfVector2i		screen_pos;
-  sfVector3f		normal;
-  sfVector3f		impact;
   sfVector3f		start;
   t_light		*lights;
   float			(*intersect[7])(sfVector3f, sfVector3f, t_obj *);
-  void			(*get_normal[7])(t_params *, t_obj *);
+  void			(*get_normal[7])(t_thread *, t_obj *);
+  int			t_count;
+  pthread_mutex_t	mutex;
+  pthread_t		*t;
   int			ssaa;
   int			bmp;
   int			live;
@@ -76,7 +86,6 @@ typedef struct		s_params
   int			reflect_depth;
   int			nb_lights;
   int			nb_objs;
-  t_ray			ray;
   t_obj			*objs;
   float			ambient;
   int			fov;
@@ -139,10 +148,10 @@ float	intersect_disk(sfVector3f, sfVector3f, t_obj *);
 /*
 ** normals.c
 */
-void	get_normal_sphere(t_params *, t_obj *);
-void	get_normal_plane(t_params *, t_obj *);
-void	get_normal_cyl(t_params *, t_obj *);
-void	get_normal_cone(t_params *, t_obj *);
+void	get_normal_sphere(t_thread *, t_obj *);
+void	get_normal_plane(t_thread *, t_obj *);
+void	get_normal_cyl(t_thread *, t_obj *);
+void	get_normal_cone(t_thread *, t_obj *);
 
 /*
 ** calc_dir_vector.c
@@ -150,22 +159,51 @@ void	get_normal_cone(t_params *, t_obj *);
 sfVector3f	calc_dir_vector(sfVector2i, float, float, int);
 
 /*
+** window.c
+*/
+void		render_frame(t_thread *);
+
+/*
 ** raytrace.c
 */
-float		gather_dist(t_params *, int);
-sfColor		raytrace(t_params *);
+float		gather_dist(t_thread *, int);
+sfColor		raytrace(t_thread *);
+
+/*
+** thread.c
+*/
+int	init_thread(t_window *, t_params *);
 
 /*
 ** light.c
 */
-sfColor		eval_luminosity(t_params *, sfColor);
-int		is_obstructed(t_params *, t_obj *);
+sfColor		calc_lights(t_thread *, t_obj *);
+sfColor		get_shadow_color(t_thread *, t_obj *);
+sfColor		eval_luminosity(t_thread *, sfColor);
+int		is_obstructed(t_thread *, t_obj *);
 float		get_light_coef(sfVector3f, sfVector3f);
+
+/*
+** colors.c
+*/
+sfColor		average_colors(sfColor *, int);
+
+/*
+** reflect.c
+*/
+void		prepare_light_ray(t_thread *, int);
+sfColor		apply_reflect(sfColor, sfColor, float);
+sfColor		light_effects(t_thread *, t_obj *, sfColor);
 
 /*
 ** rotation.c
 */
 void	rotation(sfVector3f *, t_obj *);
 void	anti_rotation(sfVector3f *, t_obj *);
+
+/*
+** parse/proc.c
+*/
+int	get_core_count();
 
 #endif /* !RAYTRACER_H_ */

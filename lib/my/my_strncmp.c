@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.net>
 ** 
 ** Started on  Mon Oct 10 09:38:55 2016 Nicolas POLOMACK
-** Last update Mon Jan 16 01:20:34 2017 Nicolas Polomack
+** Last update Tue Mar 28 19:07:36 2017 Nicolas Polomack
 */
 
 int	my_strncmp(char *str1, char *str2, int n)
@@ -14,8 +14,6 @@ int	my_strncmp(char *str1, char *str2, int n)
 
   i = 0;
   while (i < n && str1[i] && str2[i] && str1[i] == str2[i])
-    {
-      i += 1;
-    }
+    i += 1;
   return (str2[i] - str1[i]);
 }
