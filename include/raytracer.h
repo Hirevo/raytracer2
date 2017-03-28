@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Tue Mar 28 21:38:10 2017 Nicolas Polomack
+** Last update Wed Mar 29 01:44:31 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -48,6 +48,7 @@ typedef struct	s_obj
   sfColor	col;
   float		height;
   float		reflect;
+  float		spec_coef;
 }		t_obj;
 
 typedef struct s_thread
@@ -57,6 +58,7 @@ typedef struct s_thread
   sfVector3f	dir;
   sfVector3f	impact;
   sfVector3f	start;
+  sfVector3f	recur_start;
   sfVector2i	offs;
   sfVector2i	end;
   t_ray		ray;
@@ -166,12 +168,14 @@ void		render_frame(t_thread *);
 /*
 ** raytrace.c
 */
+void		prepare_light_calc(t_thread *, t_obj *, float);
 float		gather_dist(t_thread *, int);
 sfColor		raytrace(t_thread *);
 
 /*
 ** thread.c
 */
+void	update_frame(t_window *, pthread_mutex_t *);
 int	init_thread(t_window *, t_params *);
 
 /*
@@ -179,7 +183,7 @@ int	init_thread(t_window *, t_params *);
 */
 sfColor		calc_lights(t_thread *, t_obj *);
 sfColor		get_shadow_color(t_thread *, t_obj *);
-sfColor		eval_luminosity(t_thread *, sfColor);
+sfColor		eval_luminosity(t_thread *, sfColor, float *);
 int		is_obstructed(t_thread *, t_obj *);
 float		get_light_coef(sfVector3f, sfVector3f);
 
@@ -194,6 +198,12 @@ sfColor		average_colors(sfColor *, int);
 void		prepare_light_ray(t_thread *, int);
 sfColor		apply_reflect(sfColor, sfColor, float);
 sfColor		light_effects(t_thread *, t_obj *, sfColor);
+sfColor		apply_effects(t_thread *, t_obj *, float);
+
+/*
+** specular.c
+*/
+sfColor		specular_effect(sfColor, t_thread *, t_obj *, int);
 
 /*
 ** rotation.c

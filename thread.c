@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Tue Mar 28 19:53:14 2017 Nicolas Polomack
+** Last update Wed Mar 29 01:39:00 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -19,6 +19,39 @@ void		*render_thread(void *arg)
   t = (t_thread *)arg;
   render_frame(t);
   return (NULL);
+}
+
+void	update_frame(t_window *w, pthread_mutex_t *mutex)
+{
+  if (pthread_mutex_trylock(mutex) != 0)
+    return ;
+  sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
+                             w->buffer->width, w->buffer->height, 0, 0);
+  sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
+  sfRenderWindow_display(w->window);
+  pthread_mutex_unlock(mutex);
+}
+
+void	set_limits(t_thread *t, t_window *w,
+		   t_params *params, int i)
+{
+  if (!(i % 2))
+    {
+      t->offs.x = (params->screen_size.x /
+		   (params->t_count / 2)) * (i / 2);
+      t->offs.y = 0;
+    }
+  else
+    {
+      t->offs.x = (params->screen_size.x /
+		   (params->t_count / 2)) * ((i - 1) / 2);
+      t->offs.y = (params->screen_size.y / 2);
+    }
+  t->end.x = (t->offs.x + (w->buffer->width /
+			   (params->t_count / 2)));
+  t->end.y = (t->offs.y + (w->buffer->height / 2));
+  t->end.x += (i >= (params->t_count - 2)) ?
+    params->screen_size.x % (params->t_count / 2) : 0;
 }
 
 int	init_thread(t_window *w, t_params *params)
@@ -36,23 +69,7 @@ int	init_thread(t_window *w, t_params *params)
       t->params = params;
       t->w = w;
       t->start = params->start;
-      if (!(i % 2))
-	{
-	  t->offs.x = (params->screen_size.x /
-		       (params->t_count / 2)) * (i / 2);
-	  t->offs.y = 0;
-	}
-      else
-	{
-	  t->offs.x = (params->screen_size.x /
-		       (params->t_count / 2)) * ((i - 1) / 2);
-	  t->offs.y = (params->screen_size.y / 2);
-	}
-      t->end.x = (t->offs.x + (w->buffer->width /
-			       (params->t_count / 2)));
-      t->end.y = (t->offs.y + (w->buffer->height / 2));
-      t->end.x += (i >= (params->t_count - 2)) ?
-	params->screen_size.x % (params->t_count / 2) : 0;
+      set_limits(t, w, params, i);
       pthread_create(&(params->t[i]), NULL, render_thread, (void *)t);
     }
   i = -1;

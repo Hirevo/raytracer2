@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 00:22:54 2017 Nicolas Polomack
-** Last update Tue Mar 28 21:34:04 2017 Nicolas Polomack
+** Last update Wed Mar 29 01:48:44 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -60,7 +60,6 @@ sfColor		raytrace(t_thread *t)
   t_obj		*obj;
   float		dist;
   float		temp;
-  sfColor	col;
 
   i = -1;
   obj = NULL;
@@ -78,8 +77,6 @@ sfColor		raytrace(t_thread *t)
     }
   if (dist == -1)
     return (sfBlack);
-  prepare_light_calc(t, obj, dist);
-  col = calc_lights(t, obj);
-  col = light_effects(t, obj, col);
-  return (col);
+  t->recur_start = t->ray.orig;
+  return (apply_effects(t, obj, dist));
 }

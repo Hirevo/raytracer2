@@ -5,11 +5,21 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 20:37:50 2017 Nicolas Polomack
-** Last update Tue Mar 28 21:34:33 2017 Nicolas Polomack
+** Last update Wed Mar 29 01:42:48 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
 #include "raytracer.h"
+
+sfColor		apply_effects(t_thread *t, t_obj *obj, float dist)
+{
+  sfColor	col;
+
+  prepare_light_calc(t, obj, dist);
+  col = calc_lights(t, obj);
+  col = light_effects(t, obj, col);
+  return (col);
+}
 
 void	prepare_light_ray(t_thread *t, int i)
 {

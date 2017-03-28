@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Tue Mar 28 21:38:30 2017 Nicolas Polomack
+** Last update Wed Mar 29 01:36:45 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -41,7 +41,8 @@ void	handle_events(t_window *w, t_params *params,sfEvent *event)
   if (sfWindow_hasFocus((sfWindow *)w->window))
     {
       while (sfRenderWindow_pollEvent(w->window, event))
-	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyEscape)
+	if ((event->type == sfEvtKeyPressed && event->key.code == sfKeyEscape)
+	    || event->type == sfEvtClosed)
 	  sfRenderWindow_close(w->window);
       if (sfKeyboard_isKeyPressed(sfKeyZ))
 	params->start.x += 3;
@@ -79,6 +80,7 @@ void	init(t_params *params)
   params->start.z = 20;
   params->nb_objs = 5;
   params->objs = malloc(sizeof(t_obj) * 5);
+  my_memset((char *)params->objs, 0, sizeof(t_obj) * 5);
   params->objs[0].type = 0;
   params->objs[0].pos.x = -10;
   params->objs[0].pos.y = 55;
@@ -87,7 +89,8 @@ void	init(t_params *params)
   params->objs[0].ry = 0;
   params->objs[0].rz = 0;
   params->objs[0].rad = 25;
-  params->objs[0].reflect = 0.25;
+  params->objs[0].reflect = 0.5;
+  params->objs[0].spec_coef = 50;
   params->objs[0].col = get_sfcolor(0, 255, 0, 255);
   params->objs[1].type = 0;
   params->objs[1].pos.x = -10;
@@ -97,7 +100,8 @@ void	init(t_params *params)
   params->objs[1].ry = 0;
   params->objs[1].rz = 0;
   params->objs[1].rad = 25;
-  params->objs[1].reflect = 0.25;
+  params->objs[1].reflect = 0.5;
+  params->objs[1].spec_coef = 50;
   params->objs[1].col = get_sfcolor(255, 0, 0, 255);
   params->objs[2].type = 0;
   params->objs[2].pos.x = -10;
@@ -107,7 +111,8 @@ void	init(t_params *params)
   params->objs[2].ry = 0;
   params->objs[2].rz = 0;
   params->objs[2].rad = 25;
-  params->objs[2].reflect = 0.25;
+  params->objs[2].reflect = 0.5;
+  params->objs[2].spec_coef = 50;
   params->objs[2].col = get_sfcolor(0, 0, 255, 255);
   params->objs[3].type = 1;
   params->objs[3].pos.x = 30;
@@ -120,6 +125,7 @@ void	init(t_params *params)
   params->objs[3].aper = 20;
   params->objs[3].height = 50;
   params->objs[3].reflect = 0;
+  params->objs[3].spec_coef = 20;
   params->objs[3].col = get_sfcolor(100, 100, 100, 255);
   params->objs[4].type = 1;
   params->objs[4].pos.x = 0;
@@ -129,25 +135,15 @@ void	init(t_params *params)
   params->objs[4].ry = 0;
   params->objs[4].rz = 0;
   params->objs[4].reflect = 0;
+  params->objs[4].spec_coef = 20;
   params->objs[4].col = get_sfcolor(100, 100, 100, 255);
   params->nb_lights = 1;
   params->lights = malloc(sizeof(t_light) * 1);
   params->lights[0].pos.x = 0;
   params->lights[0].pos.y = 0;
   params->lights[0].pos.z = 100;
-  params->ambient = 0.05;
+  params->ambient = 0;
   params->reflect_depth = 3;
-}
-
-void	update_frame(t_window *w, pthread_mutex_t *mutex)
-{
-  if (pthread_mutex_trylock(mutex) != 0)
-    return ;
-  sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
-                             w->buffer->width, w->buffer->height, 0, 0);
-  sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
-  sfRenderWindow_display(w->window);
-  pthread_mutex_unlock(mutex);
 }
 
 void	render_frame(t_thread *t)
@@ -167,7 +163,7 @@ void	render_frame(t_thread *t)
 	  put_pixel(t->w->buffer, t->screen_pos.x, t->screen_pos.y,
 		    raytrace(t));
 	}
-      update_frame(t->w, &t->params->mutex);
+      //update_frame(t->w, &t->params->mutex);
     }
 }
 
@@ -182,8 +178,8 @@ int		main(int ac, char **av, char **ae)
   //if (!my_strcmp(av[1], "-h") || !my_strcmp(av[1], "--help"))
   //return (disp_guide());
   //params.seed = init_seed(ac, av, ae, (void *)&main);
-  params.screen_size.x = 1980;
-  params.screen_size.y = 1080;
+  params.screen_size.x = 1280;
+  params.screen_size.y = 720;
   create_window(&w.window, "Raytracer2", params.screen_size);
   w.buffer = assemble_texture(&w.texture, &w.sprite,
 			      params.screen_size.x, params.screen_size.y);
