@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Wed Mar 29 01:39:00 2017 Nicolas Polomack
+** Last update Thu Mar 30 02:24:15 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -17,7 +17,10 @@ void		*render_thread(void *arg)
   t_thread	*t;
 
   t = (t_thread *)arg;
-  render_frame(t);
+  if (t->params->config.stereo)
+    render_stereo_frame(t);
+  else
+    render_frame(t);
   return (NULL);
 }
 

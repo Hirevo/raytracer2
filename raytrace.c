@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 00:22:54 2017 Nicolas Polomack
-** Last update Wed Mar 29 01:48:44 2017 Nicolas Polomack
+** Last update Thu Mar 30 00:26:41 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -19,13 +19,13 @@ sfVector3f	prepare(sfVector3f vec, t_obj *obj, int i)
       vec.y -= obj->pos.y;
       vec.z -= obj->pos.z;
     }
-  anti_rotation(&vec, obj);
+  anti_rotation(&vec, &obj->r);
   return (vec);
 }
 
 sfVector3f	anti_prepare(sfVector3f vec, t_obj *obj, int i)
 {
-  rotation(&vec, obj);
+  rotation(&vec, &obj->r);
   if (i)
     {
       vec.x += obj->pos.x;
@@ -43,15 +43,14 @@ float	gather_dist(t_thread *t, int i)
 	   &(t->params->objs[i])));
 }
 
-void	prepare_light_calc(t_thread *t, t_obj *obj, float dist)
+void	prepare_raytrace(t_thread *t)
 {
-  t->impact.x = t->ray.orig.x + t->ray.dir.x * dist;
-  t->impact.y = t->ray.orig.y + t->ray.dir.y * dist;
-  t->impact.z = t->ray.orig.z + t->ray.dir.z * dist;
-  t->ray.orig = t->impact;
-  t->normal = prepare(t->impact, obj, 1);
-  t->params->get_normal[(int)obj->type](t, obj);
-  t->normal = anti_prepare(t->normal, obj, 0);
+  t->depth = 0;
+  t->from = NULL;
+  t->ray.dir = calc_dir_vector(t->params->screen_size,
+			       t->screen_pos.x,
+			       t->screen_pos.y, 104);
+  rotation(&t->ray.dir, &t->params->r);
 }
 
 sfColor		raytrace(t_thread *t)

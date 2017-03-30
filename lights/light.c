@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb 13 20:54:49 2017 Nicolas Polomack
-** Last update Wed Mar 29 01:24:54 2017 Nicolas Polomack
+** Last update Thu Mar 30 02:23:25 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -13,17 +13,15 @@
 #include "raytracer.h"
 #include "sfcaster.h"
 
-sfColor		get_shadow_color(t_thread *t, t_obj *obj)
+void	prepare_light_calc(t_thread *t, t_obj *obj, float dist)
 {
-  float		coef;
-  sfColor	ret;
-
-  coef = t->params->ambient;
-  ret.r = ((float)obj->col.r) * coef;
-  ret.g = ((float)obj->col.g) * coef;
-  ret.b = ((float)obj->col.b) * coef;
-  ret.a = 255;
-  return (ret);
+  t->impact.x = t->ray.orig.x + t->ray.dir.x * dist;
+  t->impact.y = t->ray.orig.y + t->ray.dir.y * dist;
+  t->impact.z = t->ray.orig.z + t->ray.dir.z * dist;
+  t->ray.orig = t->impact;
+  t->normal = prepare(t->impact, obj, 1);
+  t->params->get_normal[(int)obj->type](t, obj);
+  t->normal = anti_prepare(t->normal, obj, 0);
 }
 
 float	get_light_coef(sfVector3f light, sfVector3f imp)
@@ -69,7 +67,7 @@ sfColor		eval_luminosity(t_thread *t, sfColor col, float *coef)
 {
   sfColor	ret;
 
-  *coef = fmax(t->params->ambient,
+  *coef = fmax(t->params->config.ambient,
 	       get_light_coef(t->normal,
 			      t->ray.dir));
   ret.r = ((float)col.r) * *coef;

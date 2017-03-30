@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 20:37:50 2017 Nicolas Polomack
-** Last update Wed Mar 29 01:42:48 2017 Nicolas Polomack
+** Last update Thu Mar 30 02:23:04 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -54,7 +54,7 @@ sfColor		apply_reflect(sfColor col, sfColor reflect, float ratio)
 
 sfColor		light_effects(t_thread *t, t_obj *obj, sfColor col)
 {
-  if (t->depth++ < t->params->reflect_depth && obj->reflect > 0)
+  if (t->depth++ < t->params->config.reflect_depth && obj->reflect > 0)
     {
       t->from = obj;
       t->ray.dir = t->dir;
