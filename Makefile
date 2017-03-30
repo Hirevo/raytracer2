@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Thu Mar 30 02:46:55 2017 Nicolas Polomack
+## Last update Thu Mar 30 10:33:20 2017 Nicolas Polomack
 ##
 
 MAKE2	=	make --no-print-directory -C lib/my
@@ -24,6 +24,7 @@ SRC	=	window.c			\
 		parse/proc.c			\
 		parse/args.c			\
                 calc/colors.c                   \
+		calc/focal.c			\
                 calc/rotation.c                 \
                 calc/normals.c                  \
                 calc/calc_dir_vector.c          \

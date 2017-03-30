@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Mar 29 19:28:58 2017 Nicolas Polomack
-** Last update Thu Mar 30 02:57:59 2017 Nicolas Polomack
+** Last update Thu Mar 30 12:12:00 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -17,7 +17,7 @@ float		prepare_cameras(t_thread *t, sfVector3f cameras[2])
   float		spread;
   float		angle;
 
-  distX = calc_dir_vector(t->params->screen_size, 0, 0, 104).x;
+  distX = t->focal_dist;
   spread = 5;
   angle = atanf(distX / (2 * distX));
   cameras[0] = t->start;
@@ -31,7 +31,6 @@ void		render_red_side(t_thread *t, sfVector3f cameras[2], float angle)
 {
   sfColor       col;
 
-  angle = prepare_cameras(t, cameras);
   t->screen_pos.x = t->offs.x - 1;
   while (++t->screen_pos.x < t->end.x)
     {

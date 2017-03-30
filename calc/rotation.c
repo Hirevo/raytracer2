@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Thu Feb  9 13:15:36 2017 Nicolas Polomack
-** Last update Wed Mar 29 18:53:35 2017 Nicolas Polomack
+** Last update Thu Mar 30 09:23:19 2017 Nicolas Polomack
 */
 
 #include "sfcaster.h"
@@ -61,7 +61,7 @@ void	rotation(sfVector3f *restrict imp,
 void	anti_rotation(sfVector3f *restrict imp,
 		      sfVector3f *restrict r)
 {
-  rx(imp, -r->x);
-  ry(imp, -r->y);
   rz(imp, -r->z);
+  ry(imp, -r->y);
+  rx(imp, -r->x);
 }

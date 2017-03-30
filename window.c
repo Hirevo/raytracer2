@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Thu Mar 30 03:12:49 2017 Nicolas Polomack
+** Last update Thu Mar 30 12:20:26 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -57,7 +57,7 @@ void	handle_events(t_window *w, t_params *params, sfEvent *event)
 		sfRenderWindow_display(w->window);
 	      }
 	    else
-	      update_frame(w, &params->mutex);
+	      update_frame(w, &params->mutex, params->config.bmp);
 	    i = !i;
 	  }
     }
@@ -95,8 +95,8 @@ void	init(t_params *params)
   params->objs[0].pos.y = 55;
   params->objs[0].pos.z = 20;
   params->objs[0].r.x = 0;
-  params->objs[0].r.y = -45;
-  params->objs[0].r.z = 0;
+  params->objs[0].r.y = -60;
+  params->objs[0].r.z = 60;
   params->objs[0].rad = 25;
   params->objs[0].reflect = 0.3;
   params->objs[0].spec_coef = 50;
@@ -133,7 +133,7 @@ void	init(t_params *params)
   params->objs[3].rad = 20;
   params->objs[3].aper = 20;
   params->objs[3].height = 50;
-  params->objs[3].reflect = 0;
+  params->objs[3].reflect = 0.3;
   params->objs[3].spec_coef = 20;
   params->objs[3].col = get_sfcolor(100, 100, 100, 255);
   params->objs[4].type = 1;
@@ -143,7 +143,7 @@ void	init(t_params *params)
   params->objs[4].r.x = 0;
   params->objs[4].r.y = 0;
   params->objs[4].r.z = 0;
-  params->objs[4].reflect = 0;
+  params->objs[4].reflect = 0.3;
   params->objs[4].spec_coef = 20;
   params->objs[4].col = get_sfcolor(100, 100, 100, 255);
   params->nb_lights = 1;
@@ -168,7 +168,8 @@ void	render_frame(t_thread *t)
 	  put_pixel(t->w->buffer, t->screen_pos.x, t->screen_pos.y,
 		    raytrace(t));
 	}
-      update_frame(t->w, &t->params->mutex);
+      if (t->params->config.live)
+	update_frame(t->w, &t->params->mutex, t->params->config.bmp);
     }
 }
 
@@ -185,13 +186,14 @@ int		main(int ac, char **av, char **ae)
   //params.seed = init_seed(ac, av, ae, (void *)&main);
   params.screen_size.x = 1280;
   params.screen_size.y = 720;
-  create_window(&w.window, "Raytracer2", params.screen_size);
   parse_args(&params, ac, av);
   init(&params);
   init_buffers(&w, &params);
+  if (!params.config.bmp)
+    create_window(&w.window, "Raytracer2", params.screen_size);
   init_thread(&w, &params);
-  update_frame(&w, &params.mutex);
-  while (sfRenderWindow_isOpen(w.window))
+  update_frame(&w, &params.mutex, params.config.bmp);
+  while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
     handle_events(&w, &params, &event);
   save_buffers(&w, &params);
   return (0);//free_all(&params, &w));

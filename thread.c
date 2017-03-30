@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Thu Mar 30 02:24:15 2017 Nicolas Polomack
+** Last update Thu Mar 30 12:10:38 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -17,6 +17,7 @@ void		*render_thread(void *arg)
   t_thread	*t;
 
   t = (t_thread *)arg;
+  set_focal_dist(t);
   if (t->params->config.stereo)
     render_stereo_frame(t);
   else
@@ -24,9 +25,9 @@ void		*render_thread(void *arg)
   return (NULL);
 }
 
-void	update_frame(t_window *w, pthread_mutex_t *mutex)
+void	update_frame(t_window *w, pthread_mutex_t *mutex, int bmp)
 {
-  if (pthread_mutex_trylock(mutex) != 0)
+  if (bmp || pthread_mutex_trylock(mutex) != 0)
     return ;
   sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
                              w->buffer->width, w->buffer->height, 0, 0);

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu Mar 30 03:08:30 2017 Nicolas Polomack
+** Last update Thu Mar 30 11:59:45 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -57,6 +57,7 @@ typedef struct s_thread
   sfVector3f	recur_start;
   sfVector2i	offs;
   sfVector2i	end;
+  float		focal_dist;
   t_ray		ray;
   t_obj		*from;
   int		depth;
@@ -168,6 +169,11 @@ void	get_normal_cone(t_thread *, t_obj *);
 sfVector3f	calc_dir_vector(sfVector2i, float, float, int);
 
 /*
+** calc/focal.c
+*/
+void	set_focal_dist(t_thread *);
+
+/*
 ** window.c
 */
 void		render_frame(t_thread *);
@@ -184,7 +190,7 @@ sfColor		raytrace(t_thread *);
 /*
 ** thread.c
 */
-void	update_frame(t_window *, pthread_mutex_t *);
+void	update_frame(t_window *, pthread_mutex_t *, int);
 int	init_thread(t_window *, t_params *);
 
 /*
