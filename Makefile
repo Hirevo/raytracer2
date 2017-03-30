@@ -5,63 +5,102 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Thu Mar 30 21:07:48 2017 Nicolas Polomack
+## Last update Fri Mar 31 01:29:12 2017 Nicolas Polomack
 ##
 
-MAKE2	=	make --no-print-directory -C lib/my
+MAKE2	=	make --no-print-directory -sC lib/my
 
-MAKE1	=	make --no-print-directory -C lib/mycsfml
+MAKE1	=	make --no-print-directory -sC lib/mycsfml
 
-SRC	=	window.c			\
-		raytrace.c			\
-		thread.c			\
-		alloc.c				\
-                get_next_line.c                 \
-                lights/light.c                  \
-		lights/reflect.c		\
-		lights/specular.c		\
-		stereo/stereoscopy.c		\
-		parse/proc.c			\
-		parse/args.c			\
-                calc/colors.c                   \
-		calc/focal.c			\
-                calc/rotation.c                 \
-                calc/normals.c                  \
-                calc/calc_dir_vector.c          \
-		intersect/intersect_plane.c	\
+SRC	=	window.c				\
+		raytrace.c				\
+		thread.c				\
+		alloc.c					\
+                get_next_line.c			        \
+                lights/light.c		                \
+		lights/reflect.c			\
+		lights/specular.c			\
+		stereo/stereoscopy.c			\
+		parse/proc.c				\
+		parse/args.c				\
+                calc/colors.c				\
+		calc/focal.c				\
+                calc/rotation.c				\
+                calc/normals.c				\
+                calc/calc_dir_vector.c			\
+		intersect/intersect_plane.c		\
 		intersect/intersect_limited_plane.c	\
 		intersect/intersect_triangle.c		\
-		intersect/intersect_cyl.c	\
-		intersect/intersect_cone.c	\
-		intersect/intersect_sphere.c	\
-		intersect/intersect_disk.c	\
-		bmp/load_bmp.c			\
-                bmp/merge.c                     \
+		intersect/intersect_cyl.c		\
+		intersect/intersect_cone.c		\
+		intersect/intersect_sphere.c		\
+		intersect/intersect_disk.c		\
+		texturing/sphere_texture.c		\
+		bmp/load_bmp.c				\
+                bmp/merge.c				\
 		bmp/save_bmp.c
 
 OBJ	=	$(SRC:.c=.o)
 
-FLAGS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml -lc_graph_prog $(CFLAGS) -ansi
+FLAGS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml -lc_graph_prog $(CFLAGS) -ansi -pipe
 
 CFLAGS	=	-Iinclude -I../include -W -Wall -Wextra -pthread -O3
+
+REDDARK         =       \033[31;2m
+
+RED             =       \033[31;1m
+
+GREEN           =       \033[32;1m
+
+YEL             =       \033[33;1m
+
+BLUE            =       \033[34;1m
+
+PINK            =       \033[35;1m
+
+CYAN            =       \033[36;1m
+
+RES             =       \033[0m
 
 NAME	=	raytracer2
 
 all:	$(NAME)
 
-$(NAME):$(OBJ)
+$(NAME):.SILENT
+
+.SILENT:$(OBJ)
+	@echo
+	@echo -e "$(GREEN)Everything compiled smoothly. Now compiling dependancies...$(RES)"
+	@echo
+	@echo -en "$(CYAN)Compiling libmy...$(RES)"
 	@$(MAKE1)
+	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+	@echo -en "$(CYAN)Compiling libmycsfml...$(RES)"
 	@$(MAKE2)
-	gcc -o $(NAME) $(OBJ) $(FLAGS)
+	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+	@echo -en "$(CYAN)Linking raytracer2...$(RES)"
+	@gcc -o $(NAME) $(OBJ) $(FLAGS)
+	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+	@echo
+	@echo -e "$(GREEN)---- RAYTRACER2 READY ----$(RES)"
+	@echo
 
 clean:
-	rm -f $(OBJ)
+	@$(foreach var, $(OBJ), if [ -e $(var) ] ; then \
+        printf "[$(RED)RM$(RES)] $(YEL)$(var)$(RES)\n" \
+	&& $(RM) $(var) ; fi ;)
 	@$(MAKE1) clean
 	@$(MAKE2) clean
 
 fclean:	clean
-	rm -f $(NAME)
+	@if [ -e $(NAME) ] ; then \
+        printf "[$(RED)RM EXEC$(RES)] $(YEL)$(NAME)$(RES)\n" \
+        && rm -f $(NAME) ; fi
 	@$(MAKE1) fclean
 	@$(MAKE2) fclean
 
 re:	fclean all
+
+%.o:	%.c
+	echo -e "[$(RED)COMPILE$(RES)] $(YEL)$<$(RES) $(BLUE)=>$(RES) $(YEL)$@$(RES)"
+	@gcc $(CFLAGS) -o $@ -c $<

@@ -1,11 +1,11 @@
 /*
-1;4601;0c** bs.c for bootstrap raytracer in /home/nicolaspolomack/tests/raytracer_test
+** bs.c for bootstrap raytracer in /home/nicolaspolomack/tests/raytracer_test
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Fri Mar 31 00:05:04 2017 Nicolas Polomack
+** Last update Fri Mar 31 01:00:48 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -179,7 +179,7 @@ void	render_frame(t_thread *t)
     }
 }
 
-int		main(int ac, char **av, char **ae)
+int		main(int ac, char **av)//, char **ae)
 {
   t_window	w;
   sfEvent	event;

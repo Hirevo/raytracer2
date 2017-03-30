@@ -5,13 +5,14 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Thu Mar 30 21:46:06 2017 Maxime Jenny
-** Last update Thu Mar 30 21:52:26 2017 Maxime Jenny
+** Last update Fri Mar 31 00:54:20 2017 Nicolas Polomack
 */
 
+#include <math.h>
 #include <SFML/Graphics.h>
 #include <SFML/Window.h>
 #include "sfcaster.h"
-#include "raytracer2.h"
+#include "raytracer.h"
 
 sfVector3f	cross(sfVector3f u, sfVector3f v)
 {
@@ -24,7 +25,7 @@ sfVector3f	cross(sfVector3f u, sfVector3f v)
 }
 
 sfColor		sphere_texture(sfVector3f ve, sfVector3f vp, sfVector3f vn,
-			       t_objs *obj)
+			       t_obj *obj)
 {
   float		phi;
   float		theta;
@@ -32,7 +33,7 @@ sfColor		sphere_texture(sfVector3f ve, sfVector3f vp, sfVector3f vn,
   int		v;
   sfColor	col;
 
-  phi = acos(-1 * dot_product(vn, vp));
+  phi = acos(-1 * dot(vn, vp));
   theta = (acos(dot(vp, ve) / sin(phi))) / (2 * M_PI);
   v = phi * obj->buffer->height / M_PI;
   if (dot(cross(vn, ve), vp) > 0)

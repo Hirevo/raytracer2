@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Fri Mar 31 00:46:56 2017 Nicolas Polomack
+** Last update Fri Mar 31 00:47:25 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -36,18 +36,18 @@ typedef struct	s_light
 
 typedef struct		s_obj
 {
-  char		type;
-  sfVector3f	pos;
-  sfVector3f	r;
-  sfVector2f	len;
-  float		rad;
-  float		aper;
-  sfColor	col;
-  t_my_framebuffer      *buffer;
-  float		height;
-  float		reflect;
-  float		spec_coef;
-}		t_obj;
+  char			type;
+  sfVector3f		pos;
+  sfVector3f		r;
+  sfVector2f		len;
+  float			rad;
+  float			aper;
+  sfColor		col;
+  t_my_framebuffer	*buffer;
+  float			height;
+  float			reflect;
+  float			spec_coef;
+}			t_obj;
 
 typedef struct s_thread
 {
