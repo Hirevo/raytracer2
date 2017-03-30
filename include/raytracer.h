@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu Mar 30 11:59:45 2017 Nicolas Polomack
+** Last update Thu Mar 30 21:18:50 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -39,6 +39,7 @@ typedef struct	s_obj
   char		type;
   sfVector3f	pos;
   sfVector3f	r;
+  sfVector2f	len;
   float		rad;
   float		aper;
   sfColor	col;
@@ -85,8 +86,8 @@ typedef struct		s_params
   sfVector3f		start;
   sfVector3f		r;
   t_light		*lights;
-  float			(*intersect[8])(sfVector3f, sfVector3f, t_obj *);
-  void			(*get_normal[8])(t_thread *, t_obj *);
+  float			(*intersect[10])(sfVector3f, sfVector3f, t_obj *);
+  void			(*get_normal[10])(t_thread *, t_obj *);
   int			t_count;
   pthread_mutex_t	mutex;
   pthread_t		*t;
@@ -154,6 +155,19 @@ float	intersect_closed_cone(sfVector3f, sfVector3f, t_obj *, float);
 ** intersect/intersect_disk.c
 */
 float	intersect_disk(sfVector3f, sfVector3f, t_obj *);
+
+/*
+** intersect/intersect_limited_plane.c
+*/
+sfVector3f	create_vet3(float, float, float);
+float		intersect_limited_plane(sfVector3f, sfVector3f, t_obj *);
+
+/*
+** intersect/intersect_triangle.c
+*/
+float		norm2(sfVector2f);
+sfVector2f	create_vet2(float, float);
+float		intersect_triangle(sfVector3f, sfVector3f, t_obj *);
 
 /*
 ** calc/normals.c

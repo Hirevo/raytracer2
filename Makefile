@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Thu Mar 30 10:33:20 2017 Nicolas Polomack
+## Last update Thu Mar 30 21:07:48 2017 Nicolas Polomack
 ##
 
 MAKE2	=	make --no-print-directory -C lib/my
@@ -29,6 +29,8 @@ SRC	=	window.c			\
                 calc/normals.c                  \
                 calc/calc_dir_vector.c          \
 		intersect/intersect_plane.c	\
+		intersect/intersect_limited_plane.c	\
+		intersect/intersect_triangle.c		\
 		intersect/intersect_cyl.c	\
 		intersect/intersect_cone.c	\
 		intersect/intersect_sphere.c	\

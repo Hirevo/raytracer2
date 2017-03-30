@@ -1,11 +1,11 @@
 /*
-** bs.c for bootstrap raytracer in /home/nicolaspolomack/tests/raytracer_test
+1;4601;0c** bs.c for bootstrap raytracer in /home/nicolaspolomack/tests/raytracer_test
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Thu Mar 30 12:20:26 2017 Nicolas Polomack
+** Last update Fri Mar 31 00:05:04 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -73,6 +73,8 @@ void	init(t_params *params)
   params->intersect[5] = intersect_cone;
   params->intersect[6] = intersect_cone;
   params->intersect[7] = intersect_disk;
+  params->intersect[8] = intersect_limited_plane;
+  params->intersect[9] = intersect_triangle;
   params->get_normal[0] = get_normal_sphere;
   params->get_normal[1] = get_normal_plane;
   params->get_normal[2] = get_normal_cyl;
@@ -81,6 +83,8 @@ void	init(t_params *params)
   params->get_normal[5] = get_normal_cone;
   params->get_normal[6] = get_normal_cone;
   params->get_normal[7] = get_normal_plane;
+  params->get_normal[8] = get_normal_plane;
+  params->get_normal[9] = get_normal_plane;
   params->start.x = -150;
   params->start.y = 0;
   params->start.z = 20;
@@ -90,17 +94,19 @@ void	init(t_params *params)
   params->nb_objs = 5;
   params->objs = malloc(sizeof(t_obj) * 5);
   my_memset((char *)params->objs, 0, sizeof(t_obj) * 5);
-  params->objs[0].type = 7;
+  params->objs[0].type = 9;
   params->objs[0].pos.x = -10;
   params->objs[0].pos.y = 55;
   params->objs[0].pos.z = 20;
   params->objs[0].r.x = 0;
-  params->objs[0].r.y = -60;
-  params->objs[0].r.z = 60;
+  params->objs[0].r.y = 60;
+  params->objs[0].r.z = 0;
   params->objs[0].rad = 25;
+  params->objs[0].len.x = 20;
+  params->objs[0].len.y = 20;
   params->objs[0].reflect = 0.3;
   params->objs[0].spec_coef = 50;
-  params->objs[0].col = get_sfcolor(0, 255, 0, 255);
+  params->objs[0].col = get_sfcolor(255, 255, 0, 255);
   params->objs[1].type = 0;
   params->objs[1].pos.x = -10;
   params->objs[1].pos.y = 0;
@@ -184,8 +190,8 @@ int		main(int ac, char **av, char **ae)
   //if (!my_strcmp(av[1], "-h") || !my_strcmp(av[1], "--help"))
   //return (disp_guide());
   //params.seed = init_seed(ac, av, ae, (void *)&main);
-  params.screen_size.x = 1280;
-  params.screen_size.y = 720;
+  params.screen_size.x = 1920;
+  params.screen_size.y = 1080;
   parse_args(&params, ac, av);
   init(&params);
   init_buffers(&w, &params);
