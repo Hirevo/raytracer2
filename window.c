@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Thu Mar 30 02:53:04 2017 Nicolas Polomack
+** Last update Thu Mar 30 03:12:49 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -72,6 +72,7 @@ void	init(t_params *params)
   params->intersect[4] = intersect_cone;
   params->intersect[5] = intersect_cone;
   params->intersect[6] = intersect_cone;
+  params->intersect[7] = intersect_disk;
   params->get_normal[0] = get_normal_sphere;
   params->get_normal[1] = get_normal_plane;
   params->get_normal[2] = get_normal_cyl;
@@ -79,6 +80,7 @@ void	init(t_params *params)
   params->get_normal[4] = get_normal_cone;
   params->get_normal[5] = get_normal_cone;
   params->get_normal[6] = get_normal_cone;
+  params->get_normal[7] = get_normal_plane;
   params->start.x = -150;
   params->start.y = 0;
   params->start.z = 20;
@@ -88,12 +90,12 @@ void	init(t_params *params)
   params->nb_objs = 5;
   params->objs = malloc(sizeof(t_obj) * 5);
   my_memset((char *)params->objs, 0, sizeof(t_obj) * 5);
-  params->objs[0].type = 0;
+  params->objs[0].type = 7;
   params->objs[0].pos.x = -10;
   params->objs[0].pos.y = 55;
   params->objs[0].pos.z = 20;
   params->objs[0].r.x = 0;
-  params->objs[0].r.y = 0;
+  params->objs[0].r.y = -45;
   params->objs[0].r.z = 0;
   params->objs[0].rad = 25;
   params->objs[0].reflect = 0.3;

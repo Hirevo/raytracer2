@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu Mar 30 02:52:07 2017 Nicolas Polomack
+** Last update Thu Mar 30 03:08:30 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -84,8 +84,8 @@ typedef struct		s_params
   sfVector3f		start;
   sfVector3f		r;
   t_light		*lights;
-  float			(*intersect[7])(sfVector3f, sfVector3f, t_obj *);
-  void			(*get_normal[7])(t_thread *, t_obj *);
+  float			(*intersect[8])(sfVector3f, sfVector3f, t_obj *);
+  void			(*get_normal[8])(t_thread *, t_obj *);
   int			t_count;
   pthread_mutex_t	mutex;
   pthread_t		*t;
