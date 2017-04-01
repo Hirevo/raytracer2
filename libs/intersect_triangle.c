@@ -5,12 +5,16 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 20:58:54 2017 Nicolas Polomack
-** Last update Fri Mar 31 15:13:58 2017 Nicolas Polomack
+** Last update Sat Apr  1 02:27:49 2017 Nicolas Polomack
 */
 
 #include <math.h>
 #include "sfcaster.h"
 #include "raytracer.h"
+
+char	*intersect = "intersect_triangle";
+char	*normal = "get_normal_triangle";
+int	id = 10;
 
 float		norm2(sfVector2f i)
 {
@@ -55,4 +59,9 @@ float		intersect_triangle(sfVector3f eye_p, sfVector3f dir_vector,
   if ((k1 + k2) > 1)
     return (-1.0F);
   return (sol);
+}
+
+void	get_normal_triangle(t_thread *t, t_obj *obj)
+{
+  get_normal_plane(t, obj);
 }

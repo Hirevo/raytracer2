@@ -5,8 +5,10 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Fri Mar 31 01:29:12 2017 Nicolas Polomack
+## Last update Sat Apr  1 04:51:35 2017 Nicolas Polomack
 ##
+
+MAKESO	=	make --no-print-directory -sC libs
 
 MAKE2	=	make --no-print-directory -sC lib/my
 
@@ -15,7 +17,9 @@ MAKE1	=	make --no-print-directory -sC lib/mycsfml
 SRC	=	window.c				\
 		raytrace.c				\
 		thread.c				\
+		libs.c					\
 		alloc.c					\
+		rand.c					\
                 get_next_line.c			        \
                 lights/light.c		                \
 		lights/reflect.c			\
@@ -28,21 +32,15 @@ SRC	=	window.c				\
                 calc/rotation.c				\
                 calc/normals.c				\
                 calc/calc_dir_vector.c			\
-		intersect/intersect_plane.c		\
-		intersect/intersect_limited_plane.c	\
-		intersect/intersect_triangle.c		\
-		intersect/intersect_cyl.c		\
-		intersect/intersect_cone.c		\
-		intersect/intersect_sphere.c		\
-		intersect/intersect_disk.c		\
-		texturing/sphere_texture.c		\
-		bmp/load_bmp.c				\
-                bmp/merge.c				\
-		bmp/save_bmp.c
+                texturing/sphere_texture.c		\
+		misc/disp_guide.c			\
+                bmp/load_bmp.c                          \
+                bmp/merge.c                             \
+                bmp/save_bmp.c
 
 OBJ	=	$(SRC:.c=.o)
 
-FLAGS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml -lc_graph_prog $(CFLAGS) -ansi -pipe
+FLAGS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml-so -lc_graph_prog $(CFLAGS) -ansi -pipe -ldl
 
 CFLAGS	=	-Iinclude -I../include -W -Wall -Wextra -pthread -O3
 
@@ -78,6 +76,9 @@ $(NAME):.SILENT
 	@echo -en "$(CYAN)Compiling libmycsfml...$(RES)"
 	@$(MAKE2)
 	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+	@echo -en "$(CYAN)Compiling .so files...$(RES)"
+	@$(MAKESO)
+	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
 	@echo -en "$(CYAN)Linking raytracer2...$(RES)"
 	@gcc -o $(NAME) $(OBJ) $(FLAGS)
 	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
@@ -91,6 +92,7 @@ clean:
 	&& $(RM) $(var) ; fi ;)
 	@$(MAKE1) clean
 	@$(MAKE2) clean
+	@$(MAKESO) clean
 
 fclean:	clean
 	@if [ -e $(NAME) ] ; then \
@@ -98,9 +100,10 @@ fclean:	clean
         && rm -f $(NAME) ; fi
 	@$(MAKE1) fclean
 	@$(MAKE2) fclean
+	@$(MAKESO) fclean
 
 re:	fclean all
 
 %.o:	%.c
-	echo -e "[$(RED)COMPILE$(RES)] $(YEL)$<$(RES) $(BLUE)=>$(RES) $(YEL)$@$(RES)"
+	@echo -e "[$(RED)COMPILE$(RES)] $(YEL)$<$(RES) $(BLUE)=>$(RES) $(YEL)$@$(RES)"
 	@gcc $(CFLAGS) -o $@ -c $<

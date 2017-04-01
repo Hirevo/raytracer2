@@ -5,7 +5,7 @@
 ## Login   <nicolas@epitech.eu>
 ##
 ## Started on  Tue Nov  1 12:04:24 2016 Nicolas POLOMACK
-## Last update Fri Mar 31 00:55:09 2017 Nicolas Polomack
+## Last update Sat Apr  1 05:26:28 2017 Nicolas Polomack
 ##
 
 SRC	=	sfcaster.c	\
@@ -25,11 +25,14 @@ NAME	=	libmycsfml.a
 
 NAME2   =	libmycsfml-sa.a
 
-CFLAGS	=	-I../../include -W -Wall -Wextra -pedantic -O3 -pipe
+NAME3	=	libmycsfml-so.so
+
+CFLAGS	=	-I../../include -W -Wall -Wextra -pedantic -O3 -pipe -fPIC
 
 all:	$(NAME)
 
 $(NAME):$(OBJ) $(OBJ2)
+	@gcc -o $(NAME3) $(OBJ2) $(OBJ) -shared $(CFLAGS)
 	@ar rc $(NAME) $(OBJ) $(OBJ2)
 	@ar rc $(NAME2) $(OBJ)
 
@@ -40,5 +43,6 @@ clean:
 fclean:	clean
 	@rm -f $(NAME)
 	@rm -f $(NAME2)
+	@rm -f $(NAME3)
 
 re:	fclean all

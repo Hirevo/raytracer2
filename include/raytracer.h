@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Fri Mar 31 00:47:25 2017 Nicolas Polomack
+** Last update Sat Apr  1 04:52:22 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -39,7 +39,8 @@ typedef struct		s_obj
   char			type;
   sfVector3f		pos;
   sfVector3f		r;
-  sfVector2f		len;
+  sfVector2f		p1;
+  sfVector2f		p2;
   float			rad;
   float			aper;
   sfColor		col;
@@ -87,8 +88,10 @@ typedef struct		s_params
   sfVector3f		start;
   sfVector3f		r;
   t_light		*lights;
-  float			(*intersect[10])(sfVector3f, sfVector3f, t_obj *);
-  void			(*get_normal[10])(t_thread *, t_obj *);
+  float			(**intersect)(sfVector3f, sfVector3f, t_obj *);
+  void			(**get_normal)(t_thread *, t_obj *);
+  void			**libs;
+  int			*id;
   int			t_count;
   pthread_mutex_t	mutex;
   pthread_t		*t;
@@ -115,21 +118,6 @@ typedef struct		s_window
   t_my_framebuffer      *buffer2;
 }			t_window;
 
-typedef struct		s_menu
-{
-  sfRenderWindow	*window;
-  sfSprite		*backg_s;
-  sfTexture		*backg_t;
-  sfSprite		*menu_s;
-  sfTexture		*menu_t;
-  sfSprite		*option_s;
-  sfTexture		*option_t;
-  t_my_framebuffer	*backg;
-  t_my_framebuffer	*menu;
-  t_my_framebuffer	*option;
-  int			menu_id;
-}			t_menu;
-
 /*
 ** intersect/intersect_sphere.c
 */
@@ -144,13 +132,13 @@ float	intersect_plane(sfVector3f, sfVector3f, t_obj *);
 ** intersect/intersect_cyl.c
 */
 float	intersect_cyl(sfVector3f, sfVector3f, t_obj *);
-float	intersect_closed_cyl(sfVector3f, sfVector3f, t_obj *, float);
+float	intersect_closed_cyl(sfVector3f, sfVector3f, t_obj *);
 
 /*
 ** intersect/intersect_cone.c
 */
 float	intersect_cone(sfVector3f, sfVector3f, t_obj *);
-float	intersect_closed_cone(sfVector3f, sfVector3f, t_obj *, float);
+float	intersect_closed_cone(sfVector3f, sfVector3f, t_obj *);
 
 /*
 ** intersect/intersect_disk.c
@@ -207,6 +195,11 @@ sfColor		raytrace(t_thread *);
 */
 void	update_frame(t_window *, pthread_mutex_t *, int);
 int	init_thread(t_window *, t_params *);
+
+/*
+** libs.c
+*/
+int	load_libs(t_params *);
 
 /*
 ** lights/light.c
@@ -270,5 +263,16 @@ void	parse_args(t_params *, int, char **);
 */
 void	init_buffers(t_window *, t_params *);
 void	save_buffers(t_window *, t_params *);
+
+/*
+** rand.c
+*/
+int		my_rand(long int);
+long int	init_seed(int, char **, char **, void *);
+
+/*
+** misc/disp_guide.c
+*/
+int	disp_guide();
 
 #endif /* !RAYTRACER_H_ */

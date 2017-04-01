@@ -5,10 +5,10 @@
 ** Login   <nicolas.polomack@epitech.net>
 ** 
 ** Started on  Mon Oct 10 09:38:55 2016 Nicolas POLOMACK
-** Last update Sun Jan 15 23:20:27 2017 Nicolas Polomack
+** Last update Sat Apr  1 02:35:14 2017 Nicolas Polomack
 */
 
-int	my_strcmp(char *str1, char *str2)
+int	my_strcmp(const char *str1, const char *str2)
 {
   int	i;
 

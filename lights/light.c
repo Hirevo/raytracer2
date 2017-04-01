@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb 13 20:54:49 2017 Nicolas Polomack
-** Last update Thu Mar 30 02:23:25 2017 Nicolas Polomack
+** Last update Sat Apr  1 04:04:23 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -20,7 +20,7 @@ void	prepare_light_calc(t_thread *t, t_obj *obj, float dist)
   t->impact.z = t->ray.orig.z + t->ray.dir.z * dist;
   t->ray.orig = t->impact;
   t->normal = prepare(t->impact, obj, 1);
-  t->params->get_normal[(int)obj->type](t, obj);
+  t->params->get_normal[t->params->id[(int)obj->type]](t, obj);
   t->normal = anti_prepare(t->normal, obj, 0);
 }
 

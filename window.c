@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Fri Mar 31 01:00:48 2017 Nicolas Polomack
+** Last update Sat Apr  1 05:09:42 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -65,26 +65,6 @@ void	handle_events(t_window *w, t_params *params, sfEvent *event)
 
 void	init(t_params *params)
 {
-  params->intersect[0] = intersect_sphere;
-  params->intersect[1] = intersect_plane;
-  params->intersect[2] = intersect_cyl;
-  params->intersect[3] = intersect_cyl;
-  params->intersect[4] = intersect_cone;
-  params->intersect[5] = intersect_cone;
-  params->intersect[6] = intersect_cone;
-  params->intersect[7] = intersect_disk;
-  params->intersect[8] = intersect_limited_plane;
-  params->intersect[9] = intersect_triangle;
-  params->get_normal[0] = get_normal_sphere;
-  params->get_normal[1] = get_normal_plane;
-  params->get_normal[2] = get_normal_cyl;
-  params->get_normal[3] = get_normal_cyl;
-  params->get_normal[4] = get_normal_cone;
-  params->get_normal[5] = get_normal_cone;
-  params->get_normal[6] = get_normal_cone;
-  params->get_normal[7] = get_normal_plane;
-  params->get_normal[8] = get_normal_plane;
-  params->get_normal[9] = get_normal_plane;
   params->start.x = -150;
   params->start.y = 0;
   params->start.z = 20;
@@ -102,8 +82,11 @@ void	init(t_params *params)
   params->objs[0].r.y = 60;
   params->objs[0].r.z = 0;
   params->objs[0].rad = 25;
-  params->objs[0].len.x = 20;
-  params->objs[0].len.y = 20;
+  params->objs[0].p1.x = 20;
+  params->objs[0].p2.y = 20;
+  params->objs[0].p2.x = 0;
+  params->objs[0].p1.y = 0;
+  params->objs[0].aper = 20;
   params->objs[0].reflect = 0.3;
   params->objs[0].spec_coef = 50;
   params->objs[0].col = get_sfcolor(255, 255, 0, 255);
@@ -179,7 +162,7 @@ void	render_frame(t_thread *t)
     }
 }
 
-int		main(int ac, char **av)//, char **ae)
+int		main(int ac, char **av, char **ae)
 {
   t_window	w;
   sfEvent	event;
@@ -187,13 +170,15 @@ int		main(int ac, char **av)//, char **ae)
 
   if (ac < 2)
     return (84);
-  //if (!my_strcmp(av[1], "-h") || !my_strcmp(av[1], "--help"))
-  //return (disp_guide());
-  //params.seed = init_seed(ac, av, ae, (void *)&main);
+  if (!my_strcmp(av[1], "-h") || !my_strcmp(av[1], "--help"))
+    return (disp_guide());
+  parse_args(&params, ac, av);
+  params.seed = init_seed(ac, av, ae, (void *)&main);
   params.screen_size.x = 1920;
   params.screen_size.y = 1080;
-  parse_args(&params, ac, av);
   init(&params);
+  if (load_libs(&params) == -1)
+    return (84);
   init_buffers(&w, &params);
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);

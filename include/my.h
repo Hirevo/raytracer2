@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Thu Oct 13 10:04:36 2016 Nicolas POLOMACK
-** Last update Fri Mar 17 12:18:20 2017 Nicolas Polomack
+** Last update Sat Apr  1 02:36:20 2017 Nicolas Polomack
 */
 
 #ifndef MY_H_
@@ -41,8 +41,8 @@ char	*my_strcpy(char *, char *);
 char	*my_strncpy(char *, char *, int);
 char	*my_revstr(char *);
 char	*my_strstr(char *, char*);
-int	my_strcmp(char *, char*);
-int	my_strncmp(char *, char *, int);
+int	my_strcmp(const char *, const char*);
+int	my_strncmp(const char *, const char *, int);
 char	*my_strupcase(char *);
 char	*my_strlowcase(char *);
 char	*my_strcapitalize(char *);
