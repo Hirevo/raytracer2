@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 20:08:30 2017 Nicolas Polomack
-** Last update Sat Apr  1 05:06:48 2017 Nicolas Polomack
+** Last update Sun Apr  2 21:01:39 2017 Nicolas Polomack
 */
 
 #include <dlfcn.h>
@@ -46,6 +46,8 @@ char	*catpath(char *str1, char *str2)
 
 int	alloc_lib_vars(t_params *params, int size)
 {
+  int	i;
+
   if ((params->libs = malloc(sizeof(*(params->libs)) * size)) == NULL ||
       (params->intersect = malloc(sizeof(*(params->intersect)) *
 				  size)) == NULL ||
@@ -53,6 +55,8 @@ int	alloc_lib_vars(t_params *params, int size)
 				   size)) == NULL ||
       (params->id = malloc(sizeof(int) * size)) == NULL)
     return (-1);
+  while (i < size)
+    params->id[i] = -1;
   return (0);
 }
 
@@ -72,7 +76,7 @@ int		load_next_lib(t_params *params, struct dirent **dirs,
       (params->get_normal[i] = dlsym(params->libs[i], *(sym[1]))) == NULL ||
       (id = *((int *)dlsym(params->libs[i], "id"))) == 0)
     return (-1 + 0 * my_printf("%s\n", dlerror()));
-  if (id > size)
+  if (id > size || params->id[id - 1] != -1)
     return (-1 + 0 * my_printf("%s: Bad id.\n", name));
   params->id[id - 1] = i;
   free(name);
