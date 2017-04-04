@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 20:37:50 2017 Nicolas Polomack
-** Last update Thu Mar 30 02:23:04 2017 Nicolas Polomack
+** Last update Tue Apr  4 20:00:38 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -49,6 +49,7 @@ sfColor		apply_reflect(sfColor col, sfColor reflect, float ratio)
     ((float)col.g) * (1.0F - ratio);
   col.b = ((float)reflect.b) * ratio +
     ((float)col.b) * (1.0F - ratio);
+  col.a = 255;
   return (col);
 }
 

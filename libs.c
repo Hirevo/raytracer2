@@ -1,11 +1,11 @@
 /*
-** libs.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
+1;4601;0c** libs.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 20:08:30 2017 Nicolas Polomack
-** Last update Sun Apr  2 21:01:39 2017 Nicolas Polomack
+** Last update Tue Apr  4 22:23:49 2017 Nicolas Polomack
 */
 
 #include <dlfcn.h>
@@ -55,7 +55,8 @@ int	alloc_lib_vars(t_params *params, int size)
 				   size)) == NULL ||
       (params->id = malloc(sizeof(int) * size)) == NULL)
     return (-1);
-  while (i < size)
+  i = -1;
+  while (++i < size)
     params->id[i] = -1;
   return (0);
 }
@@ -93,6 +94,7 @@ int		load_libs(t_params *params)
   if ((size = scandir("libs", &dirs, my_filter, alphasort)) == -1 ||
       alloc_lib_vars(params, size) == -1)
     return (-1);
+  printf("%d\n", size);
   i = -1;
   while (++i < size)
     if (load_next_lib(params, dirs, i, size) == -1)

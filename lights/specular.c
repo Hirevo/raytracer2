@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Mar 29 00:28:22 2017 Nicolas Polomack
-** Last update Thu Mar 30 03:11:26 2017 Nicolas Polomack
+** Last update Tue Apr  4 19:56:50 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -22,8 +22,8 @@ float		get_specular_coef(t_thread *t, t_obj *obj, int i)
   reflect.x -= t->params->lights[i].pos.x;
   reflect.y -= t->params->lights[i].pos.y;
   reflect.z -= t->params->lights[i].pos.z;
-  reflect = normalize(reflect);
-  f = -dot(n, reflect);
+  if ((f = -dot(n, reflect)) <= 0)
+    return (0);
   reflect.x = reflect.x + (2.0F * n.x * f);
   reflect.y = reflect.y + (2.0F * n.y * f);
   reflect.z = reflect.z + (2.0F * n.z * f);

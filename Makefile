@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Sat Apr  1 04:51:35 2017 Nicolas Polomack
+## Last update Tue Apr  4 22:38:12 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -20,11 +20,14 @@ SRC	=	window.c				\
 		libs.c					\
 		alloc.c					\
 		rand.c					\
+		scene.c					\
                 get_next_line.c			        \
                 lights/light.c		                \
 		lights/reflect.c			\
 		lights/specular.c			\
 		stereo/stereoscopy.c			\
+		ssaa/ssaa.c				\
+		depth_of_field/depth.c			\
 		parse/proc.c				\
 		parse/args.c				\
                 calc/colors.c				\
@@ -40,7 +43,9 @@ SRC	=	window.c				\
 
 OBJ	=	$(SRC:.c=.o)
 
-FLAGS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml-so -lc_graph_prog $(CFLAGS) -ansi -pipe -ldl
+LIBS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml-so -lc_graph_prog
+
+FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=$(shell pwd)
 
 CFLAGS	=	-Iinclude -I../include -W -Wall -Wextra -pthread -O3
 

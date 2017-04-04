@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Sat Apr  1 04:52:22 2017 Nicolas Polomack
+** Last update Tue Apr  4 22:37:07 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -60,6 +60,8 @@ typedef struct s_thread
   sfVector3f	recur_start;
   sfVector2i	offs;
   sfVector2i	end;
+  sfColor	*depth_col;
+  sfColor	*ssaa_col;
   float		focal_dist;
   t_ray		ray;
   t_obj		*from;
@@ -238,6 +240,16 @@ sfColor		specular_effect(sfColor, t_thread *, t_obj *, int);
 ** stereo/stereoscopy.c
 */
 void	render_stereo_frame(t_thread *);
+
+/*
+** ssaa/ssaa.c
+*/
+void	render_ssaa(t_thread *);
+
+/*
+** depth_of_field/depth.c
+*/
+sfColor	dof(t_thread *, float, float);
 
 /*
 ** calc/rotation.c
