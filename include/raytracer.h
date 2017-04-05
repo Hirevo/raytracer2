@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Tue Apr  4 22:37:07 2017 Nicolas Polomack
+** Last update Wed Apr  5 00:51:33 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -161,6 +161,11 @@ sfVector2f	create_vet2(float, float);
 float		intersect_triangle(sfVector3f, sfVector3f, t_obj *);
 
 /*
+** texturing/sphere_texture.c
+*/
+sfColor		sphere_texture(sfVector3f, sfVector3f, sfVector3f, t_obj *);
+
+/*
 ** calc/normals.c
 */
 void	get_normal_sphere(t_thread *, t_obj *);
@@ -206,7 +211,7 @@ int	load_libs(t_params *);
 /*
 ** lights/light.c
 */
-sfColor		calc_lights(t_thread *, t_obj *);
+sfColor		calc_lights(t_thread *, t_obj *, sfColor);
 void		prepare_light_calc(t_thread *, t_obj *, float);
 sfColor		eval_luminosity(t_thread *, sfColor, float *);
 int		is_obstructed(t_thread *, t_obj *);

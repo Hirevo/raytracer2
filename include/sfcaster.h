@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 13:52:00 2016 Nicolas Polomack
-** Last update Mon Feb 27 20:16:46 2017 Nicolas Polomack
+** Last update Wed Apr  5 00:53:36 2017 Nicolas Polomack
 */
 
 #ifndef SFCASTER_H_
@@ -44,6 +44,7 @@ t_my_framebuffer	*assemble_texture(sfTexture **,
 sfVector3f		*create_vector3f(float, float, float);
 sfVector2f		*create_vector2f(float, float);
 sfVector2i		*create_vector2i(int, int);
+sfVector3f		v3f(float, float, float);
 void			drawSquare(t_my_framebuffer *, sfVector2i *,
 				   sfVector2i *, sfColor);
 void			put_pixel(t_my_framebuffer *,

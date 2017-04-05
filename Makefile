@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Tue Apr  4 22:38:12 2017 Nicolas Polomack
+## Last update Wed Apr  5 14:23:45 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -45,9 +45,9 @@ OBJ	=	$(SRC:.c=.o)
 
 LIBS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml-so -lc_graph_prog
 
-FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=$(shell pwd)
+FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=$(shell pwd)/lib/mycsfml -rdynamic
 
-CFLAGS	=	-Iinclude -I../include -W -Wall -Wextra -pthread -O3
+CFLAGS	=	-Iinclude -I../include -W -Wall -Wextra -pthread -g
 
 REDDARK         =       \033[31;2m
 

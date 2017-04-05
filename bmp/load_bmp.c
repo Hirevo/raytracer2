@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 19:31:11 2016 Nicolas Polomack
-** Last update Fri Mar 17 11:20:36 2017 Nicolas Polomack
+** Last update Wed Apr  5 01:06:49 2017 Nicolas Polomack
 */
 
 #include <unistd.h>
@@ -38,6 +38,8 @@ t_my_framebuffer	*load_bmp(char *filename, sfSprite **spr,
     buffer = my_framebuffer_create(info.width, info.height);
   else
     buffer = assemble_texture(tex, spr, info.width, info.height);
+  if (buffer == NULL)
+    return (NULL);
   read(fd, &head, head.off_bits -
        sizeof(bmp_header) - sizeof(bmp_info_header));
   read_pixel_buffer(buffer, fd,
@@ -46,7 +48,7 @@ t_my_framebuffer	*load_bmp(char *filename, sfSprite **spr,
   if (spr != NULL && tex != NULL)
     sfTexture_updateFromPixels(*tex, buffer->pixels,
 			       buffer->width, buffer->height, 0, 0);
-  my_printf(" Finished !\n");
+  my_printf(" Finished!\n");
   return (buffer);
 }
 

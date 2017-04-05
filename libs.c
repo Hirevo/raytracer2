@@ -1,11 +1,11 @@
 /*
-1;4601;0c** libs.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
+** libs.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 20:08:30 2017 Nicolas Polomack
-** Last update Tue Apr  4 22:23:49 2017 Nicolas Polomack
+** Last update Wed Apr  5 03:34:04 2017 Nicolas Polomack
 */
 
 #include <dlfcn.h>
