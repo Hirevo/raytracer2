@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Tue Apr  4 21:29:09 2017 
+** Last update Thu Apr  6 16:58:02 2017 Cédric Thomas
 */
 
 #ifndef RAYTRACER_H_
@@ -60,6 +60,8 @@ typedef struct s_thread
   sfVector3f	recur_start;
   sfVector2i	offs;
   sfVector2i	end;
+  sfColor	*depth_col;
+  sfColor	*ssaa_col;
   float		focal_dist;
   t_ray		ray;
   t_obj		*from;
@@ -159,6 +161,11 @@ sfVector2f	create_vet2(float, float);
 float		intersect_triangle(sfVector3f, sfVector3f, t_obj *);
 
 /*
+** texturing/sphere_texture.c
+*/
+sfColor		sphere_texture(sfVector3f, sfVector3f, sfVector3f, t_obj *);
+
+/*
 ** calc/normals.c
 */
 void	get_normal_sphere(t_thread *, t_obj *);
@@ -204,7 +211,7 @@ int	load_libs(t_params *);
 /*
 ** lights/light.c
 */
-sfColor		calc_lights(t_thread *, t_obj *);
+sfColor		calc_lights(t_thread *, t_obj *, sfColor);
 void		prepare_light_calc(t_thread *, t_obj *, float);
 sfColor		eval_luminosity(t_thread *, sfColor, float *);
 int		is_obstructed(t_thread *, t_obj *);
@@ -238,6 +245,16 @@ sfColor		specular_effect(sfColor, t_thread *, t_obj *, int);
 ** stereo/stereoscopy.c
 */
 void	render_stereo_frame(t_thread *);
+
+/*
+** ssaa/ssaa.c
+*/
+void	render_ssaa(t_thread *);
+
+/*
+** depth_of_field/depth.c
+*/
+sfColor	dof(t_thread *, float, float);
 
 /*
 ** calc/rotation.c

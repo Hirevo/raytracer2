@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ## 
 ## Started on  Fri Mar 31 19:02:25 2017 Nicolas Polomack
-## Last update Tue Apr  4 22:50:22 2017 
+## Last update Thu Apr  6 16:58:31 2017 Cédric Thomas
 ##
 
 SRC	=	intersect_sphere.c		\
@@ -18,7 +18,8 @@ SRC	=	intersect_sphere.c		\
 		intersect_cone.c		\
 		intersect_closed_cone.c		\
 		intersect_disk.c		\
-		intersect_triangle.c
+		intersect_triangle.c		\
+		intersect_cube.c
 
 OBJ	=	${SRC:.c=.o}
 

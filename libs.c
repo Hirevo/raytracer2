@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 20:08:30 2017 Nicolas Polomack
-** Last update Tue Apr  4 17:40:20 2017 
+** Last update Thu Apr  6 16:58:15 2017 Cédric Thomas
 */
 
 #include <dlfcn.h>
@@ -94,6 +94,7 @@ int		load_libs(t_params *params)
   if ((size = scandir("libs", &dirs, my_filter, alphasort)) == -1 ||
       alloc_lib_vars(params, size) == -1)
     return (-1);
+  printf("%d\n", size);
   i = -1;
   while (++i < size)
     if (load_next_lib(params, dirs, i, size) == -1)

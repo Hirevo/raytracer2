@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Mar 29 16:44:06 2017 Nicolas Polomack
-** Last update Thu Mar 30 10:40:18 2017 Nicolas Polomack
+** Last update Wed Apr  5 12:31:31 2017 Nicolas Polomack
 */
 
 #include <float.h>
@@ -19,7 +19,7 @@ void	set_focal_dist(t_thread *t)
   t->ray.dir = calc_dir_vector(t->params->screen_size,
 			       t->params->screen_size.x / 2,
 			       t->params->screen_size.y / 2,
-			       104);
+			       t->params->config.fov);
   rotation(&t->ray.dir, &t->params->r);
   t->ray.orig = t->start;
   i = -1;

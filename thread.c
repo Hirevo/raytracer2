@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Sat Apr  1 04:02:27 2017 Nicolas Polomack
+** Last update Tue Apr  4 22:36:11 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -20,6 +20,8 @@ void		*render_thread(void *arg)
   set_focal_dist(t);
   if (t->params->config.stereo)
     render_stereo_frame(t);
+  else if (t->params->config.ssaa > 1)
+    render_ssaa(t);
   else
     render_frame(t);
   return (NULL);
@@ -73,6 +75,8 @@ int	init_thread(t_window *w, t_params *params)
       t->params = params;
       t->w = w;
       t->start = params->start;
+      if ((t->depth_col = malloc(sizeof(sfColor) * 25)) == NULL)
+	return (-1);
       set_limits(t, w, params, i);
       pthread_create(&(params->t[i]), NULL, render_thread, (void *)t);
     }

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 20:37:50 2017 Nicolas Polomack
-** Last update Thu Mar 30 02:23:04 2017 Nicolas Polomack
+** Last update Wed Apr  5 04:20:04 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -14,9 +14,15 @@
 sfColor		apply_effects(t_thread *t, t_obj *obj, float dist)
 {
   sfColor	col;
+  sfVector3f	imp;
 
   prepare_light_calc(t, obj, dist);
-  col = calc_lights(t, obj);
+  imp = normalize(prepare(t->impact, obj, 1));
+  if (obj->buffer && obj->type == 0)
+    col = sphere_texture(v3f(0, 1, 0), imp, v3f(0, 0, 1), obj);
+  else
+    col = obj->col;
+  col = calc_lights(t, obj, col);
   col = light_effects(t, obj, col);
   return (col);
 }
@@ -49,12 +55,14 @@ sfColor		apply_reflect(sfColor col, sfColor reflect, float ratio)
     ((float)col.g) * (1.0F - ratio);
   col.b = ((float)reflect.b) * ratio +
     ((float)col.b) * (1.0F - ratio);
+  col.a = 255;
   return (col);
 }
 
 sfColor		light_effects(t_thread *t, t_obj *obj, sfColor col)
 {
-  if (t->depth++ < t->params->config.reflect_depth && obj->reflect > 0)
+  if (t->depth++ < t->params->config.reflect_depth &&
+      obj->reflect > 0)
     {
       t->from = obj;
       t->ray.dir = t->dir;
