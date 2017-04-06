@@ -1,0 +1,24 @@
+/*
+** inter.h for math.h in /home/cedric/delivery/MUL/raytracer2/libs
+** 
+** Made by 
+** Login   <cedric.thomas@epitech.eu>
+** 
+** Started on  Tue Apr  4 21:29:16 2017 
+** Last update Tue Apr  4 21:32:59 2017 
+*/
+
+#ifndef INTER_H_
+# define INTER_H_
+
+# define PRECISION	100
+
+# define POLY_MAX	5
+
+typedef struct		s_poly
+{
+  int			deg;
+  int			coef[POLY_MAX];
+}			t_poly;
+
+#endif /* !INTER_H_ */

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Sat Apr  1 05:09:42 2017 Nicolas Polomack
+** Last update Thu Apr  6 16:49:44 2017 Cédric Thomas
 */
 
 #include <SFML/Graphics.h>
@@ -65,83 +65,96 @@ void	handle_events(t_window *w, t_params *params, sfEvent *event)
 
 void	init(t_params *params)
 {
-  params->start.x = -150;
+  params->start.x = -200;
   params->start.y = 0;
-  params->start.z = 20;
+  params->start.z = 0;
   params->r.x = 0;
   params->r.y = 0;
   params->r.z = 0;
-  params->nb_objs = 5;
-  params->objs = malloc(sizeof(t_obj) * 5);
-  my_memset((char *)params->objs, 0, sizeof(t_obj) * 5);
-  params->objs[0].type = 9;
-  params->objs[0].pos.x = -10;
-  params->objs[0].pos.y = 55;
-  params->objs[0].pos.z = 20;
-  params->objs[0].r.x = 0;
-  params->objs[0].r.y = 60;
-  params->objs[0].r.z = 0;
-  params->objs[0].rad = 25;
-  params->objs[0].p1.x = 20;
-  params->objs[0].p2.y = 20;
-  params->objs[0].p2.x = 0;
-  params->objs[0].p1.y = 0;
-  params->objs[0].aper = 20;
-  params->objs[0].reflect = 0.3;
-  params->objs[0].spec_coef = 50;
-  params->objs[0].col = get_sfcolor(255, 255, 0, 255);
-  params->objs[1].type = 0;
-  params->objs[1].pos.x = -10;
-  params->objs[1].pos.y = 0;
-  params->objs[1].pos.z = 20;
-  params->objs[1].r.x = 0;
-  params->objs[1].r.y = 0;
-  params->objs[1].r.z = 0;
-  params->objs[1].rad = 25;
-  params->objs[1].reflect = 0.3;
-  params->objs[1].spec_coef = 50;
-  params->objs[1].col = get_sfcolor(255, 0, 0, 255);
-  params->objs[2].type = 0;
-  params->objs[2].pos.x = -10;
-  params->objs[2].pos.y = -55;
-  params->objs[2].pos.z = 20;
-  params->objs[2].r.x = 0;
-  params->objs[2].r.y = 0;
-  params->objs[2].r.z = 0;
-  params->objs[2].rad = 25;
-  params->objs[2].reflect = 0.3;
-  params->objs[2].spec_coef = 50;
-  params->objs[2].col = get_sfcolor(0, 0, 255, 255);
-  params->objs[3].type = 1;
-  params->objs[3].pos.x = 30;
-  params->objs[3].pos.y = 0;
-  params->objs[3].pos.z = 0;
-  params->objs[3].r.x = 0;
-  params->objs[3].r.y = -90;
-  params->objs[3].r.z = 0;
-  params->objs[3].rad = 20;
-  params->objs[3].aper = 20;
-  params->objs[3].height = 50;
-  params->objs[3].reflect = 0.3;
-  params->objs[3].spec_coef = 20;
-  params->objs[3].col = get_sfcolor(100, 100, 100, 255);
-  params->objs[4].type = 1;
-  params->objs[4].pos.x = 0;
-  params->objs[4].pos.y = 0;
-  params->objs[4].pos.z = -25;
-  params->objs[4].r.x = 0;
-  params->objs[4].r.y = 0;
-  params->objs[4].r.z = 0;
-  params->objs[4].reflect = 0.3;
-  params->objs[4].spec_coef = 20;
-  params->objs[4].col = get_sfcolor(100, 100, 100, 255);
+  params->nb_objs = 1;
+  params->objs = malloc(sizeof(t_obj) * 1);
+  my_memset((char *)params->objs, 0, sizeof(t_obj) * 1);
+  /* params->objs[0].type = 9; */
+  /* params->objs[0].pos.x = -10; */
+  /* params->objs[0].pos.y = 55; */
+  /* params->objs[0].pos.z = 20; */
+  /* params->objs[0].r.x = 0; */
+  /* params->objs[0].r.y = 60; */
+  /* params->objs[0].r.z = 0; */
+  /* params->objs[0].rad = 25; */
+  /* params->objs[0].p1.x = 20; */
+  /* params->objs[0].p2.y = 20; */
+  /* params->objs[0].p2.x = 0; */
+  /* params->objs[0].p1.y = 0; */
+  /* params->objs[0].aper = 20; */
+  /* params->objs[0].reflect = 0.3; */
+  /* params->objs[0].spec_coef = 50; */
+  /* params->objs[0].col = get_sfcolor(255, 255, 0, 255); */
+  /* params->objs[1].type = 0; */
+  /* params->objs[1].pos.x = -10; */
+  /* params->objs[1].pos.y = 0; */
+  /* params->objs[1].pos.z = 20; */
+  /* params->objs[1].r.x = 0; */
+  /* params->objs[1].r.y = 0; */
+  /* params->objs[1].r.z = 0; */
+  /* params->objs[1].rad = 25; */
+  /* params->objs[1].reflect = 0.3; */
+  /* params->objs[1].spec_coef = 50; */
+  /* params->objs[1].col = get_sfcolor(255, 0, 0, 255); */
+  /* params->objs[2].type = 0; */
+  /* params->objs[2].pos.x = -10; */
+  /* params->objs[2].pos.y = -55; */
+  /* params->objs[2].pos.z = 20; */
+  /* params->objs[2].r.x = 0; */
+  /* params->objs[2].r.y = 0; */
+  /* params->objs[2].r.z = 0; */
+  /* params->objs[2].rad = 25; */
+  /* params->objs[2].reflect = 0.3; */
+  /* params->objs[2].spec_coef = 50; */
+  /* params->objs[2].col = get_sfcolor(0, 0, 255, 255); */
+  /* params->objs[3].type = 1; */
+  /* params->objs[3].pos.x = 30; */
+  /* params->objs[3].pos.y = 0; */
+  /* params->objs[3].pos.z = 0; */
+  /* params->objs[3].r.x = 0; */
+  /* params->objs[3].r.y = -90; */
+  /* params->objs[3].r.z = 0; */
+  /* params->objs[3].rad = 20; */
+  /* params->objs[3].aper = 20; */
+  /* params->objs[3].height = 50; */
+  /* params->objs[3].reflect = 0.3; */
+  /* params->objs[3].spec_coef = 20; */
+  /* params->objs[3].col = get_sfcolor(100, 100, 100, 255); */
+  /* params->objs[4].type = 1; */
+  /* params->objs[4].pos.x = 0; */
+  /* params->objs[4].pos.y = 0; */
+  /* params->objs[4].pos.z = -25; */
+  /* params->objs[4].r.x = 0; */
+  /* params->objs[4].r.y = 0; */
+  /* params->objs[4].r.z = 0; */
+  /* params->objs[4].reflect = 0.3; */
+  /* params->objs[4].spec_coef = 20; */
+  /* params->objs[4].col = get_sfcolor(100, 100, 100, 255); */
   params->nb_lights = 1;
   params->lights = malloc(sizeof(t_light) * 1);
   params->lights[0].pos.x = 0;
   params->lights[0].pos.y = 0;
   params->lights[0].pos.z = 100;
-  params->config.ambient = 0;
+  params->config.ambient = 1;
   params->config.reflect_depth = 3;
+
+  params->objs[0].type = 2;
+  params->objs[0].pos.x = -50;
+  params->objs[0].pos.y = 0;
+  params->objs[0].pos.z = 0;
+  params->objs[0].r.x = 0;
+  params->objs[0].r.y = 0;
+  params->objs[0].r.z = 0;
+  params->objs[0].p1.x = 50;
+  params->objs[0].p1.y = 20;
+  params->objs[0].reflect = 0.3;
+  params->objs[0].spec_coef = 20;
+  params->objs[0].col = get_sfcolor(100, 100, 100, 255);
 }
 
 void	render_frame(t_thread *t)
@@ -174,8 +187,8 @@ int		main(int ac, char **av, char **ae)
     return (disp_guide());
   parse_args(&params, ac, av);
   params.seed = init_seed(ac, av, ae, (void *)&main);
-  params.screen_size.x = 1920;
-  params.screen_size.y = 1080;
+  params.screen_size.x = 500;//1920;
+  params.screen_size.y = 400;//1080;
   init(&params);
   if (load_libs(&params) == -1)
     return (84);

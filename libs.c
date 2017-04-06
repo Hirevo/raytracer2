@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 20:08:30 2017 Nicolas Polomack
-** Last update Sun Apr  2 21:01:39 2017 Nicolas Polomack
+** Last update Tue Apr  4 17:40:20 2017 
 */
 
 #include <dlfcn.h>
@@ -55,7 +55,8 @@ int	alloc_lib_vars(t_params *params, int size)
 				   size)) == NULL ||
       (params->id = malloc(sizeof(int) * size)) == NULL)
     return (-1);
-  while (i < size)
+  i = -1;
+  while (++i < size)
     params->id[i] = -1;
   return (0);
 }

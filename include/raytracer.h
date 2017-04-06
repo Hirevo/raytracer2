@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Sat Apr  1 04:52:22 2017 Nicolas Polomack
+** Last update Tue Apr  4 21:29:09 2017 
 */
 
 #ifndef RAYTRACER_H_
@@ -15,7 +15,7 @@
 # include <pthread.h>
 # include "sfcaster.h"
 
-# define GREY get_sfcolor(150, 150, 150, 255)
+# define GREY		get_sfcolor(150, 150, 150, 255)
 
 typedef struct s_window t_window;
 typedef struct s_params t_params;
