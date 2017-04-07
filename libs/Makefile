@@ -5,12 +5,15 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ## 
 ## Started on  Fri Mar 31 19:02:25 2017 Nicolas Polomack
-## Last update Fri Apr  7 04:28:00 2017 Nicolas Polomack
+## Last update Fri Apr  7 19:55:43 2017 Nicolas Polomack
 ##
 
 SRC	=	intersect_sphere.c		\
 		intersect_plane.c		\
 		intersect_limited_plane.c	\
+		intersect_torus.c		\
+		intersect_ellipsoid.c		\
+		intersect_paraboloid.c		\
 		intersect_cyl.c			\
 		intersect_semi_cone.c		\
 		intersect_closed_cyl.c		\
