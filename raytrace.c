@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 00:22:54 2017 Nicolas Polomack
-** Last update Tue Apr  4 21:53:10 2017 Nicolas Polomack
+** Last update Thu Apr  6 23:05:36 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -47,6 +47,7 @@ void	prepare_raytrace(t_thread *t)
 {
   t->depth = 0;
   t->from = NULL;
+  t->refr = 1;
   t->ray.dir = calc_dir_vector(t->params->screen_size,
 			       t->screen_pos.x,
 			       t->screen_pos.y, t->params->config.fov);

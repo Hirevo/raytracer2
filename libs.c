@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 20:08:30 2017 Nicolas Polomack
-** Last update Wed Apr  5 03:34:04 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:29:08 2017 Nicolas Polomack
 */
 
 #include <dlfcn.h>
@@ -53,6 +53,8 @@ int	alloc_lib_vars(t_params *params, int size)
 				  size)) == NULL ||
       (params->get_normal = malloc(sizeof(*(params->get_normal)) *
 				   size)) == NULL ||
+      (params->apply_tex = malloc(sizeof(*(params->apply_tex)) *
+				  size)) == NULL ||
       (params->id = malloc(sizeof(int) * size)) == NULL)
     return (-1);
   i = -1;
@@ -65,7 +67,7 @@ int		load_next_lib(t_params *params, struct dirent **dirs,
 			      int i, int size)
 {
   char		*name;
-  char		**sym[2];
+  char		**sym[3];
   int		id;
 
   if ((name = catpath("libs", dirs[i]->d_name)) == NULL)
@@ -73,8 +75,10 @@ int		load_next_lib(t_params *params, struct dirent **dirs,
   if ((params->libs[i] = dlopen(name, RTLD_LAZY | RTLD_GLOBAL)) == NULL ||
       (sym[0] = dlsym(params->libs[i], "intersect")) == NULL ||
       (sym[1] = dlsym(params->libs[i], "normal")) == NULL ||
+      (sym[2] = dlsym(params->libs[i], "texture")) == NULL ||
       (params->intersect[i] = dlsym(params->libs[i], *(sym[0]))) == NULL ||
       (params->get_normal[i] = dlsym(params->libs[i], *(sym[1]))) == NULL ||
+      (params->apply_tex[i] = dlsym(params->libs[i], *(sym[2]))) == NULL ||
       (id = *((int *)dlsym(params->libs[i], "id"))) == 0)
     return (-1 + 0 * my_printf("%s\n", dlerror()));
   if (id > size || params->id[id - 1] != -1)

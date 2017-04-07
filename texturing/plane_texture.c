@@ -10,14 +10,14 @@
 
 #include "raytracer.h"
 
-sfColor		plane_texture(t_objs *obj, sfVector3f impact)
+sfColor		plane_texture(sfVector3f impact, t_obj *obj)
 {
   sfColor	col;
   int		u;
   int		v;
 
-  u = impact.x - obj->pos.x;
-  v = impact.y - obj->pos.y;
+  u = (impact.x - obj->pos.x);
+  v = (impact.y - obj->pos.y);
   col.r = obj->buffer->pixels[(v * obj->buffer->width + u) * 4];
   col.g = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 1];
   col.b = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 2];

@@ -5,16 +5,18 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sat Apr  1 05:00:14 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:31:46 2017 Nicolas Polomack
 */
 
 #include <math.h>
 #include <SFML/Graphics.h>
 #include "sfcaster.h"
+#include "libs.h"
 #include "raytracer.h"
 
 char	*intersect = "intersect_cone";
 char	*normal = "get_normal_cone";
+char	*texture = "apply_tex_cone";
 int	id = 5;
 
 static float	get_value(float root[2])
@@ -85,4 +87,9 @@ float	intersect_cone(sfVector3f eye_pos,
 void	get_normal_cone(t_thread *t, t_obj *obj)
 {
   t->normal.z *= -tanr(obj->aper);
+}
+
+sfColor	apply_tex_cone(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }

@@ -5,14 +5,16 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Sat Apr  1 01:04:05 2017 Nicolas Polomack
-** Last update Tue Apr  4 16:22:43 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:31:08 2017 Nicolas Polomack
 */
 
 #include <math.h>
+#include "libs.h"
 #include "raytracer.h"
 
 char	*intersect = "intersect_closed_cyl";
 char	*normal = "get_normal_closed_cyl";
+char	*texture = "apply_tex_closed_cyl";
 int	id = 4;
 
 float		intersect_closed_cyl(sfVector3f eye_pos,
@@ -57,4 +59,9 @@ void	get_normal_closed_cyl(t_thread *t, t_obj *obj)
         }
     }
   t->normal.z = 0;
+}
+
+sfColor	apply_tex_closed_cyl(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }

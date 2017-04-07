@@ -5,11 +5,20 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Dec 23 15:12:35 2016 Nicolas Polomack
-** Last update Mon Mar  6 10:21:35 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:32:55 2017 Nicolas Polomack
 */
 
 #include <math.h>
 #include "sfcaster.h"
+
+void	swap_f(float *f1, float *f2)
+{
+  float	temp;
+
+  temp = *f1;
+  *f1 = *f2;
+  *f2 = temp;
+}
 
 float	cosr(float angle)
 {

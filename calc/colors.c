@@ -5,21 +5,21 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 14:18:43 2017 Nicolas Polomack
-** Last update Thu Mar 30 02:23:39 2017 Nicolas Polomack
+** Last update Fri Apr  7 04:05:03 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
 #include "raytracer.h"
 
-sfColor		get_shadow_color(t_thread *t, t_obj *obj)
+sfColor		get_shadow_color(t_thread *t, t_obj *obj, sfColor col)
 {
   float		coef;
   sfColor	ret;
 
   coef = t->params->config.ambient;
-  ret.r = ((float)obj->col.r) * coef;
-  ret.g = ((float)obj->col.g) * coef;
-  ret.b = ((float)obj->col.b) * coef;
+  ret.r = ((float)col.r) * coef;
+  ret.g = ((float)col.g) * coef;
+  ret.b = ((float)col.b) * coef;
   ret.a = 255;
   return (ret);
 }

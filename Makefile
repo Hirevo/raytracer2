@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Wed Apr  5 14:23:45 2017 Nicolas Polomack
+## Last update Fri Apr  7 14:17:40 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -24,6 +24,7 @@ SRC	=	window.c				\
                 get_next_line.c			        \
                 lights/light.c		                \
 		lights/reflect.c			\
+		lights/refract.c			\
 		lights/specular.c			\
 		stereo/stereoscopy.c			\
 		ssaa/ssaa.c				\
@@ -36,6 +37,7 @@ SRC	=	window.c				\
                 calc/normals.c				\
                 calc/calc_dir_vector.c			\
                 texturing/sphere_texture.c		\
+		texturing/plane_texture.c		\
 		misc/disp_guide.c			\
                 bmp/load_bmp.c                          \
                 bmp/merge.c                             \
@@ -47,7 +49,7 @@ LIBS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml-so -lc_graph_prog
 
 FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=$(shell pwd)/lib/mycsfml -rdynamic
 
-CFLAGS	=	-Iinclude -I../include -W -Wall -Wextra -pthread -g
+CFLAGS	=	-Iinclude -I../include -W -Wall -Wextra -pthread -Ofast
 
 REDDARK         =       \033[31;2m
 

@@ -5,9 +5,10 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 20:37:50 2017 Nicolas Polomack
-** Last update Wed Apr  5 04:20:04 2017 Nicolas Polomack
+** Last update Fri Apr  7 14:09:16 2017 Nicolas Polomack
 */
 
+#include <math.h>
 #include <SFML/Graphics.h>
 #include "raytracer.h"
 
@@ -17,11 +18,8 @@ sfColor		apply_effects(t_thread *t, t_obj *obj, float dist)
   sfVector3f	imp;
 
   prepare_light_calc(t, obj, dist);
-  imp = normalize(prepare(t->impact, obj, 1));
-  if (obj->buffer && obj->type == 0)
-    col = sphere_texture(v3f(0, 1, 0), imp, v3f(0, 0, 1), obj);
-  else
-    col = obj->col;
+  imp = prepare(t->impact, obj, 1);
+  col = t->params->apply_tex[t->params->id[(int)obj->type]](imp, obj);
   col = calc_lights(t, obj, col);
   col = light_effects(t, obj, col);
   return (col);
@@ -34,7 +32,7 @@ void	prepare_light_ray(t_thread *t, int i)
   t->ray.dir.z = t->params->lights[i].pos.z - t->impact.z;
 }
 
-void		prepare_reflect(t_thread *t)
+float		prepare_reflect(t_thread *t)
 {
   float		norme;
 
@@ -45,9 +43,10 @@ void		prepare_reflect(t_thread *t)
   t->ray.dir.x = t->ray.dir.x + (2.0F * t->normal.x * norme);
   t->ray.dir.y = t->ray.dir.y + (2.0F * t->normal.y * norme);
   t->ray.dir.z = t->ray.dir.z + (2.0F * t->normal.z * norme);
+  return (norme);
 }
 
-sfColor		apply_reflect(sfColor col, sfColor reflect, float ratio)
+sfColor		apply_effect(sfColor col, sfColor reflect, float ratio)
 {
   col.r = ((float)reflect.r) * ratio +
     ((float)col.r) * (1.0F - ratio);
@@ -61,13 +60,32 @@ sfColor		apply_reflect(sfColor col, sfColor reflect, float ratio)
 
 sfColor		light_effects(t_thread *t, t_obj *obj, sfColor col)
 {
-  if (t->depth++ < t->params->config.reflect_depth &&
-      obj->reflect > 0)
+  sfColor	r[2];
+  float		c1;
+  t_thread	save;
+
+  if (t->depth++ < t->params->config.reflect_depth)
     {
       t->from = obj;
       t->ray.dir = t->dir;
-      prepare_reflect(t);
-      col = apply_reflect(col, raytrace(t), obj->reflect);
+      save = *t;
+      c1 = prepare_reflect(t);
+      if (obj->reflect > 0)
+	r[0] = apply_effect(col, raytrace(t), obj->reflect);
+      *t = save;
+      t->from = NULL;
+      prepare_refract(t, c1, obj->refr_index);
+      t->refr = obj->refr_index;
+      if (obj->refract > 0)
+	r[1] = apply_effect(col, raytrace(t), obj->refract);
+      if (obj->refract > 0)
+	if (!(obj->reflect > 0))
+	  return (r[1]);
+	else
+	  return (average_colors(r, 2));
+      else if (obj->reflect > 0)
+	return (r[0]);
+      return (col);
     }
   return (col);
 }

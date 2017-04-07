@@ -5,14 +5,16 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Sat Apr  1 01:18:21 2017 Nicolas Polomack
-** Last update Sat Apr  1 04:59:45 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:40:34 2017 Nicolas Polomack
 */
 
 #include <math.h>
+#include "libs.h"
 #include "raytracer.h"
 
 char	*intersect = "intersect_semi_cone";
 char	*normal = "get_normal_semi_cone";
+char	*texture = "apply_tex_semi_cone";
 int	id = 6;
 
 float	intersect_semi_cone(sfVector3f eye_pos,
@@ -33,4 +35,9 @@ float	intersect_semi_cone(sfVector3f eye_pos,
 void	get_normal_semi_cone(t_thread *t, t_obj *obj)
 {
   t->normal.z *= -tanr(obj->aper);
+}
+
+sfColor	apply_tex_semi_cone(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }

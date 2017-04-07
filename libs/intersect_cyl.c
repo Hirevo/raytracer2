@@ -5,15 +5,16 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sat Apr  1 02:26:59 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:38:36 2017 Nicolas Polomack
 */
 
 #include <math.h>
-#include <SFML/Graphics.h>
+#include "libs.h"
 #include "raytracer.h"
 
 char	*intersect = "intersect_cyl";
 char	*normal = "get_normal_cyl";
+char	*texture = "apply_tex_cyl";
 int	id = 3;
 
 static float	get_value(float root[2])
@@ -60,4 +61,9 @@ float		intersect_cyl(sfVector3f eye_pos,
 void	get_normal_cyl(t_thread *t, t_obj *obj)
 {
   t->normal.z = 0;
+}
+
+sfColor	apply_tex_cyl(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }

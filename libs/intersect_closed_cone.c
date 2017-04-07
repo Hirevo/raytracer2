@@ -5,14 +5,16 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Sat Apr  1 01:18:21 2017 Nicolas Polomack
-** Last update Tue Apr  4 18:49:53 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:30:14 2017 Nicolas Polomack
 */
 
 #include <math.h>
+#include "libs.h"
 #include "raytracer.h"
 
 char	*intersect = "intersect_closed_cone";
 char	*normal = "get_normal_closed_cone";
+char	*texture = "apply_tex_closed_cone";
 int	id = 7;
 
 float	intersect_closed_cone(sfVector3f eye_pos,
@@ -47,4 +49,9 @@ void	get_normal_closed_cone(t_thread *t, t_obj *obj)
       return ;
     }
   t->normal.z *= -tanr(obj->aper);
+}
+
+sfColor	apply_tex_closed_cone(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }

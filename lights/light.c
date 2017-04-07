@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb 13 20:54:49 2017 Nicolas Polomack
-** Last update Wed Apr  5 00:49:19 2017 Nicolas Polomack
+** Last update Fri Apr  7 04:04:47 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -88,7 +88,7 @@ sfColor		calc_lights(t_thread *t, t_obj *obj, sfColor col)
     {
       prepare_light_ray(t, i);
       if (is_obstructed(t, obj))
-        cols[i] = get_shadow_color(t, obj);
+        cols[i] = get_shadow_color(t, obj, col);
       else
 	{
 	  cols[i] = eval_luminosity(t, col, &coef);

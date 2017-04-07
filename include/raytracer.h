@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Wed Apr  5 00:51:33 2017 Nicolas Polomack
+** Last update Fri Apr  7 16:53:11 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -47,6 +47,8 @@ typedef struct		s_obj
   t_my_framebuffer	*buffer;
   float			height;
   float			reflect;
+  float			refract;
+  float			refr_index;
   float			spec_coef;
 }			t_obj;
 
@@ -63,6 +65,7 @@ typedef struct s_thread
   sfColor	*depth_col;
   sfColor	*ssaa_col;
   float		focal_dist;
+  float		refr;
   t_ray		ray;
   t_obj		*from;
   int		depth;
@@ -92,12 +95,14 @@ typedef struct		s_params
   t_light		*lights;
   float			(**intersect)(sfVector3f, sfVector3f, t_obj *);
   void			(**get_normal)(t_thread *, t_obj *);
+  sfColor		(**apply_tex)(sfVector3f, t_obj *);
   void			**libs;
   int			*id;
   int			t_count;
   pthread_mutex_t	mutex;
   pthread_t		*t;
   long int		seed;
+  int			help;
   int			progress;
   int			nb_lights;
   int			nb_objs;
@@ -121,49 +126,14 @@ typedef struct		s_window
 }			t_window;
 
 /*
-** intersect/intersect_sphere.c
-*/
-float	intersect_sphere(sfVector3f, sfVector3f, t_obj *);
-
-/*
-** intersect/intersect_plane.c
-*/
-float	intersect_plane(sfVector3f, sfVector3f, t_obj *);
-
-/*
-** intersect/intersect_cyl.c
-*/
-float	intersect_cyl(sfVector3f, sfVector3f, t_obj *);
-float	intersect_closed_cyl(sfVector3f, sfVector3f, t_obj *);
-
-/*
-** intersect/intersect_cone.c
-*/
-float	intersect_cone(sfVector3f, sfVector3f, t_obj *);
-float	intersect_closed_cone(sfVector3f, sfVector3f, t_obj *);
-
-/*
-** intersect/intersect_disk.c
-*/
-float	intersect_disk(sfVector3f, sfVector3f, t_obj *);
-
-/*
-** intersect/intersect_limited_plane.c
-*/
-sfVector3f	create_vet3(float, float, float);
-float		intersect_limited_plane(sfVector3f, sfVector3f, t_obj *);
-
-/*
-** intersect/intersect_triangle.c
-*/
-float		norm2(sfVector2f);
-sfVector2f	create_vet2(float, float);
-float		intersect_triangle(sfVector3f, sfVector3f, t_obj *);
-
-/*
 ** texturing/sphere_texture.c
 */
 sfColor		sphere_texture(sfVector3f, sfVector3f, sfVector3f, t_obj *);
+
+/*
+** texturing/plane_texture.c
+*/
+sfColor		plane_texture(sfVector3f, t_obj *);
 
 /*
 ** calc/normals.c
@@ -220,7 +190,7 @@ float		get_light_coef(sfVector3f, sfVector3f);
 /*
 ** calc/colors.c
 */
-sfColor		get_shadow_color(t_thread *, t_obj *);
+sfColor		get_shadow_color(t_thread *, t_obj *, sfColor);
 sfColor		average_colors(sfColor *, int);
 
 /*

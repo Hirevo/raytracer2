@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Fri Mar 31 15:48:08 2017 Nicolas Polomack
+** Last update Fri Apr  7 16:53:57 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -23,10 +23,11 @@ static int	get_index(char *flags, char arg)
   return (-1);
 }
 
-static void	init_links(t_params *params, int *flags[2])
+static void	init_links(t_params *params, int *flags[3])
 {
   flags[0] = &params->config.stereo;
   flags[1] = &params->config.live;
+  flags[2] = &params->help;
 }
 
 void		parse_args(t_params *params, int ac, char **av)
@@ -34,7 +35,7 @@ void		parse_args(t_params *params, int ac, char **av)
   int		i;
   int		j;
   int		match;
-  int		*flags[2];
+  int		*flags[3];
 
   params->config.stereo = 0;
   params->config.live = 0;
@@ -47,7 +48,7 @@ void		parse_args(t_params *params, int ac, char **av)
 	  {
 	    j = 0;
 	    while (av[i][++j])
-	      if ((match = get_index("Su", av[i][j])) == -1)
+	      if ((match = get_index("Suh", av[i][j])) == -1)
 		exit(84 + 0 * my_printf("-%c: Invalid argument.\n", av[i][j]));
 	      else
 		*(flags[match]) = 1;

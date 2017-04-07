@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Wed Apr  5 00:39:09 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:44:14 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -14,6 +14,7 @@
 
 char	*intersect = "intersect_sphere";
 char	*normal = "get_normal_sphere";
+char	*texture = "apply_tex_sphere";
 int	id = 1;
 
 static float	get_value(float root[2])
@@ -59,4 +60,33 @@ float	intersect_sphere(sfVector3f eye_pos,
 
 void	get_normal_sphere(t_thread *t, t_obj *obj)
 {
+}
+
+sfColor		apply_tex_sphere(sfVector3f vp, t_obj *obj)
+{
+  float		phi;
+  float		theta;
+  int		u;
+  int		v;
+  sfColor	col;
+  sfVector3f	ve;
+  sfVector3f	vn;
+
+  if (obj->buffer == NULL)
+    return (obj->col);
+  vp = normalize(vp);
+  ve = v3f(0, 1, 0);
+  vn = v3f(0, 0, 1);
+  phi = acos(-1 * dot(vn, vp));
+  theta = (acos(dot(vp, ve) / sin(phi))) / (2 * M_PI);
+  v = phi * obj->buffer->height / M_PI;
+  if (dot(cross(vn, ve), vp) > 0)
+    u = theta * obj->buffer->width;
+  else
+    u = (1 - theta) * obj->buffer->width;
+  col.r = obj->buffer->pixels[(v * obj->buffer->width + u) * 4];
+  col.g = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 1];
+  col.b = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 2];
+  col.a = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 3];
+  return (col);
 }

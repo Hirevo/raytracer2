@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed Apr  5 12:25:22 2017 Nicolas Polomack
+** Last update Fri Apr  7 16:58:01 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -93,13 +93,13 @@ int		main(int ac, char **av, char **ae)
 
   if (ac < 2)
     return (84);
-  if (!my_strcmp(av[1], "-h") || !my_strcmp(av[1], "--help"))
-    return (disp_guide());
   parse_args(&params, ac, av);
+  if (params.help)
+    return (disp_guide());
   params.seed = init_seed(ac, av, ae, (void *)&main);
-  params.screen_size.x = 1280;
-  params.screen_size.y = 720;
-  init_reflect(&params);
+  params.screen_size.x = 1920;
+  params.screen_size.y = 1080;
+  init_test(&params);
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);

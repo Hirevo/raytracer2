@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 13:52:00 2016 Nicolas Polomack
-** Last update Wed Apr  5 00:53:36 2017 Nicolas Polomack
+** Last update Wed Apr  5 19:33:23 2017 Nicolas Polomack
 */
 
 #ifndef SFCASTER_H_
@@ -45,6 +45,7 @@ sfVector3f		*create_vector3f(float, float, float);
 sfVector2f		*create_vector2f(float, float);
 sfVector2i		*create_vector2i(int, int);
 sfVector3f		v3f(float, float, float);
+sfVector2f		v2f(float, float);
 void			drawSquare(t_my_framebuffer *, sfVector2i *,
 				   sfVector2i *, sfColor);
 void			put_pixel(t_my_framebuffer *,
@@ -54,10 +55,12 @@ void			draw_line(t_my_framebuffer *,
 				  sfColor);
 void			clear_pixels(t_my_framebuffer *);
 sfColor			get_sfcolor(int, int, int, int);
+void			swap_f(float *, float *);
 float			cosr(float);
 float			sinr(float);
 float			tanr(float);
 float			dot(sfVector3f, sfVector3f);
+sfVector3f		cross(sfVector3f, sfVector3f);
 float			norm(sfVector3f);
 sfVector3f		normalize(sfVector3f);
 sfColor			average_col(sfColor *, int);

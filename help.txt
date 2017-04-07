@@ -1,0 +1,8 @@
+Usage: raytracer2 [-u] [-S] scene_file
+
+Renders the scene for the provided scene_file.
+
+  -u
+	Live updates the rendered part of the image as the laoding progresses.
+  -S
+	Enables stereoscopic 3D rendering. This flag may disable some effects such as depth of field or anti-aliasing.

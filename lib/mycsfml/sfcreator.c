@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Sat Dec 24 00:06:29 2016 Nicolas Polomack
-** Last update Wed Apr  5 00:53:54 2017 Nicolas Polomack
+** Last update Wed Apr  5 17:24:37 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -41,6 +41,15 @@ sfVector3f	v3f(float x, float y, float z)
   v.x = x;
   v.y = y;
   v.z = z;
+  return (v);
+}
+
+sfVector2f	v2f(float x, float y)
+{
+  sfVector2f	v;
+
+  v.x = x;
+  v.y = y;
   return (v);
 }
 

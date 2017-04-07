@@ -5,27 +5,19 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Wed Apr  5 12:59:12 2017 Nicolas Polomack
+** Last update Fri Apr  7 14:20:21 2017 Nicolas Polomack
 */
 
 #include <float.h>
 #include <math.h>
-#include <SFML/Graphics.h>
+#include "libs.h"
 #include "my.h"
 #include "raytracer.h"
 
 char	*intersect = "intersect_cube";
 char	*normal = "get_normal_cube";
+char	*texture = "apply_tex_cube";
 int	id = 11;
-
-static void	swap_f(float *f1, float *f2)
-{
-  float		temp;
-
-  temp = *f1;
-  *f1 = *f2;
-  *f2 = temp;
-}
 
 static int	x_plane(sfVector3f eye, sfVector3f dir,
 			t_obj *obj, float *t)
@@ -40,15 +32,15 @@ static int	x_plane(sfVector3f eye, sfVector3f dir,
       return (-1);
   t1 = ((-obj->rad) - eye.x) / dir.x;
   t2 = (obj->rad - eye.x) / dir.x;
-  if(t1 > t2)
+  if (t1 > t2)
     swap_f(&t1, &t2);
-  if(t1 > t[0])
+  if (t1 > t[0])
     t[0] = t1;
-  if(t2 < t[1])
+  if (t2 < t[1])
     t[1] = t2;
-  if(t[0] > t[1])
+  if (t[0] > t[1])
     inter = 0;
-  if(t[1] < 0)
+  if (t[1] < 0)
     inter = 0;
   return (inter);
 }
@@ -66,15 +58,15 @@ static int	y_plane(sfVector3f eye, sfVector3f dir,
       return (-1);
   t1 = ((-obj->rad) - eye.y) / dir.y;
   t2 = (obj->rad - eye.y) / dir.y;
-  if(t1 > t2)
+  if (t1 > t2)
     swap_f(&t1, &t2);
-  if(t1 > t[0])
+  if (t1 > t[0])
     t[0] = t1;
-  if(t2 < t[1])
+  if (t2 < t[1])
     t[1] = t2;
-  if(t[0] > t[1])
+  if (t[0] > t[1])
     inter = 0;
-  if(t[1] < 0)
+  if (t[1] < 0)
     inter = 0;
   return (inter);
 }
@@ -92,15 +84,15 @@ static int	z_plane(sfVector3f eye, sfVector3f dir,
       return (-1);
   t1 = ((-obj->rad) - eye.z) / dir.z;
   t2 = (obj->rad - eye.z) / dir.z;
-  if(t1 > t2)
+  if (t1 > t2)
     swap_f(&t1, &t2);
-  if(t1 > t[0])
+  if (t1 > t[0])
     t[0] = t1;
-  if(t2 < t[1])
+  if (t2 < t[1])
     t[1] = t2;
-  if(t[0] > t[1])
+  if (t[0] > t[1])
     inter = 0;
-  if(t[1] < 0)
+  if (t[1] < 0)
     inter = 0;
   return (inter);
 }
@@ -140,4 +132,9 @@ void		get_normal_cube(t_thread *t, t_obj *obj)
     t->normal = v3f(0, 0, 1);
   else if (fabsf(t->normal.z + obj->rad) < 0.01)
     t->normal = v3f(0, 0, -1);
+}
+
+sfColor	apply_tex_cube(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }
