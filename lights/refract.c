@@ -5,9 +5,10 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Apr  6 10:47:16 2017 Nicolas Polomack
-** Last update Fri Apr  7 16:58:30 2017 Nicolas Polomack
+** Last update Sun Apr  9 15:49:37 2017 Nicolas Polomack
 */
 
+#include <math.h>
 #include "raytracer.h"
 
 sfVector3f	oppose(sfVector3f v)

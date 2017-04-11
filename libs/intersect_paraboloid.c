@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Fri Apr  7 17:31:42 2017 
+** Last update Sun Apr  9 15:15:37 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -16,6 +16,7 @@
 
 char	*intersect = "intersect_parab";
 char	*normal = "get_normal_parab";
+char	*texture = "apply_tex_parab";
 int	id = 14;
 
 static double           delt(double a, double b, double c)
@@ -70,12 +71,6 @@ void		get_normal_parab(t_thread *t, t_obj *obj)
 {
   float		m;
   sfVector3f	up;
-  
-  /* P = point; */
-  /* C = 0; */
-  /* V = up; */
-  /* m = dot(point, up); */
-  /* k = obj->p1.x; */
 
   up.x = 0;
   up.y = 0;
@@ -85,4 +80,9 @@ void		get_normal_parab(t_thread *t, t_obj *obj)
   t->normal.y = t->normal.y - up.y * (m + obj->p1.x);
   t->normal.z = t->normal.z - up.z * (m + obj->p1.x);
   t->normal = normalize(t->normal);
+}
+
+sfColor		apply_tex_parab(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }

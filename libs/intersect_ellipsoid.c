@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Fri Apr  7 16:47:09 2017 
+** Last update Sun Apr  9 15:15:40 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -16,6 +16,7 @@
 
 char	*intersect = "intersect_elli";
 char	*normal = "get_normal_elli";
+char	*texture = "apply_tex_elli";
 int	id = 13;
 
 static double           delt(double a, double b, double c)
@@ -46,8 +47,8 @@ static double           solve(sfVector3f equa, double delta)
 }
 
 float		intersect_elli(sfVector3f eye,
-			sfVector3f vec,
-			t_obj *obj)
+			       sfVector3f vec,
+			       t_obj *obj)
 {
   float		denom;
   float		a;
@@ -82,4 +83,9 @@ void		get_normal_elli(t_thread *t, t_obj *obj)
   t->normal.x /= pow(obj->p1.x, 2);
   t->normal.y /= pow(obj->p1.y, 2);
   t->normal.z /= pow(obj->p2.x, 2);
+}
+
+sfColor		apply_tex_elli(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }

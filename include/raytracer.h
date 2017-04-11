@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Fri Apr  7 19:56:26 2017 Nicolas Polomack
+** Last update Sun Apr  9 15:51:30 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -190,7 +190,7 @@ float		get_light_coef(sfVector3f, sfVector3f);
 /*
 ** calc/colors.c
 */
-sfColor		get_shadow_color(t_thread *, t_obj *, sfColor);
+sfColor		get_shadow_color(t_thread *, sfColor);
 sfColor		average_colors(sfColor *, int);
 
 /*
@@ -205,6 +205,11 @@ void		prepare_light_ray(t_thread *, int);
 sfColor		apply_reflect(sfColor, sfColor, float);
 sfColor		light_effects(t_thread *, t_obj *, sfColor);
 sfColor		apply_effects(t_thread *, t_obj *, float);
+
+/*
+** lights/refract.c
+*/
+void	prepare_refract(t_thread *, float, float);
 
 /*
 ** lights/specular.c

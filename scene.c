@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Apr  4 15:04:25 2017 Nicolas Polomack
-** Last update Fri Apr  7 09:11:37 2017 Nicolas Polomack
+** Last update Sun Apr  9 23:30:01 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -24,24 +24,24 @@ void	init_reflect(t_params *params)
   params->r.y = 0;
   params->r.z = 0;
   params->nb_objs = 5;
-  params->objs = malloc(sizeof(t_obj) * 5);
-  my_memset((char *)params->objs, 0, sizeof(t_obj) * 5);
-  params->objs[0].type = 10;
+  params->objs = malloc(sizeof(t_obj) * 4);
+  my_memset((char *)params->objs, 0, sizeof(t_obj) * 4);
+  params->objs[0].type = 12;
   params->objs[0].pos.x = -10;
   params->objs[0].pos.y = 55;
   params->objs[0].pos.z = 20;
-  params->objs[0].r.x = 0;
-  params->objs[0].r.y = -70;
-  params->objs[0].r.z = 60;
+  params->objs[0].r.x = -45;
+  params->objs[0].r.y = 0;
+  params->objs[0].r.z = 0;
   params->objs[0].rad = 25;
-  params->objs[0].p1.x = 30;
-  params->objs[0].p2.y = 30;
-  params->objs[0].p2.x = 0;
-  params->objs[0].p1.y = 0;
+  params->objs[0].p1.x = 10;
+  params->objs[0].p2.y = 0;
+  params->objs[0].p2.x = 20;
+  params->objs[0].p1.y = 30;
   params->objs[0].rad = 10;
   params->objs[0].reflect = 0.5;
   //params->objs[0].spec_coef = 50;
-  params->objs[0].col = get_sfcolor(120, 0, 0, 255);
+  params->objs[0].col = get_sfcolor(255, 255, 255, 255);
   params->objs[1].type = 0;
   params->objs[1].pos.x = -10;
   params->objs[1].pos.y = 0;
@@ -67,7 +67,7 @@ void	init_reflect(t_params *params)
   params->objs[1].buffer = load_bmp("resources/EtoileNoire.bmp", NULL, NULL);
   params->objs[2].col = get_sfcolor(0, 0, 255, 255);
   params->objs[3].type = 1;
-  params->objs[3].pos.x = 30;
+  params->objs[3].pos.x = 1000;
   params->objs[3].pos.y = -150;
   params->objs[3].pos.z = 0;
   params->objs[3].r.x = 0;
@@ -79,17 +79,17 @@ void	init_reflect(t_params *params)
   params->objs[3].reflect = 0;
   params->objs[3].buffer = load_bmp("resources/space.bmp", NULL, NULL);
   params->objs[3].col = get_sfcolor(100, 100, 100, 255);
-  params->objs[4].type = 1;
-  params->objs[4].pos.x = 0;
-  params->objs[4].pos.y = 0;
-  params->objs[4].pos.z = -25;
-  params->objs[4].r.x = 0;
-  params->objs[4].r.y = 0;
-  params->objs[4].r.z = 0;
-  params->objs[4].reflect = 0;
-  params->objs[4].spec_coef = 20;
-  params->objs[4].buffer = params->objs[3].buffer;
-  params->objs[4].col = get_sfcolor(100, 100, 100, 255);
+  /* params->objs[4].type = 1; */
+  /* params->objs[4].pos.x = 0; */
+  /* params->objs[4].pos.y = 0; */
+  /* params->objs[4].pos.z = -25; */
+  /* params->objs[4].r.x = 0; */
+  /* params->objs[4].r.y = 0; */
+  /* params->objs[4].r.z = 0; */
+  /* params->objs[4].reflect = 0; */
+  /* params->objs[4].spec_coef = 20; */
+  /* params->objs[4].buffer = params->objs[3].buffer; */
+  /* params->objs[4].col = get_sfcolor(100, 100, 100, 255); */
   params->nb_lights = 2;
   params->lights = malloc(sizeof(t_light) * 2);
   params->lights[0].pos.x = -150;
@@ -101,7 +101,7 @@ void	init_reflect(t_params *params)
   params->config.ambient = 0.2;
   params->config.reflect_depth = 5;
   params->config.depth_rays = 1;
-  params->config.ssaa = 16;
+  params->config.ssaa = 1;
 }
 
 void	init_test(t_params *params)
@@ -126,7 +126,7 @@ void	init_test(t_params *params)
   params->objs[0].rad = 20;
   params->objs[0].reflect = 0;
   params->objs[0].refract = 0.9;
-  params->objs[0].refr_index = 0.9;
+  params->objs[0].refr_index = 0.8;
   params->objs[0].buffer = NULL;
   params->objs[0].spec_coef = 50;
   params->objs[0].col = get_sfcolor(255, 0, 0, 255);
@@ -136,7 +136,7 @@ void	init_test(t_params *params)
   params->objs[1].pos.z = 0;
   params->objs[1].r.x = 0;
   params->objs[1].r.y = 0;
-  params->objs[1].r.z = 0;
+  params->objs[1].r.z = 120;
   params->objs[1].p1.x = 150;
   params->objs[1].p2.y = 200;
   params->objs[1].rad = 20;
@@ -156,7 +156,7 @@ void	init_test(t_params *params)
   params->objs[2].reflect = 0;
   params->objs[2].buffer = NULL;
   params->objs[2].spec_coef = 50;
-  params->objs[2].buffer = load_bmp("resources/space.bmp", NULL, NULL);
+  //params->objs[2].buffer = load_bmp("resources/space.bmp", NULL, NULL);
   params->objs[2].col = get_sfcolor(255, 255, 255, 255);
   params->nb_lights = 3;
   params->lights = malloc(sizeof(t_light) * 3);
@@ -314,5 +314,5 @@ void	init_room(t_params *params)
   params->config.ambient = 0.2;
   params->config.reflect_depth = 3;
   params->config.depth_rays = 3;
-  params->config.ssaa = 9;
+  params->config.ssaa = 1;
 }

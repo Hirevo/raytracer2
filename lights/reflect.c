@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 20:37:50 2017 Nicolas Polomack
-** Last update Fri Apr  7 14:09:16 2017 Nicolas Polomack
+** Last update Sun Apr  9 15:19:44 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -73,7 +73,6 @@ sfColor		light_effects(t_thread *t, t_obj *obj, sfColor col)
       if (obj->reflect > 0)
 	r[0] = apply_effect(col, raytrace(t), obj->reflect);
       *t = save;
-      t->from = NULL;
       prepare_refract(t, c1, obj->refr_index);
       t->refr = obj->refr_index;
       if (obj->refract > 0)

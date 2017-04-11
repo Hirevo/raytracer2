@@ -1,11 +1,11 @@
 /*
-** intersect_sphere.c for bootstrap raytracer1 in /home/nicolaspolomack/tests/raytracer_test
+1;4601;0c** intersect_sphere.c for bootstrap raytracer1 in /home/nicolaspolomack/tests/raytracer_test
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Tue Apr  4 23:20:31 2017 
+** Last update Sun Apr  9 15:15:43 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -15,7 +15,8 @@
 
 char	*intersect = "intersect_torus";
 char	*normal = "get_normal_torus";
-int	id = 11;
+char	*texture = "apply_tex_torus";
+int	id = 12;
 
 float		fct(t_poly p, double x)
 {
@@ -57,8 +58,8 @@ float		dico(t_poly poly)
 }
 
 float		intersect_torus(sfVector3f eye_pos,
-			sfVector3f dir_vector,
-			t_obj *obj)
+				sfVector3f dir_vector,
+				t_obj *obj)
 {
   float		g;
   float		h;
@@ -88,4 +89,9 @@ float		intersect_torus(sfVector3f eye_pos,
 void		get_normal_torus(t_thread *t, t_obj *obj)
 {
  
+}
+
+sfColor		apply_tex_torus(sfVector3f imp, t_obj *obj)
+{
+  return (obj->col);
 }

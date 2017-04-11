@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Fri Apr  7 19:54:31 2017 Nicolas Polomack
+** Last update Sun Apr  9 23:29:32 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -99,7 +99,7 @@ int		main(int ac, char **av, char **ae)
   params.seed = init_seed(ac, av, ae, (void *)&main);
   params.screen_size.x = 1920;
   params.screen_size.y = 1080;
-  init_test(&params);
+  init_room(&params);
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);
