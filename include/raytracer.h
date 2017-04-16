@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Sun Apr  9 15:51:30 2017 Nicolas Polomack
+** Last update Sat Apr 15 15:01:22 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -16,6 +16,13 @@
 # include "sfcaster.h"
 
 # define GREY		get_sfcolor(150, 150, 150, 255)
+# define SIZE_BUF	2048
+# define MATERIAL	"material"
+# define COLOR		"<color"
+# define TEXT		"<texture"
+# define NAME_N		"name="
+# define COLOR_N	"color="
+# define TEXT_N		"src="
 
 typedef struct s_window t_window;
 typedef struct s_params t_params;
@@ -31,8 +38,16 @@ typedef struct	s_light
 {
   sfVector3f	pos;
   sfColor	col;
-  float		ambient;
 }		t_light;
+
+typedef struct		s_material
+{
+  char			*name;
+  int			type;
+  char			*path;
+  sfColor		color;
+  struct s_material	*next;
+}			t_material;
 
 typedef struct		s_obj
 {
@@ -73,18 +88,18 @@ typedef struct s_thread
   t_params      *params;
 }               t_thread;
 
-typedef struct		s_config
+typedef struct	s_config
 {
-  int			stereo;
-  int			ssaa;
-  int			bmp;
-  int			live;
-  int			fov;
-  float			ambient;
-  int			reflect_depth;
-  int			depth_rays;
-  int			shadow_rays;
-}			t_config;
+  int		stereo;
+  int		ssaa;
+  int		bmp;
+  int		live;
+  int		fov;
+  float		ambient;
+  int		reflect_depth;
+  int		depth_rays;
+  int		shadow_rays;
+}		t_config;
 
 typedef struct		s_params
 {
@@ -128,12 +143,12 @@ typedef struct		s_window
 /*
 ** texturing/sphere_texture.c
 */
-sfColor		sphere_texture(sfVector3f, sfVector3f, sfVector3f, t_obj *);
+sfColor	sphere_texture(sfVector3f, sfVector3f, sfVector3f, t_obj *);
 
 /*
 ** texturing/plane_texture.c
 */
-sfColor		plane_texture(sfVector3f, t_obj *);
+sfColor	plane_texture(sfVector3f, t_obj *);
 
 /*
 ** calc/normals.c
@@ -241,9 +256,69 @@ void	rotation(sfVector3f *, sfVector3f *);
 void	anti_rotation(sfVector3f *, sfVector3f *);
 
 /*
+** parse/get_file.c
+*/
+
+char	**get_file(char *);
+
+/*
+** parse/parse_from_file.c
+*/
+
+int	parse_from_file(t_params *, char *);
+
+/*
 ** parse/proc.c
 */
 int	get_core_count();
+
+/*
+** parse/parse_material.c
+*/
+
+t_material	*parse_material(char **);
+
+/*
+** parse/add_material.c
+*/
+
+int	add_material(t_material **, t_material);
+
+/*
+** parse/get_head_node.c
+*/
+
+char	*get_head_node(char **, char *);
+
+/*
+** parse/get_text_from_node.c
+*/
+
+char	*get_text_from_node(char **, sfVector2i *);
+
+/*
+** parse/get_text_from_born.c
+*/
+
+char	*get_text_from_born(char **, sfVector2i *);
+
+/*
+** parse/get_val_from_node.c
+*/
+
+char	*get_val_from_node(char *, char *);
+
+/*
+** parse/get_color_from_node.c
+*/
+
+sfColor	get_color_from_node(char *, char *);
+
+/*
+** parse/my_epurstr.c
+*/
+
+char	*my_epurstr(char *);
 
 /*
 ** parse/args.c

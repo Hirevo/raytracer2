@@ -1,0 +1,30 @@
+<obj>
+	<1
+		pos="200, 0, 0"
+		rot="0, 0, 0"
+		material="rouge"
+	/>
+</obj>
+<material>
+	<color
+		name="rouge"
+		color="255,0,0"
+	/>
+	<texture
+		name="earth"
+		src="ressources/Earth.bmp"
+	/>
+</material>
+<light>
+	<point
+		pos="0, 200, 0"
+		color="rouge"
+	/>
+	<ambient
+		color="rouge"
+	/>
+</light>
+<camera
+	pos="0,0,0"
+	rot="0,0,0"
+/>

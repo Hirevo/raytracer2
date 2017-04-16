@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.net>
 **
 ** Started on  Thu Oct 13 10:04:36 2016 Nicolas POLOMACK
-** Last update Sat Apr  1 02:35:36 2017 Nicolas Polomack
+** Last update Sat Apr 15 14:41:25 2017 Arthur Knoepflin
 */
 
 #ifndef MY_H_
@@ -23,6 +23,7 @@ typedef struct	s_flags
   char		*backup;
 } 		t_flags;
 
+int	my_puterror(char *);
 void	my_putchar(char);
 int	my_isneg(int);
 void	my_put_nbr(int);
@@ -54,6 +55,7 @@ int	my_showmem(char *, int);
 char	*my_strcat(char *, char *);
 char	*my_strncat(char *, char *, int);
 char	*my_strdup(char *);
+char	*my_strndup(char *, int);
 void	my_display2(double, int, int, int);
 void	my_loop(double, int, int, int);
 int	my_compare1(char *, char *);

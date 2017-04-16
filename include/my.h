@@ -2,10 +2,10 @@
 ** my.h for my in /home/nicolas.polomack/CPool_Day09
 **
 ** Made by Nicolas POLOMACK
-** Login   <nicolas.polomack@epitech.eu>
+** Login   <nicolas.polomack@epitech.net>
 **
 ** Started on  Thu Oct 13 10:04:36 2016 Nicolas POLOMACK
-** Last update Sat Apr  1 02:36:20 2017 Nicolas Polomack
+** Last update Sat Apr 15 14:41:25 2017 Arthur Knoepflin
 */
 
 #ifndef MY_H_
@@ -23,6 +23,7 @@ typedef struct	s_flags
   char		*backup;
 } 		t_flags;
 
+int	my_puterror(char *);
 void	my_putchar(char);
 int	my_isneg(int);
 void	my_put_nbr(int);
@@ -35,8 +36,6 @@ int	my_power_rec(int, int);
 int	my_square_root(int);
 int	my_is_prime(int);
 int	my_find_prime_sup(int);
-void	my_memcpy(void *, void *, int);
-char	*my_memset(char *, char, int);
 char	*my_strcpy(char *, char *);
 char	*my_strncpy(char *, char *, int);
 char	*my_revstr(char *);
@@ -56,6 +55,7 @@ int	my_showmem(char *, int);
 char	*my_strcat(char *, char *);
 char	*my_strncat(char *, char *, int);
 char	*my_strdup(char *);
+char	*my_strndup(char *, int);
 void	my_display2(double, int, int, int);
 void	my_loop(double, int, int, int);
 int	my_compare1(char *, char *);
