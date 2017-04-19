@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Thu Apr 13 23:05:29 2017 
-** Last update Sat Apr 15 15:04:12 2017 Arthur Knoepflin
+** Last update Tue Apr 18 17:01:16 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
@@ -77,15 +77,6 @@ t_material	*parse_material(char **file)
 	parse_text_material(&ret, get_obj, &i);
       if (get_obj[i])
 	i += 1;
-    }
-  tmp = ret;
-  while (tmp)
-    {
-      if (tmp->type == 1)
-	printf("Couleur : %s -> (%d %d %d)\n", tmp->name ,tmp->color.r, tmp->color.g, tmp->color.b);
-      else if (tmp->type == 2)
-	printf("Texture : %s -> %s\n", tmp->name ,tmp->path);
-      tmp = tmp->next;
     }
   return (ret);
 }

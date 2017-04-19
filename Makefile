@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Fri Apr  7 19:56:45 2017 Nicolas Polomack
+## Last update Wed Apr 19 23:06:24 2017 Arthur Knoepflin
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -31,6 +31,23 @@ SRC	=	window.c				\
 		depth_of_field/depth.c			\
 		parse/proc.c				\
 		parse/args.c				\
+		parse/add_obj.c				\
+		parse/parse_from_file.c			\
+		parse/parse_obj.c			\
+		parse/my_getnbr.c			\
+		parse/get_head_node.c			\
+		parse/get_text_from_born.c		\
+		parse/get_val_from_node.c		\
+		parse/get_color_from_node.c		\
+		parse/get_color_from_mat.c		\
+		parse/get_int_from_node.c		\
+		parse/get_pos_from_node.c		\
+		parse/parse_material.c			\
+		parse/parse_light.c			\
+		parse/add_material.c			\
+		parse/add_light.c			\
+		parse/my_epurstr.c			\
+		parse/get_file.c			\
                 calc/colors.c				\
 		calc/focal.c				\
                 calc/rotation.c				\
@@ -49,68 +66,19 @@ LIBS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml-so -lc_graph_prog
 
 FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=$(shell pwd)/lib/mycsfml -rdynamic
 
-CFLAGS	=	-Iinclude -I../include -W -Wall -Wextra -pthread -Ofast
-
-REDDARK         =       \033[31;2m
-
-RED             =       \033[31;1m
-
-GREEN           =       \033[32;1m
-
-YEL             =       \033[33;1m
-
-BLUE            =       \033[34;1m
-
-PINK            =       \033[35;1m
-
-CYAN            =       \033[36;1m
-
-RES             =       \033[0m
+CFLAGS	=	-Iinclude -I../include -pthread -g
 
 NAME	=	raytracer2
 
 all:	$(NAME)
 
-$(NAME):.SILENT
-
-.SILENT:$(OBJ)
-	@echo
-	@echo -e "$(GREEN)Everything compiled smoothly. Now compiling dependancies...$(RES)"
-	@echo
-	@echo -en "$(CYAN)Compiling libmy...$(RES)"
-	@$(MAKE1)
-	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
-	@echo -en "$(CYAN)Compiling libmycsfml...$(RES)"
-	@$(MAKE2)
-	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
-	@echo -en "$(CYAN)Compiling .so files...$(RES)"
-	@$(MAKESO)
-	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
-	@echo -en "$(CYAN)Linking raytracer2...$(RES)"
-	@gcc -o $(NAME) $(OBJ) $(FLAGS)
-	@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
-	@echo
-	@echo -e "$(GREEN)---- RAYTRACER2 READY ----$(RES)"
-	@echo
+$(NAME):$(OBJ)
+	gcc -o $(NAME) $(OBJ) $(FLAGS)
 
 clean:
-	@$(foreach var, $(OBJ), if [ -e $(var) ] ; then \
-        printf "[$(RED)RM$(RES)] $(YEL)$(var)$(RES)\n" \
-	&& $(RM) $(var) ; fi ;)
-	@$(MAKE1) clean
-	@$(MAKE2) clean
-	@$(MAKESO) clean
+	rm -rf $(OBJ)
 
 fclean:	clean
-	@if [ -e $(NAME) ] ; then \
-        printf "[$(RED)RM EXEC$(RES)] $(YEL)$(NAME)$(RES)\n" \
-        && rm -f $(NAME) ; fi
-	@$(MAKE1) fclean
-	@$(MAKE2) fclean
-	@$(MAKESO) fclean
+	rm -rf $(NAME)
 
 re:	fclean all
-
-%.o:	%.c
-	@echo -e "[$(RED)COMPILE$(RES)] $(YEL)$<$(RES) $(BLUE)=>$(RES) $(YEL)$@$(RES)"
-	@gcc $(CFLAGS) -o $@ -c $<

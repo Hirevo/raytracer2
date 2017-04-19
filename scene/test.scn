@@ -1,14 +1,26 @@
 <obj>
 	<1
 		pos="200, 0, 0"
-		rot="0, 0, 0"
+		rot="0, 0, 1"
 		material="rouge"
+		rad=8
+		aperture=4
+		height=23
+	/>
+	<2
+		pos="-400, 0, 0"
+		rot="0, 90, 0"
+		material="bleu"
 	/>
 </obj>
 <material>
 	<color
 		name="rouge"
 		color="255,0,0"
+	/>
+	<color
+		name="bleu"
+		color="0,0,255"
 	/>
 	<texture
 		name="earth"
@@ -17,11 +29,11 @@
 </material>
 <light>
 	<point
-		pos="0, 200, 0"
+		pos="0,200,10"
 		color="rouge"
 	/>
 	<ambient
-		color="rouge"
+		color="bleu"
 	/>
 </light>
 <camera

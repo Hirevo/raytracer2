@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Sat Apr 15 15:01:22 2017 Arthur Knoepflin
+** Last update Wed Apr 19 23:20:06 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -18,8 +18,19 @@
 # define GREY		get_sfcolor(150, 150, 150, 255)
 # define SIZE_BUF	2048
 # define MATERIAL	"material"
+# define LIGHT		"light"
+# define OBJ		"obj"
 # define COLOR		"<color"
 # define TEXT		"<texture"
+# define POINT		"<point"
+# define AMBIENT	"<ambient"
+# define POS_N		"pos="
+# define ROT_N		"rot="
+# define P1_N		"p1="
+# define P2_N		"p2="
+# define RAD_N		"rad="
+# define APER_N		"aperture="
+# define HEIGHT_N	"height="
 # define NAME_N		"name="
 # define COLOR_N	"color="
 # define TEXT_N		"src="
@@ -48,6 +59,34 @@ typedef struct		s_material
   sfColor		color;
   struct s_material	*next;
 }			t_material;
+
+typedef struct		s_l_light
+{
+  sfVector3f		pos;
+  sfColor		col;
+  struct s_l_light	*next;
+}			t_l_light;
+
+typedef struct	s_p_light
+{
+  sfColor	ambient;
+  t_l_light	*light; 
+}		t_p_light;
+
+typedef struct		s_p_obj
+{
+  char			type;
+  sfVector3f		pos;
+  sfVector3f		rot;
+  sfVector3f		p1;
+  sfVector3f		p2;
+  float			rad;
+  float			aper;
+  sfColor		col;
+  t_my_framebuffer	*buffer;
+  float			height;
+  struct s_p_obj	*next;
+}			t_p_obj;
 
 typedef struct		s_obj
 {
@@ -279,10 +318,34 @@ int	get_core_count();
 t_material	*parse_material(char **);
 
 /*
+** parse/parse_light.c
+*/
+
+t_p_light	*parse_light(char **, t_material *);
+
+/*
+** parse/parse_obj.c
+*/
+
+t_p_obj		*parse_obj(char **, t_material *);
+
+/*
 ** parse/add_material.c
 */
 
 int	add_material(t_material **, t_material);
+
+/*
+** parse/add_light.c
+*/
+
+int	add_light(t_l_light **, t_l_light);
+
+/*
+** parse/add_obj.c
+*/
+
+int	add_obj(t_p_obj **, t_p_obj);
 
 /*
 ** parse/get_head_node.c
@@ -315,10 +378,34 @@ char	*get_val_from_node(char *, char *);
 sfColor	get_color_from_node(char *, char *);
 
 /*
+** parse/get_col_from_mat.c
+*/
+
+sfColor	get_col_from_mat(char *, char *, t_material *);
+
+/*
+** parse/get_pos_from_node.c
+*/
+
+sfVector3f	get_pos_from_node(char *, char *);
+
+/*
+** parse/get_int_from_node.c
+*/
+
+float		get_int_from_node(char *, char *);
+
+/*
 ** parse/my_epurstr.c
 */
 
 char	*my_epurstr(char *);
+
+/*
+** parse/my_getnbr.c
+*/
+
+int	getnbr_parse(char *);
 
 /*
 ** parse/args.c

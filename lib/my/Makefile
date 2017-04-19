@@ -5,10 +5,11 @@
 ## Login   <nicolas@epitech.net>
 ##
 ## Started on  Tue Nov  1 12:04:24 2016 Nicolas POLOMACK
-## Last update Sat Apr 15 14:40:56 2017 Arthur Knoepflin
+## Last update Tue Apr 18 21:55:48 2017 Arthur Knoepflin
 ##
 
 SRC	=	my_putstr.c		\
+		my_mset.c		\
 		my_puterror.c		\
 		my_putchar.c		\
 		my_put_nbr.c		\
