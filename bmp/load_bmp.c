@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 19:31:11 2016 Nicolas Polomack
-** Last update Wed Apr  5 01:06:49 2017 Nicolas Polomack
+** Last update Thu Apr 20 22:09:01 2017 Arthur Knoepflin
 */
 
 #include <unistd.h>
@@ -30,7 +30,7 @@ t_my_framebuffer	*load_bmp(char *filename, sfSprite **spr,
   t_my_framebuffer	*buffer;
 
   my_printf("Loading: %s...", filename);
-  if ((fd = open(filename, O_RDONLY)) == -1)
+  if ((fd = open(filename, O_RDONLY)) == -1 && my_printf(" Failed\n"))
     return (NULL);
   read(fd, &head, sizeof(bmp_header));
   read(fd, &info, sizeof(bmp_info_header));
@@ -38,7 +38,7 @@ t_my_framebuffer	*load_bmp(char *filename, sfSprite **spr,
     buffer = my_framebuffer_create(info.width, info.height);
   else
     buffer = assemble_texture(tex, spr, info.width, info.height);
-  if (buffer == NULL)
+  if (buffer == NULL && my_printf(" Failed\n"))
     return (NULL);
   read(fd, &head, head.off_bits -
        sizeof(bmp_header) - sizeof(bmp_info_header));
@@ -48,8 +48,7 @@ t_my_framebuffer	*load_bmp(char *filename, sfSprite **spr,
   if (spr != NULL && tex != NULL)
     sfTexture_updateFromPixels(*tex, buffer->pixels,
 			       buffer->width, buffer->height, 0, 0);
-  my_printf(" Finished!\n");
-  return (buffer);
+  return ((my_printf(" Finished!\n")) ? buffer : buffer);
 }
 
 void		read_pixel_buffer(t_my_framebuffer *buffer,

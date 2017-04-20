@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Thu Apr 13 23:14:47 2017 
-** Last update Thu Apr 13 23:48:47 2017 
+** Last update Thu Apr 20 19:02:30 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -24,6 +24,7 @@ static void	assign(t_material *new, t_material add)
     new->path = my_strdup(add.path);
   else
     new->path = NULL;
+  new->buf = add.buf;
   new->color = add.color;
   new->next = NULL;
 }

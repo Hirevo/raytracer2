@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Wed Apr 19 23:06:24 2017 Arthur Knoepflin
+## Last update Thu Apr 20 23:43:26 2017 Arthur Knoepflin
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -34,6 +34,7 @@ SRC	=	window.c				\
 		parse/add_obj.c				\
 		parse/parse_from_file.c			\
 		parse/parse_obj.c			\
+		parse/set_camera.c			\
 		parse/my_getnbr.c			\
 		parse/get_head_node.c			\
 		parse/get_text_from_born.c		\
@@ -42,7 +43,10 @@ SRC	=	window.c				\
 		parse/get_color_from_mat.c		\
 		parse/get_int_from_node.c		\
 		parse/get_pos_from_node.c		\
+		parse/get_pc_from_node.c		\
+		parse/search_material.c			\
 		parse/parse_material.c			\
+		parse/extract_str_from_born.c		\
 		parse/parse_light.c			\
 		parse/add_material.c			\
 		parse/add_light.c			\
@@ -68,17 +72,66 @@ FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=$(shell pwd)/lib/mycsfml -
 
 CFLAGS	=	-Iinclude -I../include -pthread -g
 
+REDDARK	=	\033[31;2m
+
+RED	=	\033[31;1m
+
+GREEN	=	\033[32;1m
+
+YEL	=	\033[33;1m
+
+BLUE	=	\033[34;1m
+
+PINK	=	\033[35;1m
+
+CYAN	=	\033[36;1m
+
+RES	=	\033[0m
+
 NAME	=	raytracer2
 
-all:	$(NAME)
+all:		$(NAME)
 
-$(NAME):$(OBJ)
-	gcc -o $(NAME) $(OBJ) $(FLAGS)
+$(NAME):	.SILENT
+
+.SILENT:	$(OBJ)
+		@echo
+		@echo -e "$(GREEN)Everything compiled smoothly. Now compiling dependancies...$(RES)"
+		@echo
+		@echo -en "$(CYAN)Compiling libmy...$(RES)"
+		@$(MAKE1)
+		@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+		@echo -en "$(CYAN)Compiling libmycsfml...$(RES)"
+		@$(MAKE2)
+		@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+		@echo -en "$(CYAN)Compiling .so files...$(RES)"
+		@$(MAKESO)
+		@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+		@echo -en "$(CYAN)Linking raytracer2...$(RES)"
+		@gcc -o $(NAME) $(OBJ) $(FLAGS)
+		@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+		@echo
+		@echo -e "$(GREEN)---- RAYTRACER2 READY ----$(RES)"
+		@echo
 
 clean:
-	rm -rf $(OBJ)
+		@$(foreach var, $(OBJ), if [ -e $(var) ] ; then \
+	        printf "[$(RED)RM$(RES)] $(YEL)$(var)$(RES)\n" \
+		&& $(RM) $(var) ; fi ;)
+		@$(MAKE1) clean
+		@$(MAKE2) clean
+		@$(MAKESO) clean
 
-fclean:	clean
-	rm -rf $(NAME)
+fclean:		clean
+		@if [ -e $(NAME) ] ; then \
+	        printf "[$(RED)RM EXEC$(RES)] $(YEL)$(NAME)$(RES)\n" \
+	        && rm -f $(NAME) ; fi
+		@$(MAKE1) fclean
+		@$(MAKE2) fclean
+		@$(MAKESO) fclean
 
 re:	fclean all
+
+%.o:		%.c
+		@echo -e "[$(RED)COMPILE$(RES)] $(YEL)$<$(RES) $(BLUE)=>$(RES) $(YEL)$@$(RES)"
+		@gcc $(CFLAGS) -o $@ -c $<

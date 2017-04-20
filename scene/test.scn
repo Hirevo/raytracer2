@@ -6,11 +6,15 @@
 		rad=8
 		aperture=4
 		height=23
+		reflect=56
+		refract=12
+		refr_index=46
+		spec_coef=2
 	/>
 	<2
 		pos="-400, 0, 0"
 		rot="0, 90, 0"
-		material="bleu"
+		material="earth"
 	/>
 </obj>
 <material>
@@ -33,10 +37,10 @@
 		color="rouge"
 	/>
 	<ambient
-		color="bleu"
+		val=47
 	/>
 </light>
 <camera
-	pos="0,0,0"
+	pos="20,0,0"
 	rot="0,0,0"
 />

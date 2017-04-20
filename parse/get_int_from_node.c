@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed Apr 19 23:00:34 2017 Arthur Knoepflin
-** Last update Wed Apr 19 23:18:14 2017 Arthur Knoepflin
+** Last update Thu Apr 20 15:34:25 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -32,5 +32,15 @@ float	get_int_from_node(char *obj, char *getter)
     return (0);
   ret = getnbr_parse(tmp);
   free(tmp);
+  return (ret);
+}
+
+float	get_pint_from_node(char *obj, char *getter)
+{
+  float	ret;
+
+  ret = get_int_from_node(obj, getter);
+  if (ret < 0)
+    return (0);
   return (ret);
 }

@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 ** 
 ** Started on  Tue Apr 18 21:25:05 2017 Arthur Knoepflin
-** Last update Wed Apr 19 23:19:40 2017 Arthur Knoepflin
+** Last update Thu Apr 20 21:57:41 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
@@ -18,7 +18,51 @@ static t_p_obj	init_obj_add(void)
   my_mset(&ret, 0, sizeof(ret));
   ret.rad = 1;
   ret.aper = 1;
+  ret.refr_index = 1;
+  ret.col.r = 255;
+  ret.col.g = 255;
+  ret.col.b = 255;
+  ret.col.a = 255;
   return (ret);
+}
+
+static void	core_parse_obj(char *obj, int i, t_p_obj *add)
+{
+  if (!my_strncmp(obj + i, RAD_N, my_strlen(RAD_N)))
+    add->rad = get_int_from_node(obj + i, RAD_N);
+  if (!my_strncmp(obj + i, APER_N, my_strlen(APER_N)))
+    add->aper = get_int_from_node(obj + i, APER_N);
+  if (!my_strncmp(obj + i, HEIGHT_N, my_strlen(HEIGHT_N)))
+    add->height = get_int_from_node(obj + i, HEIGHT_N);
+  if (!my_strncmp(obj + i, REFLECT_N, my_strlen(REFLECT_N)))
+    add->reflect = get_pc_from_node(obj + i, REFLECT_N);
+  if (!my_strncmp(obj + i, REFRACT_N, my_strlen(REFRACT_N)))
+    add->refract = get_pc_from_node(obj + i, REFRACT_N);
+  if (!my_strncmp(obj + i, REFR_IDX_N, my_strlen(REFR_IDX_N)))
+    add->refr_index = get_pint_from_node(obj + i, REFR_IDX_N);
+  if (!my_strncmp(obj + i, SPEC_COEF_N, my_strlen(SPEC_COEF_N)))
+    add->spec_coef = get_pint_from_node(obj + i, SPEC_COEF_N);
+}
+
+static void	attribute_mat(t_p_obj *add,
+			      char *str,
+			      char *getter,
+			      t_material *mat)
+{
+  t_material	*cur_mat;
+  char		*tmp;
+
+  if ((tmp = get_val_from_node(str, getter)) == NULL)
+    return ;
+  if ((cur_mat = search_material(tmp, mat)) == NULL)
+    {
+      my_puterror("One material specify in obj doesn't exist\n");
+      return ;
+    }
+  if (cur_mat->type == 1)
+    add->col = cur_mat->color;
+  else if (cur_mat->type == 2)
+    add->buffer = cur_mat->buf;
 }
 
 void		parse_obj_elem(char *obj, t_material *mat, t_p_obj **ret)
@@ -39,12 +83,9 @@ void		parse_obj_elem(char *obj, t_material *mat, t_p_obj **ret)
 	add.p1 = get_pos_from_node(obj + i, P1_N);
       if (!my_strncmp(obj + i, P2_N, my_strlen(P2_N)))
 	add.p2 = get_pos_from_node(obj + i, P2_N);
-      if (!my_strncmp(obj + i, RAD_N, my_strlen(RAD_N)))
-	add.rad = get_int_from_node(obj + i, RAD_N);
-      if (!my_strncmp(obj + i, APER_N, my_strlen(APER_N)))
-	add.aper = get_int_from_node(obj + i, APER_N);
-      if (!my_strncmp(obj + i, HEIGHT_N, my_strlen(HEIGHT_N)))
-	add.height = get_int_from_node(obj + i, HEIGHT_N);
+      if (!my_strncmp(obj + i, MAT_N, my_strlen(MAT_N)))
+	attribute_mat(&add, obj + i, MAT_N, mat);
+      core_parse_obj(obj, i, &add);
       i += 1;
     }
   add_obj(ret, add);

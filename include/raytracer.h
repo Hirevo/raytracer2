@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Wed Apr 19 23:20:06 2017 Arthur Knoepflin
+** Last update Thu Apr 20 23:44:45 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -20,6 +20,7 @@
 # define MATERIAL	"material"
 # define LIGHT		"light"
 # define OBJ		"obj"
+# define CAMERA		"<camera"
 # define COLOR		"<color"
 # define TEXT		"<texture"
 # define POINT		"<point"
@@ -31,6 +32,12 @@
 # define RAD_N		"rad="
 # define APER_N		"aperture="
 # define HEIGHT_N	"height="
+# define REFLECT_N	"reflect="
+# define REFRACT_N	"refract="
+# define REFR_IDX_N	"refr_index="
+# define SPEC_COEF_N	"spec_coef="
+# define MAT_N		"material="
+# define VAL_N		"val="
 # define NAME_N		"name="
 # define COLOR_N	"color="
 # define TEXT_N		"src="
@@ -56,6 +63,7 @@ typedef struct		s_material
   char			*name;
   int			type;
   char			*path;
+  t_my_framebuffer	*buf;
   sfColor		color;
   struct s_material	*next;
 }			t_material;
@@ -69,7 +77,7 @@ typedef struct		s_l_light
 
 typedef struct	s_p_light
 {
-  sfColor	ambient;
+  float		ambient;
   t_l_light	*light; 
 }		t_p_light;
 
@@ -85,6 +93,10 @@ typedef struct		s_p_obj
   sfColor		col;
   t_my_framebuffer	*buffer;
   float			height;
+  float			reflect;
+  float			refract;
+  float			refr_index;
+  float			spec_coef;
   struct s_p_obj	*next;
 }			t_p_obj;
 
@@ -381,7 +393,7 @@ sfColor	get_color_from_node(char *, char *);
 ** parse/get_col_from_mat.c
 */
 
-sfColor	get_col_from_mat(char *, char *, t_material *);
+sfColor		get_col_from_mat(char *, char *, t_material *);
 
 /*
 ** parse/get_pos_from_node.c
@@ -390,10 +402,23 @@ sfColor	get_col_from_mat(char *, char *, t_material *);
 sfVector3f	get_pos_from_node(char *, char *);
 
 /*
+** parse/get_pc_from_node.c
+*/
+
+float	get_pc_from_node(char *, char *);
+
+/*
 ** parse/get_int_from_node.c
 */
 
-float		get_int_from_node(char *, char *);
+float	get_int_from_node(char *, char *);
+float	get_pint_from_node(char *, char *);
+
+/*
+** parse/search_material.c
+*/
+
+t_material	*search_material(char *, t_material *);
 
 /*
 ** parse/my_epurstr.c
@@ -408,9 +433,22 @@ char	*my_epurstr(char *);
 int	getnbr_parse(char *);
 
 /*
+** parse/extract_str_from_born.c
+*/
+
+char	*extract_str_from_born(char **, sfVector2i);
+
+/*
 ** parse/args.c
 */
+
 void	parse_args(t_params *, int, char **);
+
+/*
+** parse/set_camera.c
+*/
+
+void	set_camera(t_params *, char **);
 
 /*
 ** alloc.c

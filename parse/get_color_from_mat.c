@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 ** 
 ** Started on  Tue Apr 18 20:43:08 2017 Arthur Knoepflin
-** Last update Tue Apr 18 21:22:17 2017 Arthur Knoepflin
+** Last update Thu Apr 20 21:45:45 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"

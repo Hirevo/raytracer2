@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 ** 
 ** Started on  Tue Apr 18 16:58:57 2017 Arthur Knoepflin
-** Last update Tue Apr 18 21:22:55 2017 Arthur Knoepflin
+** Last update Thu Apr 20 22:15:53 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -16,6 +16,7 @@ static t_l_light	get_light(char *obj, int *i, t_material *l_mat)
 {
   t_l_light		ret;
 
+  my_mset(&ret, 0, sizeof(ret));
   while (obj[*i] && my_strncmp(obj + *i, "/>", 2))
     {
       if (!my_strncmp(obj + *i, POS_N, my_strlen(POS_N)))
@@ -27,14 +28,14 @@ static t_l_light	get_light(char *obj, int *i, t_material *l_mat)
   return (ret);
 }
 
-static sfColor	get_ambient(char *obj, int *i, t_material *l_mat)
+static float	get_ambient(char *obj, int *i, t_material *l_mat)
 {
-  sfColor	ret;
+  float		ret;
 
   while (obj[*i] && my_strncmp(obj + *i, "/>", 2))
     {
-      if (!my_strncmp(obj + *i, COLOR_N, my_strlen(COLOR_N)))
-	ret = get_col_from_mat(obj + *i, COLOR_N, l_mat);
+      if (!my_strncmp(obj + *i, VAL_N, my_strlen(VAL_N)))
+	ret = get_pc_from_node(obj + *i, VAL_N);
       *i += 1;
     }
   return (ret);
@@ -43,7 +44,7 @@ static sfColor	get_ambient(char *obj, int *i, t_material *l_mat)
 static void	parse_light_point(char *obj,
 				  t_material *mat,
 				  t_l_light **light,
-				  sfColor *ambient)
+				  float *ambient)
 {
   int		i;
   t_l_light	tmp;

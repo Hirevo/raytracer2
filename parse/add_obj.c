@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed Apr 19 21:26:13 2017 Arthur Knoepflin
-** Last update Wed Apr 19 23:20:57 2017 Arthur Knoepflin
+** Last update Thu Apr 20 15:55:43 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -24,6 +24,10 @@ static void	assign(t_p_obj *new, t_p_obj add)
   new->col = add.col;
   new->buffer = add.buffer;
   new->height = add.height;
+  new->reflect = add.reflect;
+  new->refract = add.refract;
+  new->refr_index = add.refr_index;
+  new->spec_coef = add.spec_coef;
 }
 
 int		add_obj(t_p_obj **list, t_p_obj add)
