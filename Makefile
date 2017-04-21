@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Thu Apr 20 23:43:26 2017 Arthur Knoepflin
+## Last update Fri Apr 21 14:51:45 2017 Arthur Knoepflin
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -43,14 +43,18 @@ SRC	=	window.c				\
 		parse/get_color_from_mat.c		\
 		parse/get_int_from_node.c		\
 		parse/get_pos_from_node.c		\
+		parse/get_pos2_from_node.c		\
 		parse/get_pc_from_node.c		\
 		parse/search_material.c			\
 		parse/parse_material.c			\
 		parse/extract_str_from_born.c		\
 		parse/parse_light.c			\
+		parse/convert_light.c			\
+		parse/convert_obj.c			\
 		parse/add_material.c			\
 		parse/add_light.c			\
 		parse/my_epurstr.c			\
+		parse/set_config.c			\
 		parse/get_file.c			\
                 calc/colors.c				\
 		calc/focal.c				\

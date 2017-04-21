@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Thu Apr 13 18:19:24 2017 
-** Last update Thu Apr 20 23:14:25 2017 Arthur Knoepflin
+** Last update Fri Apr 21 14:30:32 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
@@ -14,15 +14,22 @@ int		parse_from_file(t_params *params, char *path)
 {
   t_p_obj	*obj;
   t_p_light	*light;
-  t_l_light	*tmp_light;
   t_material	*material;
   char		**file;
 
   file = get_file(path);
   set_camera(params, file);
-  material = parse_material(file);
-  light = parse_light(file, material);
-  obj = parse_obj(file, material);
+  if ((material = parse_material(file)) == NULL)
+    return (1);
+  if ((light = parse_light(file, material)) == NULL)
+    return (1);
+  if ((obj = parse_obj(file, material)) == NULL)
+    return (1);
+  set_config(params, light);
+  if (convert_light(params, light->light))
+    return (1);
+  if (convert_obj(params, obj))
+    return (1);
   /* tmp_light = light->light; */
   /* printf("Ambient : %f\n", light->ambient); */
   /* while (tmp_light) */
@@ -61,4 +68,5 @@ int		parse_from_file(t_params *params, char *path)
   /*     printf("\tCoefficient de spécularité : %f\n", obj->spec_coef); */
   /*     obj = obj->next; */
   /*   } */
+  return (0);
 }

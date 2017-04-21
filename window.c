@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Thu Apr 20 23:27:51 2017 Arthur Knoepflin
+** Last update Fri Apr 21 16:02:08 2017 Arthur Knoepflin
 */
 
 #include <SFML/Graphics.h>
@@ -100,11 +100,9 @@ int		main(int ac, char **av, char **ae)
   params.screen_size.x = 1920;
   params.screen_size.y = 1080;
   parse_from_file(&params, av[1]);
-  printf("pos : %f %f %f\n", params.start.x, params.start.y, params.start.z);
-  printf("rot : %f %f %f\n", params.r.x, params.r.y, params.r.z);
   /* init_room(&params); */
   /* init_reflect(&params); */
-  init_test(&params);
+  /* init_test(&params); */
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);
@@ -115,5 +113,5 @@ int		main(int ac, char **av, char **ae)
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
     handle_events(&w, &params, &event);
   save_buffers(&w, &params);
-  return (0); //free_all(&params, &w));
+  return (0);//free_all(&params, &w));
 }

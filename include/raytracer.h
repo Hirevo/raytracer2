@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu Apr 20 23:44:45 2017 Arthur Knoepflin
+** Last update Fri Apr 21 14:59:03 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -86,8 +86,8 @@ typedef struct		s_p_obj
   char			type;
   sfVector3f		pos;
   sfVector3f		rot;
-  sfVector3f		p1;
-  sfVector3f		p2;
+  sfVector2f		p1;
+  sfVector2f		p2;
   float			rad;
   float			aper;
   sfColor		col;
@@ -402,6 +402,12 @@ sfColor		get_col_from_mat(char *, char *, t_material *);
 sfVector3f	get_pos_from_node(char *, char *);
 
 /*
+** parse/get_pos2_from_node.c
+*/
+
+sfVector2f	get_pos2_from_node(char *, char *);
+
+/*
 ** parse/get_pc_from_node.c
 */
 
@@ -437,6 +443,24 @@ int	getnbr_parse(char *);
 */
 
 char	*extract_str_from_born(char **, sfVector2i);
+
+/*
+** parse/set_config.c
+*/
+
+void	set_config(t_params *, t_p_light *);
+
+/*
+** parse/convert_light.c
+*/
+
+int	convert_light(t_params *, t_l_light *);
+
+/*
+** parse/convert_obj.c
+*/
+
+int	convert_obj(t_params *, t_p_obj *);
 
 /*
 ** parse/args.c

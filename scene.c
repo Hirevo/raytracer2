@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Apr  4 15:04:25 2017 Nicolas Polomack
-** Last update Sun Apr  9 23:30:01 2017 Nicolas Polomack
+** Last update Fri Apr 21 15:00:11 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -35,9 +35,9 @@ void	init_reflect(t_params *params)
   params->objs[0].r.z = 0;
   params->objs[0].rad = 25;
   params->objs[0].p1.x = 10;
-  params->objs[0].p2.y = 0;
-  params->objs[0].p2.x = 20;
   params->objs[0].p1.y = 30;
+  params->objs[0].p2.x = 20;
+  params->objs[0].p2.y = 0;
   params->objs[0].rad = 10;
   params->objs[0].reflect = 0.5;
   //params->objs[0].spec_coef = 50;
