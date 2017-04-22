@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Fri Apr 21 16:02:08 2017 Arthur Knoepflin
+** Last update Sat Apr 22 18:39:33 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -91,9 +91,8 @@ int		main(int ac, char **av, char **ae)
   sfEvent	event;
   t_params	params;
 
-  if (ac < 2)
+  if (ac < 2 || parse_args(&params, ac, av) == -1)
     return (84);
-  parse_args(&params, ac, av);
   if (params.help)
     return (disp_guide());
   params.seed = init_seed(ac, av, ae, (void *)&main);

@@ -5,16 +5,12 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 21 13:04:16 2017 Arthur Knoepflin
-** Last update Fri Apr 21 15:58:27 2017 Arthur Knoepflin
+** Last update Sat Apr 22 18:46:43 2017 Nicolas Polomack
 */
 
 #include "raytracer.h"
 
 void	set_config(t_params *ret, t_p_light *light)
 {
-  ret->config.ssaa = 1;
-  ret->config.reflect_depth = 3;
-  ret->config.depth_rays = 1;
-  ret->config.fov = 80;
   ret->config.ambient = light->ambient;
 }

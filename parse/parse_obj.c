@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 ** 
 ** Started on  Tue Apr 18 21:25:05 2017 Arthur Knoepflin
-** Last update Fri Apr 21 16:01:35 2017 Arthur Knoepflin
+** Last update Sat Apr 22 19:33:28 2017 Nicolas Polomack
 */
 
 #include "raytracer.h"
@@ -57,7 +57,7 @@ static void	attribute_mat(t_p_obj *add,
     return ;
   if ((cur_mat = search_material(tmp, mat)) == NULL)
     {
-      my_puterror("One material specify in obj doesn't exist\n");
+      my_puterror("One material specified in obj doesn't exist.\n");
       return ;
     }
   if (cur_mat->type == 1)

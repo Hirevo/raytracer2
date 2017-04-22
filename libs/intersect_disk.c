@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Feb 10 14:42:42 2017 Nicolas Polomack
-** Last update Wed Apr  5 19:39:32 2017 Nicolas Polomack
+** Last update Sat Apr 22 19:04:41 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -30,7 +30,7 @@ float		intersect_disk(sfVector3f eye_pos,
       imp.x = eye_pos.x + dir_vector.x * dist;
       imp.y = eye_pos.y + dir_vector.y * dist;
       imp.z = powf(imp.x, 2) + powf(imp.y, 2);
-      res = (roundf(imp.z) <= roundf(powf(obj->rad, 2))) ? dist : -1;
+      res = (imp.z <= powf(obj->rad, 2)) ? dist : -1;
       return (res);
     }
   return (-1);

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Sat Apr  1 01:18:21 2017 Nicolas Polomack
-** Last update Wed Apr  5 19:30:14 2017 Nicolas Polomack
+** Last update Sat Apr 22 19:05:49 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -40,8 +40,8 @@ float	intersect_closed_cone(sfVector3f eye_pos,
 void	get_normal_closed_cone(t_thread *t, t_obj *obj)
 {
   if (roundf(t->normal.z) == -(obj->height) &&
-      roundf(powf(t->normal.x, 2) + powf(t->normal.y, 2) -
-	     powf(obj->rad, 2)) != 0)
+      powf(t->normal.x, 2) + powf(t->normal.y, 2) -
+      powf(obj->rad, 2) != 0)
     {
       t->normal.x = 0;
       t->normal.y = 0;

@@ -14,7 +14,7 @@
 		rad=25
 		reflect=30
 		spec_coef=50
-		material="rouge"
+		material="deathstar"
 	/>
 	<0
 		pos="-10,-55,0"
@@ -51,6 +51,10 @@
 		src="resources/Earth.bmp"
 	/>
 	<texture
+		name="deathstar"
+		src="resources/EtoileNoire.bmp"
+	/>
+	<texture
 		name="space"
 		src="resources/space.bmp"
 	/>
@@ -65,7 +69,7 @@
 		color="blanc"
 	/>
 	<ambient
-		val=47
+		val=0
 	/>
 </light>
 <camera

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Fri Apr 21 14:59:03 2017 Arthur Knoepflin
+** Last update Sat Apr 22 18:43:58 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -41,6 +41,13 @@
 # define NAME_N		"name="
 # define COLOR_N	"color="
 # define TEXT_N		"src="
+# define ARGS_STR	"Suh"
+# define STEREO		"--stereo"
+# define DEPTH		"--depth="
+# define SSAA		"--ssaa="
+# define SOFT		"--soft="
+# define DOF		"--dof="
+# define FOV		"--fov="
 
 typedef struct s_window t_window;
 typedef struct s_params t_params;
@@ -466,7 +473,7 @@ int	convert_obj(t_params *, t_p_obj *);
 ** parse/args.c
 */
 
-void	parse_args(t_params *, int, char **);
+int	parse_args(t_params *, int, char **);
 
 /*
 ** parse/set_camera.c
