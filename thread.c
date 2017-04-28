@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Tue Apr  4 22:36:11 2017 Nicolas Polomack
+** Last update Fri Apr 28 14:18:25 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -83,5 +83,6 @@ int	init_thread(t_window *w, t_params *params)
   i = -1;
   while (++i < params->t_count)
     pthread_join(params->t[i], NULL);
+  free(params->t);
   return (0);
 }

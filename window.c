@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Sat Apr 22 18:39:33 2017 Nicolas Polomack
+** Last update Fri Apr 28 14:19:56 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -60,6 +60,26 @@ void	handle_events(t_window *w, t_params *params, sfEvent *event)
 	      update_frame(w, &params->mutex, params->config.bmp);
 	    i = !i;
 	  }
+      if (sfKeyboard_isKeyPressed(sfKeyZ))
+	params->start.x += 10;
+      if (sfKeyboard_isKeyPressed(sfKeyS))
+        params->start.x -= 10;
+      if (sfKeyboard_isKeyPressed(sfKeyQ))
+        params->start.y += 10;
+      if (sfKeyboard_isKeyPressed(sfKeyD))
+        params->start.y -= 10;
+      if (sfKeyboard_isKeyPressed(sfKeyLShift))
+        params->start.z -= 10;
+      if (sfKeyboard_isKeyPressed(sfKeySpace))
+        params->start.z += 10;
+      if (sfKeyboard_isKeyPressed(sfKeyUp))
+        params->r.y += 3;
+      if (sfKeyboard_isKeyPressed(sfKeyDown))
+        params->r.y -= 3;
+      if (sfKeyboard_isKeyPressed(sfKeyLeft))
+        params->r.z += 3;
+      if (sfKeyboard_isKeyPressed(sfKeyRight))
+        params->r.z -= 3;
     }
 }
 
@@ -98,7 +118,7 @@ int		main(int ac, char **av, char **ae)
   params.seed = init_seed(ac, av, ae, (void *)&main);
   params.screen_size.x = 1920;
   params.screen_size.y = 1080;
-  parse_from_file(&params, av[1]);
+  parse_from_file(&params, params.config.scene_file);
   /* init_room(&params); */
   /* init_reflect(&params); */
   /* init_test(&params); */
@@ -107,10 +127,12 @@ int		main(int ac, char **av, char **ae)
   init_buffers(&w, &params);
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
-  init_thread(&w, &params);
-  update_frame(&w, &params.mutex, params.config.bmp);
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
-    handle_events(&w, &params, &event);
+    {
+      init_thread(&w, &params);
+      update_frame(&w, &params.mutex, params.config.bmp);
+      handle_events(&w, &params, &event);
+    }
   save_buffers(&w, &params);
   return (0);//free_all(&params, &w));
 }

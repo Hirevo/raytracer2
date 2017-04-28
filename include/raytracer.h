@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Sat Apr 22 18:43:58 2017 Nicolas Polomack
+** Last update Fri Apr 28 14:08:05 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -157,6 +157,7 @@ typedef struct	s_config
   int		reflect_depth;
   int		depth_rays;
   int		shadow_rays;
+  char		*scene_file;
 }		t_config;
 
 typedef struct		s_params
@@ -288,6 +289,11 @@ void	prepare_refract(t_thread *, float, float);
 ** lights/specular.c
 */
 sfColor		specular_effect(sfColor, t_thread *, t_obj *, int);
+
+/*
+** lights/diffuse.c
+*/
+sfColor		diffuse_shadows(t_thread *, sfColor, t_obj *);
 
 /*
 ** stereo/stereoscopy.c

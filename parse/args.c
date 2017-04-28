@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Sat Apr 22 18:46:29 2017 Nicolas Polomack
+** Last update Fri Apr 28 11:09:10 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -34,8 +34,10 @@ static void	init_links(t_params *params, int *flags[3])
   params->config.stereo = 0;
   params->config.ssaa = 1;
   params->config.reflect_depth = 3;
+  params->config.shadow_rays = 1;
   params->config.depth_rays = 1;
   params->config.fov = 80;
+  params->config.scene_file = NULL;
 }
 
 static int	get_arg_value(t_params *params, int ac, char **av, int i)
@@ -60,11 +62,23 @@ static int	get_arg_value(t_params *params, int ac, char **av, int i)
   return (0);
 }
 
+static int	get_short_arg(char **av, int i, int *flags[3])
+{
+  int		match;
+  int		j;
+
+  j = 0;
+  while (av[i][++j])
+    if ((match = get_index(ARGS_STR, av[i][j])) == -1)
+      return (-1 + 0 *
+	      my_printf("-%c: Invalid argument.\n", av[i][j]));
+    else
+      *(flags[match]) = 1;
+}
+
 int		parse_args(t_params *params, int ac, char **av)
 {
   int		i;
-  int		j;
-  int		match;
   int		*flags[3];
 
   init_links(params, flags);
@@ -74,17 +88,18 @@ int		parse_args(t_params *params, int ac, char **av)
       {
 	if (av[i][1] != '-')
 	  {
-	    j = 0;
-	    while (av[i][++j])
-	      if ((match = get_index(ARGS_STR, av[i][j])) == -1)
-		return (-1 + 0 *
-			my_printf("-%c: Invalid argument.\n", av[i][j]));
-	      else
-		*(flags[match]) = 1;
+	    if (get_short_arg(av, i, flags) == -1)
+	      return (-1);
 	  }
 	else
 	  if (get_arg_value(params, ac, av, i) == -1)
 	    return (-1);
+      }
+    else
+      {
+	if (params->config.scene_file != NULL)
+	  return (-1);
+	params->config.scene_file = av[i];
       }
   return (0);
 }
