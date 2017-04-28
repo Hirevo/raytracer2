@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Fri Apr 28 14:19:56 2017 Nicolas Polomack
+** Last update Fri Apr 28 14:27:31 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -118,15 +118,26 @@ int		main(int ac, char **av, char **ae)
   params.seed = init_seed(ac, av, ae, (void *)&main);
   params.screen_size.x = 1920;
   params.screen_size.y = 1080;
+<<<<<<< HEAD
   parse_from_file(&params, params.config.scene_file);
   /* init_room(&params); */
   /* init_reflect(&params); */
   /* init_test(&params); */
+=======
+  parse_from_file(&params, av[1]);
+>>>>>>> 1e5561986d3f569b478c8a5329c5450042e66415
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);
+  clear_pixels(w.buffer);
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
+<<<<<<< HEAD
+=======
+  params.tesla_lvl = 40;
+  init_thread(&w, &params);
+  update_frame(&w, &params.mutex, params.config.bmp);
+>>>>>>> 1e5561986d3f569b478c8a5329c5450042e66415
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
     {
       init_thread(&w, &params);
@@ -134,5 +145,5 @@ int		main(int ac, char **av, char **ae)
       handle_events(&w, &params, &event);
     }
   save_buffers(&w, &params);
-  return (0);//free_all(&params, &w));
+  return (0);
 }

@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Fri Apr 21 14:51:45 2017 Arthur Knoepflin
+## Last update Fri Apr 28 11:33:46 2017 Arthur Knoepflin
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -21,6 +21,7 @@ SRC	=	window.c				\
 		alloc.c					\
 		rand.c					\
 		scene.c					\
+		teslation.c				\
                 get_next_line.c			        \
                 lights/light.c		                \
 		lights/reflect.c			\
