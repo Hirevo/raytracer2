@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.net>
 **
 ** Started on  Thu Oct 13 10:04:36 2016 Nicolas POLOMACK
-** Last update Tue Apr 18 21:56:08 2017 Arthur Knoepflin
+** Last update Mon Apr 24 13:02:59 2017 Nicolas Polomack
 */
 
 #ifndef MY_H_
@@ -25,6 +25,8 @@ typedef struct	s_flags
 
 int	my_puterror(char *);
 void	my_putchar(char);
+void	my_memcpy(void *, void *, int);
+char	*my_memset(char *, char, int);
 void	my_mset(void *, int, int);
 int	my_isneg(int);
 void	my_put_nbr(int);
