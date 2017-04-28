@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Sat Apr 22 18:43:58 2017 Nicolas Polomack
+** Last update Fri Apr 28 13:43:04 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -142,8 +142,10 @@ typedef struct s_thread
   t_ray		ray;
   t_obj		*from;
   int		depth;
+  int		tesla_lvl;
   t_window	*w;
   t_params      *params;
+  int		id;
 }               t_thread;
 
 typedef struct	s_config
@@ -179,6 +181,7 @@ typedef struct		s_params
   int			progress;
   int			nb_lights;
   int			nb_objs;
+  int			tesla_lvl;
   t_obj			*objs;
 }			t_params;
 
@@ -225,6 +228,12 @@ sfVector3f	calc_dir_vector(sfVector2i, float, float, int);
 ** calc/focal.c
 */
 void	set_focal_dist(t_thread *);
+
+/*
+** teslation.c
+*/
+
+void	render_frame_tesla(t_thread *);
 
 /*
 ** window.c

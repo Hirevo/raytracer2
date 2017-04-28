@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Sat Apr 22 18:39:33 2017 Nicolas Polomack
+** Last update Fri Apr 28 13:54:22 2017 Arthur Knoepflin
 */
 
 #include <SFML/Graphics.h>
@@ -99,18 +99,17 @@ int		main(int ac, char **av, char **ae)
   params.screen_size.x = 1920;
   params.screen_size.y = 1080;
   parse_from_file(&params, av[1]);
-  /* init_room(&params); */
-  /* init_reflect(&params); */
-  /* init_test(&params); */
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);
+  clear_pixels(w.buffer);
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
+  params.tesla_lvl = 40;
   init_thread(&w, &params);
   update_frame(&w, &params.mutex, params.config.bmp);
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
     handle_events(&w, &params, &event);
   save_buffers(&w, &params);
-  return (0);//free_all(&params, &w));
+  return (0);
 }

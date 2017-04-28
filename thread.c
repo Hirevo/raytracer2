@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Tue Apr  4 22:36:11 2017 Nicolas Polomack
+** Last update Fri Apr 28 14:22:23 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -23,7 +23,7 @@ void		*render_thread(void *arg)
   else if (t->params->config.ssaa > 1)
     render_ssaa(t);
   else
-    render_frame(t);
+    render_frame_tesla(t);
   return (NULL);
 }
 
@@ -74,6 +74,8 @@ int	init_thread(t_window *w, t_params *params)
       t = malloc(sizeof(t_thread));
       t->params = params;
       t->w = w;
+      t->id = i;
+      t->tesla_lvl = params->tesla_lvl;
       t->start = params->start;
       if ((t->depth_col = malloc(sizeof(sfColor) * 25)) == NULL)
 	return (-1);
@@ -83,5 +85,12 @@ int	init_thread(t_window *w, t_params *params)
   i = -1;
   while (++i < params->t_count)
     pthread_join(params->t[i], NULL);
+  if (t->tesla_lvl > 1)
+    {
+      params->tesla_lvl -= 1;
+      init_thread(w, params);
+    }
+  else
+    sfRenderWindow_setTitle(w->window, "Raytracer - Termine");
   return (0);
 }
