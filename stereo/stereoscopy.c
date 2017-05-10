@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Mar 29 19:28:58 2017 Nicolas Polomack
-** Last update Sat Apr 22 19:13:54 2017 Nicolas Polomack
+** Last update Wed May 10 17:49:24 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -64,7 +64,6 @@ void		render_teal_side(t_thread *t, sfVector3f cameras[2], float angle)
           rz(&t->ray.dir, angle);
           col = raytrace(t);
           col.r = 0;
-	  //col.g = 0;
           put_pixel(t->w->buffer2, t->screen_pos.x, t->screen_pos.y,
                     col);
         }

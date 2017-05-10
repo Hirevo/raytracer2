@@ -5,11 +5,18 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Apr 28 11:07:58 2017 Nicolas Polomack
-** Last update Wed May 10 14:27:34 2017 Nicolas Polomack
+** Last update Wed May 10 17:48:13 2017 Nicolas Polomack
 */
 
 #include <math.h>
 #include "raytracer.h"
+
+void	prepare_light_ray(t_thread *t, int i)
+{
+  t->ray.dir.x = t->params->lights[i].pos.x - t->impact.x;
+  t->ray.dir.y = t->params->lights[i].pos.y - t->impact.y;
+  t->ray.dir.z = t->params->lights[i].pos.z - t->impact.z;
+}
 
 sfVector3f	get_shadow_ray(t_thread *t, int i)
 {

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 19:22:36 2016 Nicolas Polomack
-** Last update Mon Mar 20 21:25:43 2017 Nicolas Polomack
+** Last update Wed May 10 17:06:12 2017 Nicolas Polomack
 */
 
 #ifndef BMP_H_
@@ -52,7 +52,6 @@ void			read_pixel_buffer(t_my_framebuffer *, int,
 					  unsigned short, int);
 sfColor			get_bmp_color(int, unsigned short);
 int			get_pad(int);
-void			set_bounds(t_my_framebuffer *, sfVector2i *, int *);
 
 /*
 ** save_bmp.c

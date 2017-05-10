@@ -1,11 +1,11 @@
 /*
-1;4601;0c** intersect_plane.c for bootstrap raytracer1 in /home/nicolaspolomack/tests/raytracer_test
+** intersect_plane.c for bootstrap raytracer1 in /home/nicolaspolomack/tests/raytracer_test
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:31:08 2017 Nicolas Polomack
-** Last update Thu Apr  6 23:33:17 2017 Nicolas Polomack
+** Last update Wed May 10 17:53:01 2017 Nicolas Polomack
 */
 
 #include <math.h>

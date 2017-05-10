@@ -1,11 +1,11 @@
 /*
-1;4803;0c1;4803;0c** teslation.c for teslation in /home/arthur/delivery/MUL/raytracer2
+** teslation.c for teslation in /home/arthur/delivery/MUL/raytracer2
 ** 
 ** Made by Arthur Knoepflin
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 28 11:08:45 2017 Arthur Knoepflin
-** Last update Wed May 10 15:55:51 2017 Nicolas Polomack
+** Last update Wed May 10 17:51:51 2017 Nicolas Polomack
 */
 
 #include "raytracer.h"
@@ -37,7 +37,8 @@ static int	get_size_tesla(int lvl)
   return (size);
 }
 
-static void	put_px_tesla(t_thread *t, sfVector2i pos, int size_tesla, sfColor col)
+static void	put_px_tesla(t_thread *t, sfVector2i pos,
+			     int size_tesla, sfColor col)
 {
   sfVector2i	put;
 
@@ -52,6 +53,20 @@ static void	put_px_tesla(t_thread *t, sfVector2i pos, int size_tesla, sfColor co
     	  put.x += 1;
     	}
       put.y += 1;
+    }
+}
+
+static void	raytrace_tesla(t_thread *t, int size_tesla, sfVector2i pos)
+{
+  if (t->params->config.depth_rays > 1)
+    put_px_tesla(t, pos, size_tesla,
+		 dof(t, t->offs.x + (pos.x + size_tesla / 2),
+		     t->offs.y + (pos.y + size_tesla / 2)));
+  else
+    {
+      prepare_raytrace_tesla(t, t->offs.x + (pos.x + size_tesla / 2),
+			     t->offs.y + (pos.y + size_tesla / 2));
+      put_px_tesla(t, pos, size_tesla, raytrace(t));
     }
 }
 
@@ -71,15 +86,7 @@ void		render_frame_tesla(t_thread *t)
       while (pos.x < size.x)
 	{
 	  t->ray.orig = t->start;
-	  if (t->params->config.depth_rays > 1)
-	    put_px_tesla(t, pos, size_tesla, dof(t, t->offs.x + (pos.x + size_tesla / 2),
-						 t->offs.y + (pos.y + size_tesla / 2)));
-	  else
-	    {
-	      prepare_raytrace_tesla(t, t->offs.x + (pos.x + size_tesla / 2),
-				     t->offs.y + (pos.y + size_tesla / 2));
-	      put_px_tesla(t, pos, size_tesla, raytrace(t));
-	    }
+	  raytrace_tesla(t, size_tesla, pos);
 	  pos.x += size_tesla;
 	}
       if (t->params->config.live)

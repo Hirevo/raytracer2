@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Wed May 10 16:20:33 2017 Nicolas Polomack
+** Last update Wed May 10 17:49:03 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -47,6 +47,7 @@
 # define DEPTH		"--depth="
 # define SSAA		"--ssaa="
 # define SOFT		"--soft="
+# define RES		"--res="
 # define DOF		"--dof="
 # define FOV		"--fov="
 
@@ -86,7 +87,7 @@ typedef struct		s_l_light
 typedef struct	s_p_light
 {
   float		ambient;
-  t_l_light	*light; 
+  t_l_light	*light;
 }		t_p_light;
 
 typedef struct		s_p_obj
@@ -264,6 +265,11 @@ int	init_thread(t_window *, t_params *);
 ** render.c
 */
 void	check_render(t_params *, t_window *);
+
+/*
+** event.c
+*/
+void	check_keys(t_params *);
 
 /*
 ** libs.c

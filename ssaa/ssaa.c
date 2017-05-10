@@ -5,14 +5,14 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Apr  4 22:25:51 2017 Nicolas Polomack
-** Last update Wed May 10 14:30:46 2017 Nicolas Polomack
+** Last update Wed May 10 17:44:15 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
 #include <math.h>
 #include "raytracer.h"
 
-void    render_pixel(t_thread *t, sfVector2f v, int i, sfVector2f f)
+void	render_pixel(t_thread *t, sfVector2f v, int i, sfVector2f f)
 {
   if (t->params->config.depth_rays > 1)
     t->ssaa_col[i] = dof(t, v.x, v.y);
@@ -30,12 +30,12 @@ void    render_pixel(t_thread *t, sfVector2f v, int i, sfVector2f f)
     }
 }
 
-sfColor         ssaa(t_thread *t, float x, float y)
+sfColor		ssaa(t_thread *t, float x, float y)
 {
-  float         ssaa_offs;
-  int           i;
-  sfVector2f    v;
-  sfVector2f    f;
+  float		ssaa_offs;
+  int		i;
+  sfVector2f	v;
+  sfVector2f	f;
 
   i = 0;
   f.x = -0.5F;

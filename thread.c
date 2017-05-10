@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Wed May 10 16:22:41 2017 Nicolas Polomack
+** Last update Wed May 10 17:35:56 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -13,13 +13,12 @@
 #include "my.h"
 #include "raytracer.h"
 
-void		*render_thread(void *arg)
+static void	*render_thread(void *arg)
 {
   t_thread	*t;
 
   t = (t_thread *)arg;
   set_focal_dist(t);
-  printf("%d\n", t->params->config.tesla);
   if (t->params->config.stereo)
     render_stereo_frame(t);
   else if (t->params->config.ssaa > 1)
@@ -53,8 +52,8 @@ void	update_frame(t_window *w, pthread_mutex_t *mutex, int bmp)
   pthread_mutex_unlock(mutex);
 }
 
-void	set_limits(t_thread *t, t_window *w,
-		   t_params *params, int i)
+static void	set_limits(t_thread *t, t_window *w,
+			   t_params *params, int i)
 {
   if (!(i % 2))
     {
@@ -75,6 +74,24 @@ void	set_limits(t_thread *t, t_window *w,
     params->screen_size.x % (params->t_count / 2) : 0;
 }
 
+static t_thread	*prepare_thread(t_window *w, t_params *params, int i)
+{
+  t_thread	*t;
+
+  if ((t = malloc(sizeof(t_thread))) == NULL)
+    return (NULL);
+  t->params = params;
+  t->w = w;
+  t->id = i;
+  t->tesla_lvl = params->tesla_lvl;
+  t->start = params->start;
+  if ((t->depth_col = malloc(sizeof(sfColor) *
+			     t->params->config.depth_rays *
+			     t->params->config.depth_rays)) == NULL)
+    return (NULL);
+  return (t);
+}
+
 int	init_thread(t_window *w, t_params *params)
 {
   int		i;
@@ -87,15 +104,7 @@ int	init_thread(t_window *w, t_params *params)
   pthread_mutex_init(&params->mutex, NULL);
   while (++i < params->t_count)
     {
-      t = malloc(sizeof(t_thread));
-      t->params = params;
-      t->w = w;
-      t->id = i;
-      t->tesla_lvl = params->tesla_lvl;
-      t->start = params->start;
-      if ((t->depth_col = malloc(sizeof(sfColor) *
-				 t->params->config.depth_rays *
-				 t->params->config.depth_rays)) == NULL)
+      if ((t = prepare_thread(w, params, i)) == NULL)
 	return (-1);
       set_limits(t, w, params, i);
       pthread_create(&(params->t[i]), NULL, render_thread, (void *)t);

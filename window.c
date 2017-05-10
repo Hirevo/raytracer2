@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed May 10 14:51:57 2017 Nicolas Polomack
+** Last update Wed May 10 17:42:52 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -60,26 +60,7 @@ void	handle_events(t_window *w, t_params *params, sfEvent *event)
 	      update_frame(w, &params->mutex, params->config.bmp);
 	    i = !i;
 	  }
-      if (sfKeyboard_isKeyPressed(sfKeyZ))
-	params->start.x += 10;
-      if (sfKeyboard_isKeyPressed(sfKeyS))
-        params->start.x -= 10;
-      if (sfKeyboard_isKeyPressed(sfKeyQ))
-        params->start.y += 10;
-      if (sfKeyboard_isKeyPressed(sfKeyD))
-        params->start.y -= 10;
-      if (sfKeyboard_isKeyPressed(sfKeyLShift))
-        params->start.z -= 10;
-      if (sfKeyboard_isKeyPressed(sfKeySpace))
-        params->start.z += 10;
-      if (sfKeyboard_isKeyPressed(sfKeyUp))
-        params->r.y += 3;
-      if (sfKeyboard_isKeyPressed(sfKeyDown))
-        params->r.y -= 3;
-      if (sfKeyboard_isKeyPressed(sfKeyLeft))
-        params->r.z += 3;
-      if (sfKeyboard_isKeyPressed(sfKeyRight))
-        params->r.z -= 3;
+      check_keys(params);
     }
 }
 
@@ -128,11 +109,7 @@ int		main(int ac, char **av, char **ae)
   init_thread(&w, &params);
   update_frame(&w, &params.mutex, params.config.bmp);
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
-    {
-      //init_thread(&w, &params);
-      //update_frame(&w, &params.mutex, params.config.bmp);
-      handle_events(&w, &params, &event);
-    }
+    handle_events(&w, &params, &event);
   save_buffers(&w, &params);
   return (0);
 }
