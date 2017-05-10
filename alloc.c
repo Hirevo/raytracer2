@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:39:33 2017 Nicolas Polomack
-** Last update Thu Mar 30 13:50:48 2017 Nicolas Polomack
+** Last update Wed May 10 16:17:20 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -37,6 +37,7 @@ void	init_buffers(t_window *w, t_params *params)
 	w->buffer2 = assemble_texture(&w->texture2, &w->sprite2,
 				      params->screen_size.x, params->screen_size.y);
     }
+  w->sizes = params->screen_size;
 }
 
 void	save_buffers(t_window *w, t_params *params)

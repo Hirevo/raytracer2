@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Fri Apr 28 14:27:18 2017 Nicolas Polomack
+** Last update Wed May 10 16:20:33 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -43,6 +43,7 @@
 # define TEXT_N		"src="
 # define ARGS_STR	"Suh"
 # define STEREO		"--stereo"
+# define TESLA		"--tesla="
 # define DEPTH		"--depth="
 # define SSAA		"--ssaa="
 # define SOFT		"--soft="
@@ -143,6 +144,7 @@ typedef struct s_thread
   t_obj		*from;
   int		depth;
   int		tesla_lvl;
+  int		primary;
   t_window	*w;
   t_params      *params;
   int		id;
@@ -152,6 +154,7 @@ typedef struct	s_config
 {
   int		stereo;
   int		ssaa;
+  int		tesla;
   int		bmp;
   int		live;
   int		fov;
@@ -179,7 +182,6 @@ typedef struct		s_params
   pthread_t		*t;
   long int		seed;
   int			help;
-  int			progress;
   int			nb_lights;
   int			nb_objs;
   int			tesla_lvl;
@@ -188,6 +190,8 @@ typedef struct		s_params
 
 typedef struct		s_window
 {
+  float			progress;
+  sfVector2i		sizes;
   pthread_mutex_t	mutex;
   sfRenderWindow	*window;
   sfRenderWindow        *window2;
@@ -257,6 +261,11 @@ void	update_frame(t_window *, pthread_mutex_t *, int);
 int	init_thread(t_window *, t_params *);
 
 /*
+** render.c
+*/
+void	check_render(t_params *, t_window *);
+
+/*
 ** libs.c
 */
 int	load_libs(t_params *);
@@ -300,9 +309,9 @@ void	prepare_refract(t_thread *, float, float);
 sfColor		specular_effect(sfColor, t_thread *, t_obj *, int);
 
 /*
-** lights/diffuse.c
+** lights/shadows.c
 */
-sfColor		diffuse_shadows(t_thread *, sfColor, t_obj *);
+sfColor		diffuse_shadows(t_thread *, sfColor, t_obj *, int);
 
 /*
 ** stereo/stereoscopy.c

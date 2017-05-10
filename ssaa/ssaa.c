@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Apr  4 22:25:51 2017 Nicolas Polomack
-** Last update Tue Apr  4 22:40:48 2017 Nicolas Polomack
+** Last update Wed May 10 14:30:46 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -21,6 +21,7 @@ void    render_pixel(t_thread *t, sfVector2f v, int i, sfVector2f f)
       t->ray.orig = t->start;
       t->depth = 0;
       t->from = NULL;
+      t->primary = 1;
       t->ray.dir = calc_dir_vector(t->params->screen_size,
 				   v.x + f.x, v.y + f.y,
 				   t->params->config.fov);

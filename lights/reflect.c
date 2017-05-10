@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 20:37:50 2017 Nicolas Polomack
-** Last update Sun Apr  9 15:19:44 2017 Nicolas Polomack
+** Last update Wed May 10 14:14:15 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -66,6 +66,7 @@ sfColor		light_effects(t_thread *t, t_obj *obj, sfColor col)
 
   if (t->depth++ < t->params->config.reflect_depth)
     {
+      t->primary = 0;
       t->from = obj;
       t->ray.dir = t->dir;
       save = *t;

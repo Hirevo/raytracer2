@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb 13 20:54:49 2017 Nicolas Polomack
-** Last update Fri Apr 28 14:14:49 2017 Nicolas Polomack
+** Last update Mon May  8 05:07:32 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -85,19 +85,19 @@ sfColor		calc_lights(t_thread *t, t_obj *obj, sfColor col)
 
   i = -1;
   while (++i < t->params->nb_lights)
-    //if (t->params->config.shadow_rays > 1)
-    //cols[i] = diffuse_shadows(t, obj, col);
-    //else
-    {
-      prepare_light_ray(t, i);
-      if (is_obstructed(t, obj))
-	cols[i] = get_shadow_color(t, col);
-      else
-	{
-	  cols[i] = eval_luminosity(t, col, &coef);
-	  if (coef > 0)
-	    cols[i] = specular_effect(cols[i], t, obj, i);
-	}
-    }
+    if (t->params->config.shadow_rays > 1)
+      cols[i] = diffuse_shadows(t, col, obj, i);
+    else
+      {
+	prepare_light_ray(t, i);
+	if (is_obstructed(t, obj))
+	  cols[i] = get_shadow_color(t, col);
+	else
+	  {
+	    cols[i] = eval_luminosity(t, col, &coef);
+	    if (coef > 0)
+	      cols[i] = specular_effect(cols[i], t, obj, i);
+	  }
+      }
   return (average_colors(cols, t->params->nb_lights));
 }

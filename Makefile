@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Fri Apr 28 11:33:46 2017 Arthur Knoepflin
+## Last update Wed May 10 14:43:50 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -17,16 +17,17 @@ MAKE1	=	make --no-print-directory -sC lib/mycsfml
 SRC	=	window.c				\
 		raytrace.c				\
 		thread.c				\
+		render.c				\
 		libs.c					\
 		alloc.c					\
 		rand.c					\
-		scene.c					\
-		teslation.c				\
+		tesselation.c				\
                 get_next_line.c			        \
                 lights/light.c		                \
 		lights/reflect.c			\
 		lights/refract.c			\
 		lights/specular.c			\
+		lights/shadows.c			\
 		stereo/stereoscopy.c			\
 		ssaa/ssaa.c				\
 		depth_of_field/depth.c			\

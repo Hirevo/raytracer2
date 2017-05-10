@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Fri Apr 28 11:09:10 2017 Nicolas Polomack
+** Last update Wed May 10 14:50:17 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -33,6 +33,7 @@ static void	init_links(t_params *params, int *flags[3])
   params->config.live = 0;
   params->config.stereo = 0;
   params->config.ssaa = 1;
+  params->config.tesla = 0;
   params->config.reflect_depth = 3;
   params->config.shadow_rays = 1;
   params->config.depth_rays = 1;
@@ -54,6 +55,11 @@ static int	get_arg_value(t_params *params, int ac, char **av, int i)
     params->config.depth_rays = sqrtf(my_getnbr(av[i] + my_strlen(DOF)));
   else if (my_strncmp(av[i], FOV, my_strlen(FOV)) == 0)
     params->config.fov = my_getnbr(av[i] + my_strlen(FOV));
+  else if (my_strncmp(av[i], TESLA, my_strlen(TESLA)) == 0)
+    {
+      params->config.tesla = 1;
+      params->tesla_lvl = my_getnbr(av[i] + my_strlen(TESLA));
+    }
   else
     {
       my_printf("%s: Invalid argument.\n", av[i]);
