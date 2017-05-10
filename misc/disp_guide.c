@@ -1,33 +1,24 @@
 /*
-** check.c for raytracer in /home/nicolaspolomack/graphical/raytracer1
+** help.c for raytracer2 in 
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
-** Started on  Thu Feb  9 02:34:59 2017 Nicolas Polomack
-** Last update Sat Apr  1 04:50:37 2017 Nicolas Polomack
+** Started on  Fri Apr  7 16:46:51 2017 Nicolas Polomack
+** Last update Wed May 10 16:51:05 2017 Nicolas Polomack
 */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include "get_next_line.h"
-#include "raytracer.h"
 #include "my.h"
+#include "help.h"
 
 int	disp_guide()
 {
-  int	fd;
-  char	*line;
+  extern unsigned char	help_txt[];
+  extern unsigned int	help_txt_len;
+  int			i;
 
-  if ((fd = open("help.txt", O_RDONLY)) == -1)
-    return (84);
-  while ((line = get_next_line(fd)))
-    {
-      my_printf("%s\n", line);
-      free(line);
-    }
-  close(fd);
+  i = -1;
+  while (++i < help_txt_len)
+    my_putchar(help_txt[i]);
   return (0);
 }
