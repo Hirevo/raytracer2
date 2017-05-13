@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 ** 
 ** Started on  Tue Apr 18 21:25:05 2017 Arthur Knoepflin
-** Last update Sat Apr 22 19:33:28 2017 Nicolas Polomack
+** Last update Sat May 13 18:17:19 2017 Nicolas Polomack
 */
 
 #include "raytracer.h"
@@ -19,7 +19,7 @@ static t_p_obj	init_obj_add(void)
   ret.rad = 1;
   ret.aper = 1;
   ret.refr_index = 1;
-  ret.spec_coef = 1;
+  ret.spec_coef = 99999999;
   ret.col.r = 255;
   ret.col.g = 255;
   ret.col.b = 255;
