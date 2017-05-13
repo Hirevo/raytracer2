@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Wed May 10 14:50:17 2017 Nicolas Polomack
+** Last update Sat May 13 16:46:18 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -39,6 +39,30 @@ static void	init_links(t_params *params, int *flags[3])
   params->config.depth_rays = 1;
   params->config.fov = 80;
   params->config.scene_file = NULL;
+  params->screen_size.x = 1280;
+  params->screen_size.y = 720;
+}
+
+static void	get_res(t_params *params, char *str)
+{
+  int		i;
+  int		c;
+
+  i = -1;
+  c = 0;
+  while (str[++i])
+    c += (str[i] == ',');
+  if (c != 1)
+    {
+      my_printf("Incorrect resolution, it has been set to default 1280x720.\n");
+      return ;
+    }
+  i = 0;
+  while (str[i] != ',')
+    i += 1;
+  i += 1;
+  params->screen_size.x = my_getnbr(str);
+  params->screen_size.y = my_getnbr(str + i);
 }
 
 static int	get_arg_value(t_params *params, int ac, char **av, int i)
@@ -60,6 +84,8 @@ static int	get_arg_value(t_params *params, int ac, char **av, int i)
       params->config.tesla = 1;
       params->tesla_lvl = my_getnbr(av[i] + my_strlen(TESLA));
     }
+  else if (my_strncmp(av[i], RES, my_strlen(RES)) == 0)
+    get_res(params, av[i] + my_strlen(RES));
   else
     {
       my_printf("%s: Invalid argument.\n", av[i]);

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb 13 20:54:49 2017 Nicolas Polomack
-** Last update Mon May  8 05:07:32 2017 Nicolas Polomack
+** Last update Sat May 13 18:10:01 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -95,7 +95,7 @@ sfColor		calc_lights(t_thread *t, t_obj *obj, sfColor col)
 	else
 	  {
 	    cols[i] = eval_luminosity(t, col, &coef);
-	    if (coef > 0)
+	    if (coef > 0.7)
 	      cols[i] = specular_effect(cols[i], t, obj, i);
 	  }
       }

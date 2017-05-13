@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed May 10 17:42:52 2017 Nicolas Polomack
+** Last update Sat May 13 18:07:37 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -97,8 +97,6 @@ int		main(int ac, char **av, char **ae)
   if (params.help)
     return (disp_guide());
   params.seed = init_seed(ac, av, ae, (void *)&main);
-  params.screen_size.x = 1280;
-  params.screen_size.y = 720;
   parse_from_file(&params, params.config.scene_file);
   if (load_libs(&params) == -1)
     return (84);
