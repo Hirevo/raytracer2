@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Fri Apr 28 13:43:04 2017 Arthur Knoepflin
+** Last update Wed May 10 21:22:24 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -51,6 +51,21 @@
 
 typedef struct s_window t_window;
 typedef struct s_params t_params;
+
+typedef struct		s_poly_obj
+{
+  sfVector3f		pos1;
+  sfVector3f		pos2;
+  sfVector3f		pos3;
+  struct s_poly_obj	*next;  
+}			t_poly_obj;
+
+typedef struct	s_obj_file
+{
+  int		nb_poly;
+  int		nb_vert;
+  t_poly_obj	*poly_list;
+}		t_obj_file;
 
 typedef struct	s_ray
 {
@@ -321,6 +336,39 @@ void	ry(sfVector3f *, float);
 void	rz(sfVector3f *, float);
 void	rotation(sfVector3f *, sfVector3f *);
 void	anti_rotation(sfVector3f *, sfVector3f *);
+
+/*
+** obj/my_getfloat.c
+*/
+
+float	my_getfloat(char *);
+
+/*
+** obj/my_split_char.c
+*/
+
+char	**my_split_char(char *, char);
+
+/*
+** obj/parse_obj.c
+*/
+
+t_obj_file	*parse_obj_file(char *);
+
+/*
+** obj/parse_poly.c
+*/
+
+int	get_nb_poly(char **);
+int	parse_poly(char **, sfVector3f *, t_obj_file *);
+
+/*
+** obj/parse_pos_vert.c
+*/
+
+int		tab_len(char **);
+int		nb_vert(char **);
+sfVector3f	*parse_pos_vert(char **, t_obj_file *);
 
 /*
 ** parse/get_file.c

@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Fri Apr 28 11:33:46 2017 Arthur Knoepflin
+## Last update Wed May 10 19:23:58 2017 Arthur Knoepflin
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -30,6 +30,11 @@ SRC	=	window.c				\
 		stereo/stereoscopy.c			\
 		ssaa/ssaa.c				\
 		depth_of_field/depth.c			\
+		obj/my_getfloat.c			\
+		obj/my_split_char.c			\
+		obj/parse_obj.c				\
+		obj/parse_poly.c			\
+		obj/parse_pos_vert.c			\
 		parse/proc.c				\
 		parse/args.c				\
 		parse/add_obj.c				\
