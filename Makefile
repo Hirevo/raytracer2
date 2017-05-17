@@ -5,11 +5,8 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-<<<<<<< HEAD
-## Last update Wed May 10 19:23:58 2017 Arthur Knoepflin
-=======
+## Last update Thu May 18 00:00:12 2017 Arthur Knoepflin
 ## Last update Wed May 10 17:40:43 2017 Nicolas Polomack
->>>>>>> 8a69f48e658a2082bad635a7bec3b2e5556f1a67
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
