@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 19:31:11 2016 Nicolas Polomack
-** Last update Thu Apr 20 22:09:01 2017 Arthur Knoepflin
+** Last update Wed May 10 17:05:56 2017 Nicolas Polomack
 */
 
 #include <unistd.h>
@@ -97,12 +97,4 @@ int	get_pad(int w)
   while (((w + i) % 4) != 0)
     i += 1;
   return (i);
-}
-
-void	set_bounds(t_my_framebuffer *buffer,
-		   sfVector2i *max, int *j)
-{
-  max->x = (max->x < 0) ? 0 : max->x;
-  max->y = (max->y > buffer->height) ? buffer->height : max->y;
-  *j = max->x - 1;
 }

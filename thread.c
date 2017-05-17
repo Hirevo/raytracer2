@@ -5,14 +5,16 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Sat Apr 29 13:39:43 2017 Arthur Knoepflin
+** Last update Wed May 17 23:56:54 2017 Arthur Knoepflin
+** Last update Wed May 10 17:35:56 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
 #include <pthread.h>
+#include "my.h"
 #include "raytracer.h"
 
-void		*render_thread(void *arg)
+static void	*render_thread(void *arg)
 {
   t_thread	*t;
 
@@ -22,24 +24,37 @@ void		*render_thread(void *arg)
     render_stereo_frame(t);
   else if (t->params->config.ssaa > 1)
     render_ssaa(t);
-  else
+  else if (t->params->config.tesla)
     render_frame_tesla(t);
+  else
+    render_frame(t);
   return (NULL);
 }
 
 void	update_frame(t_window *w, pthread_mutex_t *mutex, int bmp)
 {
+  char	*title;
+  char	*final;
+
+  w->progress += ((1.0F / ((float)w->sizes.x)) / 2.0F) * 100.0F;
   if (bmp || pthread_mutex_trylock(mutex) != 0)
     return ;
+  title = my_int_to_char((int)w->progress);
+  if ((final = malloc(14 + my_strlen(title))) == NULL)
+    return ;
+  my_strcat(my_strcat(my_strcpy(final, "Raytracer - "), title), "%");
+  sfRenderWindow_setTitle(w->window, final);
+  free(final);
+  free(title);
   sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
-                             w->buffer->width, w->buffer->height, 0, 0);
+			     w->buffer->width, w->buffer->height, 0, 0);
   sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
   sfRenderWindow_display(w->window);
   pthread_mutex_unlock(mutex);
 }
 
-void	set_limits(t_thread *t, t_window *w,
-		   t_params *params, int i)
+static void	set_limits(t_thread *t, t_window *w,
+			   t_params *params, int i)
 {
   if (!(i % 2))
     {
@@ -60,6 +75,24 @@ void	set_limits(t_thread *t, t_window *w,
     params->screen_size.x % (params->t_count / 2) : 0;
 }
 
+static t_thread	*prepare_thread(t_window *w, t_params *params, int i)
+{
+  t_thread	*t;
+
+  if ((t = malloc(sizeof(t_thread))) == NULL)
+    return (NULL);
+  t->params = params;
+  t->w = w;
+  t->id = i;
+  t->tesla_lvl = params->tesla_lvl;
+  t->start = params->start;
+  if ((t->depth_col = malloc(sizeof(sfColor) *
+			     t->params->config.depth_rays *
+			     t->params->config.depth_rays)) == NULL)
+    return (NULL);
+  return (t);
+}
+
 int	init_thread(t_window *w, t_params *params)
 {
   int		i;
@@ -68,16 +101,11 @@ int	init_thread(t_window *w, t_params *params)
   i = -1;
   params->t_count = get_core_count() * 2;
   params->t = malloc(sizeof(pthread_t) * params->t_count);
+  w->progress = 0;
   pthread_mutex_init(&params->mutex, NULL);
   while (++i < params->t_count)
     {
-      t = malloc(sizeof(t_thread));
-      t->params = params;
-      t->w = w;
-      t->id = i;
-      t->tesla_lvl = params->tesla_lvl;
-      t->start = params->start;
-      if ((t->depth_col = malloc(sizeof(sfColor) * 25)) == NULL)
+      if ((t = prepare_thread(w, params, i)) == NULL)
 	return (-1);
       set_limits(t, w, params, i);
       pthread_create(&(params->t[i]), NULL, render_thread, (void *)t);
@@ -85,12 +113,6 @@ int	init_thread(t_window *w, t_params *params)
   i = -1;
   while (++i < params->t_count)
     pthread_join(params->t[i], NULL);
-  if (t->tesla_lvl > 1)
-    {
-      params->tesla_lvl -= 1;
-      init_thread(w, params);
-    }
-  else
-    sfRenderWindow_setTitle(w->window, "Raytracer - Termine");
+  check_render(params, w);
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed May 10 19:26:52 2017 Arthur Knoepflin
+** Last update Wed May 17 23:56:45 2017 Arthur Knoepflin
 */
 
 #include <SFML/Graphics.h>
@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 #include "sfcaster.h"
 #include "raytracer.h"
 #include "bmp.h"
@@ -60,6 +59,7 @@ void	handle_events(t_window *w, t_params *params, sfEvent *event)
 	      update_frame(w, &params->mutex, params->config.bmp);
 	    i = !i;
 	  }
+      check_keys(params);
     }
 }
 

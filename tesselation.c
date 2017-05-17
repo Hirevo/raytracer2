@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 28 11:08:45 2017 Arthur Knoepflin
-** Last update Fri Apr 28 13:38:56 2017 Arthur Knoepflin
+** Last update Wed May 10 17:51:51 2017 Nicolas Polomack
 */
 
 #include "raytracer.h"
@@ -15,6 +15,7 @@ static void	prepare_raytrace_tesla(t_thread *t, int x, int y)
   t->depth = 0;
   t->from = NULL;
   t->refr = 1;
+  t->primary = 1;
   t->ray.dir = calc_dir_vector(t->params->screen_size,
 			       x, y, t->params->config.fov);
   rotation(&t->ray.dir, &t->params->r);
@@ -36,12 +37,11 @@ static int	get_size_tesla(int lvl)
   return (size);
 }
 
-static void	put_px_tesla(t_thread *t, sfVector2i pos, int size_tesla)
+static void	put_px_tesla(t_thread *t, sfVector2i pos,
+			     int size_tesla, sfColor col)
 {
   sfVector2i	put;
-  sfColor	col;
 
-  col = raytrace(t);
   put.y = 0;
   while (put.y < size_tesla)
     {
@@ -53,6 +53,20 @@ static void	put_px_tesla(t_thread *t, sfVector2i pos, int size_tesla)
     	  put.x += 1;
     	}
       put.y += 1;
+    }
+}
+
+static void	raytrace_tesla(t_thread *t, int size_tesla, sfVector2i pos)
+{
+  if (t->params->config.depth_rays > 1)
+    put_px_tesla(t, pos, size_tesla,
+		 dof(t, t->offs.x + (pos.x + size_tesla / 2),
+		     t->offs.y + (pos.y + size_tesla / 2)));
+  else
+    {
+      prepare_raytrace_tesla(t, t->offs.x + (pos.x + size_tesla / 2),
+			     t->offs.y + (pos.y + size_tesla / 2));
+      put_px_tesla(t, pos, size_tesla, raytrace(t));
     }
 }
 
@@ -72,9 +86,7 @@ void		render_frame_tesla(t_thread *t)
       while (pos.x < size.x)
 	{
 	  t->ray.orig = t->start;
-	  prepare_raytrace_tesla(t, t->offs.x + (pos.x + size_tesla / 2),
-				 t->offs.y + (pos.y + size_tesla / 2));
-	  put_px_tesla(t, pos, size_tesla);
+	  raytrace_tesla(t, size_tesla, pos);
 	  pos.x += size_tesla;
 	}
       if (t->params->config.live)

@@ -1,11 +1,11 @@
 /*
-1;4601;0c** intersect_sphere.c for bootstrap raytracer1 in /home/nicolaspolomack/tests/raytracer_test
+** intersect_sphere.c for bootstrap raytracer1 in /home/nicolaspolomack/tests/raytracer_test
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sun Apr  9 15:15:43 2017 Nicolas Polomack
+** Last update Wed May 10 17:44:48 2017 Nicolas Polomack
 */
 
 #include <math.h>

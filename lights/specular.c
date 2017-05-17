@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Mar 29 00:28:22 2017 Nicolas Polomack
-** Last update Tue Apr  4 19:56:50 2017 Nicolas Polomack
+** Last update Sat May 13 18:11:56 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -41,7 +41,7 @@ sfColor		specular_effect(sfColor col, t_thread *t, t_obj *obj, int l)
   int		i[3];
   float		coef;
 
-  coef = fmax(0, get_specular_coef(t, obj, l)) * (!(obj->type));
+  coef = fmax(0, get_specular_coef(t, obj, l));
   i[0] = (((float)col.r) + 255.0F * coef);
   i[1] = (((float)col.g) + 255.0F * coef);
   i[2] = (((float)col.b) + 255.0F * coef);

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Wed May 10 21:22:24 2017 Arthur Knoepflin
+** Last update Wed May 17 23:57:26 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -43,9 +43,11 @@
 # define TEXT_N		"src="
 # define ARGS_STR	"Suh"
 # define STEREO		"--stereo"
+# define TESLA		"--tesla="
 # define DEPTH		"--depth="
 # define SSAA		"--ssaa="
 # define SOFT		"--soft="
+# define RES		"--res="
 # define DOF		"--dof="
 # define FOV		"--fov="
 
@@ -100,7 +102,7 @@ typedef struct		s_l_light
 typedef struct	s_p_light
 {
   float		ambient;
-  t_l_light	*light; 
+  t_l_light	*light;
 }		t_p_light;
 
 typedef struct		s_p_obj
@@ -158,6 +160,7 @@ typedef struct s_thread
   t_obj		*from;
   int		depth;
   int		tesla_lvl;
+  int		primary;
   t_window	*w;
   t_params      *params;
   int		id;
@@ -167,6 +170,7 @@ typedef struct	s_config
 {
   int		stereo;
   int		ssaa;
+  int		tesla;
   int		bmp;
   int		live;
   int		fov;
@@ -174,6 +178,7 @@ typedef struct	s_config
   int		reflect_depth;
   int		depth_rays;
   int		shadow_rays;
+  char		*scene_file;
 }		t_config;
 
 typedef struct		s_params
@@ -193,7 +198,6 @@ typedef struct		s_params
   pthread_t		*t;
   long int		seed;
   int			help;
-  int			progress;
   int			nb_lights;
   int			nb_objs;
   int			tesla_lvl;
@@ -202,6 +206,8 @@ typedef struct		s_params
 
 typedef struct		s_window
 {
+  float			progress;
+  sfVector2i		sizes;
   pthread_mutex_t	mutex;
   sfRenderWindow	*window;
   sfRenderWindow        *window2;
@@ -271,6 +277,16 @@ void	update_frame(t_window *, pthread_mutex_t *, int);
 int	init_thread(t_window *, t_params *);
 
 /*
+** render.c
+*/
+void	check_render(t_params *, t_window *);
+
+/*
+** event.c
+*/
+void	check_keys(t_params *);
+
+/*
 ** libs.c
 */
 int	load_libs(t_params *);
@@ -312,6 +328,11 @@ void	prepare_refract(t_thread *, float, float);
 ** lights/specular.c
 */
 sfColor		specular_effect(sfColor, t_thread *, t_obj *, int);
+
+/*
+** lights/shadows.c
+*/
+sfColor		diffuse_shadows(t_thread *, sfColor, t_obj *, int);
 
 /*
 ** stereo/stereoscopy.c

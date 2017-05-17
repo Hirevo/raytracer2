@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Sat Apr 22 18:46:29 2017 Nicolas Polomack
+** Last update Sat May 13 16:46:18 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -33,9 +33,36 @@ static void	init_links(t_params *params, int *flags[3])
   params->config.live = 0;
   params->config.stereo = 0;
   params->config.ssaa = 1;
+  params->config.tesla = 0;
   params->config.reflect_depth = 3;
+  params->config.shadow_rays = 1;
   params->config.depth_rays = 1;
   params->config.fov = 80;
+  params->config.scene_file = NULL;
+  params->screen_size.x = 1280;
+  params->screen_size.y = 720;
+}
+
+static void	get_res(t_params *params, char *str)
+{
+  int		i;
+  int		c;
+
+  i = -1;
+  c = 0;
+  while (str[++i])
+    c += (str[i] == ',');
+  if (c != 1)
+    {
+      my_printf("Incorrect resolution, it has been set to default 1280x720.\n");
+      return ;
+    }
+  i = 0;
+  while (str[i] != ',')
+    i += 1;
+  i += 1;
+  params->screen_size.x = my_getnbr(str);
+  params->screen_size.y = my_getnbr(str + i);
 }
 
 static int	get_arg_value(t_params *params, int ac, char **av, int i)
@@ -52,6 +79,13 @@ static int	get_arg_value(t_params *params, int ac, char **av, int i)
     params->config.depth_rays = sqrtf(my_getnbr(av[i] + my_strlen(DOF)));
   else if (my_strncmp(av[i], FOV, my_strlen(FOV)) == 0)
     params->config.fov = my_getnbr(av[i] + my_strlen(FOV));
+  else if (my_strncmp(av[i], TESLA, my_strlen(TESLA)) == 0)
+    {
+      params->config.tesla = 1;
+      params->tesla_lvl = my_getnbr(av[i] + my_strlen(TESLA));
+    }
+  else if (my_strncmp(av[i], RES, my_strlen(RES)) == 0)
+    get_res(params, av[i] + my_strlen(RES));
   else
     {
       my_printf("%s: Invalid argument.\n", av[i]);
@@ -60,11 +94,23 @@ static int	get_arg_value(t_params *params, int ac, char **av, int i)
   return (0);
 }
 
+static int	get_short_arg(char **av, int i, int *flags[3])
+{
+  int		match;
+  int		j;
+
+  j = 0;
+  while (av[i][++j])
+    if ((match = get_index(ARGS_STR, av[i][j])) == -1)
+      return (-1 + 0 *
+	      my_printf("-%c: Invalid argument.\n", av[i][j]));
+    else
+      *(flags[match]) = 1;
+}
+
 int		parse_args(t_params *params, int ac, char **av)
 {
   int		i;
-  int		j;
-  int		match;
   int		*flags[3];
 
   init_links(params, flags);
@@ -74,17 +120,18 @@ int		parse_args(t_params *params, int ac, char **av)
       {
 	if (av[i][1] != '-')
 	  {
-	    j = 0;
-	    while (av[i][++j])
-	      if ((match = get_index(ARGS_STR, av[i][j])) == -1)
-		return (-1 + 0 *
-			my_printf("-%c: Invalid argument.\n", av[i][j]));
-	      else
-		*(flags[match]) = 1;
+	    if (get_short_arg(av, i, flags) == -1)
+	      return (-1);
 	  }
 	else
 	  if (get_arg_value(params, ac, av, i) == -1)
 	    return (-1);
+      }
+    else
+      {
+	if (params->config.scene_file != NULL)
+	  return (-1);
+	params->config.scene_file = av[i];
       }
   return (0);
 }
