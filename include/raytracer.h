@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Wed May 17 23:57:26 2017 Arthur Knoepflin
+** Last update Mon May 22 19:44:44 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -54,19 +54,13 @@
 typedef struct s_window t_window;
 typedef struct s_params t_params;
 
-typedef struct		s_poly_obj
-{
-  sfVector3f		pos1;
-  sfVector3f		pos2;
-  sfVector3f		pos3;
-  struct s_poly_obj	*next;  
-}			t_poly_obj;
-
 typedef struct	s_obj_file
 {
   int		nb_poly;
   int		nb_vert;
-  t_poly_obj	*poly_list;
+  sfVector3f	*p1;
+  sfVector3f	*p2;
+  sfVector3f	*p3;
 }		t_obj_file;
 
 typedef struct	s_ray

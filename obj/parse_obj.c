@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Tue May  9 22:05:59 2017 Arthur Knoepflin
-** Last update Wed May 10 21:28:50 2017 Arthur Knoepflin
+** Last update Mon May 22 19:56:50 2017 Arthur Knoepflin
 */
 
 #include <sys/types.h>
@@ -66,8 +66,10 @@ static char	**load_file(char *path)
       free(tmp);
       i += 1;
       if (i >= max)
-	if ((ret = realloc_file(ret, &max)) == NULL)
-	  return (NULL);
+	{
+	  if ((ret = realloc_file(ret, &max)) == NULL)
+	    return (NULL);
+	}
     }
   ret[i] = NULL;
   close(fd);
@@ -84,10 +86,14 @@ t_obj_file	*parse_obj_file(char *path)
     return (NULL);
   if ((file = load_file(path)) == NULL)
     return (NULL);
-  ret->poly_list = NULL;
   ret->nb_vert = nb_vert(file);
   ret->nb_poly = get_nb_poly(file);
+  printf("Vertex : %d || Polygon : %d\n", ret->nb_vert, ret->nb_poly);
   if ((pos = parse_pos_vert(file, ret)) == NULL)
+    return (NULL);
+  if ((ret->p1 = malloc(sizeof(sfVector3f) * ret->nb_poly)) == NULL ||
+      (ret->p2 = malloc(sizeof(sfVector3f) * ret->nb_poly)) == NULL ||
+      (ret->p3 = malloc(sizeof(sfVector3f) * ret->nb_poly)) == NULL)
     return (NULL);
   parse_poly(file, pos, ret);
   return (ret);
