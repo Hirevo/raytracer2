@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed May 17 23:56:45 2017 Arthur Knoepflin
+** Last update Mon May 22 19:21:02 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -91,26 +91,35 @@ int		main(int ac, char **av, char **ae)
   sfEvent	event;
   t_params	params;
 
-  /* if (ac < 2 || parse_args(&params, ac, av) == -1) */
-  /*   return (84); */
-  /* if (params.help) */
-  /*   return (disp_guide()); */
-  parse_obj_file("scene/cow.obj");
-  /* params.seed = init_seed(ac, av, ae, (void *)&main); */
-  /* params.screen_size.x = 1920; */
-  /* params.screen_size.y = 1080; */
-  /* parse_from_file(&params, av[1]); */
-  /* if (load_libs(&params) == -1) */
-  /*   return (84); */
-  /* init_buffers(&w, &params); */
-  /* clear_pixels(w.buffer); */
-  /* if (!params.config.bmp) */
-  /*   create_window(&w.window, "Raytracer2", params.screen_size); */
-  /* params.tesla_lvl = 40; */
-  /* init_thread(&w, &params); */
-  /* update_frame(&w, &params.mutex, params.config.bmp); */
-  /* while (!params.config.bmp && sfRenderWindow_isOpen(w.window)) */
-  /*   handle_events(&w, &params, &event); */
-  /* save_buffers(&w, &params); */
-  /* return (0); */
+  if (ac < 2 || parse_args(&params, ac, av) == -1)
+    return (84);
+  if (params.help)
+    return (disp_guide());
+  params.obj_data = parse_obj_file("scene/dragon.obj");
+  params.seed = init_seed(ac, av, ae, (void *)&main);
+  params.screen_size.x = 500;
+  params.screen_size.y = 500;
+  //parse_from_file(&params, av[1]);
+  if (load_libs(&params) == -1)
+    return (84);
+  init_buffers(&w, &params);
+  clear_pixels(w.buffer);
+  params.start.x = -10;
+  params.start.y = -20;
+  params.start.z = 0;
+  params.r.x = -90;
+  params.r.y = 0;
+  params.r.z = 45;
+  params.lights = malloc(sizeof(t_light));
+  params.lights[0].pos = params.start;
+  params.config.fov = 10;
+  if (!params.config.bmp)
+    create_window(&w.window, "Raytracer2", params.screen_size);
+  params.tesla_lvl = 40;
+  init_thread(&w, &params);
+  update_frame(&w, &params.mutex, params.config.bmp);
+  while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
+    handle_events(&w, &params, &event);
+  save_buffers(&w, &params);
+  return (0);
 }
