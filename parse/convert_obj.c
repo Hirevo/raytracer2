@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 21 13:30:38 2017 Arthur Knoepflin
-** Last update Fri Apr 21 14:53:46 2017 Arthur Knoepflin
+** Last update Tue May 23 23:40:42 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -34,6 +34,8 @@ static void	assign_obj(t_obj *obj, t_p_obj *list)
   obj->rad = list->rad;
   obj->aper = list->aper;
   obj->col = list->col;
+  obj->obj_parse = list->obj_parse;
+  obj->file = list->file;
   obj->buffer = list->buffer;
   obj->height = list->height;
   obj->reflect = list->reflect;

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed May 10 14:39:42 2017 Nicolas Polomack
-** Last update Wed May 10 15:50:04 2017 Nicolas Polomack
+** Last update Wed May 24 00:02:55 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
@@ -17,6 +17,7 @@ void	check_render(t_params *params, t_window *w)
       params->config.tesla &&
       params->tesla_lvl > 1)
     {
+      w->time_start = get_time();
       params->tesla_lvl -= 1;
       init_thread(w, params);
     }

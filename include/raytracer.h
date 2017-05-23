@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Tue May 23 20:01:17 2017 Nicolas Polomack
+** Last update Tue May 23 22:52:56 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -132,6 +132,8 @@ typedef struct		s_obj
   float			rad;
   float			aper;
   sfColor		col;
+  t_obj_file		*obj_parse;
+  char			*file;
   t_my_framebuffer	*buffer;
   float			height;
   float			reflect;
@@ -358,6 +360,12 @@ void	ry(sfVector3f *, float);
 void	rz(sfVector3f *, float);
 void	rotation(sfVector3f *, sfVector3f *);
 void	anti_rotation(sfVector3f *, sfVector3f *);
+
+/*
+** obj/render.c
+*/
+float		get_dist_obj(t_thread *, t_obj_file *);
+sfVector3f	get_normal_obj(t_thread *, t_obj *);
 
 /*
 ** obj/my_getfloat.c

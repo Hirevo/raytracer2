@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Tue May 23 20:21:45 2017 Nicolas Polomack
+** Last update Tue May 23 23:59:53 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -18,10 +18,10 @@ static void	*render_thread(void *arg)
   t_thread	*t;
 
   t = (t_thread *)arg;
-  //set_focal_dist(t);
-  if (1)
-    render_obj(t);
-  else if (t->params->config.stereo)
+  set_focal_dist(t);
+  /* if (1) */
+  /*   render_obj(t); */
+  if (t->params->config.stereo)
     render_stereo_frame(t);
   else if (t->params->config.ssaa > 1)
     render_ssaa(t);
@@ -37,9 +37,9 @@ void	update_frame(t_window *w, pthread_mutex_t *mutex, int bmp)
   char	*time;
   char	*final;
 
+  w->progress += ((1.0F / ((float)w->sizes.x)) / 2.0F) * 100.0F;
   if (bmp || pthread_mutex_trylock(mutex) != 0)
     return ;
-  w->progress += ((1.0F / ((float)w->sizes.x)) / 2.0F) * 100.0F;
   sfRenderWindow_display(w->window);
   sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
 			     w->buffer->width, w->buffer->height, 0, 0);

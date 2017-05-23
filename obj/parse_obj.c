@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Tue May  9 22:05:59 2017 Arthur Knoepflin
-** Last update Tue May 23 22:02:56 2017 Arthur Knoepflin
+** Last update Tue May 23 23:41:47 2017 Arthur Knoepflin
 */
 
 #include <sys/types.h>
@@ -89,7 +89,6 @@ t_obj_file	*parse_obj_file(char *path)
     return (NULL);
   ret->nb_vert = nb_vert(file);
   ret->nb_poly = get_nb_poly(file);
-  printf("Vertex : %d || Polygon : %d\n", ret->nb_vert, ret->nb_poly);
   if ((pos = parse_pos_vert(file, ret)) == NULL)
     return (NULL);
   if ((ret->p1 = malloc(sizeof(sfVector3f) * ret->nb_poly)) == NULL ||

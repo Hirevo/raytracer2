@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed Apr 19 21:26:13 2017 Arthur Knoepflin
-** Last update Thu Apr 20 15:55:43 2017 Arthur Knoepflin
+** Last update Tue May 23 22:48:00 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -20,6 +20,8 @@ static void	assign(t_p_obj *new, t_p_obj add)
   new->p1 = add.p1;
   new->p2 = add.p2;
   new->rad = add.rad;
+  new->file = add.file;
+  new->obj_parse = add.obj_parse;
   new->aper = add.aper;
   new->col = add.col;
   new->buffer = add.buffer;

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 20:37:50 2017 Nicolas Polomack
-** Last update Wed May 10 17:48:19 2017 Nicolas Polomack
+** Last update Tue May 23 23:39:30 2017 Arthur Knoepflin
 */
 
 #include <math.h>
@@ -19,7 +19,10 @@ sfColor		apply_effects(t_thread *t, t_obj *obj, float dist)
 
   prepare_light_calc(t, obj, dist);
   imp = prepare(t->impact, obj, 1);
-  col = t->params->apply_tex[t->params->id[(int)obj->type]](imp, obj);
+  if (obj->type == -1)
+    col = obj->col;
+  else
+    col = t->params->apply_tex[t->params->id[(int)obj->type]](imp, obj);
   col = calc_lights(t, obj, col);
   col = light_effects(t, obj, col);
   return (col);

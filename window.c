@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Tue May 23 21:10:09 2017 Nicolas Polomack
+** Last update Tue May 23 23:35:41 2017 Arthur Knoepflin
 */
 
 #include <SFML/Graphics.h>
@@ -95,24 +95,12 @@ int		main(int ac, char **av, char **ae)
     return (84);
   if (params.help)
     return (disp_guide());
-  params.obj_data = parse_obj_file(params.config.scene_file);
   params.seed = init_seed(ac, av, ae, (void *)&main);
-  params.screen_size.x = 1280;
-  params.screen_size.y = 720;
-  //parse_from_file(&params, params.config.scene_file);
+  parse_from_file(&params, params.config.scene_file);
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);
   clear_pixels(w.buffer);;
-  params.start.x = -1500;
-  params.start.y = 10;
-  params.start.z = 10;
-  params.r.x = -90;
-  params.r.y = 0;
-  params.r.z = 0;
-  params.lights = malloc(sizeof(t_light));
-  params.lights[0].pos = params.start;
-  params.config.fov = 10;
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
   params.tesla_lvl = 40;
