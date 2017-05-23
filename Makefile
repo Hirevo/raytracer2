@@ -5,8 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Mon May 22 16:20:55 2017 Nicolas Polomack
-## Last update Wed May 10 17:40:43 2017 Nicolas Polomack
+## Last update Tue May 23 20:01:26 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -73,6 +72,7 @@ SRC	=	window.c				\
                 calc/calc_dir_vector.c			\
                 texturing/sphere_texture.c		\
 		texturing/plane_texture.c		\
+		time.c					\
 		misc/disp_guide.c			\
                 bmp/load_bmp.c                          \
                 bmp/merge.c                             \

@@ -5,8 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Thu May 18 11:38:05 2017 Nicolas Polomack
-** Last update Wed May 10 17:35:56 2017 Nicolas Polomack
+** Last update Tue May 23 20:21:45 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -36,18 +35,19 @@ static void	*render_thread(void *arg)
 void	update_frame(t_window *w, pthread_mutex_t *mutex, int bmp)
 {
   char	*title;
+  char	*time;
   char	*final;
 
   w->progress += ((1.0F / ((float)w->sizes.x)) / 2.0F) * 100.0F;
   if (bmp || pthread_mutex_trylock(mutex) != 0)
     return ;
   title = my_int_to_char((int)w->progress);
-  if ((final = malloc(14 + my_strlen(title))) == NULL)
+  if ((time = get_time_calc(w, title)) == NULL)
     return ;
-  my_strcat(my_strcat(my_strcpy(final, "Raytracer - "), title), "%");
+  if ((final = my_fstrcat("Raytracer - ", time, 3)) == NULL)
+    return ;
   sfRenderWindow_setTitle(w->window, final);
   free(final);
-  free(title);
   sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
 			     w->buffer->width, w->buffer->height, 0, 0);
   sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
