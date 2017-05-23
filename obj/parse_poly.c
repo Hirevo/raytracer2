@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 10 19:13:48 2017 Arthur Knoepflin
-** Last update Mon May 22 19:51:11 2017 Arthur Knoepflin
+** Last update Tue May 23 21:52:30 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -51,7 +51,7 @@ int	parse_poly(char **file, sfVector3f *pos, t_obj_file *ret)
   j = 0;
   while (file[i])
     {
-      if (file[i][0] == 'f')	
+      if (file[i][0] == 'f')
 	add_poly(file[i], pos, ret, &j);
       i += 1;
     }

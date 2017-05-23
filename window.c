@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed May 17 23:56:45 2017 Arthur Knoepflin
+** Last update Tue May 23 21:52:05 2017 Arthur Knoepflin
 */
 
 #include <SFML/Graphics.h>
@@ -35,9 +35,9 @@ int		create_window(sfRenderWindow **w, char *name,
   return (0);
 }
 
-void	handle_events(t_window *w, t_params *params, sfEvent *event)
+void		handle_events(t_window *w, t_params *params, sfEvent *event)
 {
-  static int i = 0;
+  static int	i = 0;
 
   if (sfWindow_hasFocus((sfWindow *)w->window))
     {
@@ -91,26 +91,27 @@ int		main(int ac, char **av, char **ae)
   sfEvent	event;
   t_params	params;
 
-  /* if (ac < 2 || parse_args(&params, ac, av) == -1) */
-  /*   return (84); */
-  /* if (params.help) */
-  /*   return (disp_guide()); */
-  parse_obj_file("scene/cow.obj");
-  /* params.seed = init_seed(ac, av, ae, (void *)&main); */
-  /* params.screen_size.x = 1920; */
-  /* params.screen_size.y = 1080; */
-  /* parse_from_file(&params, av[1]); */
-  /* if (load_libs(&params) == -1) */
-  /*   return (84); */
-  /* init_buffers(&w, &params); */
-  /* clear_pixels(w.buffer); */
-  /* if (!params.config.bmp) */
-  /*   create_window(&w.window, "Raytracer2", params.screen_size); */
-  /* params.tesla_lvl = 40; */
-  /* init_thread(&w, &params); */
-  /* update_frame(&w, &params.mutex, params.config.bmp); */
-  /* while (!params.config.bmp && sfRenderWindow_isOpen(w.window)) */
-  /*   handle_events(&w, &params, &event); */
-  /* save_buffers(&w, &params); */
-  /* return (0); */
+  if (ac < 2 || parse_args(&params, ac, av) == -1)
+    return (84);
+  if (params.help)
+    return (disp_guide());
+  /* parse_obj_file("scene/cow.obj"); */
+  params.seed = init_seed(ac, av, ae, (void *)&main);
+  params.screen_size.x = 1920;
+  params.screen_size.y = 1080;
+  parse_from_file(&params, av[1]);
+  if (load_libs(&params) == -1)
+    return (84);
+  init_buffers(&w, &params);
+  clear_pixels(w.buffer);
+  if (!params.config.bmp)
+    create_window(&w.window, "Raytracer2", params.screen_size);
+  params.tesla_lvl = 40;
+  w.time_start = get_time();
+  init_thread(&w, &params);
+  update_frame(&w, &params.mutex, params.config.bmp);
+  while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
+    handle_events(&w, &params, &event);
+  save_buffers(&w, &params);
+  return (0);
 }

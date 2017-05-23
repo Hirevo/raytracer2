@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 28 11:08:45 2017 Arthur Knoepflin
-** Last update Wed May 10 17:51:51 2017 Nicolas Polomack
+** Last update Tue May 23 21:51:35 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
@@ -20,7 +20,6 @@ static void	prepare_raytrace_tesla(t_thread *t, int x, int y)
 			       x, y, t->params->config.fov);
   rotation(&t->ray.dir, &t->params->r);
 }
-
 
 static int	get_size_tesla(int lvl)
 {

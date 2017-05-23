@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:31:08 2017 Nicolas Polomack
-** Last update Wed May 10 17:53:01 2017 Nicolas Polomack
+** Last update Tue May 23 21:53:21 2017 Arthur Knoepflin
 */
 
 #include <math.h>
@@ -46,9 +46,9 @@ void	get_normal_plane(t_thread *t, t_obj *obj)
 sfColor		apply_tex_plane(sfVector3f impact,
 				t_obj *obj)
 {
-  sfColor       col;
-  int           u;
-  int           v;
+  sfColor	col;
+  int		u;
+  int		v;
 
   if (obj->buffer == NULL)
     return (obj->col);

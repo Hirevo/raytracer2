@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 00:22:54 2017 Nicolas Polomack
-** Last update Wed May 10 14:11:47 2017 Nicolas Polomack
+** Last update Tue May 23 22:07:50 2017 Arthur Knoepflin
 */
 
 #include <math.h>
@@ -37,10 +37,13 @@ sfVector3f	anti_prepare(sfVector3f vec, t_obj *obj, int i)
 
 float	gather_dist(t_thread *t, int i)
 {
-  return (t->params->intersect[t->params->id[(int)t->params->objs[i].type]]
-	  (prepare(t->ray.orig, &(t->params->objs[i]), 1),
-	   prepare(t->ray.dir, &(t->params->objs[i]), 0),
-	   &(t->params->objs[i])));
+  if ((int)t->params->objs[i].type == -1)
+    get_dist_obj();
+  else
+    return (t->params->intersect[t->params->id[(int)t->params->objs[i].type]]
+	    (prepare(t->ray.orig, &(t->params->objs[i]), 1),
+	     prepare(t->ray.dir, &(t->params->objs[i]), 0),
+	     &(t->params->objs[i])));
 }
 
 void	prepare_raytrace(t_thread *t)

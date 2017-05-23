@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Tue May 23 09:54:10 2017 Arthur Knoepflin
+** Last update Tue May 23 21:50:09 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -25,7 +25,9 @@
 # define TEXT		"<texture"
 # define POINT		"<point"
 # define AMBIENT	"<ambient"
+# define OBJ_F		"<obj"
 # define POS_N		"pos="
+# define FILE_N		"file="
 # define ROT_N		"rot="
 # define P1_N		"p1="
 # define P2_N		"p2="
@@ -109,6 +111,8 @@ typedef struct		s_p_obj
   float			rad;
   float			aper;
   sfColor		col;
+  t_obj_file		*obj_parse;
+  char			*file;
   t_my_framebuffer	*buffer;
   float			height;
   float			reflect;
@@ -156,7 +160,7 @@ typedef struct s_thread
   int		tesla_lvl;
   int		primary;
   t_window	*w;
-  t_params      *params;
+  t_params	*params;
   int		id;
 }               t_thread;
 

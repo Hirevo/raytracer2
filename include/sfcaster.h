@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 13:52:00 2016 Nicolas Polomack
-** Last update Wed Apr  5 19:33:23 2017 Nicolas Polomack
+** Last update Tue May 23 21:54:43 2017 Arthur Knoepflin
 */
 
 #ifndef SFCASTER_H_
@@ -16,10 +16,10 @@
 
 # define PI 3.141592653F
 
-# define GREEN get_sfcolor(39,174,96,255)
-# define DARK_BLUE get_sfcolor(44,62,80,255)
-# define RED get_sfcolor(192,57,43,255)
-# define BLUE get_sfcolor(41,128,185,255)
+# define GREEN get_sfcolor(39, 174, 96, 255)
+# define DARK_BLUE get_sfcolor(44, 62, 80, 255)
+# define RED get_sfcolor(192, 57, 43, 255)
+# define BLUE get_sfcolor(41, 128, 185, 255)
 
 typedef struct	s_my_framebuffer
 {

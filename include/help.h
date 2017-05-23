@@ -5,8 +5,11 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed May 10 17:43:36 2017 Nicolas Polomack
-** Last update Wed May 10 19:43:23 2017 Nicolas Polomack
+** Last update Tue May 23 21:49:42 2017 Arthur Knoepflin
 */
+
+#ifndef HELP_H_
+# define HELP_H_
 
 unsigned char	help_txt[] = {
   0x55, 0x73, 0x61, 0x67, 0x65, 0x3a, 0x20, 0x72, 0x61, 0x79, 0x74, 0x72,
@@ -34,4 +37,7 @@ unsigned char	help_txt[] = {
   0x6f, 0x72, 0x20, 0x61, 0x6e, 0x74, 0x69, 0x2d, 0x61, 0x6c, 0x69, 0x61,
   0x73, 0x69, 0x6e, 0x67, 0x2e, 0x0a
 };
+
 unsigned int	help_txt_len = 282;
+
+#endif /* HELP_H_ */

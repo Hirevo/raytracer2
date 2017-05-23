@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Tue May  9 22:05:59 2017 Arthur Knoepflin
-** Last update Mon May 22 19:56:50 2017 Arthur Knoepflin
+** Last update Tue May 23 22:02:56 2017 Arthur Knoepflin
 */
 
 #include <sys/types.h>
@@ -43,7 +43,6 @@ static char	**realloc_file(char **ret, int *max)
   free(ret);
   *max += SIZE_BUF;
   return (new);
-  
 }
 
 static char	**load_file(char *path)
@@ -82,6 +81,8 @@ t_obj_file	*parse_obj_file(char *path)
   sfVector3f	*pos;
   char		**file;
 
+  if (path == NULL)
+    return (NULL);
   if ((ret = malloc(sizeof(t_obj_file))) == NULL)
     return (NULL);
   if ((file = load_file(path)) == NULL)

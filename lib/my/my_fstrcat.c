@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 ** 
 ** Started on  Tue Feb 21 10:22:56 2017 
-** Last update Tue May 16 10:06:30 2017 Arthur Knoepflin
+** Last update Tue May 23 13:12:46 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -18,13 +18,13 @@ static void	copy_data(char *dest, char *s1, char *s2)
 
   i = 0;
   j = 0;
-  while (s1[i])
+  while (s1 && s1[i])
     {
       dest[i] = s1[i];
       i += 1;
     }
   j = 0;
-  while (s2[j])
+  while (s2 && s2[j])
     {
       dest[i] = s2[j];
       i += 1;
