@@ -5,8 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Tue May 23 10:52:10 2017 Arthur Knoepflin
-## Last update Wed May 10 17:40:43 2017 Nicolas Polomack
+## Last update Tue May 23 20:01:26 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -38,6 +37,7 @@ SRC	=	window.c				\
 		obj/parse_obj.c				\
 		obj/parse_poly.c			\
 		obj/parse_pos_vert.c			\
+		obj/render.c				\
 		parse/proc.c				\
 		parse/args.c				\
 		parse/add_obj.c				\

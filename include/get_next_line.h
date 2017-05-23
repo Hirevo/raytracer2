@@ -5,11 +5,11 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Jan  2 12:57:44 2017 Nicolas Polomack
-** Last update Thu May 18 15:13:50 2017 Arthur Knoepflin
+** Last update Mon May 22 20:02:23 2017 Nicolas Polomack
 */
 
 #ifndef READ_SIZE
-# define READ_SIZE (2048)
+# define READ_SIZE (4096)
 #endif /* !READ_SIZE */
 
 #ifndef GET_NEXT_LINE_H_

@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Tue May 23 09:22:15 2017 Arthur Knoepflin
-** Last update Tue May 23 10:23:16 2017 Arthur Knoepflin
+** Last update Tue May 23 20:15:06 2017 Nicolas Polomack
 */
 
 #include <sys/time.h>
@@ -27,7 +27,7 @@ static char	*time_to_char(int nb)
 {
   char		*ret;
 
-  if (nb >= 100)
+  if (nb < 0 || nb >= 100)
     return (NULL);
   if ((ret = malloc(sizeof(char) * 3)) == NULL)
     return (NULL);

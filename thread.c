@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Tue May 23 21:51:43 2017 Arthur Knoepflin
+** Last update Tue May 23 20:21:45 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -18,8 +18,10 @@ static void	*render_thread(void *arg)
   t_thread	*t;
 
   t = (t_thread *)arg;
-  set_focal_dist(t);
-  if (t->params->config.stereo)
+  //set_focal_dist(t);
+  if (1)
+    render_obj(t);
+  else if (t->params->config.stereo)
     render_stereo_frame(t);
   else if (t->params->config.ssaa > 1)
     render_ssaa(t);
