@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Mon May 22 19:44:44 2017 Arthur Knoepflin
+** Last update Tue May 23 09:54:10 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -214,6 +214,7 @@ typedef struct		s_window
   t_my_framebuffer	*save;
   t_my_framebuffer	*buffer;
   t_my_framebuffer      *buffer2;
+  unsigned long long	time_start;
 }			t_window;
 
 /*
@@ -552,6 +553,13 @@ int	parse_args(t_params *, int, char **);
 */
 
 void	set_camera(t_params *, char **);
+
+/*
+** time.c
+*/
+
+unsigned long long	get_time();
+char			*get_time_calc();
 
 /*
 ** alloc.c

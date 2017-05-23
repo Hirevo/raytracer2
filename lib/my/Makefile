@@ -5,7 +5,7 @@
 ## Login   <nicolas@epitech.net>
 ##
 ## Started on  Tue Nov  1 12:04:24 2016 Nicolas POLOMACK
-## Last update Tue Apr 18 21:55:48 2017 Arthur Knoepflin
+## Last update Tue May 23 10:11:08 2017 Arthur Knoepflin
 ##
 
 SRC	=	my_putstr.c		\
@@ -45,6 +45,7 @@ SRC	=	my_putstr.c		\
 		my_printf.c		\
 		parsing.c		\
 		convert_base.c		\
+		my_fstrcat.c		\
 		my_int_to_char.c
 
 OBJ	=	$(SRC:.c=.o)

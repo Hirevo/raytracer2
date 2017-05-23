@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Thu May 18 00:00:12 2017 Arthur Knoepflin
+## Last update Tue May 23 10:52:10 2017 Arthur Knoepflin
 ## Last update Wed May 10 17:40:43 2017 Nicolas Polomack
 ##
 
@@ -72,6 +72,7 @@ SRC	=	window.c				\
                 calc/calc_dir_vector.c			\
                 texturing/sphere_texture.c		\
 		texturing/plane_texture.c		\
+		time.c					\
 		misc/disp_guide.c			\
                 bmp/load_bmp.c                          \
                 bmp/merge.c                             \
