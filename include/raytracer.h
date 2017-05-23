@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Mon May 22 20:02:41 2017 Nicolas Polomack
+** Last update Mon May 22 20:58:52 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -53,16 +53,6 @@
 
 typedef struct s_window t_window;
 typedef struct s_params t_params;
-
-typedef struct		s_poly_obj
-{
-  sfVector3f		pos1;
-  sfVector3f		pos2;
-  sfVector3f		pos3;
-  sfVector3f		edge1;
-  sfVector3f		edge2;
-  struct s_poly_obj	*next;  
-}			t_poly_obj;
 
 typedef struct	s_obj_file
 {
@@ -148,7 +138,6 @@ typedef struct		s_obj
 
 typedef struct s_thread
 {
-  t_poly_obj	*tri;
   sfVector2i	screen_pos;
   sfVector3f	normal;
   sfVector3f	dir;
@@ -163,6 +152,7 @@ typedef struct s_thread
   float		refr;
   t_ray		ray;
   t_obj		*from;
+  int		idx;
   int		depth;
   int		tesla_lvl;
   int		primary;
