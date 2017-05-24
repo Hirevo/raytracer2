@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update Wed May 24 20:29:45 2017 Arthur Knoepflin
+** Last update Thu May 25 00:46:24 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -75,7 +75,7 @@ static int	treat_resp_wait_c(t_socket sock)
       return (1);
     }
   else
-    treat_resp(sock, talk);
+    return (treat_resp(sock, talk));
   return (0);
 }
 
@@ -113,5 +113,10 @@ int		client_cluster(t_params *p)
     return (84);
   if (wait_connect_c(sock))
     return (84);
+  if (recv_parse(sock, p))
+    {
+      close(sock);
+      return (84);
+    }
   return (0);
 }

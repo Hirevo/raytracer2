@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Wed May 24 14:50:36 2017 Arthur Knoepflin
+** Last update Thu May 25 00:22:48 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -206,7 +206,6 @@ typedef struct		s_params
   int			nb_objs;
   int			tesla_lvl;
   t_obj			*objs;
-  t_obj_file		*obj_data;
 }			t_params;
 
 typedef struct		s_window

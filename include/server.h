@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update Wed May 24 20:37:15 2017 Arthur Knoepflin
+** Last update Thu May 25 00:52:11 2017 Arthur Knoepflin
 */
 
 #ifndef SERVER_H_
@@ -50,6 +50,12 @@ int	read_socket(t_socket, char **);
 void	write_socket(t_socket, char *);
 
 /*
+** get_ip.c
+*/
+
+char	*get_ip();
+
+/*
 ** manag_client.c
 */
 
@@ -73,6 +79,18 @@ int	treat_resp(t_socket, char *);
 */
 
 int	treat_resp_cli_w(t_client *, int, char *, int);
+
+/*
+** recv_parse.c
+*/
+
+int	recv_parse(t_socket, t_params *);
+
+/*
+** send_parse.c
+*/
+
+int	send_parse(t_client *, t_params *);
 
 /*
 ** wait_connection.c
