@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Wed May 24 11:53:01 2017 Nicolas Polomack
+** Last update Wed May 24 21:41:47 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -43,8 +43,9 @@
 # define NAME_N		"name="
 # define COLOR_N	"color="
 # define TEXT_N		"src="
-# define ARGS_STR	"Suh"
+# define ARGS_STR	"Suhc"
 # define STEREO		"--stereo"
+# define CLUSTERING	"--cluster="
 # define TESLA		"--tesla="
 # define DEPTH		"--depth="
 # define SSAA		"--ssaa="
@@ -175,6 +176,8 @@ typedef struct	s_config
   int		bmp;
   int		live;
   int		fov;
+  int		clu_serv;
+  char		*clu_cli;
   float		ambient;
   int		reflect_depth;
   int		depth_rays;

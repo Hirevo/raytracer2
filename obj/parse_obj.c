@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Tue May  9 22:05:59 2017 Arthur Knoepflin
-** Last update Tue May 23 23:41:47 2017 Arthur Knoepflin
+** Last update Wed May 24 11:31:12 2017 Arthur Knoepflin
 */
 
 #include <sys/types.h>
@@ -83,9 +83,10 @@ t_obj_file	*parse_obj_file(char *path)
 
   if (path == NULL)
     return (NULL);
-  if ((ret = malloc(sizeof(t_obj_file))) == NULL)
+  my_printf("Loading: %s...", path);
+  if ((ret = malloc(sizeof(t_obj_file))) == NULL && my_printf(" Failed\n"))
     return (NULL);
-  if ((file = load_file(path)) == NULL)
+  if ((file = load_file(path)) == NULL && my_printf(" Failed\n"))
     return (NULL);
   ret->nb_vert = nb_vert(file);
   ret->nb_poly = get_nb_poly(file);
@@ -96,5 +97,6 @@ t_obj_file	*parse_obj_file(char *path)
       (ret->p3 = malloc(sizeof(sfVector3f) * ret->nb_poly)) == NULL)
     return (NULL);
   parse_poly(file, pos, ret);
+  my_putstr(" Ok!\n");
   return (ret);
 }

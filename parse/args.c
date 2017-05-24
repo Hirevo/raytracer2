@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Wed May 24 04:28:20 2017 Nicolas Polomack
+** Last update Wed May 24 21:34:27 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -24,11 +24,12 @@ static int	get_index(char *flags, char arg)
   return (-1);
 }
 
-static void	init_links(t_params *params, int *flags[3])
+static void	init_links(t_params *params, int *flags[4])
 {
   flags[0] = &params->config.stereo;
   flags[1] = &params->config.live;
   flags[2] = &params->help;
+  flags[3] = &params->config.clu_serv;
   params->help = 0;
   params->config.live = 0;
   params->config.stereo = 0;
@@ -38,6 +39,7 @@ static void	init_links(t_params *params, int *flags[3])
   params->config.shadow_rays = 1;
   params->config.depth_rays = 1;
   params->config.fov = 80;
+  params->config.clu_cli = NULL;
   params->config.scene_file = NULL;
   params->screen_size.x = 1280;
   params->screen_size.y = 720;
@@ -54,7 +56,8 @@ static void	get_res(t_params *params, char *str)
     c += (str[i] == ',');
   if (c != 1)
     {
-      my_printf("Incorrect resolution, it has been set to default 1280x720.\n");
+      my_printf("Incorrect resolution, it has been\
+ set to default 1280x720.\n");
       return ;
     }
   i = 0;
@@ -79,6 +82,8 @@ static int	get_arg_value(t_params *params, int ac, char **av, int i)
     params->config.depth_rays = sqrtf(my_getnbr(av[i] + my_strlen(DOF)));
   else if (my_strncmp(av[i], FOV, my_strlen(FOV)) == 0)
     params->config.fov = my_getnbr(av[i] + my_strlen(FOV));
+  else if (my_strncmp(av[i], CLUSTERING, my_strlen(CLUSTERING)) == 0)
+    params->config.clu_cli = av[i] + my_strlen(CLUSTERING);
   else if (my_strncmp(av[i], TESLA, my_strlen(TESLA)) == 0)
     {
       params->config.tesla = 1;
@@ -94,7 +99,7 @@ static int	get_arg_value(t_params *params, int ac, char **av, int i)
   return (0);
 }
 
-static int	get_short_arg(char **av, int i, int *flags[3])
+static int	get_short_arg(char **av, int i, int *flags[4])
 {
   int		match;
   int		j;
@@ -112,7 +117,7 @@ static int	get_short_arg(char **av, int i, int *flags[3])
 int		parse_args(t_params *params, int ac, char **av)
 {
   int		i;
-  int		*flags[3];
+  int		*flags[4];
 
   init_links(params, flags);
   i = 0;

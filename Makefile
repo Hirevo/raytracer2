@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Wed May 24 04:34:36 2017 Nicolas Polomack
+## Last update Wed May 24 21:52:01 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -14,7 +14,20 @@ MAKE2	=	make --no-print-directory -sC lib/my
 
 MAKE1	=	make --no-print-directory -sC lib/mycsfml
 
-SRC	=	window.c				\
+SRC	=	calc/colors.c				\
+		calc/focal.c				\
+		calc/rotation.c				\
+		calc/normals.c				\
+		calc/calc_dir_vector.c			\
+		cluster/client.c			\
+		cluster/check_cli_ready.c		\
+		cluster/com_sock.c			\
+		cluster/manag_client.c			\
+		cluster/treat_resp_wait.c		\
+		cluster/treat_resp_cli.c		\
+		cluster/server.c			\
+		cluster/wait_connection.c		\
+		window.c				\
 		raytrace.c				\
 		thread.c				\
 		render.c				\
@@ -65,11 +78,6 @@ SRC	=	window.c				\
 		parse/my_epurstr.c			\
 		parse/set_config.c			\
 		parse/get_file.c			\
-                calc/colors.c				\
-		calc/focal.c				\
-                calc/rotation.c				\
-                calc/normals.c				\
-                calc/calc_dir_vector.c			\
                 texturing/sphere_texture.c		\
 		texturing/plane_texture.c		\
 		time.c					\

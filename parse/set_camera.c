@@ -5,11 +5,27 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Thu Apr 20 22:57:42 2017 Arthur Knoepflin
-** Last update Fri Apr 21 00:06:29 2017 Arthur Knoepflin
+** Last update Wed May 24 10:17:13 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
 #include "my.h"
+
+static int	chk_born(sfVector2i *born, int mode)
+{
+  if (mode == 0)
+    {
+      born->x = -1;
+      born->y = -1;
+      return (0);
+    }
+  else if (mode == 1)
+    {
+      if (born->x == -1 || born->y == -1)
+	return (1);
+      return (0);
+    }
+}
 
 static char	*get_cam_cfg(char **file)
 {
@@ -18,7 +34,7 @@ static char	*get_cam_cfg(char **file)
   sfVector2i	born;
 
   i = 0;
-  my_mset(&born, 0, sizeof(sfVector2i));
+  chk_born(&born, 0);
   while (file[i])
     {
       j = 0;
@@ -33,6 +49,8 @@ static char	*get_cam_cfg(char **file)
 	}
       i += 1;
     }
+  if (chk_born(&born, 1))
+    return (NULL);
   return (extract_str_from_born(file, born));
 }
 
