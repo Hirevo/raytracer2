@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 10:31:37 2017 Arthur Knoepflin
-** Last update Wed May 24 19:57:03 2017 Arthur Knoepflin
+** Last update Wed May 24 21:05:26 2017 Arthur Knoepflin
 */
 
 #include <sys/select.h>
@@ -59,6 +59,7 @@ static int	new_client(t_socket serv, t_client *clients, int *actual)
   len = sizeof(csin);
   if ((clients[*actual].sock = accept(serv, &csin, &len)) == -1)
     return (0);
+  clients[*actual].ready = 0;
   i = 0;
   while (i < *actual)
     {
@@ -68,8 +69,6 @@ static int	new_client(t_socket serv, t_client *clients, int *actual)
     }
   *actual += 1;
   my_printf("\rWait for client [%d/%d]", *actual, CLIENTS);
-  /* if (*actual >= CLIENTS) */
-  /*   return (1); */
   return (0);
 }
 
@@ -102,9 +101,11 @@ int		wait_connection_s(t_client *clients, t_socket sock)
   fd_set	rdfs;
   int		actual;
   int		stop;
+  int		start;
 
   stop = 0;
   actual = 0;
+  start = 0;
   while (!stop)
     {
       set_select(&rdfs, clients, &actual, sock);
@@ -114,8 +115,11 @@ int		wait_connection_s(t_client *clients, t_socket sock)
 	stop = new_client(sock, clients, &actual);
       else
 	speak_client_w(clients, &actual, &rdfs);
-      /* if (actual == CLIENTS) */
-      /* 	broadcast_start(clients); */
+      if (actual == CLIENTS && check_cli_ready(clients, actual))
+	{
+	  broadcast_start(clients);
+	  stop = 1;
+	}
     }
   close(sock);
   if (stop == 2)

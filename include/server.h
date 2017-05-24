@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update Wed May 24 18:38:24 2017 Arthur Knoepflin
+** Last update Wed May 24 20:37:15 2017 Arthur Knoepflin
 */
 
 #ifndef SERVER_H_
@@ -25,7 +25,14 @@ typedef struct in_addr		t_in_addr;
 typedef struct	s_client
 {
   t_socket	sock;
+  int		ready;
 }		t_client;
+
+/*
+** check_cli_ready.c
+*/
+
+int	check_cli_ready(t_client *, int);
 
 /*
 ** client.c

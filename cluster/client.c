@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update Wed May 24 19:51:10 2017 Arthur Knoepflin
+** Last update Wed May 24 20:29:45 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -21,27 +21,21 @@
 
 int		print_state_wait(t_socket sock)
 {
-  struct timeval	tv;
   fd_set	rdfs;
   char		*actual;
   char		*max;
 
-  FD_ZERO(&rdfs);
-  FD_SET(sock, &rdfs);
-  tv.tv_sec = 0;
-  tv.tv_usec = 500;
-  select(sock, &rdfs, NULL, NULL, &tv);
-  if (FD_ISSET(sock, &rdfs))
-    {
-      printf("CLEAR BUF BEFORE\n");
-      read_socket(sock, &actual);
-      free(actual);
-    }
   write_socket(sock, "nb_cli_act");
   read_socket(sock, &actual);
   write_socket(sock, "nb_cli_max");
   read_socket(sock, &max);
   my_printf("\rWait for client [%s/%s]", actual, max);
+  if (!my_strcmp(actual, max))
+    {
+      free(max);
+      write_socket(sock, "ready");
+      read_socket(sock, &max);
+    }
   free(actual);
   free(max);
 }

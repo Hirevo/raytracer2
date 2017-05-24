@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 18:31:53 2017 Arthur Knoepflin
-** Last update Wed May 24 19:52:00 2017 Arthur Knoepflin
+** Last update Wed May 24 21:01:59 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -19,7 +19,9 @@ int	treat_resp(t_socket sock, char *input)
     print_state_wait(sock);
   else if (!my_strcmp(input, "rm_cli"))
     print_state_wait(sock);
+  else if (!my_strcmp(input, "start"))
+    my_printf("\nStart\n");
   else
-    printf("The client said : %s\n", input);
+    my_printf("The server said : %s\n", input);
   free(input);
 }
