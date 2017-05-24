@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 00:22:54 2017 Nicolas Polomack
-** Last update Tue May 23 23:51:47 2017 Arthur Knoepflin
+** Last update Wed May 24 03:25:16 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -40,7 +40,9 @@ float	gather_dist(t_thread *t, int i)
   if (t->params->objs[i].type == -1)
     {
       if (t->params->objs[i].obj_parse != NULL)
-	return (get_dist_obj(t, t->params->objs[i].obj_parse));
+	return (get_dist_obj(prepare(t->ray.orig, &(t->params->objs[i]), 1),
+			     prepare(t->ray.dir, &(t->params->objs[i]), 0),
+			     t->params->objs[i].obj_parse, &t->idx));
       else
 	return (-1);
     }
@@ -84,6 +86,8 @@ sfColor		raytrace(t_thread *t)
 	  obj = &(t->params->objs[i]);
 	}
     }
+  //if (obj->type == 0)
+  //printf("dist: %f\n", dist);
   if (dist == -1)
     return (sfBlack);
   t->recur_start = t->ray.orig;

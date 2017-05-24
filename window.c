@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed May 24 16:43:02 2017 Arthur Knoepflin
+** Last update Wed May 24 21:51:12 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -110,10 +110,10 @@ int		main(int ac, char **av, char **ae)
     return (server_cluster(&w, &params));
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
-  /* init_thread(&w, &params); */
-  /* update_frame(&w, &params.mutex, params.config.bmp); */
-  /* while (!params.config.bmp && sfRenderWindow_isOpen(w.window)) */
-  /*   handle_events(&w, &params, &event); */
-  /* save_buffers(&w, &params); */
+  init_thread(&w, &params);
+  update_frame(&w, &params.mutex, params.config.bmp);
+  while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
+    handle_events(&w, &params, &event);
+  save_buffers(&w, &params);
   return (0);
 }

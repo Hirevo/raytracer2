@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ## 
 ## Started on  Fri Mar 31 19:02:25 2017 Nicolas Polomack
-## Last update Wed May 24 09:36:17 2017 Arthur Knoepflin
+## Last update Wed May 24 21:51:20 2017 Nicolas Polomack
 ##
 
 SRC	=	intersect_sphere.c		\
@@ -27,7 +27,7 @@ OBJ	=	${SRC:.c=.o}
 
 NAME	=	${SRC:.c=.so}
 
-CFLAGS	=	-fPIC -I../include -Ofast
+CFLAGS	=	-fPIC -I../include -O2
 
 LDFLAGS	+=	-rdynamic
 

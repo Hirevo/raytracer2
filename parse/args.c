@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Wed May 24 14:56:37 2017 Arthur Knoepflin
+** Last update Wed May 24 21:34:27 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -111,6 +111,7 @@ static int	get_short_arg(char **av, int i, int *flags[4])
 	      my_printf("-%c: Invalid argument.\n", av[i][j]));
     else
       *(flags[match]) = 1;
+  return (0);
 }
 
 int		parse_args(t_params *params, int ac, char **av)

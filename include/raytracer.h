@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu May 25 00:22:48 2017 Arthur Knoepflin
+** Last update Wed May 24 21:41:47 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -366,7 +366,7 @@ void	anti_rotation(sfVector3f *, sfVector3f *);
 /*
 ** obj/render.c
 */
-float		get_dist_obj(t_thread *, t_obj_file *);
+float		get_dist_obj(sfVector3f, sfVector3f, t_obj_file *, int *);
 sfVector3f	get_normal_obj(t_thread *, t_obj *);
 
 /*
@@ -581,6 +581,7 @@ char			*get_time_calc();
 ** alloc.c
 */
 void	init_buffers(t_window *, t_params *);
+void	prepare_objs(t_params *);
 void	save_buffers(t_window *, t_params *);
 
 /*

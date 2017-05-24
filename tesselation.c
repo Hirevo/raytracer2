@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 28 11:08:45 2017 Arthur Knoepflin
-** Last update Tue May 23 21:51:35 2017 Arthur Knoepflin
+** Last update Wed May 24 03:55:24 2017 Nicolas Polomack
 */
 
 #include "raytracer.h"
@@ -59,12 +59,12 @@ static void	raytrace_tesla(t_thread *t, int size_tesla, sfVector2i pos)
 {
   if (t->params->config.depth_rays > 1)
     put_px_tesla(t, pos, size_tesla,
-		 dof(t, t->offs.x + (pos.x + size_tesla / 2),
-		     t->offs.y + (pos.y + size_tesla / 2)));
+		 dof(t, t->offs.x + (pos.x + (size_tesla >> 1)),
+		     t->offs.y + (pos.y + (size_tesla >> 1))));
   else
     {
-      prepare_raytrace_tesla(t, t->offs.x + (pos.x + size_tesla / 2),
-			     t->offs.y + (pos.y + size_tesla / 2));
+      prepare_raytrace_tesla(t, t->offs.x + (pos.x + (size_tesla >> 1)),
+			     t->offs.y + (pos.y + (size_tesla >> 1)));
       put_px_tesla(t, pos, size_tesla, raytrace(t));
     }
 }

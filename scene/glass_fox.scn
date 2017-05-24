@@ -2,7 +2,7 @@
 	<0
 		pos="700,10,0"
 		rot="20,0,-120"
-		rad=500
+		rad=300
 		material="earth"
 	/>
 	<1
@@ -14,13 +14,13 @@
                 material="blanc"
         />
 	<-1
-		pos="-1100,0,0"
-		rot="-90,0,0"
-		spec_coef=100
+		pos="-600,0,90"
+		rot="-90,-20,20"
+		spec_coef=1
 		rad=1
 		refract=90
 		refr_index=80
-		file="scene/dragon.obj"
+		file="fox.obj"
 		material="rouge"
 	/>
 </obj>
@@ -60,6 +60,6 @@
 	/>
 </light>
 <camera
-	pos="-1000,0,0"
+	pos="-500,0,50"
 	rot="0,0,0"
 />
