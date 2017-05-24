@@ -5,7 +5,7 @@
 ## Login   <nicolas@epitech.net>
 ##
 ## Started on  Tue Nov  1 12:04:24 2016 Nicolas POLOMACK
-## Last update Tue May 23 10:11:08 2017 Arthur Knoepflin
+## Last update Wed May 24 04:35:02 2017 Nicolas Polomack
 ##
 
 SRC	=	my_putstr.c		\
@@ -52,7 +52,7 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	libmy.a
 
-CFLAGS	=	-I../../include -Ofast -pipe
+CFLAGS	=	-I../../include -O2 -pipe
 
 all:	$(NAME)
 

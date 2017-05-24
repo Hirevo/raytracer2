@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:39:33 2017 Nicolas Polomack
-** Last update Wed May 10 16:17:20 2017 Nicolas Polomack
+** Last update Wed May 24 13:22:52 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -38,6 +38,33 @@ void	init_buffers(t_window *w, t_params *params)
 				      params->screen_size.x, params->screen_size.y);
     }
   w->sizes = params->screen_size;
+}
+
+void	prepare_objs(t_params *params)
+{
+  int	i;
+  int	j;
+  float	scale;
+
+  i = -1;
+  while (++i < params->nb_objs)
+    if (params->objs[i].type == -1 && params->objs[i].obj_parse)
+      {
+	scale = params->objs[i].spec_coef;
+	j = -1;
+	while (++j < params->objs[i].obj_parse->nb_poly)
+	  {
+	    params->objs[i].obj_parse->p1[j].x *= scale;
+            params->objs[i].obj_parse->p1[j].y *= scale;
+            params->objs[i].obj_parse->p1[j].z *= scale;
+            params->objs[i].obj_parse->p2[j].x *= scale;
+            params->objs[i].obj_parse->p2[j].y *= scale;
+            params->objs[i].obj_parse->p2[j].z *= scale;
+            params->objs[i].obj_parse->p3[j].x *= scale;
+            params->objs[i].obj_parse->p3[j].y *= scale;
+            params->objs[i].obj_parse->p3[j].z *= scale;
+	  }
+      }
 }
 
 void	save_buffers(t_window *w, t_params *params)

@@ -5,7 +5,7 @@
 ## Login   <nicolas@epitech.eu>
 ##
 ## Started on  Tue Nov  1 12:04:24 2016 Nicolas POLOMACK
-## Last update Thu Apr  6 16:12:22 2017 Nicolas Polomack
+## Last update Wed May 24 04:34:50 2017 Nicolas Polomack
 ##
 
 SRC	=	sfcaster.c	\
@@ -27,7 +27,7 @@ NAME2   =	libmycsfml-sa.a
 
 NAME3	=	libmycsfml-so.so
 
-CFLAGS	=	-I../../include -W -Wall -Wextra -pedantic -Ofast -pipe -fPIC
+CFLAGS	=	-I../../include -W -Wall -Wextra -pedantic -O2 -pipe -fPIC
 
 all:	$(NAME)
 

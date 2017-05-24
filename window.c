@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Tue May 23 23:35:41 2017 Arthur Knoepflin
+** Last update Wed May 24 14:47:42 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -91,22 +91,25 @@ int		main(int ac, char **av, char **ae)
   sfEvent	event;
   t_params	params;
 
-  if (ac < 2 || parse_args(&params, ac, av) == -1)
+  if ((ac < 2) || (parse_args(&params, ac, av) == -1))
     return (84);
   if (params.help)
     return (disp_guide());
   params.seed = init_seed(ac, av, ae, (void *)&main);
   parse_from_file(&params, params.config.scene_file);
+  printf("lel\n");
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);
-  clear_pixels(w.buffer);;
+  prepare_objs(&params);
+  clear_pixels(w.buffer);
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
-  params.tesla_lvl = 40;
+  //params.tesla_lvl = 40;
   w.time_start = get_time();
   init_thread(&w, &params);
   update_frame(&w, &params.mutex, params.config.bmp);
+  system("notify-send -i /usr/share/icons/Numix-Square/48/apps/terminal.svg -a Raytracer2 Raytracer2 \"Finished scene rendering\"");
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
     handle_events(&w, &params, &event);
   save_buffers(&w, &params);
