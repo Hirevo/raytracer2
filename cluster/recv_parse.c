@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 22:30:45 2017 Arthur Knoepflin
-** Last update Thu May 25 00:51:05 2017 Arthur Knoepflin
+** Last update Thu May 25 00:54:30 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -59,6 +59,7 @@ static int	recv_obj(t_socket sock, t_params *p)
 	      recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p3))
 	    return (1);
 	}
+      p->objs[i].file = NULL;
       if (p->objs[i].buffer)
 	{
 	  if (send_buffer(sock, p, i))
