@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Thu May 25 22:02:22 2017 Nicolas Polomack
+** Last update Thu May 25 22:42:20 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -66,12 +66,14 @@ static void	set_limits(t_thread *t, t_window *w,
   size.y = params->config.end.y - params->config.offs.y;
   if (!(i % 2))
     {
-      t->offs.x = (size.x / (params->t_count / 2)) * (i / 2);
+      t->offs.x = params->config.offs.x +
+	(size.x / (params->t_count / 2)) * (i / 2);
       t->offs.y = 0;
     }
   else
     {
-      t->offs.x = (size.x / (params->t_count / 2)) * ((i - 1) / 2);
+      t->offs.x = params->config.offs.x +
+	(size.x / (params->t_count / 2)) * ((i - 1) / 2);
       t->offs.y = (size.y / 2);
     }
   t->end.x = (t->offs.x + (size.x / (params->t_count / 2)));
