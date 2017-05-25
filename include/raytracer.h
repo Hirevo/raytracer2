@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu May 25 21:18:25 2017 Nicolas Polomack
+** Last update Thu May 25 21:29:17 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
@@ -36,6 +36,7 @@
 # define HEIGHT_N	"height="
 # define REFLECT_N	"reflect="
 # define REFRACT_N	"refract="
+# define SHINE_N	"shine="
 # define REFR_IDX_N	"refr_index="
 # define SPEC_COEF_N	"spec_coef="
 # define MAT_N		"material="
@@ -110,6 +111,7 @@ typedef struct		s_p_obj
   sfVector2f		p1;
   sfVector2f		p2;
   float			rad;
+  int			shine;
   float			aper;
   sfColor		col;
   t_obj_file		*obj_parse;
@@ -131,6 +133,7 @@ typedef struct		s_obj
   sfVector3f		r;
   sfVector2f		p1;
   sfVector2f		p2;
+  int			shine;
   float			rad;
   float			aper;
   sfColor		col;
