@@ -73,8 +73,8 @@ static int	send_zones(t_client *clients, t_params *p)
   while (i < CLIENTS)
     {
       if ((send_protocol(clients[i].sock, (void *)&clients[i].zone,
-			 sizeof(clients[i].zone), MSG_DONTWAIT)) == -1)
-	return (-1);
+  			 sizeof(clients[i].zone), MSG_DONTWAIT)) == -1)
+  	return (-1);
       i++;
     }
 }
@@ -93,7 +93,7 @@ int		server_cluster(t_window *w, t_params *p)
 	    "\033[31;1munknown\033[0m");
   my_printf("Wait for client \033[31;1m[0/%d]\033[0m", CLIENTS);
   free(ip);
-  if ((nb_cli_conn = wait_connection_s(clients, serv)))
+  if ((nb_cli_conn = wait_connection_s(clients, serv)) != -1)
     {
       close_all(clients, nb_cli_conn);
       return (84);

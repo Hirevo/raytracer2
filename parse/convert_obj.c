@@ -5,11 +5,12 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 21 13:30:38 2017 Arthur Knoepflin
-** Last update Tue May 23 23:40:42 2017 Arthur Knoepflin
+** Last update Thu May 25 14:07:14 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
 #include "raytracer.h"
+#include "my.h"
 
 static int	nb_obj(t_p_obj *list)
 {
@@ -58,5 +59,6 @@ int	convert_obj(t_params *par, t_p_obj *list)
       i += 1;
       list = list->next;
     }
+  my_mset(par->objs, 0, sizeof(t_obj));
   return (0);
 }

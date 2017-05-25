@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 10:31:37 2017 Arthur Knoepflin
-** Last update Thu May 25 11:29:04 2017 Arthur Knoepflin
+** Last update Thu May 25 13:40:23 2017 Arthur Knoepflin
 */
 
 #include <sys/select.h>
@@ -129,6 +129,6 @@ int		wait_connection_s(t_client *clients, t_socket sock)
 	}
     }
   if (stop == 2)
-    purge_standard(actual);
-  return (0);
+    return (purge_standard(actual));
+  return (-1);
 }

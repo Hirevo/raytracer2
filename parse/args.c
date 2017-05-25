@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Wed May 24 21:34:27 2017 Nicolas Polomack
+** Last update Thu May 25 14:04:31 2017 Arthur Knoepflin
 */
 
 #include <math.h>
@@ -26,6 +26,7 @@ static int	get_index(char *flags, char arg)
 
 static void	init_links(t_params *params, int *flags[4])
 {
+  my_mset(params, 0, sizeof(t_params));
   flags[0] = &params->config.stereo;
   flags[1] = &params->config.live;
   flags[2] = &params->help;

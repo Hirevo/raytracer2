@@ -128,9 +128,9 @@ int		client_cluster(t_params *p)
   if ((recv_protocol(sock, (void **)&zone, &n, 0)) == -1)
     return (-1);
   my_printf("You recieved :\nstart: %d; %d\nend: %d; %d\n", zone->s_x,
-	    zone->s_y, zone->e_x, zone->e_y);
+  	    zone->s_y, zone->e_x, zone->e_y);
   while (get_next_line(0));
-  // initialize_calculation(p, &w);
+  /* initialize_calculation(p, &w); */
   close(sock);
   return (0);
 }
