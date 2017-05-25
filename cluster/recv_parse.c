@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 22:30:45 2017 Arthur Knoepflin
-** Last update Thu May 25 00:54:30 2017 Arthur Knoepflin
+** Last update Thu May 25 11:26:27 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -22,7 +22,7 @@ static int	recv_obj_2(t_socket sock,
   	      p->objs[i].obj_parse->nb_poly)) == NULL)
     return (1);
   recv(sock, *ptr, sizeof(sfVector3f) *
-       p->objs[i].obj_parse->nb_poly, 0);  
+       p->objs[i].obj_parse->nb_poly, 0);
 }
 
 static int	send_buffer(t_socket sock,

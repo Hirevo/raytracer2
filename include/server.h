@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update Thu May 25 00:52:11 2017 Arthur Knoepflin
+** Last update Thu May 25 11:04:29 2017 Arthur Knoepflin
 */
 
 #ifndef SERVER_H_
@@ -15,7 +15,7 @@
 
 # define PORT		33000
 # define SIZE_SOCK	4096
-# define CLIENTS	4
+# define CLIENTS	2
 
 typedef int			t_socket;
 typedef struct sockaddr_in	t_sockaddr_in;

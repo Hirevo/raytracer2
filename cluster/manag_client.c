@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 13:33:41 2017 Arthur Knoepflin
-** Last update Wed May 24 17:51:29 2017 Arthur Knoepflin
+** Last update Thu May 25 11:15:39 2017 Arthur Knoepflin
 */
 
 #include <string.h>
@@ -22,6 +22,7 @@ void	remove_client(t_client *clients,
   int	i;
 
   i = 0;
+  close(clients[to_rem].sock);
   memmove(clients + to_rem, clients + to_rem + 1,
 	  (*actual - to_rem - 1) * sizeof(t_client));
   (*actual) -= 1;

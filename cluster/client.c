@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update Thu May 25 00:46:24 2017 Arthur Knoepflin
+** Last update Thu May 25 11:25:51 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -29,7 +29,10 @@ int		print_state_wait(t_socket sock)
   read_socket(sock, &actual);
   write_socket(sock, "nb_cli_max");
   read_socket(sock, &max);
-  my_printf("\rWait for client [%s/%s]", actual, max);
+  if (actual && max)
+    my_printf("\rWait for client %s[%s/%s]\033[0m",
+	      (my_strcmp(actual, max)) ? "\033[31;1m" : "\033[32;1m",
+	      actual, max);
   if (!my_strcmp(actual, max))
     {
       free(max);
@@ -71,7 +74,7 @@ static int	treat_resp_wait_c(t_socket sock)
 
   if (read_socket(sock, &talk) == 0)
     {
-      my_putstr("Disconnected, abort clustering\n");
+      my_putstr("\nDisconnected, abort clustering\n");
       return (1);
     }
   else
@@ -118,5 +121,6 @@ int		client_cluster(t_params *p)
       close(sock);
       return (84);
     }
+  close(sock);
   return (0);
 }
