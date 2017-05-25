@@ -49,7 +49,7 @@ int	check_cli_ready(t_client *, int);
 
 int	print_state_wait(t_socket);
 void	broadcast_start(t_client *);
-int	client_cluster(t_params *);
+int	client_cluster(t_window *, t_params *);
 
 /*
 ** com_sock.c

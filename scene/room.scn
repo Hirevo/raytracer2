@@ -1,5 +1,13 @@
 <obj>
 	<0
+		pos="-150, -60, 80"
+		rad=30
+		spec_coef=50
+		reflect=0
+		refract=90
+		refr_index=80
+	/>
+	<0
 		pos="-75, -20, 75"
 		rot="0, 0, 0"
 		rad=50
@@ -8,14 +16,6 @@
 		reflect=50
 		spec_coef=50
 		material="earth"
-	/>
-	<0
-		pos="-150, -60, 80"
-		rad=30
-		spec_coef=50
-		reflect=0
-		refract=90
-		refr_index=80
 	/>
 	<1
 		pos="0,0,-25"

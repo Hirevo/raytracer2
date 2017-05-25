@@ -109,12 +109,11 @@ static int	wait_connect_c(t_socket sock)
   return (0);
 }
 
-int		client_cluster(t_params *p)
+int		client_cluster(t_window *w, t_params *p)
 {
   t_socket	sock;
   long		n;
   t_zone	zone;
-  t_window	w;
 
   if (connect_cli(p->config.clu_cli, &sock))
     return (84);

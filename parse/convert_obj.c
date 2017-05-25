@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 21 13:30:38 2017 Arthur Knoepflin
-** Last update Thu May 25 14:07:14 2017 Arthur Knoepflin
+** Last update Thu May 25 19:43:08 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -52,6 +52,7 @@ int	convert_obj(t_params *par, t_p_obj *list)
   par->nb_objs = nb_obj(list);
   if ((par->objs = malloc(sizeof(t_obj) * (nb_obj(list)))) == NULL)
     return (1);
+  my_mset(par->objs, 0, sizeof(t_obj) * nb_obj(list));
   i = 0;
   while (list)
     {
@@ -59,6 +60,5 @@ int	convert_obj(t_params *par, t_p_obj *list)
       i += 1;
       list = list->next;
     }
-  my_mset(par->objs, 0, sizeof(t_obj));
   return (0);
 }

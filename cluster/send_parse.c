@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 21:39:29 2017 Arthur Knoepflin
-** Last update Thu May 25 18:35:36 2017 Arthur Knoepflin
+** Last update Thu May 25 19:17:46 2017 Arthur Knoepflin
 */
 
 #include <sys/types.h>
@@ -27,15 +27,12 @@ static int	send_obj_ptr(t_socket sock, t_params *p)
       	  send(sock, p->objs[i].obj_parse->p1,
 	       sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
 	  recv(sock, buf, 2, 0);
-	  printf("SEND 1 OK\n");
       	  send(sock, p->objs[i].obj_parse->p2,
 	       sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
 	  recv(sock, buf, 2, 0);
-	  printf("SEND 2 OK\n");
       	  send(sock, p->objs[i].obj_parse->p3,
 	       sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
 	  recv(sock, buf, 2, 0);
-	  printf("SEND 3 OK\n");
       	}
       if (p->objs[i].buffer)
       	{

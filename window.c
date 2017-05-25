@@ -105,12 +105,11 @@ int		main(int ac, char **av, char **ae)
   clear_pixels(w.buffer);
   w.time_start = get_time();
   if (params.config.clu_cli)
-    return (client_cluster(&params));
+    return (client_cluster(&w, &params));
   if (params.config.clu_serv == 1)
     return (server_cluster(&w, &params));
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
-  //params.tesla_lvl = 40;
   w.time_start = get_time();
   init_thread(&w, &params);
   update_frame(&w, &params.mutex, params.config.bmp);

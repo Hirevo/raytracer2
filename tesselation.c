@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 28 11:08:45 2017 Arthur Knoepflin
-** Last update Wed May 24 03:55:24 2017 Nicolas Polomack
+** Last update Thu May 25 19:32:00 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
@@ -78,18 +78,18 @@ void		render_frame_tesla(t_thread *t)
   size.x = t->end.x - t->offs.x;
   size.y = t->end.y - t->offs.y;
   size_tesla = get_size_tesla(t->tesla_lvl);
-  pos.y = 0;
-  while (pos.y < size.y)
+  pos.x = 0;
+  while (pos.x < size.x)
     {
-      pos.x = 0;
-      while (pos.x < size.x)
+      pos.y = 0;
+      while (pos.y < size.y)
 	{
 	  t->ray.orig = t->start;
 	  raytrace_tesla(t, size_tesla, pos);
-	  pos.x += size_tesla;
+	  pos.y += size_tesla;
 	}
       if (t->params->config.live)
 	update_frame(t->w, &t->params->mutex, t->params->config.bmp);
-      pos.y += size_tesla;
+      pos.x += size_tesla;
     }
 }
