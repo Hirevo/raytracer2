@@ -1,0 +1,51 @@
+<obj>
+	<11
+		pos="0,0,0"
+		rot="0,0,0"
+		p1="100,10"
+		material="rouge"
+	/>
+	<1
+		pos="0,0,-100"
+		rot="0,0,0"
+		rad=20
+		reflect=0
+		material="blanc"
+		spec_coef=50
+	/>
+</obj>
+<material>
+	<color
+		name="rouge"
+		color="255,0,0"
+	/>
+	<color
+		name="blanc"
+		color="255,255,255"
+	/>
+	<texture
+		name="earth"
+		src="resources/Earth.bmp"
+	/>
+</material>
+<light>
+	<point
+		pos="-150,100,100"
+		color="blanc"
+	/>
+	<point
+		pos="-150,-100,100"
+		color="blanc"
+	/>
+	<point
+		pos="20,10,100"
+		color="blanc"
+	/>
+	<ambient
+		val=10
+	/>
+</light>
+<camera
+	pos="-20,0,0"
+	rot="0,0,0"
+/>

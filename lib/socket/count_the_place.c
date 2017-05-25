@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Thu May  4 17:40:13 2017 Maxime Jenny
-** Last update	Thu May 25 11:08:37 2017 Full Name
+** Last update	Thu May 25 16:52:50 2017 Full Name
 */
 
 #include <sys/types.h>
@@ -13,8 +13,9 @@
 #include <unistd.h>
 #include <errno.h>
 #include "socket_lib.h"
+#include "server.h"
 
-int	count_the_place(SOCKET fd, long size)
+int	count_place(SOCKET fd, long size)
 {
   off_t	actual;
   char	str[size];

@@ -1,11 +1,11 @@
 /*
 ** server.h for server in /home/arthur/delivery/MUL/raytracer2
-** 
+**
 ** Made by Arthur Knoepflin
 ** Login   <arthur.knoepflin@epitech.eu>
-** 
+**
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update Thu May 25 21:23:52 2017 Nicolas Polomack
+** Last update	Thu May 25 22:05:03 2017 Full Name
 */
 
 #ifndef SERVER_H_
@@ -15,7 +15,7 @@
 
 # define PORT		33000
 # define SIZE_SOCK	4096
-# define CLIENTS	4
+# define CLIENTS	2
 
 typedef int			t_socket;
 typedef struct sockaddr_in	t_sockaddr_in;
@@ -112,5 +112,17 @@ int	wait_connection_s(t_client *, t_socket);
 */
 
 int	divide_scene(t_client *clients, sfVector2i *ss, int nb_clients);
+
+/*
+** calculation/client_calc.c
+*/
+
+int	initialize_calculation(t_params *p, t_window *w, t_zone *zone);
+
+/*
+** send_results.c
+*/
+
+void	send_results(int socket, t_window *w, t_zone *s);
 
 #endif /* !SERVER_H_ */

@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Tue May  2 15:05:43 2017 Maxime Jenny
-** Last update	Thu May 25 11:18:58 2017 Full Name
+** Last update	Thu May 25 15:26:24 2017 Full Name
 */
 
 #ifndef SOCKET_LIB_H_
@@ -34,7 +34,7 @@ int			send_protocol(SOCKET, void *, long, int);
 int			recv_protocol(SOCKET, void **, long *, int);
 void			set_sockaddr_in(SOCKADDR_IN *son);
 int			read_protocol(SOCKET sock, void **msg, long *len);
-int			count_the_place(int fd, long size);
+int			count_place(int fd, long size);
 int			my_put_error(char *str, int nbr);
 
 #endif /* !SOCKET_LIB_H_ */

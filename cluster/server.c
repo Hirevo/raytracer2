@@ -5,12 +5,13 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 09:23:35 2017 Arthur Knoepflin
-** Last update	Thu May 25 13:23:03 2017 Full Name
+** Last update	Thu May 25 22:22:38 2017 Full Name
 */
 
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <sys/types.h>
 #include <ifaddrs.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -72,11 +73,35 @@ static int	send_zones(t_client *clients, t_params *p)
   i = 0;
   while (i < CLIENTS)
     {
-      printf("%d %d %d %d\n", clients[i].zone.s_x,
-  	     clients[i].zone.s_y, clients[i].zone.e_x ,clients[i].zone.e_y);
       send(clients[i].sock, &clients[i].zone, sizeof(t_zone), 0);
       read_socket(clients[i].sock, &buf);
       free(buf);
+      i++;
+    }
+  return (0);
+}
+
+static int	gather_results(t_params *params, t_window *w, t_client
+			       *client)
+{
+  int		i;
+
+  i = 0;
+  while (i < CLIENTS)
+    {
+      my_printf("Client %d: ...", i + 1);
+      if (send(client[i].sock, "RESULT", 7, 0) == -1 ||
+	  recv(client[i].sock,
+	       &(w->buffer->pixels[((client[i].zone.s_y * w->buffer->width) +
+				    client[i].zone.s_x) * 4]),
+	       (client[i].zone.e_x - client[i].zone.s_x) *
+	       (client[i].zone.e_y - client[i].zone.s_y) * 4,
+	       MSG_WAITALL) == -1)
+	{
+	  my_printf(" KO !\n");
+	  return (-1);
+	}
+      my_printf(" OK !\n");
       i++;
     }
   return (0);
@@ -88,6 +113,7 @@ int		server_cluster(t_window *w, t_params *p)
   char		*ip;
   int		nb_cli_conn;
   t_socket	serv;
+  sfEvent	event;
 
   if (init_serv(&serv))
     return (84);
@@ -104,7 +130,19 @@ int		server_cluster(t_window *w, t_params *p)
     }
   if (send_zones(clients, p))
     return (84);
+  if ((gather_results(p, w, clients)) == -1)
+    return (84);
   close_all(clients, CLIENTS);
   close(serv);
+  if (!p->config.bmp)
+    create_window(&w->window, "Raytracer2", p->screen_size);
+  w->time_start = get_time();
+  sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
+			     w->buffer->width, w->buffer->height, 0, 0);
+  sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
+  sfRenderWindow_display(w->window);
+  while (!p->config.bmp && sfRenderWindow_isOpen(w->window))
+    handle_events(w, p, &event);
+  save_buffers(w, p);
   return (0);
 }

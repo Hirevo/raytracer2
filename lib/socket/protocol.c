@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Tue May  2 15:07:24 2017 Maxime Jenny
-** Last update	Thu May 25 11:12:37 2017 Full Name
+** Last update	Thu May 25 16:54:24 2017 Full Name
 */
 
 #include <sys/ioctl.h>
@@ -18,6 +18,26 @@
 #include <unistd.h>
 #include "my.h"
 #include "socket_lib.h"
+
+char	*my_strconcat(char *dest, char *src)
+{
+  int	i;
+  int	m;
+  char	*str;
+
+  if ((str = malloc(my_strlen(dest) + my_strlen(src) + 1)) == NULL)
+    return (NULL);
+  while (dest && dest[i] != '\0')
+    {
+      str[i] = dest[i];
+      i++;
+    }
+  while (src && src[m])
+    str[i++] = src[m++];
+  str[i] = 0;
+  free(dest);
+  return (str);
+}
 
 char		*recup_size(long size, char *size_msg)
 {
@@ -44,9 +64,8 @@ int		send_protocol(SOCKET csock, void *msg, long size, int flags)
   if ((size_msg = malloc(9)) == NULL)
     return (-1);
   size_msg = recup_size(size, size_msg);
-  if ((send(csock, size_msg, 8, flags)) == -1)
-    return (my_put_error("send()", -1));
-  if ((send(csock, msg, size, flags)) == -1)
+  size_msg = my_strconcat(size_msg, msg);
+  if ((send(csock, size_msg, size + 8, flags)) == -1)
     return (my_put_error("send()", -1));
   return (0);
 }
@@ -57,16 +76,16 @@ int		recv_protocol(SOCKET sock, void **msg, long *len, int flags)
   char		size[9];
 
   *msg = NULL;
-  if ((n = count_the_place(sock, 8)) != 1)
-    return (0);
+  while (count_place(sock, 8) != 1);
   if ((n = recv(sock, size, 8, flags)) == -1)
     return ((errno != EAGAIN) ? (my_put_error("recv()", -1)) : (0));
   else
     {
       size[8] = 0;
-      while (count_the_place(sock, my_getnbr(size)) != 1);
+      while (count_place(sock, my_getnbr(size)) != 1);
       if (((*msg) = malloc(my_getnbr(size) + 1)) == NULL)
 	return (-1);
+      printf("%d\n", my_getnbr(size));
       if ((n = recv(sock, *msg, my_getnbr(size), flags)) == -1)
 	{
 	  free(*msg);

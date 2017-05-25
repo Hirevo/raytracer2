@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu May 25 21:29:17 2017 Arthur Knoepflin
+** Last update	Thu May 25 22:31:12 2017 Full Name
 */
 
 #ifndef RAYTRACER_H_
@@ -600,6 +600,11 @@ long int	init_seed(int, char **, char **, void *);
 /*
 ** misc/disp_guide.c
 */
+
 int	disp_guide();
+
+void		handle_events(t_window *w, t_params *params, sfEvent *event);
+int		create_window(sfRenderWindow **w, char *name,
+			      sfVector2i screen_size);
 
 #endif /* !RAYTRACER_H_ */

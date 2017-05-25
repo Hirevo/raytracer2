@@ -1,11 +1,11 @@
 /*
 ** client.c for client in /home/arthur/delivery/MUL/raytracer2
-** 
+**
 ** Made by Arthur Knoepflin
 ** Login   <arthur.knoepflin@epitech.eu>
-** 
+**
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update Thu May 25 21:24:20 2017 Nicolas Polomack
+** Last update	Thu May 25 22:05:24 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -123,6 +123,8 @@ int		client_cluster(t_params *p, t_window *w)
   send(sock, "ok", 2, 0);
   my_printf("You recieved :\nstart: %d; %d\nend: %d; %d\n", zone.s_x,
 	    zone.s_y, zone.e_x, zone.e_y);
+  initialize_calculation(p, w, &zone);
+  send_results(sock, w, &zone);
   close(sock);
   return (0);
 }

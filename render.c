@@ -1,11 +1,11 @@
 /*
 ** render.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Wed May 10 14:39:42 2017 Nicolas Polomack
-** Last update Wed May 24 00:02:55 2017 Arthur Knoepflin
+** Last update	Thu May 25 21:58:07 2017 Full Name
 */
 
 #include "raytracer.h"
@@ -21,6 +21,6 @@ void	check_render(t_params *params, t_window *w)
       params->tesla_lvl -= 1;
       init_thread(w, params);
     }
-  else
+  else if (!params->config.bmp)
     sfRenderWindow_setTitle(w->window, "Raytracer - Termine");
 }
