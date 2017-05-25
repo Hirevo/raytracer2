@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Thu Apr 13 18:19:24 2017 
-** Last update Wed May 10 17:36:40 2017 Nicolas Polomack
+** Last update Thu May 25 14:04:52 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
@@ -17,7 +17,8 @@ int		parse_from_file(t_params *params, char *path)
   t_material	*material;
   char		**file;
 
-  file = get_file(path);
+  if ((file = get_file(path)) == NULL)
+    return (1);
   set_camera(params, file);
   if ((material = parse_material(file)) == NULL)
     return (1);

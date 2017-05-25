@@ -1,0 +1,66 @@
+<obj>
+	<0
+		pos="700,10,0"
+		rot="20,0,-120"
+		rad=300
+		material="earth"
+	/>
+	<1
+    pos="1000,-150,0"
+    rot="0,-90,0"
+    p1="1280,0"
+    p2="0,720"
+    height=50
+    material="blanc"
+  />
+	<-1
+		pos="-600,0,90"
+		rot="-90,0,0"
+		spec_coef=1
+		rad=1
+		refract=90
+		refr_index=80
+		file="fox.obj"
+		reflect=20
+		material="rouge"
+	/>
+</obj>
+<material>
+	<color
+		name="rouge"
+		color="255,0,0"
+	/>
+	<color
+		name="blanc"
+		color="255,255,255"
+	/>
+	<texture
+		name="deathstar"
+		src="resources/EtoileNoire.bmp"
+	/>
+	<texture
+		name="earth"
+		src="resources/Earth.bmp"
+	/>
+	<texture
+		name="space"
+		src="resources/space.bmp"
+	/>
+	<color
+		name="green"
+		color="0,255,0"
+	/>
+</material>
+<light>
+	<point
+		pos="-500,0,100"
+		color="blanc"
+	/>
+	<ambient
+		val=30
+	/>
+</light>
+<camera
+	pos="-500,0,50"
+	rot="0,0,0"
+/>

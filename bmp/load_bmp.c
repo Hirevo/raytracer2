@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 19:31:11 2016 Nicolas Polomack
-** Last update Wed May 10 17:05:56 2017 Nicolas Polomack
+** Last update Wed May 24 11:31:06 2017 Arthur Knoepflin
 */
 
 #include <unistd.h>
@@ -48,7 +48,7 @@ t_my_framebuffer	*load_bmp(char *filename, sfSprite **spr,
   if (spr != NULL && tex != NULL)
     sfTexture_updateFromPixels(*tex, buffer->pixels,
 			       buffer->width, buffer->height, 0, 0);
-  return ((my_printf(" Finished!\n")) ? buffer : buffer);
+  return ((my_printf(" Ok!\n")) ? buffer : buffer);
 }
 
 void		read_pixel_buffer(t_my_framebuffer *buffer,

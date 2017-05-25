@@ -1,0 +1,45 @@
+<obj>
+	<1
+		pos="0,0,-25"
+		material="blanc"
+	/>
+	<1
+		pos="150,0,0"
+		material="blanc"
+		rot="0,-60,0"
+	/>
+	<0
+		pos="0,0,0"
+		rot="0,0,0"
+		rad=25
+		reflect=20
+		material="saumon"
+		spec_coef=50
+	/>						
+</obj>
+<material>
+	<color
+		name="rouge"
+		color="255,0,0"
+	/>
+	<color
+		name="blanc"
+		color="255,255,255"
+	/>
+	<color
+		name="saumon"
+		color="226,120,81"
+	/>
+</material>
+<light>
+	<point
+		pos="-150,100,100"
+		color="blanc"
+	/>
+	<ambient
+		val=10
+	/>
+</light>
+<camera
+	pos="-200,0,0"
+/>

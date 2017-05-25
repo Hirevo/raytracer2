@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ## 
 ## Started on  Fri Mar 31 19:02:25 2017 Nicolas Polomack
-## Last update Wed May 24 21:22:46 2017 Cédric THOMAS
+## Last update Thu May 25 18:42:11 2017 Cédric THOMAS
 ##
 
 SRC	=	intersect_sphere.c		\
@@ -28,7 +28,7 @@ OBJ	=	${SRC:.c=.o}
 
 NAME	=	${SRC:.c=.so}
 
-CFLAGS	=	-fPIC -I../include -g
+CFLAGS	=	-fPIC -I../include -O2
 
 LDFLAGS	+=	-rdynamic
 
@@ -37,12 +37,12 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 
 clean:
-	rm -f $(OBJ)
+		rm -f $(OBJ)
 
-fclean:	clean
-	rm -f $(NAME)
+fclean:		clean
+		rm -f $(NAME)
 
-re:	fclean all
+re:		fclean all
 
 %.so:	%.o
 	@gcc -shared -o $@ $< -I../include -L../lib/my -lmy -L../lib/mycsfml -lmycsfml-so -lm -rdynamic -fPIC

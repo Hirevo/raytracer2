@@ -1,11 +1,11 @@
 /*
 ** bs.c for bootstrap raytracer in /home/nicolaspolomack/tests/raytracer_test
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Thu May 25 15:37:43 2017 Cédric THOMAS
+** Last update	Wed May 24 23:45:51 2017 Full Namex
 */
 
 #include <SFML/Graphics.h>
@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include "sfcaster.h"
 #include "raytracer.h"
+#include "server.h"
 #include "bmp.h"
 #include "my.h"
 
@@ -91,16 +92,22 @@ int		main(int ac, char **av, char **ae)
   sfEvent	event;
   t_params	params;
 
-  if (ac < 2 || parse_args(&params, ac, av) == -1)
+  if (parse_args(&params, ac, av) == -1)
     return (84);
-  if (params.help)
+  if (params.config.clu_cli)
+    return (client_cluster(&params));
+  if (ac == 1 || params.help)
     return (disp_guide());
   params.seed = init_seed(ac, av, ae, (void *)&main);
-  parse_from_file(&params, params.config.scene_file);
+  if (parse_from_file(&params, params.config.scene_file))
+    return (84);
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);
-  clear_pixels(w.buffer);;
+  clear_pixels(w.buffer);
+  w.time_start = get_time();
+  if (params.config.clu_serv == 1)
+    return (server_cluster(&w, &params));
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
   //params.tesla_lvl = 40;
