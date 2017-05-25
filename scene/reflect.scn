@@ -69,7 +69,7 @@
 		color="blanc"
 	/>
 	<ambient
-		val=0
+		val=30
 	/>
 </light>
 <camera

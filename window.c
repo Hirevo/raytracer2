@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Fri Apr 28 13:54:22 2017 Arthur Knoepflin
+** Last update Thu May 25 15:37:43 2017 Cédric THOMAS
 */
 
 #include <SFML/Graphics.h>
@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 #include "sfcaster.h"
 #include "raytracer.h"
 #include "bmp.h"
@@ -36,9 +35,9 @@ int		create_window(sfRenderWindow **w, char *name,
   return (0);
 }
 
-void	handle_events(t_window *w, t_params *params, sfEvent *event)
+void		handle_events(t_window *w, t_params *params, sfEvent *event)
 {
-  static int i = 0;
+  static int	i = 0;
 
   if (sfWindow_hasFocus((sfWindow *)w->window))
     {
@@ -60,6 +59,7 @@ void	handle_events(t_window *w, t_params *params, sfEvent *event)
 	      update_frame(w, &params->mutex, params->config.bmp);
 	    i = !i;
 	  }
+      check_keys(params);
     }
 }
 
@@ -96,16 +96,15 @@ int		main(int ac, char **av, char **ae)
   if (params.help)
     return (disp_guide());
   params.seed = init_seed(ac, av, ae, (void *)&main);
-  params.screen_size.x = 1920;
-  params.screen_size.y = 1080;
-  parse_from_file(&params, av[1]);
+  parse_from_file(&params, params.config.scene_file);
   if (load_libs(&params) == -1)
     return (84);
   init_buffers(&w, &params);
-  clear_pixels(w.buffer);
+  clear_pixels(w.buffer);;
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
-  params.tesla_lvl = 40;
+  //params.tesla_lvl = 40;
+  w.time_start = get_time();
   init_thread(&w, &params);
   update_frame(&w, &params.mutex, params.config.bmp);
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))

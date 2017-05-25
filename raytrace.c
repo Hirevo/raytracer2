@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 00:22:54 2017 Nicolas Polomack
-** Last update Thu Apr  6 23:05:36 2017 Nicolas Polomack
+** Last update Tue May 23 23:51:47 2017 Arthur Knoepflin
 */
 
 #include <math.h>
@@ -37,10 +37,18 @@ sfVector3f	anti_prepare(sfVector3f vec, t_obj *obj, int i)
 
 float	gather_dist(t_thread *t, int i)
 {
-  return (t->params->intersect[t->params->id[(int)t->params->objs[i].type]]
-	  (prepare(t->ray.orig, &(t->params->objs[i]), 1),
-	   prepare(t->ray.dir, &(t->params->objs[i]), 0),
-	   &(t->params->objs[i])));
+  if (t->params->objs[i].type == -1)
+    {
+      if (t->params->objs[i].obj_parse != NULL)
+	return (get_dist_obj(t, t->params->objs[i].obj_parse));
+      else
+	return (-1);
+    }
+  else
+    return (t->params->intersect[t->params->id[(int)t->params->objs[i].type]]
+	    (prepare(t->ray.orig, &(t->params->objs[i]), 1),
+	     prepare(t->ray.dir, &(t->params->objs[i]), 0),
+	     &(t->params->objs[i])));
 }
 
 void	prepare_raytrace(t_thread *t)
@@ -48,6 +56,7 @@ void	prepare_raytrace(t_thread *t)
   t->depth = 0;
   t->from = NULL;
   t->refr = 1;
+  t->primary = 1;
   t->ray.dir = calc_dir_vector(t->params->screen_size,
 			       t->screen_pos.x,
 			       t->screen_pos.y, t->params->config.fov);
@@ -63,13 +72,13 @@ sfColor		raytrace(t_thread *t)
 
   i = -1;
   obj = NULL;
-  dist = -1;
+  dist = -1.0F;
   t->dir = t->ray.dir;
   while (++i < t->params->nb_objs)
     {
       temp = gather_dist(t, i);
-      if (temp >= 0 && (dist == -1 || temp < dist) &&
-	  &(t->params->objs[i]) != t->from)
+      if (temp != -1.0F && (dist == -1.0F || temp < dist) &&
+	&(t->params->objs[i]) != t->from)
 	{
 	  dist = temp;
 	  obj = &(t->params->objs[i]);

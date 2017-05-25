@@ -5,13 +5,13 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ## 
 ## Started on  Fri Mar 31 19:02:25 2017 Nicolas Polomack
-## Last update Fri Apr  7 19:55:43 2017 Nicolas Polomack
+## Last update Wed May 24 21:22:46 2017 Cédric THOMAS
 ##
 
 SRC	=	intersect_sphere.c		\
 		intersect_plane.c		\
 		intersect_limited_plane.c	\
-		intersect_torus.c		\
+		intersect_cubet.c		\
 		intersect_ellipsoid.c		\
 		intersect_paraboloid.c		\
 		intersect_cyl.c			\
@@ -21,13 +21,14 @@ SRC	=	intersect_sphere.c		\
 		intersect_closed_cone.c		\
 		intersect_disk.c		\
 		intersect_triangle.c		\
+		intersect_torus.c		\
 		intersect_cube.c
 
 OBJ	=	${SRC:.c=.o}
 
 NAME	=	${SRC:.c=.so}
 
-CFLAGS	=	-fPIC -I../include -Ofast
+CFLAGS	=	-fPIC -I../include -g
 
 LDFLAGS	+=	-rdynamic
 
@@ -44,4 +45,4 @@ fclean:	clean
 re:	fclean all
 
 %.so:	%.o
-	@gcc -shared -o $@ $< -I../include -L../lib/my -lmy -L../lib/mycsfml -lmycsfml-so -lm -rdynamic
+	@gcc -shared -o $@ $< -I../include -L../lib/my -lmy -L../lib/mycsfml -lmycsfml-so -lm -rdynamic -fPIC

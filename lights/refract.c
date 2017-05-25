@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Apr  6 10:47:16 2017 Nicolas Polomack
-** Last update Sun Apr  9 15:49:37 2017 Nicolas Polomack
+** Last update Thu May 18 15:02:48 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -15,9 +15,9 @@ sfVector3f	oppose(sfVector3f v)
 {
   sfVector3f	ret;
 
-  ret.x = v.x;
-  ret.y = v.y;
-  ret.z = v.z;
+  ret.x = -v.x;
+  ret.y = -v.y;
+  ret.z = -v.z;
   return (ret);
 }
 

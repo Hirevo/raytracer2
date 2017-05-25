@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Fri Apr 28 13:43:04 2017 Arthur Knoepflin
+** Last update Thu May 25 15:38:00 2017 Cédric THOMAS
 */
 
 #ifndef RAYTRACER_H_
@@ -25,7 +25,9 @@
 # define TEXT		"<texture"
 # define POINT		"<point"
 # define AMBIENT	"<ambient"
+# define OBJ_F		"<obj"
 # define POS_N		"pos="
+# define FILE_N		"file="
 # define ROT_N		"rot="
 # define P1_N		"p1="
 # define P2_N		"p2="
@@ -43,14 +45,25 @@
 # define TEXT_N		"src="
 # define ARGS_STR	"Suh"
 # define STEREO		"--stereo"
+# define TESLA		"--tesla="
 # define DEPTH		"--depth="
 # define SSAA		"--ssaa="
 # define SOFT		"--soft="
+# define RES		"--res="
 # define DOF		"--dof="
 # define FOV		"--fov="
 
 typedef struct s_window t_window;
 typedef struct s_params t_params;
+
+typedef struct	s_obj_file
+{
+  int		nb_poly;
+  int		nb_vert;
+  sfVector3f	*p1;
+  sfVector3f	*p2;
+  sfVector3f	*p3;
+}		t_obj_file;
 
 typedef struct	s_ray
 {
@@ -85,7 +98,7 @@ typedef struct		s_l_light
 typedef struct	s_p_light
 {
   float		ambient;
-  t_l_light	*light; 
+  t_l_light	*light;
 }		t_p_light;
 
 typedef struct		s_p_obj
@@ -98,6 +111,8 @@ typedef struct		s_p_obj
   float			rad;
   float			aper;
   sfColor		col;
+  t_obj_file		*obj_parse;
+  char			*file;
   t_my_framebuffer	*buffer;
   float			height;
   float			reflect;
@@ -117,6 +132,8 @@ typedef struct		s_obj
   float			rad;
   float			aper;
   sfColor		col;
+  t_obj_file		*obj_parse;
+  char			*file;
   t_my_framebuffer	*buffer;
   float			height;
   float			reflect;
@@ -141,10 +158,12 @@ typedef struct s_thread
   float		refr;
   t_ray		ray;
   t_obj		*from;
+  int		idx;
   int		depth;
   int		tesla_lvl;
+  int		primary;
   t_window	*w;
-  t_params      *params;
+  t_params	*params;
   int		id;
 }               t_thread;
 
@@ -152,6 +171,7 @@ typedef struct	s_config
 {
   int		stereo;
   int		ssaa;
+  int		tesla;
   int		bmp;
   int		live;
   int		fov;
@@ -159,6 +179,7 @@ typedef struct	s_config
   int		reflect_depth;
   int		depth_rays;
   int		shadow_rays;
+  char		*scene_file;
 }		t_config;
 
 typedef struct		s_params
@@ -178,15 +199,17 @@ typedef struct		s_params
   pthread_t		*t;
   long int		seed;
   int			help;
-  int			progress;
   int			nb_lights;
   int			nb_objs;
   int			tesla_lvl;
   t_obj			*objs;
+  t_obj_file		*obj_data;
 }			t_params;
 
 typedef struct		s_window
 {
+  float			progress;
+  sfVector2i		sizes;
   pthread_mutex_t	mutex;
   sfRenderWindow	*window;
   sfRenderWindow        *window2;
@@ -199,6 +222,7 @@ typedef struct		s_window
   t_my_framebuffer	*save;
   t_my_framebuffer	*buffer;
   t_my_framebuffer      *buffer2;
+  unsigned long long	time_start;
 }			t_window;
 
 /*
@@ -256,6 +280,16 @@ void	update_frame(t_window *, pthread_mutex_t *, int);
 int	init_thread(t_window *, t_params *);
 
 /*
+** render.c
+*/
+void	check_render(t_params *, t_window *);
+
+/*
+** event.c
+*/
+void	check_keys(t_params *);
+
+/*
 ** libs.c
 */
 int	load_libs(t_params *);
@@ -299,6 +333,11 @@ void	prepare_refract(t_thread *, float, float);
 sfColor		specular_effect(sfColor, t_thread *, t_obj *, int);
 
 /*
+** lights/shadows.c
+*/
+sfColor		diffuse_shadows(t_thread *, sfColor, t_obj *, int);
+
+/*
 ** stereo/stereoscopy.c
 */
 void	render_stereo_frame(t_thread *);
@@ -321,6 +360,45 @@ void	ry(sfVector3f *, float);
 void	rz(sfVector3f *, float);
 void	rotation(sfVector3f *, sfVector3f *);
 void	anti_rotation(sfVector3f *, sfVector3f *);
+
+/*
+** obj/render.c
+*/
+float		get_dist_obj(t_thread *, t_obj_file *);
+sfVector3f	get_normal_obj(t_thread *, t_obj *);
+
+/*
+** obj/my_getfloat.c
+*/
+
+float	my_getfloat(char *);
+
+/*
+** obj/my_split_char.c
+*/
+
+char	**my_split_char(char *, char);
+
+/*
+** obj/parse_obj.c
+*/
+
+t_obj_file	*parse_obj_file(char *);
+
+/*
+** obj/parse_poly.c
+*/
+
+int	get_nb_poly(char **);
+int	parse_poly(char **, sfVector3f *, t_obj_file *);
+
+/*
+** obj/parse_pos_vert.c
+*/
+
+int		tab_len(char **);
+int		nb_vert(char **);
+sfVector3f	*parse_pos_vert(char **, t_obj_file *);
 
 /*
 ** parse/get_file.c
@@ -489,6 +567,13 @@ int	parse_args(t_params *, int, char **);
 */
 
 void	set_camera(t_params *, char **);
+
+/*
+** time.c
+*/
+
+unsigned long long	get_time();
+char			*get_time_calc();
 
 /*
 ** alloc.c

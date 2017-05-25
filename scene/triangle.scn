@@ -1,0 +1,24 @@
+<obj>
+	<9
+		pos="0,0,0"
+		p1="10,10"
+		p2="10,10"
+		material="white"
+	/>
+<obj/>
+<material>
+	<color
+		name="white"
+		color="255,255,255"
+	/>
+<material/>
+<light>
+	<point
+		pos="0,10,0"
+		color="white"
+	/>
+<light/>
+<camera
+	pos="10,0,0"
+	rot="0,0,0"
+/>

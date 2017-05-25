@@ -1,0 +1,32 @@
+<obj>
+	<0
+		pos="100,0,0"
+		rot="0,0,0"
+		rad=10
+		material="blue"
+	/>
+	<1
+		pos="0,0,-25"
+		material="blanc"
+	/>
+</obj>
+<material>
+	<color
+		name="blue"
+		color="0,0,255"
+	/>
+	<color
+		name="blanc"
+		color="255,255,255"
+	/>
+</material>
+<light>
+	<point
+		pos="10,10,10"
+		color="blanc"
+	/>
+</light>
+<camera
+	pos="0,0,0"
+	rot="0,0,0"
+/>

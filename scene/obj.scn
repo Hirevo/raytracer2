@@ -1,0 +1,46 @@
+<obj>
+	<0
+		pos="0,0,0"
+		rot="0,0,0"
+		rad=2
+		reflect=50
+		material="blanc"
+	/>
+	<-1
+		pos="0,0,0"
+		rot="0,0,0"
+		file="scene/cow.obj"
+		material="rouge"
+	/>
+</obj>
+<material>
+	<color
+		name="rouge"
+		color="255,0,0"
+	/>
+	<color
+		name="blanc"
+		color="255,255,255"
+	/>
+	<color
+		name="green"
+		color="0,255,0"
+	/>
+</material>
+<light>
+	<point
+		pos="-150,50,100"
+		color="blanc"
+	/>
+	<point
+		pos="-150,-50,100"
+		color="blanc"
+	/>
+	<ambient
+		val=30
+	/>
+</light>
+<camera
+	pos="5,0,0"
+	rot="0,0,0"
+/>

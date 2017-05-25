@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb 13 20:54:49 2017 Nicolas Polomack
-** Last update Sun Apr  9 15:08:51 2017 Nicolas Polomack
+** Last update Tue May 23 23:06:05 2017 Arthur Knoepflin
 */
 
 #include <math.h>
@@ -20,7 +20,10 @@ void	prepare_light_calc(t_thread *t, t_obj *obj, float dist)
   t->impact.z = t->ray.orig.z + t->ray.dir.z * dist;
   t->ray.orig = t->impact;
   t->normal = prepare(t->impact, obj, 1);
-  t->params->get_normal[t->params->id[(int)obj->type]](t, obj);
+  if (obj->type != -1)
+    t->params->get_normal[t->params->id[(int)obj->type]](t, obj);
+  else
+    t->normal = get_normal_obj(t, obj);
   t->normal = anti_prepare(t->normal, obj, 0);
 }
 
@@ -85,16 +88,19 @@ sfColor		calc_lights(t_thread *t, t_obj *obj, sfColor col)
 
   i = -1;
   while (++i < t->params->nb_lights)
-    {
-      prepare_light_ray(t, i);
-      if (is_obstructed(t, obj))
-        cols[i] = get_shadow_color(t, col);
-      else
-	{
-	  cols[i] = eval_luminosity(t, col, &coef);
-	  if (coef > 0)
-	    cols[i] = specular_effect(cols[i], t, obj, i);
-	}
-    }
+    if (t->params->config.shadow_rays > 1)
+      cols[i] = diffuse_shadows(t, col, obj, i);
+    else
+      {
+	prepare_light_ray(t, i);
+	if (is_obstructed(t, obj))
+	  cols[i] = get_shadow_color(t, col);
+	else
+	  {
+	    cols[i] = eval_luminosity(t, col, &coef);
+	    if (coef > 0.7)
+	      cols[i] = specular_effect(cols[i], t, obj, i);
+	  }
+      }
   return (average_colors(cols, t->params->nb_lights));
 }

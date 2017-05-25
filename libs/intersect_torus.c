@@ -1,11 +1,11 @@
 /*
-1;4601;0c** intersect_sphere.c for bootstrap raytracer1 in /home/nicolaspolomack/tests/raytracer_test
+** intersect_sphere.c for bootstrap raytracer1 in /home/nicolaspolomack/tests/raytracer_test
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sun Apr 30 16:50:19 2017 
+** Last update Thu May 25 18:37:56 2017 Cédric THOMAS
 */
 
 #include <math.h>
@@ -60,13 +60,11 @@ float		intersect_torus(sfVector3f eye_pos,
 
 void		get_normal_torus(t_thread *t, t_obj *obj)
 {
-  float		tmp;
-  sfVector3f	q;
+  float		a;
   sfVector3f	n;
 
-  tmp = obj->p1.x / sqrt(pow(t->impact.x, 2) + pow(t->impact.z, 2));
-  q = v3f(tmp * t->impact.x, tmp * t->impact.y, 0);
-  n = v3f(t->impact.x - q.x, t->impact.y - q.y, t->impact.z);
+  a = 1.0 - (obj->p1.x / sqrt(pow(t->impact.y, 2) + pow(t->impact.z, 2)));
+  n = v3f(t->impact.x, a * t->impact.y, a * t->impact.z);
   t->normal = normalize(n);
 }
 

@@ -5,14 +5,13 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sun Apr  9 15:15:37 2017 Nicolas Polomack
+** Last update Sat Apr 29 22:09:09 2017 
 */
 
 #include <math.h>
 #include <SFML/Graphics.h>
 #include "raytracer.h"
 #include "sfcaster.h"
-#include "inter.h"
 
 char	*intersect = "intersect_parab";
 char	*normal = "get_normal_parab";

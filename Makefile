@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Fri Apr 28 11:33:46 2017 Arthur Knoepflin
+## Last update Wed May 24 20:01:07 2017 Cédric THOMAS
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -17,19 +17,27 @@ MAKE1	=	make --no-print-directory -sC lib/mycsfml
 SRC	=	window.c				\
 		raytrace.c				\
 		thread.c				\
+		render.c				\
 		libs.c					\
 		alloc.c					\
+		event.c					\
 		rand.c					\
-		scene.c					\
-		teslation.c				\
+		tesselation.c				\
                 get_next_line.c			        \
                 lights/light.c		                \
 		lights/reflect.c			\
 		lights/refract.c			\
 		lights/specular.c			\
+		lights/shadows.c			\
 		stereo/stereoscopy.c			\
 		ssaa/ssaa.c				\
 		depth_of_field/depth.c			\
+		obj/my_getfloat.c			\
+		obj/my_split_char.c			\
+		obj/parse_obj.c				\
+		obj/parse_poly.c			\
+		obj/parse_pos_vert.c			\
+		obj/render.c				\
 		parse/proc.c				\
 		parse/args.c				\
 		parse/add_obj.c				\
@@ -64,10 +72,20 @@ SRC	=	window.c				\
                 calc/calc_dir_vector.c			\
                 texturing/sphere_texture.c		\
 		texturing/plane_texture.c		\
+		time.c					\
 		misc/disp_guide.c			\
                 bmp/load_bmp.c                          \
                 bmp/merge.c                             \
-                bmp/save_bmp.c
+                bmp/save_bmp.c				\
+\
+		solver/caster.c				\
+		solver/fourth/solus_four_part1.c	\
+		solver/fourth/solus_four_part2.c	\
+		solver/fourth/solver_four.c		\
+		solver/sec/solver_sec.c			\
+		solver/solver.c				\
+		solver/third/solver_three.c
+
 
 OBJ	=	$(SRC:.c=.o)
 
