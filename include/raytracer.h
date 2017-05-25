@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu May 25 21:04:35 2017 Nicolas Polomack
+** Last update Thu May 25 21:18:25 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -123,6 +123,7 @@ typedef struct		s_p_obj
   struct s_p_obj	*next;
 }			t_p_obj;
 
+# pragma pack(1)
 typedef struct		s_obj
 {
   char			type;
@@ -142,6 +143,7 @@ typedef struct		s_obj
   float			refr_index;
   float			spec_coef;
 }			t_obj;
+# pragma pop
 
 typedef struct s_thread
 {
@@ -208,7 +210,6 @@ typedef struct		s_params
   int			nb_objs;
   int			tesla_lvl;
   t_obj			*objs;
-  t_obj_file		*obj_data;
 }			t_params;
 
 typedef struct		s_window

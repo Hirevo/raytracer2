@@ -20,7 +20,7 @@
 		rad=1
 		refract=90
 		refr_index=80
-		file="scene/dragon.obj"
+		file="scene/cow.obj"
 		material="rouge"
 	/>
 </obj>

@@ -5,11 +5,12 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 21 13:30:38 2017 Arthur Knoepflin
-** Last update Tue May 23 23:40:42 2017 Arthur Knoepflin
+** Last update Thu May 25 19:43:08 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
 #include "raytracer.h"
+#include "my.h"
 
 static int	nb_obj(t_p_obj *list)
 {
@@ -51,6 +52,7 @@ int	convert_obj(t_params *par, t_p_obj *list)
   par->nb_objs = nb_obj(list);
   if ((par->objs = malloc(sizeof(t_obj) * (nb_obj(list)))) == NULL)
     return (1);
+  my_mset(par->objs, 0, sizeof(t_obj) * nb_obj(list));
   i = 0;
   while (list)
     {

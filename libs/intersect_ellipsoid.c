@@ -5,14 +5,13 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sun Apr  9 15:15:40 2017 Nicolas Polomack
+** Last update Sat Apr 29 22:08:51 2017 
 */
 
 #include <math.h>
 #include <SFML/Graphics.h>
 #include "raytracer.h"
 #include "sfcaster.h"
-#include "inter.h"
 
 char	*intersect = "intersect_elli";
 char	*normal = "get_normal_elli";
@@ -85,7 +84,31 @@ void		get_normal_elli(t_thread *t, t_obj *obj)
   t->normal.z /= pow(obj->p2.x, 2);
 }
 
-sfColor		apply_tex_elli(sfVector3f imp, t_obj *obj)
+sfColor		apply_tex_elli(sfVector3f vp, t_obj *obj)
 {
-  return (obj->col);
+  float		phi;
+  float		theta;
+  int		u;
+  int		v;
+  sfColor	col;
+  sfVector3f	ve;
+  sfVector3f	vn;
+
+  if (obj->buffer == NULL)
+    return (obj->col);
+  vp = normalize(vp);
+  ve = v3f(0, 1, 0);
+  vn = v3f(0, 0, 1);
+  phi = acos(-1 * dot(vn, vp));
+  theta = (acos(dot(vp, ve) / sin(phi))) / (2 * M_PI);
+  v = phi * obj->buffer->height / M_PI;
+  if (dot(cross(vn, ve), vp) > 0)
+    u = theta * obj->buffer->width;
+  else
+    u = (1 - theta) * obj->buffer->width;
+  col.r = obj->buffer->pixels[(v * obj->buffer->width + u) * 4];
+  col.g = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 1];
+  col.b = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 2];
+  col.a = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 3];
+  return (col);
 }

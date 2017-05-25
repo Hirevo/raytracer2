@@ -5,12 +5,14 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Wed May 24 21:52:01 2017 Nicolas Polomack
+## Last update Thu May 25 18:43:03 2017 Cédric THOMAS
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
 
 MAKE2	=	make --no-print-directory -sC lib/my
+
+MAKESOC	=	make --no-print-directory -sC lib/socket
 
 MAKE1	=	make --no-print-directory -sC lib/mycsfml
 
@@ -22,11 +24,15 @@ SRC	=	calc/colors.c				\
 		cluster/client.c			\
 		cluster/check_cli_ready.c		\
 		cluster/com_sock.c			\
+		cluster/get_ip.c			\
 		cluster/manag_client.c			\
 		cluster/treat_resp_wait.c		\
 		cluster/treat_resp_cli.c		\
+		cluster/recv_parse.c			\
+		cluster/send_parse.c			\
 		cluster/server.c			\
 		cluster/wait_connection.c		\
+		cluster/divide_scene.c			\
 		window.c				\
 		raytrace.c				\
 		thread.c				\
@@ -84,15 +90,24 @@ SRC	=	calc/colors.c				\
 		misc/disp_guide.c			\
                 bmp/load_bmp.c                          \
                 bmp/merge.c                             \
-                bmp/save_bmp.c
+                bmp/save_bmp.c				\
+\
+		solver/caster.c				\
+		solver/fourth/solus_four_part1.c	\
+		solver/fourth/solus_four_part2.c	\
+		solver/fourth/solver_four.c		\
+		solver/sec/solver_sec.c			\
+		solver/solver.c				\
+		solver/third/solver_three.c
+
 
 OBJ	=	$(SRC:.c=.o)
 
-LIBS	=	-lm -Llib/my -lmy -Llib/mycsfml -lmycsfml-so -lc_graph_prog
+LIBS	=	-lm -Llib/my -lmy -Llib/mycsfml -Llib/socket -lmycsfml-so -lc_graph_prog -lsocket_lib
 
 FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=$(shell pwd)/lib/mycsfml -rdynamic
 
-CFLAGS	=	-Iinclude -I../include -pthread -O2
+CFLAGS	=	-Iinclude -I../include -pthread -O2 -g
 
 REDDARK	=	\033[31;2m
 
@@ -126,6 +141,9 @@ $(NAME):	.SILENT
 		@echo -en "$(CYAN)Compiling libmycsfml...$(RES)"
 		@$(MAKE2)
 		@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
+		@echo -en "$(CYAN)Compiling socketlib...$(RES)"
+		@$(MAKESOC)
+		@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
 		@echo -en "$(CYAN)Compiling .so files...$(RES)"
 		@$(MAKESO)
 		@echo -e "\t$(GREEN)OK$(RES)$(CYAN)!$(RES)"
@@ -143,6 +161,7 @@ clean:
 		@$(MAKE1) clean
 		@$(MAKE2) clean
 		@$(MAKESO) clean
+		@$(MAKESOC) clean
 
 fclean:		clean
 		@if [ -e $(NAME) ] ; then \
@@ -151,6 +170,7 @@ fclean:		clean
 		@$(MAKE1) fclean
 		@$(MAKE2) fclean
 		@$(MAKESO) fclean
+		@$(MAKESOC) fclean
 
 re:	fclean all
 

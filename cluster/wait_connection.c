@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 10:31:37 2017 Arthur Knoepflin
-** Last update Wed May 24 21:05:26 2017 Arthur Knoepflin
+** Last update Thu May 25 16:01:11 2017 Arthur Knoepflin
 */
 
 #include <sys/select.h>
@@ -46,7 +46,7 @@ static int	set_select(fd_set *rdfs,
     if (select(clients[*actual - 1].sock + 1,
   	       rdfs, NULL, NULL, NULL) == -1)
       return (1);
-  return (0);  
+  return (0);
 }
 
 static int	new_client(t_socket serv, t_client *clients, int *actual)
@@ -68,7 +68,9 @@ static int	new_client(t_socket serv, t_client *clients, int *actual)
       i += 1;
     }
   *actual += 1;
-  my_printf("\rWait for client [%d/%d]", *actual, CLIENTS);
+  my_printf("\rWait for client %s[%d/%d]\033[0m",
+	    (*actual != CLIENTS) ? "\033[31;1m" : "\033[32;1m",
+	    *actual, CLIENTS);
   return (0);
 }
 
@@ -87,7 +89,8 @@ static void	speak_client_w(t_client *clients, int *actual, fd_set *rdfs)
 	  if (len == 0)
 	    {
 	      remove_client(clients, i, actual, 1);
-	      my_printf("\rWait for client [%d/%d]", *actual, CLIENTS);
+	      my_printf("\rWait for client \033[31;1m[%d/%d]\033[0m",
+			*actual, CLIENTS);
 	    }
 	  else
 	    treat_resp_cli_w(clients, i, ret, *actual);
@@ -96,16 +99,20 @@ static void	speak_client_w(t_client *clients, int *actual, fd_set *rdfs)
     }
 }
 
+static int	purge_standard(int actual)
+{
+  free(get_next_line(0));
+  return (actual);
+}
+
 int		wait_connection_s(t_client *clients, t_socket sock)
 {
   fd_set	rdfs;
   int		actual;
   int		stop;
-  int		start;
 
   stop = 0;
   actual = 0;
-  start = 0;
   while (!stop)
     {
       set_select(&rdfs, clients, &actual, sock);
@@ -121,11 +128,7 @@ int		wait_connection_s(t_client *clients, t_socket sock)
 	  stop = 1;
 	}
     }
-  close(sock);
   if (stop == 2)
-    {
-      free(get_next_line(0));
-      return (1);
-    }
-  return (0);
+    return (purge_standard(actual));
+  return (-1);
 }

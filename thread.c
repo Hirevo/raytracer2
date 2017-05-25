@@ -1,11 +1,11 @@
 /*
 ** thread.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Thu May 25 19:10:00 2017 Nicolas Polomack
+** Last update Thu May 25 21:14:35 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -19,8 +19,6 @@ static void	*render_thread(void *arg)
 
   t = (t_thread *)arg;
   set_focal_dist(t);
-  /* if (1) */
-  /*   render_obj(t); */
   if (t->params->config.stereo)
     render_stereo_frame(t);
   else if (t->params->config.ssaa > 1)
@@ -100,7 +98,7 @@ static t_thread	*prepare_thread(t_window *w, t_params *params, int i)
   return (t);
 }
 
-int	init_thread(t_window *w, t_params *params)
+int		init_thread(t_window *w, t_params *params)
 {
   int		i;
   t_thread	*t;

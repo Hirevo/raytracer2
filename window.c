@@ -1,11 +1,11 @@
 /*
 ** bs.c for bootstrap raytracer in /home/nicolaspolomack/tests/raytracer_test
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Thu May 25 19:05:38 2017 Nicolas Polomack
+** Last update Thu May 25 21:25:29 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -111,9 +111,8 @@ int		main(int ac, char **av, char **ae)
   sfEvent	event;
   t_params	params;
 
-  if (parse_args(&params, ac, av) == -1)
+  if (ac < 2 || parse_args(&params, ac, av) == -1)
     return (84);
-  params.seed = init_seed(ac, av, ae, (void *)&main);
   if (ac == 1 || params.help)
     return (disp_guide());
   if (prepare_render(&params, &w) == 84)
@@ -124,6 +123,7 @@ int		main(int ac, char **av, char **ae)
     return (client_cluster(&params, &w));
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
+  w.time_start = get_time();
   init_thread(&w, &params);
   update_frame(&w, &params.mutex, params.config.bmp);
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))

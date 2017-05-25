@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update Thu May 25 19:04:56 2017 Nicolas Polomack
+** Last update Thu May 25 21:23:52 2017 Nicolas Polomack
 */
 
 #ifndef SERVER_H_
@@ -22,10 +22,19 @@ typedef struct sockaddr_in	t_sockaddr_in;
 typedef struct sockaddr		t_sockaddr;
 typedef struct in_addr		t_in_addr;
 
+typedef struct	s_zone
+{
+  int		s_x;
+  int		s_y;
+  int		e_x;
+  int		e_y;
+}		t_zone;
+
 typedef struct	s_client
 {
   t_socket	sock;
   int		ready;
+  t_zone	zone;
 }		t_client;
 
 /*
@@ -48,6 +57,12 @@ int	client_cluster(t_params *, t_window *);
 
 int	read_socket(t_socket, char **);
 void	write_socket(t_socket, char *);
+
+/*
+** get_ip.c
+*/
+
+char	*get_ip();
 
 /*
 ** manag_client.c
@@ -75,9 +90,27 @@ int	treat_resp(t_socket, char *);
 int	treat_resp_cli_w(t_client *, int, char *, int);
 
 /*
+** recv_parse.c
+*/
+
+int	recv_parse(t_socket, t_params *);
+
+/*
+** send_parse.c
+*/
+
+int	send_parse(t_client *, t_params *);
+
+/*
 ** wait_connection.c
 */
 
 int	wait_connection_s(t_client *, t_socket);
+
+/*
+** divide_scene.c
+*/
+
+int	divide_scene(t_client *clients, sfVector2i *ss, int nb_clients);
 
 #endif /* !SERVER_H_ */
