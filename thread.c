@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Thu May 25 21:14:35 2017 Nicolas Polomack
+** Last update Thu May 25 22:02:22 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -38,10 +38,10 @@ void	update_frame(t_window *w, pthread_mutex_t *mutex, int bmp)
   w->progress += ((1.0F / ((float)w->sizes.x)) / 2.0F) * 100.0F;
   if (bmp || pthread_mutex_trylock(mutex) != 0)
     return ;
-  sfRenderWindow_display(w->window);
   sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
 			     w->buffer->width, w->buffer->height, 0, 0);
   sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
+  sfRenderWindow_display(w->window);
   if ((time = get_time_calc(w, my_int_to_char((int)w->progress))) == NULL)
     {
       pthread_mutex_unlock(mutex);

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Thu May 25 21:25:29 2017 Nicolas Polomack
+** Last update Thu May 25 22:01:40 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -125,7 +125,7 @@ int		main(int ac, char **av, char **ae)
     create_window(&w.window, "Raytracer2", params.screen_size);
   w.time_start = get_time();
   init_thread(&w, &params);
-  update_frame(&w, &params.mutex, params.config.bmp);
+  update_frame(&w, &params.mutex, 0);
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
     handle_events(&w, &params, &event);
   save_buffers(&w, &params);
