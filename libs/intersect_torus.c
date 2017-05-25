@@ -5,90 +5,67 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Wed May 10 17:44:48 2017 Nicolas Polomack
+** Last update Thu May 25 18:37:56 2017 Cédric THOMAS
 */
 
 #include <math.h>
 #include <SFML/Graphics.h>
 #include "raytracer.h"
-#include "inter.h"
+#include "solver.h"
 
 char	*intersect = "intersect_torus";
 char	*normal = "get_normal_torus";
 char	*texture = "apply_tex_torus";
 int	id = 12;
 
-float		fct(t_poly p, double x)
+static void	fill_var(float *var, sfVector3f eye,
+			 sfVector3f dir, t_obj *obj)
 {
-  int		i;
-  int		deg;
-  float		ret;
-
-  i = -1;
-  ret = 0;
-  deg = p.elem - 1;
-  while (++i < p.elem)
-    {
-      ret += p.coef[deg] * pow(x, deg);
-      deg -= 1;
-    }
-  return (ret);
-}
-
-float		dico(t_poly poly)
-{
-  int		i;
-  float		x;
-  float		g;
-  float		d;
-
-  g = 0;
-  d = 1;
-  x = 0.5;
-  i = 0;
-  while (fabs(fct(poly, x)) >= pow(10, -PRECISION) && ++i < SECUR)
-    {
-      x = (g + d) / 2;
-      if (fct(poly, g) * fct(poly, x) > 0)
-	g = x;
-      else
-	d = x;
-    }
-  return (x);
+  var[0] = 4 * pow(obj->p1.x, 2) * (pow(dir.x, 2) + pow(dir.y, 2));
+  var[1] = 8 * pow(obj->p1.x, 2) *
+    (eye.x * dir.x + eye.y * dir.y);
+  var[2] = 4 * pow(obj->p1.x, 2) * (pow(eye.x, 2) + pow(eye.y, 2));
+  var[3] = pow(dir.x, 2) + pow(dir.y, 2) + pow(dir.z, 2);
+  var[4] = 2 * (eye.x * dir.x + eye.y *
+	   dir.y + eye.z * dir.z);
+  var[5] = pow(eye.x, 2) + pow(eye.y, 2) + pow(eye.z, 2) +
+    (pow(obj->p1.x, 2) - pow(obj->p1.y, 2));
 }
 
 float		intersect_torus(sfVector3f eye_pos,
 				sfVector3f dir_vector,
 				t_obj *obj)
 {
-  float		g;
-  float		h;
-  float		i;
-  float		j;
-  float		k;
-  float		l;
-  t_poly	poly;
-  float		sol;
+  float		min;
+  float		equa[5];
+  float		var[6];
+  t_poly	*poly;
+  t_solus	*solus;
 
-  poly.elem = 5;
-  g = 4 * pow(obj->p1.x, 2) * (pow(dir_vector.x, 2) + pow(dir_vector.y, 2));
-  h = 8 * pow(obj->p1.x, 2) * (eye_pos.x * dir_vector.x + eye_pos.y * dir_vector.y);
-  i = 4 * pow(obj->p1.x, 2) * (pow(eye_pos.x, 2) + pow(eye_pos.y, 2));
-  j = pow(dir_vector.x, 2) + pow(dir_vector.y, 2) + pow(dir_vector.z, 2);
-  k = 2 * (eye_pos.x * dir_vector.x + eye_pos.y * dir_vector.y + eye_pos.z * dir_vector.z);
-  l = pow(eye_pos.x, 2) + pow(eye_pos.y, 2) + pow(eye_pos.y, 2) +
-    (pow(obj->p1.x, 2) - pow(obj->p1.y, 2)) ;
-  poly.coef[0] = pow(j, 2);
-  poly.coef[1] = 2 * j * k;
-  poly.coef[2] = 2 * j * l + pow(k, 2) - g;
-  poly.coef[3] = 2 * k * l - h;
-  poly.coef[4] = pow(l, 2) - i;
-  return (dico(poly));
+  fill_var(var, eye_pos, dir_vector, obj);
+  equa[0] = pow(var[3], 2);
+  equa[1] = 2 * var[3] * var[4];
+  equa[2] = 2 * var[3] * var[5] + pow(var[4], 2) - var[0];
+  equa[3] = 2 * var[4] * var[5] - var[1];
+  equa[4] = pow(var[5], 2) - var[2];
+  if ((poly = create_poly(5, equa[0], equa[1], equa[2], equa[3], equa[4]))
+      == NULL)
+    return (-1);
+  solus = solver(poly);
+  min = get_min_pos_solus(solus);
+  del_polys(poly);
+  del_solus(solus);
+  return (min);
 }
 
 void		get_normal_torus(t_thread *t, t_obj *obj)
 {
- 
+  float		a;
+  sfVector3f	n;
+
+  a = 1.0 - (obj->p1.x / sqrt(pow(t->impact.y, 2) + pow(t->impact.z, 2)));
+  n = v3f(t->impact.x, a * t->impact.y, a * t->impact.z);
+  t->normal = normalize(n);
 }
 
 sfColor		apply_tex_torus(sfVector3f imp, t_obj *obj)

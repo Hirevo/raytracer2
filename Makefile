@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Thu May 25 13:28:11 2017 Arthur Knoepflin
+## Last update Thu May 25 18:43:03 2017 Cédric THOMAS
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -90,7 +90,16 @@ SRC	=	calc/colors.c				\
 		misc/disp_guide.c			\
                 bmp/load_bmp.c                          \
                 bmp/merge.c                             \
-                bmp/save_bmp.c
+                bmp/save_bmp.c				\
+\
+		solver/caster.c				\
+		solver/fourth/solus_four_part1.c	\
+		solver/fourth/solus_four_part2.c	\
+		solver/fourth/solver_four.c		\
+		solver/sec/solver_sec.c			\
+		solver/solver.c				\
+		solver/third/solver_three.c
+
 
 OBJ	=	$(SRC:.c=.o)
 

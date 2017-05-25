@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update	Wed May 24 23:45:51 2017 Full Name
+** Last update	Wed May 24 23:45:51 2017 Full Namex
 */
 
 #include <SFML/Graphics.h>
@@ -110,6 +110,8 @@ int		main(int ac, char **av, char **ae)
     return (server_cluster(&w, &params));
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
+  //params.tesla_lvl = 40;
+  w.time_start = get_time();
   init_thread(&w, &params);
   update_frame(&w, &params.mutex, params.config.bmp);
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))

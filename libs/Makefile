@@ -5,13 +5,13 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ## 
 ## Started on  Fri Mar 31 19:02:25 2017 Nicolas Polomack
-## Last update Wed May 24 21:51:20 2017 Nicolas Polomack
+## Last update Thu May 25 18:42:11 2017 Cédric THOMAS
 ##
 
 SRC	=	intersect_sphere.c		\
 		intersect_plane.c		\
 		intersect_limited_plane.c	\
-		intersect_torus.c		\
+		intersect_cubet.c		\
 		intersect_ellipsoid.c		\
 		intersect_paraboloid.c		\
 		intersect_cyl.c			\
@@ -21,6 +21,7 @@ SRC	=	intersect_sphere.c		\
 		intersect_closed_cone.c		\
 		intersect_disk.c		\
 		intersect_triangle.c		\
+		intersect_torus.c		\
 		intersect_cube.c
 
 OBJ	=	${SRC:.c=.o}
@@ -43,5 +44,5 @@ fclean:		clean
 
 re:		fclean all
 
-%.so:		%.o
-		@gcc -shared -o $@ $< -I../include -L../lib/my -lmy -L../lib/mycsfml -lmycsfml-so -lm -rdynamic
+%.so:	%.o
+	@gcc -shared -o $@ $< -I../include -L../lib/my -lmy -L../lib/mycsfml -lmycsfml-so -lm -rdynamic -fPIC

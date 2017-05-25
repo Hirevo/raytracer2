@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update	Thu May 25 00:45:33 2017 Full Name
+** Last update Thu May 25 18:40:18 2017 Cédric THOMAS
 */
 
 #include <stdlib.h>

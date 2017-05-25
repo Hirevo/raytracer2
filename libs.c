@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 20:08:30 2017 Nicolas Polomack
-** Last update Thu May 25 14:21:52 2017 Arthur Knoepflin
+** Last update Thu May 25 18:42:24 2017 Cédric THOMAS
 */
 
 #include <dlfcn.h>
