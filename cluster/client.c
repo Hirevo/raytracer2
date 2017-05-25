@@ -53,7 +53,7 @@ static int		connect_cli(char *addr, t_socket *sock)
     return (1);
   if ((hostinfo = gethostbyname(addr)) == NULL)
     {
-      my_printf("Impossible to find %s\n", addr);
+      my_printf("\nImpossible to find %s\n", addr);
       return (1);
     }
   sin.sin_addr = *(t_in_addr *) hostinfo->h_addr;
@@ -61,10 +61,10 @@ static int		connect_cli(char *addr, t_socket *sock)
   sin.sin_family = AF_INET;
   if (connect(*sock, (t_sockaddr *) &sin, sizeof(t_sockaddr)) == -1)
     {
-      my_printf("Impossible to connect %s\n", addr);
+      my_printf("\nImpossible to connect %s\n", addr);
       return (1);
     }
-  my_putstr("Connected\n");
+  my_putstr("\nConnected\n");
   print_state_wait(*sock);
   return (0);
 }
@@ -120,17 +120,10 @@ int		client_cluster(t_params *p)
     return (84);
   if (wait_connect_c(sock))
     return (84);
-  if (recv_parse(sock, p))
-    {
-      close(sock);
-      return (84);
-    }
   recv(sock, &zone, sizeof(t_zone), 0);
   send(sock, "ok", 2, 0);
   my_printf("You recieved :\nstart: %d; %d\nend: %d; %d\n", zone.s_x,
 	    zone.s_y, zone.e_x, zone.e_y);
   close(sock);
-  /* while (get_next_line(0)); */
-  /* initialize_calculation(p, &w); */
   return (0);
 }

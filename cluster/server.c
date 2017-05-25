@@ -68,8 +68,6 @@ static int	send_zones(t_client *clients, t_params *p)
   int		i;
   char		*buf;
 
-  if (send_parse(clients, p))
-    return (1);
   divide_scene(clients, &p->screen_size, CLIENTS);
   i = 0;
   while (i < CLIENTS)
@@ -106,7 +104,6 @@ int		server_cluster(t_window *w, t_params *p)
     }
   if (send_zones(clients, p))
     return (84);
-  /* while (1); */
   close_all(clients, CLIENTS);
   close(serv);
   return (0);

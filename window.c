@@ -92,10 +92,8 @@ int		main(int ac, char **av, char **ae)
   sfEvent	event;
   t_params	params;
 
-  if (parse_args(&params, ac, av) == -1)
+  if (ac < 2 || parse_args(&params, ac, av) == -1)
     return (84);
-  if (params.config.clu_cli)
-    return (client_cluster(&params));
   if (ac == 1 || params.help)
     return (disp_guide());
   params.seed = init_seed(ac, av, ae, (void *)&main);
@@ -106,6 +104,8 @@ int		main(int ac, char **av, char **ae)
   init_buffers(&w, &params);
   clear_pixels(w.buffer);
   w.time_start = get_time();
+  if (params.config.clu_cli)
+    return (client_cluster(&params));
   if (params.config.clu_serv == 1)
     return (server_cluster(&w, &params));
   if (!params.config.bmp)
