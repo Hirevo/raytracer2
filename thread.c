@@ -1,11 +1,11 @@
 /*
 ** thread.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Tue May 23 23:59:53 2017 Arthur Knoepflin
+** Last update	Thu May 25 00:45:33 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -99,7 +99,7 @@ static t_thread	*prepare_thread(t_window *w, t_params *params, int i)
   return (t);
 }
 
-int	init_thread(t_window *w, t_params *params)
+int		init_thread(t_window *w, t_params *params)
 {
   int		i;
   t_thread	*t;

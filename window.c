@@ -1,11 +1,11 @@
 /*
 ** bs.c for bootstrap raytracer in /home/nicolaspolomack/tests/raytracer_test
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed May 24 21:51:12 2017 Nicolas Polomack
+** Last update	Wed May 24 23:45:51 2017 Full Name
 */
 
 #include <SFML/Graphics.h>

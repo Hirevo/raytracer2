@@ -1,11 +1,11 @@
 /*
 ** client.c for client in /home/arthur/delivery/MUL/raytracer2
-** 
+**
 ** Made by Arthur Knoepflin
 ** Login   <arthur.knoepflin@epitech.eu>
-** 
+**
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update Thu May 25 00:46:24 2017 Arthur Knoepflin
+** Last update	Thu May 25 11:49:31 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -18,6 +18,7 @@
 #include "server.h"
 #include "get_next_line.h"
 #include "my.h"
+#include "socket_lib.h"
 
 int		print_state_wait(t_socket sock)
 {
@@ -108,6 +109,9 @@ static int	wait_connect_c(t_socket sock)
 int		client_cluster(t_params *p)
 {
   t_socket	sock;
+  long		n;
+  t_zone	*zone;
+  t_window	w;
 
   if (connect_cli(p->config.clu_cli, &sock))
     return (84);
@@ -118,5 +122,11 @@ int		client_cluster(t_params *p)
       close(sock);
       return (84);
     }
+  if ((recv_protocol(sock, (void **)&zone, &n, 0)) == -1)
+    return (-1);
+  my_printf("You recieved : %d; %d; %d; %d\n", zone->s_x,
+	    zone->s_y, zone->e_x, zone->e_y);
+  while (get_next_line(0));
+  // initialize_calculation(p, &w);
   return (0);
 }
