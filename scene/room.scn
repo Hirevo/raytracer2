@@ -122,7 +122,7 @@
 <light>
 	<point
 		pos="-200,-40,150"
-		color="grey"
+		color="white"
 	/>
 	<ambient
 		val=10
