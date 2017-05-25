@@ -1,11 +1,11 @@
 /*
-** client.c for client in /home/arthur/delivery/MUL/raytracer2
+** client.c for client in /home/Maxime/delivery/MUL/raytracer2/cluster/
 **
-** Made by Arthur Knoepflin
-** Login   <arthur.knoepflin@epitech.eu>
+** Made by Maxime Jenny
+** Login   <maxime.jenny@epitech.eu>
 **
-** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update	Thu May 25 11:49:31 2017 Full Name
+** Started on  Thu May 25 13:22:50 2017 Maxime Jenny
+** Last update	Thu May 25 13:23:11 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -30,7 +30,10 @@ int		print_state_wait(t_socket sock)
   read_socket(sock, &actual);
   write_socket(sock, "nb_cli_max");
   read_socket(sock, &max);
-  my_printf("\rWait for client [%s/%s]", actual, max);
+  if (actual && max)
+    my_printf("\rWait for client %s[%s/%s]\033[0m",
+	      (my_strcmp(actual, max)) ? "\033[31;1m" : "\033[32;1m",
+	      actual, max);
   if (!my_strcmp(actual, max))
     {
       free(max);
@@ -72,7 +75,7 @@ static int	treat_resp_wait_c(t_socket sock)
 
   if (read_socket(sock, &talk) == 0)
     {
-      my_putstr("Disconnected, abort clustering\n");
+      my_putstr("\nDisconnected, abort clustering\n");
       return (1);
     }
   else
@@ -124,9 +127,10 @@ int		client_cluster(t_params *p)
     }
   if ((recv_protocol(sock, (void **)&zone, &n, 0)) == -1)
     return (-1);
-  my_printf("You recieved : %d; %d; %d; %d\n", zone->s_x,
+  my_printf("You recieved :\nstart: %d; %d\nend: %d; %d\n", zone->s_x,
 	    zone->s_y, zone->e_x, zone->e_y);
   while (get_next_line(0));
   // initialize_calculation(p, &w);
+  close(sock);
   return (0);
 }

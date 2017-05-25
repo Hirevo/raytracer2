@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 09:23:35 2017 Arthur Knoepflin
-** Last update	Thu May 25 11:37:07 2017 Full Name
+** Last update	Thu May 25 13:23:03 2017 Full Name
 */
 
 #include <arpa/inet.h>
@@ -63,20 +63,10 @@ void	broadcast_start(t_client *clients)
     }
 }
 
-int		server_cluster(t_window *w, t_params *p)
+static int	send_zones(t_client *clients, t_params *p)
 {
-  t_client	clients[CLIENTS];
-  char		*ip;
   int		i;
-  t_socket	serv;
 
-  if (init_serv(&serv))
-    return (84);
-  ip = get_ip();
-  my_printf("\nServer started on %s...\nWait for client [0/%d]",
-	    (ip) ? ip : "unknown", CLIENTS);
-  free(ip);
-  wait_connection_s(clients, serv);
   send_parse(clients, p);
   divide_scene(clients, &p->screen_size, CLIENTS);
   i = 0;
@@ -87,7 +77,29 @@ int		server_cluster(t_window *w, t_params *p)
 	return (-1);
       i++;
     }
-  close_all(clients, 4);
+}
+
+int		server_cluster(t_window *w, t_params *p)
+{
+  t_client	clients[CLIENTS];
+  char		*ip;
+  int		nb_cli_conn;
+  t_socket	serv;
+
+  if (init_serv(&serv))
+    return (84);
+  ip = get_ip();
+  my_printf("\nServer started on \033[32;1m%s\033[0m...\n", (ip) ? ip :
+	    "\033[31;1munknown\033[0m");
+  my_printf("Wait for client \033[31;1m[0/%d]\033[0m", CLIENTS);
+  free(ip);
+  if ((nb_cli_conn = wait_connection_s(clients, serv)))
+    {
+      close_all(clients, nb_cli_conn);
+      return (84);
+    }
+  send_zones(clients, p);
+  close_all(clients, CLIENTS);
   close(serv);
   return (0);
 }

@@ -1,11 +1,11 @@
 /*
-** server.h for server in /home/arthur/delivery/MUL/raytracer2
+** server.h for .h in /home/Maxime/delivery/MUL/raytracer2/include/
 **
-** Made by Arthur Knoepflin
-** Login   <arthur.knoepflin@epitech.eu>
+** Made by Maxime Jenny
+** Login   <maxime.jenny@epitech.eu>
 **
-** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update	Thu May 25 11:31:20 2017 Full Name
+** Started on  Thu May 25 13:23:26 2017 Maxime Jenny
+** Last update	Thu May 25 13:23:28 2017 Full Name
 */
 
 #ifndef SERVER_H_
