@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:39:33 2017 Nicolas Polomack
-** Last update Wed May 24 13:22:52 2017 Nicolas Polomack
+** Last update Thu May 25 19:08:34 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -17,8 +17,9 @@
 void	init_buffers(t_window *w, t_params *params)
 {
   params->config.bmp = (params->screen_size.x >= 8192 ||
-			params->screen_size.y >= 8192);
-  if (params->config.bmp)
+			params->screen_size.y >= 8192) ||
+    !!params->config.clu_cli;
+  if (params->config.bmp && !params->config.clu_cli)
     my_printf("The requested image is too big to be printed %s%s",
 	      "inside of a window.\n",
 	      "Switching to buffer-only frame rendering.\n");
@@ -50,7 +51,7 @@ void	prepare_objs(t_params *params)
   while (++i < params->nb_objs)
     if (params->objs[i].type == -1 && params->objs[i].obj_parse)
       {
-	scale = params->objs[i].spec_coef;
+	scale = 1.75;//params->objs[i].spec_coef;
 	j = -1;
 	while (++j < params->objs[i].obj_parse->nb_poly)
 	  {

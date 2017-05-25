@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Wed May 24 21:51:12 2017 Nicolas Polomack
+** Last update Thu May 25 19:05:38 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -86,6 +86,25 @@ void	render_frame(t_thread *t)
     }
 }
 
+static int	prepare_render(t_params *params, t_window *w)
+{
+  if (parse_from_file(params, params->config.scene_file))
+    return (84);
+  if (load_libs(params) == -1)
+    return (84);
+  if (!params->config.clu_cli)
+    {
+      params->config.offs.x = 0;
+      params->config.offs.y = 0;
+      params->config.end = params->screen_size;
+    }
+  init_buffers(w, params);
+  prepare_objs(params);
+  clear_pixels(w->buffer);
+  w->time_start = get_time();
+  return (0);
+}
+
 int		main(int ac, char **av, char **ae)
 {
   t_window	w;
@@ -94,20 +113,15 @@ int		main(int ac, char **av, char **ae)
 
   if (parse_args(&params, ac, av) == -1)
     return (84);
-  if (params.config.clu_cli)
-    return (client_cluster(&params));
+  params.seed = init_seed(ac, av, ae, (void *)&main);
   if (ac == 1 || params.help)
     return (disp_guide());
-  params.seed = init_seed(ac, av, ae, (void *)&main);
-  if (parse_from_file(&params, params.config.scene_file))
+  if (prepare_render(&params, &w) == 84)
     return (84);
-  if (load_libs(&params) == -1)
-    return (84);
-  init_buffers(&w, &params);
-  clear_pixels(w.buffer);
-  w.time_start = get_time();
   if (params.config.clu_serv == 1)
     return (server_cluster(&w, &params));
+  if (params.config.clu_cli)
+    return (client_cluster(&params, &w));
   if (!params.config.bmp)
     create_window(&w.window, "Raytracer2", params.screen_size);
   init_thread(&w, &params);

@@ -18,6 +18,7 @@
 		rot="-90,-20,20"
 		spec_coef=1
 		rad=1
+		scale=25
 		refract=90
 		refr_index=80
 		file="fox.obj"

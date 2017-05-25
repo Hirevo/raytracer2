@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Wed May 24 21:41:47 2017 Nicolas Polomack
+** Last update Thu May 25 18:26:22 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -183,6 +183,8 @@ typedef struct	s_config
   int		depth_rays;
   int		shadow_rays;
   char		*scene_file;
+  sfVector2i	offs;
+  sfVector2i	end;
 }		t_config;
 
 typedef struct		s_params

@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update Wed May 24 20:37:15 2017 Arthur Knoepflin
+** Last update Thu May 25 19:04:56 2017 Nicolas Polomack
 */
 
 #ifndef SERVER_H_
@@ -40,7 +40,7 @@ int	check_cli_ready(t_client *, int);
 
 int	print_state_wait(t_socket);
 void	broadcast_start(t_client *);
-int	client_cluster(t_params *);
+int	client_cluster(t_params *, t_window *);
 
 /*
 ** com_sock.c

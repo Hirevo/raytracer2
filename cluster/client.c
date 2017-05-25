@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update Wed May 24 20:29:45 2017 Arthur Knoepflin
+** Last update Thu May 25 18:54:35 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -105,7 +105,7 @@ static int	wait_connect_c(t_socket sock)
   return (0);
 }
 
-int		client_cluster(t_params *p)
+int		client_cluster(t_params *p, t_window *w)
 {
   t_socket	sock;
 

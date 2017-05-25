@@ -14,9 +14,9 @@
                 material="blanc"
         />
 	<-1
-		pos="-1100,0,0"
+		pos="-1000,0,0"
 		rot="-90,0,0"
-		spec_coef=100
+		spec_coef=3
 		rad=1
 		refract=90
 		refr_index=80
@@ -60,6 +60,6 @@
 	/>
 </light>
 <camera
-	pos="-1000,0,0"
+	pos="-997,0,0"
 	rot="0,0,0"
 />

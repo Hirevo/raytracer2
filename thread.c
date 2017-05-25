@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Tue May 23 23:59:53 2017 Arthur Knoepflin
+** Last update Thu May 25 19:10:00 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -62,23 +62,24 @@ void	update_frame(t_window *w, pthread_mutex_t *mutex, int bmp)
 static void	set_limits(t_thread *t, t_window *w,
 			   t_params *params, int i)
 {
+  sfVector2i	size;
+
+  size.x = params->config.end.x - params->config.offs.x;
+  size.y = params->config.end.y - params->config.offs.y;
   if (!(i % 2))
     {
-      t->offs.x = (params->screen_size.x /
-		   (params->t_count / 2)) * (i / 2);
+      t->offs.x = (size.x / (params->t_count / 2)) * (i / 2);
       t->offs.y = 0;
     }
   else
     {
-      t->offs.x = (params->screen_size.x /
-		   (params->t_count / 2)) * ((i - 1) / 2);
-      t->offs.y = (params->screen_size.y / 2);
+      t->offs.x = (size.x / (params->t_count / 2)) * ((i - 1) / 2);
+      t->offs.y = (size.y / 2);
     }
-  t->end.x = (t->offs.x + (w->buffer->width /
-			   (params->t_count / 2)));
-  t->end.y = (t->offs.y + (w->buffer->height / 2));
+  t->end.x = (t->offs.x + (size.x / (params->t_count / 2)));
+  t->end.y = (t->offs.y + (size.y / 2));
   t->end.x += (i >= (params->t_count - 2)) ?
-    params->screen_size.x % (params->t_count / 2) : 0;
+    size.x % (params->t_count / 2) : 0;
 }
 
 static t_thread	*prepare_thread(t_window *w, t_params *params, int i)
@@ -106,7 +107,8 @@ int	init_thread(t_window *w, t_params *params)
 
   i = -1;
   params->t_count = get_core_count() * 2;
-  params->t = malloc(sizeof(pthread_t) * params->t_count);
+  if ((params->t = malloc(sizeof(pthread_t) * params->t_count)) == NULL)
+    return (-1);
   w->progress = 0;
   pthread_mutex_init(&params->mutex, NULL);
   while (++i < params->t_count)
