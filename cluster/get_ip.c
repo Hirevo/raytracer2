@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 22:12:58 2017 Arthur Knoepflin
-** Last update Wed May 24 22:18:51 2017 Arthur Knoepflin
+** Last update Thu May 25 10:09:39 2017 Arthur Knoepflin
 */
 
 #include <arpa/inet.h>
@@ -19,15 +19,14 @@
 
 char			*get_ip()
 {
-  struct ifaddrs	*ifaddr;
   struct ifaddrs	*ifa;
   int			family;
   int			s;
   char			host[NI_MAXHOST];
 
-  getifaddrs(&ifaddr);
-  ifa = ifaddr;
-  while (ifa != NULL)
+  if (getifaddrs(&ifa) == -1)
+    return (NULL);
+  while (ifa)
     {
       if (ifa->ifa_addr)
 	{

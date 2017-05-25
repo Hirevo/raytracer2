@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 09:23:35 2017 Arthur Knoepflin
-** Last update Wed May 24 22:19:39 2017 Arthur Knoepflin
+** Last update Thu May 25 10:08:49 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -67,12 +67,15 @@ void	broadcast_start(t_client *clients)
 int		server_cluster(t_window *w, t_params *p)
 {
   t_client	clients[CLIENTS];
+  char		*ip;
   t_socket	serv;
 
   if (init_serv(&serv))
     return (84);
+  ip = get_ip();
   my_printf("\nServer started on %s...\nWait for client [0/%d]",
-	    get_ip(), CLIENTS);
+	    (ip) ? ip : "unknown", CLIENTS);
+  free(ip);
   wait_connection_s(clients, serv);
   send_parse(clients, p);
   close_all(clients, 4);
