@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb 13 20:54:49 2017 Nicolas Polomack
-** Last update Tue May 23 23:06:05 2017 Arthur Knoepflin
+** Last update Thu May 25 21:04:54 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -66,16 +66,16 @@ int	is_obstructed(t_thread *t, t_obj *obj)
   return (0);
 }
 
-sfColor		eval_luminosity(t_thread *t, sfColor col, float *coef)
+sfColor		eval_luminosity(t_thread *t, sfColor col, int i, float *coef)
 {
   sfColor	ret;
 
   *coef = fmax(t->params->config.ambient,
 	       get_light_coef(t->normal,
 			      t->ray.dir));
-  ret.r = ((float)col.r) * *coef;
-  ret.g = ((float)col.g) * *coef;
-  ret.b = ((float)col.b) * *coef;
+  ret.r = ((float)col.r) * *coef * (t->params->lights[i].col.r / 255);
+  ret.g = ((float)col.g) * *coef * (t->params->lights[i].col.g / 255);
+  ret.b = ((float)col.b) * *coef * (t->params->lights[i].col.b / 255);
   ret.a = 255;
   return (ret);
 }
@@ -97,7 +97,7 @@ sfColor		calc_lights(t_thread *t, t_obj *obj, sfColor col)
 	  cols[i] = get_shadow_color(t, col);
 	else
 	  {
-	    cols[i] = eval_luminosity(t, col, &coef);
+	    cols[i] = eval_luminosity(t, col, i, &coef);
 	    if (coef > 0.7)
 	      cols[i] = specular_effect(cols[i], t, obj, i);
 	  }

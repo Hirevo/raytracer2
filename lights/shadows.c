@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Apr 28 11:07:58 2017 Nicolas Polomack
-** Last update Wed May 10 17:48:13 2017 Nicolas Polomack
+** Last update Thu May 25 21:05:10 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -54,7 +54,7 @@ sfColor		diffuse_shadows(t_thread *t, sfColor col,
 	cols[x] = get_shadow_color(t, col);
       else
 	{
-	  cols[x] = eval_luminosity(t, col, &coef);
+	  cols[x] = eval_luminosity(t, col, i, &coef);
 	  if (coef > 0)
 	    cols[x] = specular_effect(cols[i], t, obj, i);
 	}

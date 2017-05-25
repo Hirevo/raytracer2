@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu May 25 18:26:22 2017 Nicolas Polomack
+** Last update Thu May 25 21:04:35 2017 Nicolas Polomack
 */
 
 #ifndef RAYTRACER_H_
@@ -304,7 +304,7 @@ int	load_libs(t_params *);
 */
 sfColor		calc_lights(t_thread *, t_obj *, sfColor);
 void		prepare_light_calc(t_thread *, t_obj *, float);
-sfColor		eval_luminosity(t_thread *, sfColor, float *);
+sfColor		eval_luminosity(t_thread *, sfColor, int, float *);
 int		is_obstructed(t_thread *, t_obj *);
 float		get_light_coef(sfVector3f, sfVector3f);
 
