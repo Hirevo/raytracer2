@@ -113,7 +113,7 @@ int		client_cluster(t_params *p)
 {
   t_socket	sock;
   long		n;
-  t_zone	*zone;
+  t_zone	zone;
   t_window	w;
 
   if (connect_cli(p->config.clu_cli, &sock))
@@ -125,12 +125,12 @@ int		client_cluster(t_params *p)
       close(sock);
       return (84);
     }
-  if ((recv_protocol(sock, (void **)&zone, &n, 0)) == -1)
-    return (-1);
-  my_printf("You recieved :\nstart: %d; %d\nend: %d; %d\n", zone->s_x,
-  	    zone->s_y, zone->e_x, zone->e_y);
-  while (get_next_line(0));
-  /* initialize_calculation(p, &w); */
+  recv(sock, &zone, sizeof(t_zone), 0);
+  send(sock, "ok", 2, 0);
+  my_printf("You recieved :\nstart: %d; %d\nend: %d; %d\n", zone.s_x,
+	    zone.s_y, zone.e_x, zone.e_y);
   close(sock);
+  /* while (get_next_line(0)); */
+  /* initialize_calculation(p, &w); */
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 22:30:45 2017 Arthur Knoepflin
-** Last update Thu May 25 14:17:05 2017 Arthur Knoepflin
+** Last update Thu May 25 17:50:31 2017 Arthur Knoepflin
 */
 
 #include <stdlib.h>
@@ -13,16 +13,35 @@
 #include <sys/socket.h>
 #include "server.h"
 
+static void	long_recv(t_socket sock, t_params *p, int i, int len)
+{
+  int		j;
+
+  j = 0;
+  while (j < len)
+    {
+      j += recv(sock, p->objs[i].buffer->pixels + j,
+		len - j, 0);
+    }
+}
+
 static int	recv_obj_2(t_socket sock,
 			   t_params *p,
 			   int i,
 			   sfVector3f **ptr)
 {
+  int		j;
+
   if ((*ptr = malloc(sizeof(sfVector3f) *
   	      p->objs[i].obj_parse->nb_poly)) == NULL)
     return (1);
-  recv(sock, *ptr, sizeof(sfVector3f) *
-       p->objs[i].obj_parse->nb_poly, 0);
+  j = 0;
+  while (j < p->objs[i].obj_parse->nb_poly)
+    {
+      j += recv(sock, *ptr + j, sizeof(sfVector3f) *
+	   p->objs[i].obj_parse->nb_poly - j, 0);
+    }
+  return (0);
 }
 
 static int	send_buffer(t_socket sock,
@@ -36,9 +55,9 @@ static int	send_buffer(t_socket sock,
        malloc(sizeof(sfUint8) * p->objs[i].buffer->width *
 	      p->objs[i].buffer->height * 4)) == NULL)
     return (1);
-  recv(sock, p->objs[i].buffer->pixels,
-       sizeof(sfUint8) * p->objs[i].buffer->width *
-       p->objs[i].buffer->height * 4, 0);
+  long_recv(sock, p, i,
+	    sizeof(sfUint8) * p->objs[i].buffer->width *
+	    p->objs[i].buffer->height * 4);
   return (0);
 }
 
@@ -50,21 +69,23 @@ static int	recv_obj(t_socket sock, t_params *p)
   while (i < p->nb_objs)
     {
       if (p->objs[i].obj_parse)
-	{
-	  if ((p->objs[i].obj_parse = malloc(sizeof(t_obj_file))) == NULL)
-	    return (1);
-	  recv(sock, p->objs[i].obj_parse, sizeof(t_obj_file), 0);
-	  if (recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p1) ||
-	      recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p2) ||
-	      recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p3))
-	    return (1);
-	}
+      	{
+      	  if ((p->objs[i].obj_parse = malloc(sizeof(t_obj_file))) == NULL)
+      	    return (1);
+      	  recv(sock, p->objs[i].obj_parse, sizeof(t_obj_file), 0);
+	  /* recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p1); */
+	  /* recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p2); */
+      	  /* if (recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p1) || */
+      	  /*     recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p2) || */
+      	  /*     recv_obj_2(sock, p, i, &p->objs[i].obj_parse->p3)) */
+      	  /*   return (1); */
+      	}
       p->objs[i].file = NULL;
       if (p->objs[i].buffer)
-	{
-	  if (send_buffer(sock, p, i))
-	    return (1);
-	}
+      	{
+      	  if (send_buffer(sock, p, i))
+      	    return (1);
+      	}
       i += 1;
     }
   return (0);
@@ -87,5 +108,6 @@ int		recv_parse(t_socket sock, t_params *p)
     return (1);
   if (load_libs(p) == -1)
     return (1);
+  send(sock, "ready", 5, 0);
   return (0);
 }

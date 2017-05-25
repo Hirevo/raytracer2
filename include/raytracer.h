@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update Thu May 25 14:15:36 2017 Arthur Knoepflin
+** Last update Thu May 25 15:21:59 2017 Arthur Knoepflin
 */
 
 #ifndef RAYTRACER_H_
