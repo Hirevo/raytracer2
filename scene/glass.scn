@@ -1,10 +1,23 @@
 <obj>
-	<11
-		pos="0,0,-10"
-		rot="0,90,0"
-		p1="50,10"
+	<0
+		pos="0,20,0"
+		rot="0,45,45"
+		rad=20
+		relfect=0
+		refract=90
+		refr_index=80
 		material="rouge"
 		spec_coef=50
+	/>
+	<0
+		pos="50,10,0"
+		rot="0,0,120"
+		p1="150,0"
+		p2="0,200"
+		rad=20
+		reflect=0
+		spec_coef=50
+		material="earth"
 	/>
 	<1
 		pos="0,0,-100"
@@ -31,7 +44,15 @@
 </material>
 <light>
 	<point
-		pos="-100,0,0"
+		pos="-150,100,100"
+		color="blanc"
+	/>
+	<point
+		pos="-150,-100,100"
+		color="blanc"
+	/>
+	<point
+		pos="20,10,100"
 		color="blanc"
 	/>
 	<ambient
@@ -39,6 +60,6 @@
 	/>
 </light>
 <camera
-	pos="-150,0,10"
+	pos="-20,0,0"
 	rot="0,0,0"
 />
