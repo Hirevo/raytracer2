@@ -5,10 +5,11 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri May 26 10:39:57 2017 Arthur Knoepflin
-** Last update Fri May 26 10:48:26 2017 Arthur Knoepflin
+** Last update Fri May 26 10:59:59 2017 Nicolas Polomack
 */
 
 #include "server.h"
+#include "my.h"
 
 void	print_percent(int pc)
 {

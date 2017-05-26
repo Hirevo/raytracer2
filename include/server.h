@@ -15,7 +15,7 @@
 
 # define PORT		33000
 # define SIZE_SOCK	4096
-# define CLIENTS	4
+# define CLIENTS	1
 # define PERCENT	20
 
 typedef int			t_socket;

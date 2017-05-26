@@ -1,5 +1,5 @@
 /*
-** render.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
+1;4803;0c** render.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
 **
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
@@ -39,8 +39,9 @@ static int	increment_progress(t_window *w, t_params *params)
         {
           pthread_mutex_lock(&params->mutex);
           last = w->progress;
-          my_printf("\rProgress: %d %%", last);
-          pthread_mutex_unlock(&params->mutex);
+          //my_printf("\rProgress: %d %%", last);
+	  print_percent(last);
+	  pthread_mutex_unlock(&params->mutex);
         }
       return (-1);
     }

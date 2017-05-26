@@ -1,17 +1,13 @@
 <obj>
-	<1
-                pos="1000,-150,0"
-                rot="0,-90,0"
-                material="blanc"
-        />
 	<-1
-		pos="-2010,0,3"
-		rot="-90,0,90"
-		scale=200
+		pos="50,0,50"
+		rot="-90,0,-90"
+		scale=5000
 		refract=0
 		refr_index=0
 		file="scene/teapot.obj"
-		material="rouge"
+		reflect=0
+		material="blanc"
 	/>
 </obj>
 <material>
@@ -24,13 +20,21 @@
 		color="255,255,255"
 	/>
 	<color
+		name="grey"
+		color="50,50,50"
+	/>
+	<texture
+		name="earth"
+		src="resources/Earth.bmp"
+	/>
+	<color
 		name="green"
 		color="0,255,0"
 	/>
 </material>
 <light>
 	<point
-		pos="-2000,0,0"
+		pos="-200,0,100"
 		color="blanc"
 	/>
 	<ambient
@@ -38,6 +42,6 @@
 	/>
 </light>
 <camera
-	pos="-2000,0,0"
-	rot="0,0,0"
+	pos="-200,0,0"
+	rot="0,0,180"
 />
