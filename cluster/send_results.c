@@ -15,6 +15,7 @@
 #include <ifaddrs.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "server.h"
 #include "my.h"
 #include "socket_lib.h"
