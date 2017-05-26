@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri May 26 10:39:57 2017 Arthur Knoepflin
-** Last update Fri May 26 10:59:59 2017 Nicolas Polomack
+** Last update Fri May 26 18:45:46 2017 Nicolas Polomack
 */
 
 #include "server.h"
@@ -14,14 +14,21 @@
 void	print_percent(int pc)
 {
   int	i;
+  char	*str;
   int	size;
 
   size = (pc * PERCENT) / 100;
+  str = my_int_to_char(pc);
   my_putstr("\r[");
   i = 0;
   while (i < PERCENT)
     {
-      if (i < size)
+      if (i == (PERCENT / 2) - (my_strlen(str) / 2))
+	{
+	  my_printf("\033[31;1m%s\033[0m", str);
+	  i += my_strlen(str);
+	}
+      else if (i < size)
 	my_putchar('#');
       else
 	my_putchar(' ');

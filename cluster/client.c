@@ -125,6 +125,7 @@ int		client_cluster(t_params *p, t_window *w)
 	    zone.s_y, zone.e_x, zone.e_y);
   initialize_calculation(p, w, &zone);
   send_results(sock, w, &zone);
+  my_putchar('\n');
   close(sock);
   return (0);
 }
