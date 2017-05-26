@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Fri May 26 04:17:05 2017 Nicolas Polomack
+## Last update Fri May 26 11:14:34 2017 Arthur Knoepflin
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -30,6 +30,7 @@ SRC	=	calc/colors.c				\
 		cluster/treat_resp_cli.c		\
 		cluster/recv_parse.c			\
 		cluster/send_parse.c			\
+		cluster/percent.c			\
 		cluster/server.c			\
 		cluster/wait_connection.c		\
 		cluster/divide_scene.c			\

@@ -15,8 +15,8 @@
 
 # define PORT		33000
 # define SIZE_SOCK	4096
-# define CLIENTS	4
-# define PERCENT	20
+# define CLIENTS	2
+# define PERCENT	45
 
 typedef int			t_socket;
 typedef struct sockaddr_in	t_sockaddr_in;
@@ -89,6 +89,12 @@ int	treat_resp(t_socket, char *);
 */
 
 int	treat_resp_cli_w(t_client *, int, char *, int);
+
+/*
+** percent.c
+*/
+
+void	print_percent(int);
 
 /*
 ** recv_parse.c

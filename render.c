@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <SFML/Graphics.h>
 #include "raytracer.h"
+#include "server.h"
 #include "my.h"
 
 void	check_render(t_params *params, t_window *w)
@@ -39,7 +40,7 @@ static int	increment_progress(t_window *w, t_params *params)
         {
           pthread_mutex_lock(&params->mutex);
           last = w->progress;
-          my_printf("\rProgress: %d %%", last);
+	  print_percent(last);
           pthread_mutex_unlock(&params->mutex);
         }
       return (-1);
