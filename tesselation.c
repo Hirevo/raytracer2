@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 28 11:08:45 2017 Arthur Knoepflin
-** Last update Thu May 25 19:32:00 2017 Arthur Knoepflin
+** Last update Fri May 26 04:26:14 2017 Nicolas Polomack
 */
 
 #include "raytracer.h"
@@ -88,8 +88,8 @@ void		render_frame_tesla(t_thread *t)
 	  raytrace_tesla(t, size_tesla, pos);
 	  pos.y += size_tesla;
 	}
-      if (t->params->config.live)
-	update_frame(t->w, &t->params->mutex, t->params->config.bmp);
+      if (t->params->config.live || t->params->config.bmp)
+	update_progress(t->w, t->params);
       pos.x += size_tesla;
     }
 }

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 00:22:54 2017 Nicolas Polomack
-** Last update Wed May 24 03:25:16 2017 Nicolas Polomack
+** Last update Fri May 26 05:11:37 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -86,8 +86,6 @@ sfColor		raytrace(t_thread *t)
 	  obj = &(t->params->objs[i]);
 	}
     }
-  //if (obj->type == 0)
-  //printf("dist: %f\n", dist);
   if (dist == -1)
     return (sfBlack);
   t->recur_start = t->ray.orig;

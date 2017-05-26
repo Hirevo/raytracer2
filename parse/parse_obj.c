@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 ** 
 ** Started on  Tue Apr 18 21:25:05 2017 Arthur Knoepflin
-** Last update Thu May 25 21:31:00 2017 Arthur Knoepflin
+** Last update Fri May 26 04:46:43 2017 Nicolas Polomack
 */
 
 #include "raytracer.h"
@@ -19,6 +19,7 @@ static t_p_obj	init_obj_add(void)
   ret.rad = 1;
   ret.aper = 1;
   ret.refr_index = 1;
+  ret.scale = 1;
   ret.spec_coef = 99999999;
   ret.col.r = 255;
   ret.col.g = 255;
@@ -45,6 +46,8 @@ static void	core_parse_obj(char *obj, int i, t_p_obj *add)
     add->spec_coef = get_pint_from_node(obj + i, SPEC_COEF_N);
   if (!my_strncmp(obj + i, SHINE_N, my_strlen(SHINE_N)))
     add->shine = get_int_from_node(obj + i, SHINE_N);
+  if (!my_strncmp(obj + i, SCALE_N, my_strlen(SCALE_N)))
+    add->scale = get_float_from_node(obj + i, SCALE_N);
   if (!my_strncmp(obj + i, FILE_N, my_strlen(FILE_N)))
     add->file = get_val_from_node(obj + i, FILE_N);
 }

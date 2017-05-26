@@ -120,7 +120,7 @@ int		server_cluster(t_window *w, t_params *p)
   ip = get_ip();
   my_printf("\nServer started on \033[32;1m%s\033[0m...\n", (ip) ? ip :
 	    "\033[31;1munknown\033[0m");
-  my_printf("Wait for client \033[31;1m[0/%d]\033[0m", CLIENTS);
+  my_printf("Waiting for clients \033[31;1m[0/%d]\033[0m", CLIENTS);
   free(ip);
   if ((nb_cli_conn = wait_connection_s(clients, serv)) != -1)
     {
@@ -135,14 +135,15 @@ int		server_cluster(t_window *w, t_params *p)
   close_all(clients, CLIENTS);
   close(serv);
   if (!p->config.bmp)
-    create_window(&w->window, "Raytracer2", p->screen_size);
-  w->time_start = get_time();
-  sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
-			     w->buffer->width, w->buffer->height, 0, 0);
-  sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
-  sfRenderWindow_display(w->window);
-  while (!p->config.bmp && sfRenderWindow_isOpen(w->window))
-    handle_events(w, p, &event);
+    {
+      create_window(&w->window, "Raytracer2", p->screen_size);
+      sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
+				 w->buffer->width, w->buffer->height, 0, 0);
+      sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
+      sfRenderWindow_display(w->window);
+      while (!p->config.bmp && sfRenderWindow_isOpen(w->window))
+	handle_events(w, p, &event);
+    }
   save_buffers(w, p);
   return (0);
 }

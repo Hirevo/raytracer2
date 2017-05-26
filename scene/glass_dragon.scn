@@ -8,20 +8,23 @@
 	<1
                 pos="1000,-150,0"
                 rot="0,-90,0"
-                p1="1280,0"
-                p2="0,720"
-                height=50
                 material="blanc"
         />
+	<1
+		pos="1020,-150,0"
+		rot="0,90,0"
+		reflect=80
+		material="grey"
+	/>
 	<-1
 		pos="-1000,0,0"
 		rot="-90,0,0"
-		spec_coef=3
-		rad=1
+		scale=175
+		reflect=80
 		refract=90
 		refr_index=80
 		file="scene/dragon.obj"
-		material="rouge"
+		material="blanc"
 	/>
 </obj>
 <material>
@@ -32,6 +35,10 @@
 	<color
 		name="blanc"
 		color="255,255,255"
+	/>
+	<color
+		name="grey"
+		color="50,50,50"
 	/>
 	<texture
 		name="deathstar"

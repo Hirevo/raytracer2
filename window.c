@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update Thu May 25 22:01:40 2017 Nicolas Polomack
+** Last update Fri May 26 03:47:00 2017 Nicolas Polomack
 */
 
 #include <SFML/Graphics.h>
@@ -57,7 +57,7 @@ void		handle_events(t_window *w, t_params *params, sfEvent *event)
 		sfRenderWindow_display(w->window);
 	      }
 	    else
-	      update_frame(w, &params->mutex, params->config.bmp);
+	      update_frame(w, params);
 	    i = !i;
 	  }
       check_keys(params);
@@ -81,8 +81,8 @@ void	render_frame(t_thread *t)
 	    put_pixel(t->w->buffer, t->screen_pos.x, t->screen_pos.y,
 		      raytrace(t));
 	  }
-      if (t->params->config.live)
-	update_frame(t->w, &t->params->mutex, t->params->config.bmp);
+      if (t->params->config.live || t->params->config.bmp)
+	update_progress(t->w, t->params);
     }
 }
 
@@ -97,6 +97,7 @@ static int	prepare_render(t_params *params, t_window *w)
       params->config.offs.x = 0;
       params->config.offs.y = 0;
       params->config.end = params->screen_size;
+      w->sizes = params->screen_size;
     }
   init_buffers(w, params);
   prepare_objs(params);
@@ -125,7 +126,9 @@ int		main(int ac, char **av, char **ae)
     create_window(&w.window, "Raytracer2", params.screen_size);
   w.time_start = get_time();
   init_thread(&w, &params);
-  update_frame(&w, &params.mutex, 0);
+  if (params.config.bmp)
+    my_putchar(012);
+  update_frame(&w, &params);
   while (!params.config.bmp && sfRenderWindow_isOpen(w.window))
     handle_events(&w, &params, &event);
   save_buffers(&w, &params);

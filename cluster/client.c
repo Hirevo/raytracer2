@@ -31,7 +31,7 @@ int		print_state_wait(t_socket sock)
   write_socket(sock, "nb_cli_max");
   read_socket(sock, &max);
   if (actual && max)
-    my_printf("\rWait for client %s[%s/%s]\033[0m",
+    my_printf("\rWaiting for clients %s[%s/%s]\033[0m",
 	      (my_strcmp(actual, max)) ? "\033[31;1m" : "\033[32;1m",
 	      actual, max);
   if (!my_strcmp(actual, max))

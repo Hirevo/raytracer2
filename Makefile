@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Thu May 25 23:22:09 2017 Nicolas Polomack
+## Last update Fri May 26 04:17:05 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -93,7 +93,6 @@ SRC	=	calc/colors.c				\
                 bmp/load_bmp.c                          \
                 bmp/merge.c                             \
                 bmp/save_bmp.c				\
-\
 		solver/caster.c				\
 		solver/fourth/solus_four_part1.c	\
 		solver/fourth/solus_four_part2.c	\
@@ -109,7 +108,7 @@ LIBS	=	-lm -Llib/my -lmy -Llib/mycsfml -Llib/socket -lmycsfml-so -lc_graph_prog 
 
 FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=./lib/mycsfml -rdynamic
 
-CFLAGS	=	-Iinclude -I../include -pthread -O2
+CFLAGS	=	-Iinclude -I../include -pthread -g
 
 REDDARK	=	\033[31;2m
 

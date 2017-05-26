@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Fri Apr 21 13:30:38 2017 Arthur Knoepflin
-** Last update Thu May 25 21:29:38 2017 Arthur Knoepflin
+** Last update Fri May 26 04:49:43 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -40,6 +40,7 @@ static void	assign_obj(t_obj *obj, t_p_obj *list)
   obj->file = list->file;
   obj->buffer = list->buffer;
   obj->height = list->height;
+  obj->scale = list->scale;
   obj->reflect = list->reflect;
   obj->refract = list->refract;
   obj->refr_index = list->refr_index;

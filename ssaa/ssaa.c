@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Tue Apr  4 22:25:51 2017 Nicolas Polomack
-** Last update Wed May 10 17:44:15 2017 Nicolas Polomack
+** Last update Fri May 26 03:36:24 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -71,8 +71,8 @@ void	render_ssaa(t_thread *t)
       while (++t->screen_pos.y < t->end.y)
         put_pixel(t->w->buffer, t->screen_pos.x, t->screen_pos.y,
 		  ssaa(t, t->screen_pos.x, t->screen_pos.y));
-      if (t->params->config.live)
-	update_frame(t->w, &t->params->mutex, t->params->config.bmp);
+      if (t->params->config.live || t->params->config.bmp)
+	update_progress(t->w, t->params);
     }
   free(t->ssaa_col);
 }

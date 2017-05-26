@@ -28,6 +28,8 @@ int		initialize_calculation(t_params *p, t_window *w,
   p->config.offs.y = zone->s_y;
   p->config.end.x = zone->e_x;
   p->config.end.y = zone->e_y;
+  w->sizes.x = p->config.end.x - p->config.offs.x;
+  w->sizes.y = p->config.end.y - p->config.offs.y;
   if ((init_thread(w, p)) == -1)
     return (-1);
   return (0);

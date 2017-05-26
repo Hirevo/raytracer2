@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 02:39:33 2017 Nicolas Polomack
-** Last update Thu May 25 19:08:34 2017 Nicolas Polomack
+** Last update Fri May 26 05:13:42 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -51,7 +51,7 @@ void	prepare_objs(t_params *params)
   while (++i < params->nb_objs)
     if (params->objs[i].type == -1 && params->objs[i].obj_parse)
       {
-	scale = 1.75;//params->objs[i].spec_coef;
+	scale = params->objs[i].scale;
 	j = -1;
 	while (++j < params->objs[i].obj_parse->nb_poly)
 	  {
@@ -71,9 +71,4 @@ void	prepare_objs(t_params *params)
 void	save_buffers(t_window *w, t_params *params)
 {
   save_bmp(w->buffer, "capture.bmp");
-  if (params->config.stereo)
-    {
-      save_bmp(w->buffer2, "capture2.bmp");
-      save_bmp(merge_buffers(2, w->buffer, w->buffer2), "merge.bmp");
-    }
 }

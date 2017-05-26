@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 10:31:37 2017 Arthur Knoepflin
-** Last update Thu May 25 16:01:11 2017 Arthur Knoepflin
+** Last update Fri May 26 03:01:19 2017 Nicolas Polomack
 */
 
 #include <sys/select.h>
@@ -68,7 +68,7 @@ static int	new_client(t_socket serv, t_client *clients, int *actual)
       i += 1;
     }
   *actual += 1;
-  my_printf("\rWait for client %s[%d/%d]\033[0m",
+  my_printf("\rWaiting for clients %s[%d/%d]\033[0m",
 	    (*actual != CLIENTS) ? "\033[31;1m" : "\033[32;1m",
 	    *actual, CLIENTS);
   return (0);

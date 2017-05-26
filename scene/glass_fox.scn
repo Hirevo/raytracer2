@@ -8,22 +8,23 @@
 	<1
 		pos="1000,-150,0"
 		rot="0,-90,0"
-		p1="1280,0"
-		p2="0,720"
-		height=50
 		material="blanc"
 	/>
+	<1
+		pos="-220,-150,0"
+		rot="0,90,0"
+		reflect=80
+		material="grey"
+        />
 	<-1
-		pos="-600,0,90"
+		pos="-415,0,130"
 		rot="-90,0,0"
-		spec_coef=1
-		rad=1
-		scale=25
+		scale=225
 		refract=90
 		refr_index=80
 		file="fox.obj"
-		reflect=20
-		material="rouge"
+		reflect=80
+		material="blanc"
 	/>
 </obj>
 <material>
@@ -34,6 +35,10 @@
 	<color
 		name="blanc"
 		color="255,255,255"
+	/>
+	<color
+		name="grey"
+		color="50,50,50"
 	/>
 	<texture
 		name="deathstar"
@@ -54,7 +59,7 @@
 </material>
 <light>
 	<point
-		pos="-500,0,100"
+		pos="-200,0,100"
 		color="blanc"
 	/>
 	<ambient
@@ -62,6 +67,6 @@
 	/>
 </light>
 <camera
-	pos="-500,0,50"
+	pos="-200,0,50"
 	rot="0,0,0"
 />

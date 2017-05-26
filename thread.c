@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Tue Mar 28 16:22:29 2017 Nicolas Polomack
-** Last update Thu May 25 22:47:24 2017 Nicolas Polomack
+** Last update Fri May 26 03:45:32 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -30,31 +30,15 @@ static void	*render_thread(void *arg)
   return (NULL);
 }
 
-void	update_frame(t_window *w, pthread_mutex_t *mutex, int bmp)
+void	update_frame(t_window *w, t_params *params)
 {
-  char	*time;
-  char	*final;
-
-  w->progress += ((1.0F / ((float)w->sizes.x)) / 2.0F) * 100.0F;
-  if (bmp || pthread_mutex_trylock(mutex) != 0)
-    return ;
-  sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
-			     w->buffer->width, w->buffer->height, 0, 0);
-  sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
-  sfRenderWindow_display(w->window);
-  if ((time = get_time_calc(w, my_int_to_char((int)w->progress))) == NULL)
+  if (!params->config.bmp)
     {
-      pthread_mutex_unlock(mutex);
-      return ;
+      sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
+				 w->buffer->width, w->buffer->height, 0, 0);
+      sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
+      sfRenderWindow_display(w->window);
     }
-  if ((final = my_fstrcat("Raytracer - ", time, 3)) == NULL)
-    {
-      pthread_mutex_unlock(mutex);
-      return ;
-    }
-  sfRenderWindow_setTitle(w->window, final);
-  free(final);
-  pthread_mutex_unlock(mutex);
 }
 
 static void	set_limits(t_thread *t, t_window *w,
@@ -108,6 +92,8 @@ int		init_thread(t_window *w, t_params *params)
   if ((params->t = malloc(sizeof(pthread_t) * params->t_count)) == NULL)
     return (-1);
   w->progress = 0;
+  if (params->config.bmp)
+    my_printf("\nProgress: 0 %%");
   pthread_mutex_init(&params->mutex, NULL);
   while (++i < params->t_count)
     {

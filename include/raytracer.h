@@ -37,6 +37,7 @@
 # define REFLECT_N	"reflect="
 # define REFRACT_N	"refract="
 # define SHINE_N	"shine="
+# define SCALE_N	"scale="
 # define REFR_IDX_N	"refr_index="
 # define SPEC_COEF_N	"spec_coef="
 # define MAT_N		"material="
@@ -111,6 +112,7 @@ typedef struct		s_p_obj
   sfVector2f		p1;
   sfVector2f		p2;
   float			rad;
+  float			scale;
   int			shine;
   float			aper;
   sfColor		col;
@@ -136,6 +138,7 @@ typedef struct		s_obj
   int			shine;
   float			rad;
   float			aper;
+  float			scale;
   sfColor		col;
   t_obj_file		*obj_parse;
   char			*file;
@@ -263,7 +266,7 @@ sfVector3f	calc_dir_vector(sfVector2i, float, float, int);
 void	set_focal_dist(t_thread *);
 
 /*
-** teslation.c
+** tesselation.c
 */
 
 void	render_frame_tesla(t_thread *);
@@ -285,13 +288,14 @@ sfColor		raytrace(t_thread *);
 /*
 ** thread.c
 */
-void	update_frame(t_window *, pthread_mutex_t *, int);
+void	update_frame(t_window *, t_params *);
 int	init_thread(t_window *, t_params *);
 
 /*
 ** render.c
 */
 void	check_render(t_params *, t_window *);
+void	update_progress(t_window *, t_params *);
 
 /*
 ** event.c
@@ -515,6 +519,7 @@ sfVector2f	get_pos2_from_node(char *, char *);
 */
 
 float	get_pc_from_node(char *, char *);
+float	get_float_from_node(char *, char *);
 
 /*
 ** parse/get_int_from_node.c
