@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 13:33:41 2017 Arthur Knoepflin
-** Last update Thu May 25 11:15:39 2017 Arthur Knoepflin
+** Last update Fri May 26 01:46:12 2017 Arthur Knoepflin
 */
 
 #include <string.h>

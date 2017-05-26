@@ -76,7 +76,7 @@ static int	treat_resp_wait_c(t_socket sock)
   if (read_socket(sock, &talk) == 0)
     {
       my_putstr("\nDisconnected, abort clustering\n");
-      return (1);
+      return (3);
     }
   else
     return (treat_resp(sock, talk));
@@ -104,9 +104,9 @@ static int	wait_connect_c(t_socket sock)
   if (stop == 2)
     {
       free(get_next_line(0));
-      return (1);
+      return (0);
     }
-  return (0);
+  return (stop);
 }
 
 int		client_cluster(t_params *p, t_window *w)
@@ -117,7 +117,7 @@ int		client_cluster(t_params *p, t_window *w)
 
   if (connect_cli(p->config.clu_cli, &sock))
     return (84);
-  if (wait_connect_c(sock))
+  if (wait_connect_c(sock) != 1)
     return (84);
   recv(sock, &zone, sizeof(t_zone), 0);
   send(sock, "ok", 2, 0);
