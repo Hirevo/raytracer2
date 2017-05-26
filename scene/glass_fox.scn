@@ -22,7 +22,7 @@
 		scale=225
 		refract=90
 		refr_index=80
-		file="fox.obj"
+		file="scene/fox.obj"
 		reflect=80
 		material="blanc"
 	/>
