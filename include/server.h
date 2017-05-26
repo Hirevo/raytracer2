@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update	Thu May 25 22:05:03 2017 Full Name
+** Last update	Fri May 26 10:32:40 2017 Full Name
 */
 
 #ifndef SERVER_H_
@@ -124,5 +124,9 @@ int	initialize_calculation(t_params *p, t_window *w, t_zone *zone);
 */
 
 void	send_results(int socket, t_window *w, t_zone *s);
+int	server_end(t_window *w, t_params *p, t_client *clients,
+			   int serv);
+int	send_zones(t_client *clients, t_params *p);
+int	gather_results(t_params *params, t_window *w, t_client *client);
 
 #endif /* !SERVER_H_ */

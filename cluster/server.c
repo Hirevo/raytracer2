@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 09:23:35 2017 Arthur Knoepflin
-** Last update	Thu May 25 22:22:38 2017 Full Name
+** Last update	Fri May 26 10:32:48 2017 Full Name
 */
 
 #include <arpa/inet.h>
@@ -64,7 +64,7 @@ void	broadcast_start(t_client *clients)
     }
 }
 
-static int	send_zones(t_client *clients, t_params *p)
+int	send_zones(t_client *clients, t_params *p)
 {
   int		i;
   char		*buf;
@@ -81,7 +81,7 @@ static int	send_zones(t_client *clients, t_params *p)
   return (0);
 }
 
-static int	gather_results(t_params *params, t_window *w, t_client
+int	gather_results(t_params *params, t_window *w, t_client
 			       *client)
 {
   int		i;
@@ -128,22 +128,7 @@ int		server_cluster(t_window *w, t_params *p)
       close(serv);
       return (84);
     }
-  if (send_zones(clients, p))
+  if ((server_end(w, p, clients, serv)) == -1)
     return (84);
-  if ((gather_results(p, w, clients)) == -1)
-    return (84);
-  close_all(clients, CLIENTS);
-  close(serv);
-  if (!p->config.bmp)
-    {
-      create_window(&w->window, "Raytracer2", p->screen_size);
-      sfTexture_updateFromPixels(w->texture, w->buffer->pixels,
-				 w->buffer->width, w->buffer->height, 0, 0);
-      sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
-      sfRenderWindow_display(w->window);
-      while (!p->config.bmp && sfRenderWindow_isOpen(w->window))
-	handle_events(w, p, &event);
-    }
-  save_buffers(w, p);
   return (0);
 }
