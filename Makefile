@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Thu May 25 21:47:50 2017 Maxime Jenny
+## Last update Thu May 25 23:22:09 2017 Nicolas Polomack
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -107,9 +107,9 @@ OBJ	=	$(SRC:.c=.o)
 
 LIBS	=	-lm -Llib/my -lmy -Llib/mycsfml -Llib/socket -lmycsfml-so -lc_graph_prog -lsocket_lib
 
-FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=$(shell pwd)/lib/mycsfml -rdynamic
+FLAGS	=	$(LIBS) $(CFLAGS) -ansi -pipe -ldl -Wl,-rpath=./lib/mycsfml -rdynamic
 
-CFLAGS	=	-Iinclude -I../include -pthread -O2 -g
+CFLAGS	=	-Iinclude -I../include -pthread -O2
 
 REDDARK	=	\033[31;2m
 
