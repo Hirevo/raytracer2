@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update	Fri May 26 10:32:40 2017 Full Name
+** Last update	Fri May 26 10:46:00 2017 Full Name
 */
 
 #ifndef SERVER_H_
@@ -16,6 +16,15 @@
 # define PORT		33000
 # define SIZE_SOCK	4096
 # define CLIENTS	2
+
+# define REDD		"\033[31;1m"
+# define REDDARK	"\033[31;2m"
+# define GREENN		"\033[32;1m"
+# define CYAN		"\033[36;1m"
+# define PINK		"\033[35;1m"
+# define BLUEE		"\033[34;1m"
+# define YEL		"\033[33;1m"
+# define RESET		"\033[0m"
 
 typedef int			t_socket;
 typedef struct sockaddr_in	t_sockaddr_in;

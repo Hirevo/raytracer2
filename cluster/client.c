@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update	Thu May 25 22:05:24 2017 Full Name
+** Last update	Fri May 26 10:45:47 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -121,8 +121,7 @@ int		client_cluster(t_params *p, t_window *w)
     return (84);
   recv(sock, &zone, sizeof(t_zone), 0);
   send(sock, "ok", 2, 0);
-  my_printf("You recieved :\nstart: %d; %d\nend: %d; %d\n", zone.s_x,
-	    zone.s_y, zone.e_x, zone.e_y);
+  my_printf("You work zone is:\nstart: [%d, %d]\nend: [%d, %d]\n", zone.s_x, zone.s_y, zone.e_x, zone.e_y);
   initialize_calculation(p, w, &zone);
   send_results(sock, w, &zone);
   close(sock);

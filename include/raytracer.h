@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update	Thu May 25 22:31:12 2017 Full Name
+** Last update	Fri May 26 10:37:29 2017 Full Name
 */
 
 #ifndef RAYTRACER_H_
@@ -54,7 +54,7 @@
 # define SOFT		"--soft="
 # define RES		"--res="
 # define DOF		"--dof="
-# define FOV		"--fov="
+# define FOV		"--fov="									  
 
 typedef struct s_window t_window;
 typedef struct s_params t_params;
