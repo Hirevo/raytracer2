@@ -338,7 +338,8 @@ sfColor		apply_effects(t_thread *, t_obj *, float);
 /*
 ** lights/refract.c
 */
-void	prepare_refract(t_thread *, float, float);
+sfVector3f	oppose(sfVector3f);
+void		prepare_refract(t_thread *, float, float);
 
 /*
 ** lights/specular.c

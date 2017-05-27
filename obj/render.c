@@ -1,11 +1,11 @@
 /*
-1;4803;0c** render.c for 42sh in /home/nicolaspolomack/graphical/raytracer2
+** render.c for 42sh in /home/nicolaspolomack/graphical/raytracer2
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu May 18 10:09:40 2017 Nicolas Polomack
-** Last update Fri May 26 18:39:03 2017 Nicolas Polomack
+** Last update Sat May 27 13:57:36 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -21,8 +21,6 @@ sfVector3f	sub_vect(sfVector3f *v1, sfVector3f *v2)
   v3.z = v2->z - v1->z;
   return (v3);
 }
-
-sfVector3f	oppose(sfVector3f);
 
 sfVector3f	get_normal_obj(t_thread *t, t_obj *obj)
 {

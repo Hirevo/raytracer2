@@ -1,0 +1,30 @@
+<obj>
+	<-1
+		file="scene/Stormtrooper.obj"
+		scale=100
+		material="red"
+	/>
+</obj>
+<material>
+	<color
+		name="white"
+		color="255,255,255"
+	/>
+	<color
+		name="red"
+		color="255,0,0"
+	/>
+</material>
+<light>
+	<point
+		pos="0,2,50"
+		color="white"
+	/>
+	<ambient
+		val=0
+	/>
+</light>
+<camera
+	pos="0,2,50"
+	rot="0,90,90"
+/>

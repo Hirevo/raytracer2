@@ -20,7 +20,6 @@
 		pos="-1000,0,0"
 		rot="-90,0,0"
 		scale=175
-		reflect=0
 		refract=90
 		refr_index=80
 		file="scene/dragon.obj"
