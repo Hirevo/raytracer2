@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 09:27:17 2017 Arthur Knoepflin
-** Last update	Fri May 26 10:46:00 2017 Full Name
+** Last update	Sat May 27 19:09:53 2017 Full Name
 */
 
 #ifndef SERVER_H_
@@ -16,6 +16,7 @@
 # define PORT		33000
 # define SIZE_SOCK	4096
 # define CLIENTS	2
+# define PERCENT	45
 
 # define REDD		"\033[31;1m"
 # define REDDARK	"\033[31;2m"
@@ -97,6 +98,12 @@ int	treat_resp(t_socket, char *);
 */
 
 int	treat_resp_cli_w(t_client *, int, char *, int);
+
+/*
+** percent.c
+*/
+
+void	print_percent(int);
 
 /*
 ** recv_parse.c

@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update	Fri May 26 10:45:47 2017 Full Name
+** Last update	Sat May 27 19:45:24 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -76,7 +76,7 @@ static int	treat_resp_wait_c(t_socket sock)
   if (read_socket(sock, &talk) == 0)
     {
       my_putstr("\nDisconnected, abort clustering\n");
-      return (1);
+      return (3);
     }
   else
     return (treat_resp(sock, talk));
@@ -104,26 +104,29 @@ static int	wait_connect_c(t_socket sock)
   if (stop == 2)
     {
       free(get_next_line(0));
-      return (1);
+      return (0);
     }
-  return (0);
+  return (stop);
 }
 
 int		client_cluster(t_params *p, t_window *w)
 {
   t_socket	sock;
   long		n;
+  sfEvent	event;
   t_zone	zone;
 
   if (connect_cli(p->config.clu_cli, &sock))
     return (84);
-  if (wait_connect_c(sock))
+  if (wait_connect_c(sock) != 1)
     return (84);
   recv(sock, &zone, sizeof(t_zone), 0);
   send(sock, "ok", 2, 0);
-  my_printf("You work zone is:\nstart: [%d, %d]\nend: [%d, %d]\n", zone.s_x, zone.s_y, zone.e_x, zone.e_y);
+  my_printf("You work zone is:\nstart:\t[%d, %d]\nend:\t[%d, %d]\n",
+	    zone.s_x, zone.s_y, zone.e_x, zone.e_y);
   initialize_calculation(p, w, &zone);
   send_results(sock, w, &zone);
+  my_putchar('\n');
   close(sock);
   return (0);
 }

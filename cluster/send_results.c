@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Thu May 25 21:37:16 2017 Maxime Jenny
-** Last update	Fri May 26 10:46:46 2017 Full Name
+** Last update	Sat May 27 19:24:18 2017 Full Name
 */
 
 #include <arpa/inet.h>
@@ -16,6 +16,7 @@
 #include <ifaddrs.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "server.h"
 #include "my.h"
 #include "socket_lib.h"

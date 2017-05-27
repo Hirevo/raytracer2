@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 10 19:13:48 2017 Arthur Knoepflin
-** Last update Tue May 23 21:52:30 2017 Arthur Knoepflin
+** Last update Fri May 26 07:37:25 2017 Nicolas Polomack
 */
 
 #include <stdlib.h>
@@ -32,7 +32,13 @@ static void	add_poly(char *line, sfVector3f *pos, t_obj_file *ret, int *j)
 {
   char		**val;
 
-  if ((val = my_split_char(line + 2, ' ')) == NULL)
+  while (*line && *line != ' ')
+    line += 1;
+  while (*line && *line == ' ')
+    line += 1;
+  if (!line)
+    return ;
+  if ((val = my_split_char(line, ' ')) == NULL)
     return ;
   if (tab_len(val) != 3)
     return ;

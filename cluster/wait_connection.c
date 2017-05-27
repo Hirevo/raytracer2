@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 10:31:37 2017 Arthur Knoepflin
-** Last update Fri May 26 03:01:19 2017 Nicolas Polomack
+** Last update Fri May 26 01:47:08 2017 Arthur Knoepflin
 */
 
 #include <sys/select.h>

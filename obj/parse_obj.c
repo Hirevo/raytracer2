@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Tue May  9 22:05:59 2017 Arthur Knoepflin
-** Last update Wed May 24 11:31:12 2017 Arthur Knoepflin
+** Last update Sat May 27 14:16:12 2017 Cédric THOMAS
 */
 
 #include <sys/types.h>
@@ -65,10 +65,8 @@ static char	**load_file(char *path)
       free(tmp);
       i += 1;
       if (i >= max)
-	{
-	  if ((ret = realloc_file(ret, &max)) == NULL)
-	    return (NULL);
-	}
+	if ((ret = realloc_file(ret, &max)) == NULL)
+	  return (NULL);
     }
   ret[i] = NULL;
   close(fd);

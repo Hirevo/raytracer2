@@ -121,7 +121,7 @@
 </material>
 <light>
 	<point
-		pos="-200,-40,150"
+	    pos="-200,-40,150"
 		color="white"
 	/>
 	<ambient

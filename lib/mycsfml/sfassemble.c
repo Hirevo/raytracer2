@@ -5,11 +5,11 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Feb 17 17:31:45 2017 Nicolas Polomack
-** Last update Wed Feb 22 02:39:56 2017 Nicolas Polomack
+** Last update Sat May 27 13:59:51 2017 Cédric THOMAS
 */
 
-#include "sfcaster.h"
 #include <SFML/Graphics.h>
+#include "sfcaster.h"
 
 t_my_framebuffer	*assemble_texture(sfTexture **tex, sfSprite **spr,
                                           int width, int height)

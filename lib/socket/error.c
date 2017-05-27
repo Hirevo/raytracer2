@@ -16,8 +16,5 @@
 int		my_put_error(char *str, int nbr)
 {
   perror(str);
-  // write(2, "an error occured with : ", 24);
-  // write(2, str, my_strlen(str));
-  // write(2, "\n", 1);
   return (nbr);
 }

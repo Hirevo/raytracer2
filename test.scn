@@ -1,29 +1,22 @@
 <obj>
 	<0
-		pos="700,10,0"
-		rot="20,0,-120"
-		rad=300
+		pos="-700,0,0"
+		rad=50
 		material="earth"
 	/>
 	<1
-		pos="1000,-150,0"
-		rot="0,-90,0"
+		pos="-1000,0,0"
+		rot="0,90,0"
 		material="blanc"
 	/>
-	<1
-		pos="-220,-150,0"
-		rot="0,90,0"
-		reflect=80
-		material="grey"
-        />
 	<-1
-		pos="-415,0,130"
-		rot="-90,0,0"
-		scale=225
+		pos="50,0,50"
+		rot="-90,0,-90"
+		scale=5000
 		refract=90
 		refr_index=80
-		file="scene/fox.obj"
-		reflect=80
+		file="scene/teapot.obj"
+		reflect=0
 		material="blanc"
 	/>
 </obj>
@@ -41,16 +34,8 @@
 		color="50,50,50"
 	/>
 	<texture
-		name="deathstar"
-		src="resources/EtoileNoire.bmp"
-	/>
-	<texture
 		name="earth"
 		src="resources/Earth.bmp"
-	/>
-	<texture
-		name="space"
-		src="resources/space.bmp"
 	/>
 	<color
 		name="green"
@@ -67,6 +52,6 @@
 	/>
 </light>
 <camera
-	pos="-200,0,50"
-	rot="0,0,0"
+	pos="-200,0,-20"
+	rot="0,0,180"
 />

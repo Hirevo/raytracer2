@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:33:15 2017 Nicolas Polomack
-** Last update Wed Apr  5 15:00:09 2017 Nicolas Polomack
+** Last update Sat May 27 13:58:40 2017 Cédric THOMAS
 */
 
 #include <math.h>
@@ -13,7 +13,7 @@
 
 float	norm(sfVector3f v1)
 {
-  return (sqrtf(powf(v1.x,2) + powf(v1.y,2) + powf(v1.z,2)));
+  return (sqrtf(powf(v1.x, 2) + powf(v1.y, 2) + powf(v1.z, 2)));
 }
 
 sfVector3f	normalize(sfVector3f v)
