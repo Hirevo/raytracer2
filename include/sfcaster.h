@@ -1,11 +1,11 @@
 /*
 ** sfcaster.h for mycsfml in /home/nicolaspolomack/graphical/wolf3d
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Wed Dec 21 13:52:00 2016 Nicolas Polomack
-** Last update Tue May 23 21:54:43 2017 Arthur Knoepflin
+** Last update	Sat May 27 21:44:52 2017 Full Name
 */
 
 #ifndef SFCASTER_H_

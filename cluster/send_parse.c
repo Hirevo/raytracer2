@@ -5,13 +5,38 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 ** 
 ** Started on  Wed May 24 21:39:29 2017 Arthur Knoepflin
-** Last update Thu May 25 19:17:46 2017 Arthur Knoepflin
+** Last update Sat May 27 13:56:19 2017 Cédric THOMAS
 */
 
 #include <sys/types.h>
 #include <sys/socket.h>
 #include "server.h"
 #include "my.h"
+
+static void	send_one(t_socket sock, t_params *p,
+			 char *buf, int i)
+{
+  if (p->objs[i].obj_parse)
+    {
+      send(sock, p->objs[i].obj_parse, sizeof(t_obj_file), 0);
+      send(sock, p->objs[i].obj_parse->p1,
+	   sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
+      recv(sock, buf, 2, 0);
+      send(sock, p->objs[i].obj_parse->p2,
+	   sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
+      recv(sock, buf, 2, 0);
+      send(sock, p->objs[i].obj_parse->p3,
+	   sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
+      recv(sock, buf, 2, 0);
+    }
+  if (p->objs[i].buffer)
+    {
+      send(sock, p->objs[i].buffer, sizeof(t_my_framebuffer), 0);
+      send(sock, p->objs[i].buffer->pixels, sizeof(sfUint8) *
+	   p->objs[i].buffer->width * p->objs[i].buffer->height * 4, 0);
+      recv(sock, buf, 2, 0);
+    }
+}
 
 static int	send_obj_ptr(t_socket sock, t_params *p)
 {
@@ -21,26 +46,7 @@ static int	send_obj_ptr(t_socket sock, t_params *p)
   i = 0;
   while (i < p->nb_objs)
     {
-      if (p->objs[i].obj_parse)
-      	{
-      	  send(sock, p->objs[i].obj_parse, sizeof(t_obj_file), 0);
-      	  send(sock, p->objs[i].obj_parse->p1,
-	       sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
-	  recv(sock, buf, 2, 0);
-      	  send(sock, p->objs[i].obj_parse->p2,
-	       sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
-	  recv(sock, buf, 2, 0);
-      	  send(sock, p->objs[i].obj_parse->p3,
-	       sizeof(sfVector3f) * p->objs[i].obj_parse->nb_poly, 0);
-	  recv(sock, buf, 2, 0);
-      	}
-      if (p->objs[i].buffer)
-      	{
-      	  send(sock, p->objs[i].buffer, sizeof(t_my_framebuffer), 0);
-      	  send(sock, p->objs[i].buffer->pixels, sizeof(sfUint8) *
-	       p->objs[i].buffer->width * p->objs[i].buffer->height * 4, 0);
-	  recv(sock, buf, 2, 0);
-      	}
+      send_one(sock, p, buf, i);
       i += 1;
     }
 }

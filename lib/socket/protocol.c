@@ -1,11 +1,11 @@
 /*
-** protocol.c for proto in /home/Maxime/perso/echat/lib/socket/
+** protocol.c for proto in /home/Maxime/perso/echat/lib/t_SOCKET/
 **
 ** Made by Maxime Jenny
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Tue May  2 15:07:24 2017 Maxime Jenny
-** Last update	Thu May 25 16:54:24 2017 Full Name
+** Last update	Sat May 27 21:22:22 2017 Full Name
 */
 
 #include <sys/ioctl.h>
@@ -55,7 +55,7 @@ char		*recup_size(long size, char *size_msg)
   return (size_msg);
 }
 
-int		send_protocol(SOCKET csock, void *msg, long size, int flags)
+int		send_protocol(t_SOCKET csock, void *msg, long size, int flags)
 {
   char		*size_msg;
   int		i;
@@ -70,7 +70,7 @@ int		send_protocol(SOCKET csock, void *msg, long size, int flags)
   return (0);
 }
 
-int		recv_protocol(SOCKET sock, void **msg, long *len, int flags)
+int		recv_protocol(t_SOCKET sock, void **msg, long *len, int flags)
 {
   int		n;
   char		size[9];

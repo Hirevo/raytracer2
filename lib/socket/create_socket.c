@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Tue May  2 15:05:07 2017 Maxime Jenny
-** Last update	Thu May 25 11:08:32 2017 Full Name
+** Last update	Sat May 27 21:20:41 2017 Full Name
 */
 
 #include <unistd.h>
@@ -13,7 +13,7 @@
 
 int		create_socket(void)
 {
-  SOCKET	sock = socket(AF_INET, SOCK_STREAM, 0);
+  t_SOCKET	sock = socket(AF_INET, SOCK_STREAM, 0);
 
   if (sock == INVALID_SOCKET)
     {

@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Thu Mar 30 21:42:40 2017 Maxime Jenny
-** Last update Thu Apr  6 15:34:10 2017 Nicolas Polomack
+** Last update Sat May 27 14:13:50 2017 Cédric THOMAS
 */
 
 #include <math.h>
@@ -54,7 +54,6 @@ sfColor		apply_tex_limited_plane(sfVector3f impact,
   col.r = obj->buffer->pixels[(v * obj->buffer->width + u) * 4];
   col.g = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 1];
   col.b = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 2];
-  //col.a = obj->buffer->pixels[(v * obj->buffer->width + u) * 4 + 3];
   col.a = 255;
   return (col);
 }

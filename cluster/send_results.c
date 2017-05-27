@@ -5,11 +5,12 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Thu May 25 21:37:16 2017 Maxime Jenny
-** Last update	Fri May 26 10:31:11 2017 Full Name
+** Last update	Sat May 27 19:24:18 2017 Full Name
 */
 
 #include <arpa/inet.h>
 #include <sys/types.h>
+#include <unistd.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <ifaddrs.h>

@@ -3,9 +3,9 @@
 ** 
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Thu May 18 10:09:40 2017 Nicolas Polomack
-** Last update Sat May 27 13:57:36 2017 Nicolas Polomack
+** Last update Sat May 27 22:57:50 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -43,7 +43,7 @@ float		intersect_obj_tri(sfVector3f *orig, sfVector3f *dir,
   sfVector3f	edge[2];
   float		uvtdet[4];
   float		inv_det;
-  
+
   edge[0] = sub_vect(&(file->p2[i]), &(file->p1[i]));
   edge[1] = sub_vect(&(file->p3[i]), &(file->p1[i]));
   pvec = cross(*dir, edge[1]);

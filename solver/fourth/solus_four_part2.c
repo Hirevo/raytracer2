@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Sat Apr 29 19:11:57 2017 
-** Last update Thu May 25 13:54:29 2017 Cédric THOMAS
+** Last update Sat May 27 13:51:53 2017 Cédric THOMAS
 */
 
 #include <math.h>
@@ -25,7 +25,7 @@ int		solver_four_part2(float *var, float *nxvar, t_solus *solus)
   if (delta_3 >= 0)
     {
       if (solus_add(solus, p3 + nxvar[3] + p4))
-	return (1);      
+	return (1);
       if (solus_add(solus, p3 + nxvar[3] - p4))
 	return (1);
     }

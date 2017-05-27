@@ -1,11 +1,11 @@
 /*
 ** args.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Thu Mar 30 02:43:14 2017 Nicolas Polomack
-** Last update Thu May 25 14:04:31 2017 Arthur Knoepflin
+** Last update	Sat May 27 19:04:24 2017 Full Name
 */
 
 #include <math.h>
@@ -93,10 +93,7 @@ static int	get_arg_value(t_params *params, int ac, char **av, int i)
   else if (my_strncmp(av[i], RES, my_strlen(RES)) == 0)
     get_res(params, av[i] + my_strlen(RES));
   else
-    {
-      my_printf("%s: Invalid argument.\n", av[i]);
-      return (-1);
-    }
+    return (-1 + 0 * my_printf("%s: Invalid argument.\n", av[i]));
   return (0);
 }
 
