@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Thu Mar 30 20:58:54 2017 Nicolas Polomack
-** Last update Wed Apr  5 19:41:33 2017 Nicolas Polomack
+** Last update Sat May 27 14:15:14 2017 Cédric THOMAS
 */
 
 #include <math.h>
@@ -28,15 +28,6 @@ float		dot2(sfVector2f u, sfVector2f v)
   return (u.x * v.x + u.y * v.y);
 }
 
-sfVector2f	create_vet2(float x, float y)
-{
-  sfVector2f	ret;
-
-  ret.x = x;
-  ret.y = y;
-  return (ret);
-}
-
 float		intersect_triangle(sfVector3f eye_p, sfVector3f dir_vector,
 				   t_obj *obj)
 {
@@ -48,8 +39,8 @@ float		intersect_triangle(sfVector3f eye_p, sfVector3f dir_vector,
 
   if ((sol = intersect_plane(eye_p, dir_vector, obj)) == -1)
     return (-1);
-  i = create_vet2(dir_vector.x * sol + eye_p.x, dir_vector.y * sol +
-                  eye_p.y);
+  i.x = dir_vector.x * sol + eye_p.x;
+  i.y = dir_vector.y * sol + eye_p.y;
   den = powf(dot2(obj->p1, obj->p2), 2) -
     dot2(obj->p1, obj->p1) * dot2(obj->p2, obj->p2);
   k1 = (dot2(obj->p1, obj->p2) * dot2(i, obj->p2) -

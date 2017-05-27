@@ -1,11 +1,11 @@
 /*
 ** parse_pos_vert.c for parse_pos_vert_obj in /home/arthur/delivery/MUL/raytracer2
-** 
+**
 ** Made by Arthur Knoepflin
 ** Login   <arthur.knoepflin@epitech.eu>
-** 
+**
 ** Started on  Tue May  9 22:36:16 2017 Arthur Knoepflin
-** Last update Wed May 10 21:04:52 2017 Arthur Knoepflin
+** Last update Sat May 27 14:16:55 2017 Cédric THOMAS
 */
 
 #include <stdlib.h>
@@ -16,7 +16,7 @@ int	tab_len(char **tab)
   int	i;
 
   i = 0;
-  while (tab[i])      
+  while (tab[i])
     i += 1;
   return (i);
 }
@@ -45,9 +45,6 @@ static int	add_pos_ret(sfVector3f *ret, int j, char *line)
     return (1);
   if (tab_len(sep) != 3)
     return (1);
-  /* ret[j].x = my_getfloat(sep[0]); */
-  /* ret[j].y = my_getfloat(sep[1]); */
-  /* ret[j].z = my_getfloat(sep[2]); */
   ret[j].x = atof(sep[0]);
   ret[j].y = atof(sep[1]);
   ret[j].z = atof(sep[2]);

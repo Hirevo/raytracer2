@@ -1,11 +1,11 @@
 /*
 1;4803;0c** render.c for 42sh in /home/nicolaspolomack/graphical/raytracer2
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Thu May 18 10:09:40 2017 Nicolas Polomack
-** Last update Fri May 26 18:39:03 2017 Nicolas Polomack
+** Last update Sat May 27 14:17:23 2017 Cédric THOMAS
 */
 
 #include <math.h>
@@ -45,7 +45,7 @@ float		intersect_obj_tri(sfVector3f *orig, sfVector3f *dir,
   sfVector3f	edge[2];
   float		uvtdet[4];
   float		inv_det;
-  
+
   edge[0] = sub_vect(&(file->p2[i]), &(file->p1[i]));
   edge[1] = sub_vect(&(file->p3[i]), &(file->p1[i]));
   pvec = cross(*dir, edge[1]);
