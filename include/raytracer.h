@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Sun Feb  5 14:37:35 2017 Nicolas Polomack
-** Last update	Sat May 27 19:05:37 2017 Full Name
+** Last update	Sat May 27 21:38:22 2017 Full Name
 */
 
 #ifndef RAYTRACER_H_
@@ -592,6 +592,7 @@ char			*get_time_calc();
 /*
 ** alloc.c
 */
+void	init_buffers_cli(t_window *w, t_params *params);
 void	init_buffers(t_window *, t_params *);
 void	prepare_objs(t_params *);
 void	save_buffers(t_window *, t_params *);

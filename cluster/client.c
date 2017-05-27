@@ -5,7 +5,7 @@
 ** Login   <arthur.knoepflin@epitech.eu>
 **
 ** Started on  Wed May 24 15:13:00 2017 Arthur Knoepflin
-** Last update	Sat May 27 19:45:24 2017 Full Name
+** Last update	Sat May 27 22:23:21 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -122,10 +122,16 @@ int		client_cluster(t_params *p, t_window *w)
     return (84);
   recv(sock, &zone, sizeof(t_zone), 0);
   send(sock, "ok", 2, 0);
-  my_printf("You work zone is:\nstart:\t[%d, %d]\nend:\t[%d, %d]\n",
+  my_printf("Your work zone is:\nstart:\t[%d, %d]\nend:\t[%d, %d]\n",
 	    zone.s_x, zone.s_y, zone.e_x, zone.e_y);
   initialize_calculation(p, w, &zone);
   send_results(sock, w, &zone);
+  if (p->config.live)
+    {
+      update_frame(w, p);
+      while (!p->config.bmp && sfRenderWindow_isOpen(w->window))
+	handle_events(w, p, &event);
+    }
   my_putchar('\n');
   close(sock);
   return (0);

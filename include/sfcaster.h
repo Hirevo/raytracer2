@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Wed Dec 21 13:52:00 2016 Nicolas Polomack
-** Last update	Fri May 26 10:44:01 2017 Full Name
+** Last update	Sat May 27 21:44:52 2017 Full Name
 */
 
 #ifndef SFCASTER_H_

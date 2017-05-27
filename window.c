@@ -1,11 +1,11 @@
 /*
-** bs.c for bootstrap raytracer in /home/nicolaspolomack/tests/raytracer_test
+** window.c for window.c in /home/Maxime/delivery/MUL/raytracer2/
 **
-** Made by Nicolas Polomack
-** Login   <nicolas.polomack@epitech.eu>
+** Made by Maxime Jenny
+** Login   <maxime.jenny@epitech.eu>
 **
-** Started on  Mon Feb  6 14:08:22 2017 Nicolas Polomack
-** Last update	Sat May 27 18:53:11 2017 Full Name
+** Started on  Sat May 27 22:05:55 2017 Maxime Jenny
+** Last update	Sat May 27 22:06:21 2017 Full Name
 */
 
 #include <SFML/Graphics.h>

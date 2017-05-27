@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu>
 **
 ** Started on  Thu May 25 10:03:57 2017 Maxime Jenny
-** Last update	Sat May 27 19:39:38 2017 Full Name
+** Last update	Sat May 27 22:23:18 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -25,6 +25,11 @@ int		initialize_calculation(t_params *p, t_window *w,
   t_thread	*t;
 
   i = 0;
+  if (p->config.live)
+    {
+      init_buffers_cli(w, p);
+      clear_pixels(w->buffer);
+    }
   p->config.offs.x = zone->s_x;
   p->config.offs.y = zone->s_y;
   p->config.end.x = zone->e_x;

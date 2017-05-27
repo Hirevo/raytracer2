@@ -1,11 +1,11 @@
 /*
 ** alloc.c for raytracer2 in /home/nicolaspolomack/graphical/raytracer2
-** 
+**
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
-** 
+**
 ** Started on  Thu Mar 30 02:39:33 2017 Nicolas Polomack
-** Last update Fri May 26 05:13:42 2017 Nicolas Polomack
+** Last update	Sat May 27 22:18:59 2017 Full Name
 */
 
 #include <stdlib.h>
@@ -13,6 +13,29 @@
 #include "sfcaster.h"
 #include "my.h"
 #include "bmp.h"
+
+void	init_buffers_cli(t_window *w, t_params *params)
+{
+  params->config.bmp = (params->screen_size.x >= 8192 ||
+			params->screen_size.y >= 8192);
+  if (params->config.bmp && !params->config.clu_cli)
+    my_printf("The requested image is too big to be printed %s%s",
+	      "inside of a window.\n",
+	      "Switching to buffer-only frame rendering.\n");
+  w->buffer = assemble_texture(&w->texture, &w->sprite,
+			       params->screen_size.x, params->screen_size.y);
+  if (params->config.stereo)
+    {
+      if (params->config.bmp)
+	w->buffer2 = my_framebuffer_create(params->screen_size.x,
+					   params->screen_size.y);
+      else
+	w->buffer2 = assemble_texture(&w->texture2, &w->sprite2,
+				      params->screen_size.x,
+				      params->screen_size.y);
+    }
+  w->sizes = params->screen_size;
+}
 
 void	init_buffers(t_window *w, t_params *params)
 {
@@ -36,7 +59,8 @@ void	init_buffers(t_window *w, t_params *params)
 					   params->screen_size.y);
       else
 	w->buffer2 = assemble_texture(&w->texture2, &w->sprite2,
-				      params->screen_size.x, params->screen_size.y);
+				      params->screen_size.x,
+				      params->screen_size.y);
     }
   w->sizes = params->screen_size;
 }
