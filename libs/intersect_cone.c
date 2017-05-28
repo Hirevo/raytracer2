@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Fri Apr 21 19:55:46 2017 Nicolas Polomack
+** Last update Sun May 28 18:26:37 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -45,23 +45,6 @@ void	calc_abcd(float *abcd, sfVector3f *restrict eye_pos,
   abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 }
 
-float	ret_value(float *abcd, float *root,
-		  float pos, float dir)
-{
-  if (root[2] == -1)
-    {
-      if (abcd[3])
-	{
-	  root[2] = ((root[0] == root[2]) ? root[1] : root[0]);
-	  if (roundf(pos + dir * root[2]) >= 0)
-	    return (-1);
-	  return (root[2]);
-	}
-      return (-1);
-    }
-  return (root[2]);
-}
-
 float	intersect_cone(sfVector3f eye_pos,
 		       sfVector3f dir_vector,
 		       t_obj *obj)
@@ -79,7 +62,14 @@ float	intersect_cone(sfVector3f eye_pos,
     {
       root[0] = (-abcd[1] - sqrtf(abcd[3])) / (2 * abcd[0]);
       root[1] = (-abcd[1] + sqrtf(abcd[3])) / (2 * abcd[0]);
-      root[2] = get_value(root);
+      if (root[0] > 0)
+	if (root[1] > 0)
+	  return ((root[0] > root[1]) ? root[1] : root[0]);
+	else
+	  return (root[0]);
+      else if (root[1] < 0)
+	return (-1);
+      return (root[1]);
     }
   return (root[2]);
 }
