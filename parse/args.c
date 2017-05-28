@@ -13,17 +13,6 @@
 #include "raytracer.h"
 #include "my.h"
 
-static int	get_index(char *flags, char arg)
-{
-  int		i;
-
-  i = -1;
-  while (flags[++i])
-    if (flags[i] == arg)
-      return (i);
-  return (-1);
-}
-
 static void	init_links(t_params *params, int *flags[4])
 {
   my_mset(params, 0, sizeof(t_params));

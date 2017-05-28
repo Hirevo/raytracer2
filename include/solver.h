@@ -5,8 +5,9 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Sat Apr 29 13:48:34 2017 
-** Last update Sun Apr 30 16:31:46 2017 
+** Last update Sun May 28 12:17:57 2017 Arthur Knoepflin
 */
+
 #ifndef SOLVER_H_
 # define SOLVER_H_
 
@@ -52,7 +53,7 @@ t_solus		*solver_three(float *poly);
 /*
 **FOURTH
 */
-t_solus         *solver_four(float *poly);
+t_solus		*solver_four(float *poly);
 int		solver_four_part2(float *var, float *nxvar, t_solus *solus);
 int		solver_four_part1(float *var, float *nxvar, t_solus *solus);
 

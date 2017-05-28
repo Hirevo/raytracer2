@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Feb 17 17:31:45 2017 Nicolas Polomack
-** Last update Sat May 27 13:59:51 2017 Cédric THOMAS
+** Last update Sun May 28 17:45:37 2017 Arthur Knoepflin
 */
 
 #include <SFML/Graphics.h>

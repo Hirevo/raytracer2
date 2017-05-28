@@ -5,17 +5,15 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Jan  6 19:15:36 2017 Nicolas Polomack
-** Last update Sun May 28 15:12:19 2017 Nicolas Polomack
+** Last update Sun May 28 18:01:21 2017 Nicolas Polomack
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
 #include "raytracer.h"
 #include "my.h"
 #include "bmp.h"
@@ -70,7 +68,7 @@ t_bmp_header	set_header(t_bmp_header head,
 }
 
 t_bmp_info_header	set_info(t_bmp_info_header info,
-			 t_my_framebuffer *buffer, int pad)
+				 t_my_framebuffer *buffer, int pad)
 {
   info.size = 40;
   info.width = buffer->width;

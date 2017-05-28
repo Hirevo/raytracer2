@@ -578,6 +578,12 @@ int	convert_obj(t_params *, t_p_obj *);
 int	parse_args(t_params *, int, char **);
 
 /*
+** parse/args_2.c
+*/
+
+int	get_index(char *, char);
+
+/*
 ** parse/set_camera.c
 */
 
