@@ -1,12 +1,11 @@
 <obj>
-	<0
-		pos="-150, -60, 80"
-		rad=30
-		spec_coef=50
-		reflect=0
+	<-1
+		pos="-550, -20, 40"
+		rot="-90, 0, 0"
 		refract=90
 		refr_index=80
-		material="grey"
+		scale=5500
+		file="scene/dragon.obj"
 	/>
 	<0
 		pos="-75, -20, 75"
@@ -122,8 +121,8 @@
 </material>
 <light>
 	<point
-	    pos="-200,-40,150"
-		color="white"
+	    pos="-400,-40,150"
+	    color="white"
 	/>
 	<ambient
 		val=10
