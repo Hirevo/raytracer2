@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 19:22:36 2016 Nicolas Polomack
-** Last update Wed May 10 17:06:12 2017 Nicolas Polomack
+** Last update Sun May 28 17:52:29 2017 Arthur Knoepflin
 */
 
 #ifndef BMP_H_
@@ -22,7 +22,7 @@ typedef struct		s_bmp_header {
   unsigned short	reserved1;
   unsigned short	reserved2;
   unsigned int		off_bits;
-}			bmp_header;
+}			t_bmp_header;
 
 # pragma pack(pop)
 
@@ -40,7 +40,7 @@ typedef struct		s_bmp_info_header {
   int			yppm;
   unsigned int		clr_used;
   unsigned int		clr_important;
-}			bmp_info_header;
+}			t_bmp_info_header;
 
 # pragma pack(pop)
 
@@ -56,10 +56,13 @@ int			get_pad(int);
 /*
 ** save_bmp.c
 */
-void		save_bmp(t_my_framebuffer *, char *);
-int		calculate_pad(t_my_framebuffer *);
-void		write_pixel_buffer(t_my_framebuffer *, int, unsigned char *, int);
-bmp_header	set_header(bmp_header, t_my_framebuffer *, int);
-bmp_info_header	set_info(bmp_info_header, t_my_framebuffer *, int);
+void			save_bmp(t_my_framebuffer *, char *);
+int			calculate_pad(t_my_framebuffer *);
+void			write_pixel_buffer(t_my_framebuffer *,
+					   int,
+					   unsigned char *,
+					   int);
+t_bmp_header		set_header(t_bmp_header, t_my_framebuffer *, int);
+t_bmp_info_header	set_info(t_bmp_info_header, t_my_framebuffer *, int);
 
 #endif /* !BMP_H_ */

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Jan  6 19:15:36 2017 Nicolas Polomack
-** Last update Sun May 28 12:15:42 2017 Arthur Knoepflin
+** Last update Sun May 28 17:51:01 2017 Arthur Knoepflin
 */
 
 #include <unistd.h>
@@ -22,8 +22,8 @@
 void			save_bmp(t_my_framebuffer *buffer, char *name)
 {
   int			fd;
-  bmp_header		head;
-  bmp_info_header	info;
+  t_bmp_header		head;
+  t_bmp_info_header	info;
   unsigned char		*p_buffer;
   int			pad;
 
@@ -55,7 +55,7 @@ int	calculate_pad(t_my_framebuffer *buffer)
   return (pad);
 }
 
-bmp_header	set_header(bmp_header head,
+t_bmp_header	set_header(t_bmp_header head,
 			   t_my_framebuffer *buffer, int pad)
 {
   head.type = 0x4D42;
@@ -67,8 +67,8 @@ bmp_header	set_header(bmp_header head,
   return (head);
 }
 
-bmp_info_header	set_info(bmp_info_header info,
-			 t_my_framebuffer *buffer, int pad)
+t_bmp_info_header	set_info(t_bmp_info_header info,
+				 t_my_framebuffer *buffer, int pad)
 {
   info.size = 40;
   info.width = buffer->width;

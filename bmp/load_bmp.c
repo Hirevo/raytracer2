@@ -5,17 +5,15 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Wed Dec 21 19:31:11 2016 Nicolas Polomack
-** Last update Wed May 24 11:31:06 2017 Arthur Knoepflin
+** Last update Sun May 28 17:53:50 2017 Arthur Knoepflin
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
 #include "raytracer.h"
 #include "my.h"
 #include "bmp.h"
@@ -25,15 +23,15 @@ t_my_framebuffer	*load_bmp(char *filename, sfSprite **spr,
 				  sfTexture **tex)
 {
   int			fd;
-  bmp_header		head;
-  bmp_info_header	info;
+  t_bmp_header		head;
+  t_bmp_info_header	info;
   t_my_framebuffer	*buffer;
 
   my_printf("Loading: %s...", filename);
   if ((fd = open(filename, O_RDONLY)) == -1 && my_printf(" Failed\n"))
     return (NULL);
-  read(fd, &head, sizeof(bmp_header));
-  read(fd, &info, sizeof(bmp_info_header));
+  read(fd, &head, sizeof(t_bmp_header));
+  read(fd, &info, sizeof(t_bmp_info_header));
   if (spr == NULL || tex == NULL)
     buffer = my_framebuffer_create(info.width, info.height);
   else
@@ -41,7 +39,7 @@ t_my_framebuffer	*load_bmp(char *filename, sfSprite **spr,
   if (buffer == NULL && my_printf(" Failed\n"))
     return (NULL);
   read(fd, &head, head.off_bits -
-       sizeof(bmp_header) - sizeof(bmp_info_header));
+       sizeof(t_bmp_header) - sizeof(t_bmp_info_header));
   read_pixel_buffer(buffer, fd,
 		    info.bits_per_pixels, get_pad(info.width));
   close(fd);
