@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 ** 
 ** Started on  Tue Apr 18 20:43:08 2017 Arthur Knoepflin
-** Last update Thu Apr 20 21:45:45 2017 Arthur Knoepflin
+** Last update Sun May 28 18:28:36 2017 Arthur Knoepflin
 */
 
 #include "raytracer.h"
@@ -48,10 +48,6 @@ sfColor		get_col_from_mat(char *obj,
   if ((name_mat = get_val_from_node(obj, name)) == NULL)
     return (ret);
   if ((mat = search_mat(name_mat, l_mat)) == NULL)
-    {
-      my_puterror("ERREUR: Une texture est attribué sur une\
- lumière ou reference vers une couleur indéfinie\n");
-      return (ret);
-    }
+    return (ret);
   return (mat->color);
 }

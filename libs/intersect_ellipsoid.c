@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sat Apr 29 22:08:51 2017 
+** Last update Sun May 28 17:59:31 2017 Arthur Knoepflin
 */
 
 #include <math.h>
@@ -18,15 +18,15 @@ char	*normal = "get_normal_elli";
 char	*texture = "apply_tex_elli";
 int	id = 13;
 
-static double           delt(double a, double b, double c)
+static double	delt(double a, double b, double c)
 {
   return ((b * b) - (4 * a * c));
 }
 
-static double           solve(sfVector3f equa, double delta)
+static double	solve(sfVector3f equa, double delta)
 {
-  double                msol1;
-  double                msol2;
+  double	msol1;
+  double	msol2;
 
   if (delta == 0 && equa.x != 0)
     {
@@ -55,7 +55,7 @@ float		intersect_elli(sfVector3f eye,
   float		c;
   sfVector3f    equa;
   float         sol;
-  double        delta;
+  double	delta;
 
   if ((obj->p1.x * obj->p1.y * obj->p2.x) == 0)
     return (-1);

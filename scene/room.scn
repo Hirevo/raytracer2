@@ -6,6 +6,7 @@
 		reflect=0
 		refract=90
 		refr_index=80
+		material="grey"
 	/>
 	<0
 		pos="-75, -20, 75"
