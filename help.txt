@@ -1,8 +1,42 @@
-Usage: raytracer2 [-u] [-S] scene_file
+Usage: raytracer2 [-uSch] [--cluster="ip"] [--res=width,height] [--ssaa=nb] [--soft=nb]
+       		  [--fov=nb] [--dof=nb] [--tesla=nb] [--depth=nb] [--stereo] scene_file
 
 Renders the scene for the provided scene_file.
 
   -u
 	Live updates the rendered part of the image as the laoding progresses.
   -S
-	Enables stereoscopic 3D rendering. This flag may disable some effects such as depth of field or anti-aliasing.
+	Enables stereoscopic anaglyph 3D rendering. This flag may disable some effects such as depth of field or anti-aliasing.
+  -c
+	Enable cluster mode as the master server, clients can then connect and start computing parts of the image
+  -h
+	Displays this help message
+
+  --cluster="ip"
+	ip: an ip address (i.e.: 192.168.1.11)
+	Enable cluster mode as a client and tries to connect to the specified ip address
+
+  --res=width,height
+	Sets the resolution of the rendered image to the one specified
+
+  --ssaa=nb
+	Enables SSAA (SuperSampled Anti-Aliasing) with the specified resolution multiplier
+
+  --soft=nb
+	Enables soft shadows with the specified number of samples per shadow computation
+
+  --fov=nb
+	Sets the fov to the specified value
+
+  --dof=nb
+	Enables depth-of-field with the specified number of samples per pixel
+
+  --tesla=nb
+	Generates an image with the specified value as the size of the rendered pixels.
+	The image is then re-rendered at a higher level of detail, until the tesselation level equals 1.
+
+  --depth=nb
+	Sets the limit for how much reflection and refraction can a single ray perform to the specified value.
+
+  --stereo
+	The effect is the same as the "-S" flag. Enables stereoscopic anaglyph 3D rendering.
