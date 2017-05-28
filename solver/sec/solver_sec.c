@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Sat Apr 29 15:04:44 2017 
-** Last update Sat Apr 29 21:47:41 2017 
+** Last update Sun May 28 12:33:19 2017 Arthur Knoepflin
 */
 #include <stdlib.h>
 #include <math.h>
@@ -13,8 +13,8 @@
 
 t_solus		*solver_sec(float *poly)
 {
-  float         delta;
-  t_solus       *solus;
+  float		delta;
+  t_solus	*solus;
 
   if ((solus = init_solus()) == NULL)
     return (NULL);

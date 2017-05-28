@@ -1,11 +1,11 @@
 /*
-1;4803;0c** render.c for 42sh in /home/nicolaspolomack/graphical/raytracer2
+** render.c for 42sh in /home/nicolaspolomack/graphical/raytracer2
 **
 ** Made by Nicolas Polomack
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Thu May 18 10:09:40 2017 Nicolas Polomack
-** Last update Sat May 27 14:17:23 2017 Cédric THOMAS
+** Last update Sun May 28 12:32:59 2017 Arthur Knoepflin
 */
 
 #include <math.h>

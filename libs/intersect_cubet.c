@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 **
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sat May 27 14:04:21 2017 Cédric THOMAS
+** Last update Sun May 28 12:33:47 2017 Arthur Knoepflin
 */
 
 #include <math.h>
@@ -17,7 +17,7 @@
 
 char	*intersect = "intersect_cubet";
 char	*normal = "get_normal_cubet";
-char    *texture = "apply_tex_cubet";
+char	*texture = "apply_tex_cubet";
 int	id = 15;
 
 static void	fill_equa(float *equa,

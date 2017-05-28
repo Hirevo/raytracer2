@@ -5,17 +5,15 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Fri Jan  6 19:15:36 2017 Nicolas Polomack
-** Last update Fri Mar 17 12:13:26 2017 Nicolas Polomack
+** Last update Sun May 28 12:15:42 2017 Arthur Knoepflin
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
 #include "raytracer.h"
 #include "my.h"
 #include "bmp.h"

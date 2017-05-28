@@ -5,7 +5,7 @@
 ## Login   <nicolas.polomack@epitech.eu>
 ##
 ## Started on  Tue Nov 15 09:05:43 2016 Nicolas Polomack
-## Last update Fri May 26 18:49:36 2017 Nicolas Polomack
+## Last update Sun May 28 12:20:54 2017 Arthur Knoepflin
 ##
 
 MAKESO	=	make --no-print-directory -sC libs
@@ -62,6 +62,7 @@ SRC	=	calc/colors.c				\
 		obj/render.c				\
 		parse/proc.c				\
 		parse/args.c				\
+		parse/args_2.c				\
 		parse/add_obj.c				\
 		parse/parse_from_file.c			\
 		parse/parse_obj.c			\

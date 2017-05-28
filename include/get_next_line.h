@@ -5,15 +5,15 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Jan  2 12:57:44 2017 Nicolas Polomack
-** Last update Mon May 22 20:02:23 2017 Nicolas Polomack
+** Last update Sun May 28 12:17:24 2017 Arthur Knoepflin
 */
+
+#ifndef GET_NEXT_LINE_H_
+# define GET_NEXT_LINE_H_
 
 #ifndef READ_SIZE
 # define READ_SIZE (4096)
 #endif /* !READ_SIZE */
-
-#ifndef GET_NEXT_LINE_H_
-# define GET_NEXT_LINE_H_
 
 char	*get_next_line(const int);
 int	get_line_str(const int, char **, int);

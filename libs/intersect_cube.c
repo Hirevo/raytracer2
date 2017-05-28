@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Fri Apr  7 14:20:21 2017 Nicolas Polomack
+** Last update Sun May 28 12:24:38 2017 Arthur Knoepflin
 */
 
 #include <float.h>
@@ -76,7 +76,7 @@ static int	z_plane(sfVector3f eye, sfVector3f dir,
 {
   float		t1;
   float		t2;
-  int           inter;
+  int		inter;
 
   inter = 1;
   if (dir.z == 0)
