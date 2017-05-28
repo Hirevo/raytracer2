@@ -4,7 +4,7 @@
 		rot="-90, 0, 0"
 		refract=90
 		refr_index=80
-		scale=5500
+		scale=8000
 		file="scene/dragon.obj"
 	/>
 	<0
@@ -105,6 +105,10 @@
 	<color
 		name="blueish"
 		color="41,128,185"
+	/>
+	<color
+		name="rouge"
+		color="255,0,0"
 	/>
 	<texture
 		name="earth"

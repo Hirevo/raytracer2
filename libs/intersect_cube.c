@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sun May 28 12:24:38 2017 Arthur Knoepflin
+** Last update Sun May 28 18:14:31 2017 Nicolas Polomack
 */
 
 #include <float.h>
@@ -116,25 +116,4 @@ float	intersect_cube(sfVector3f eye,
     return (t[0]);
   else
     return (-1);
-}
-
-void		get_normal_cube(t_thread *t, t_obj *obj)
-{
-  if (fabsf(t->normal.x - obj->rad) < 0.01)
-    t->normal = v3f(1, 0, 0);
-  else if (fabsf(t->normal.x + obj->rad) < 0.01)
-    t->normal = v3f(-1, 0, 0);
-  else if (fabsf(t->normal.y - obj->rad) < 0.01)
-    t->normal = v3f(0, 1, 0);
-  else if (fabsf(t->normal.y + obj->rad) < 0.01)
-    t->normal = v3f(0, -1, 0);
-  else if (fabsf(t->normal.z - obj->rad) < 0.01)
-    t->normal = v3f(0, 0, 1);
-  else if (fabsf(t->normal.z + obj->rad) < 0.01)
-    t->normal = v3f(0, 0, -1);
-}
-
-sfColor	apply_tex_cube(sfVector3f imp, t_obj *obj)
-{
-  return (obj->col);
 }
