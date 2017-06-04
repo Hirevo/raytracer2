@@ -85,7 +85,6 @@ int		recv_protocol(t_SOCKET sock, void **msg, long *len, int flags)
       while (count_place(sock, my_getnbr(size)) != 1);
       if (((*msg) = malloc(my_getnbr(size) + 1)) == NULL)
 	return (-1);
-      printf("%d\n", my_getnbr(size));
       if ((n = recv(sock, *msg, my_getnbr(size), flags)) == -1)
 	{
 	  free(*msg);

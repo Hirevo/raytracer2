@@ -1,24 +1,30 @@
 <obj>
-	<9
-		pos="0,0,0"
-		p1="10,10"
-		p2="10,10"
-		material="white"
+	<-1
+		pos="0,0,1"
+		rot="-90,0,-90"
+		file="scene/test.obj"
+		material="red"
 	/>
-<obj/>
+</obj>
 <material>
+	<color
+		name="red"
+		color="255,0,0"
+	/>
 	<color
 		name="white"
 		color="255,255,255"
 	/>
-<material/>
+</material>
 <light>
 	<point
-		pos="0,10,0"
+		pos="4,0,0"
 		color="white"
 	/>
-<light/>
+	<ambient
+		val=10
+	/>
+</light>
 <camera
-	pos="10,0,0"
-	rot="0,0,0"
+	pos="4,0,0"
 />

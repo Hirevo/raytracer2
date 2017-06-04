@@ -1,17 +1,5 @@
 <obj>
-	<11
-		pos="0,0,0"
-		rot="0,0,0"
-		p1="100,10"
-		material="rouge"
-	/>
-	<1
-		pos="0,0,-100"
-		rot="0,0,0"
-		rad=20
-		reflect=0
-		material="blanc"
-		spec_coef=50
+	<14
 	/>
 </obj>
 <material>
@@ -34,11 +22,7 @@
 		color="blanc"
 	/>
 	<point
-		pos="-150,-100,100"
-		color="blanc"
-	/>
-	<point
-		pos="20,10,100"
+		pos="-200,0,130"
 		color="blanc"
 	/>
 	<ambient
@@ -46,6 +30,6 @@
 	/>
 </light>
 <camera
-	pos="-20,0,0"
+	pos="-10,0,0"
 	rot="0,0,0"
 />

@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Mon Feb  6 23:30:22 2017 Nicolas Polomack
-** Last update Sun May 28 18:26:37 2017 Nicolas Polomack
+** Last update Tue May 30 21:04:43 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -76,7 +76,10 @@ float	intersect_cone(sfVector3f eye_pos,
 
 void	get_normal_cone(t_thread *t, t_obj *obj)
 {
-  t->normal.z *= -tanr(obj->aper);
+  if (t->normal.z > 0)
+    t->normal.z *= tanr(obj->aper);
+  else
+    t->normal.z *= -tanr(obj->aper);
 }
 
 sfColor	apply_tex_cone(sfVector3f imp, t_obj *obj)

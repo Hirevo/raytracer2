@@ -5,7 +5,7 @@
 ** Login   <nicolas.polomack@epitech.eu>
 ** 
 ** Started on  Sat Apr  1 01:18:21 2017 Nicolas Polomack
-** Last update Sun May 28 12:40:38 2017 Arthur Knoepflin
+** Last update Sun Jun  4 22:33:37 2017 Nicolas Polomack
 */
 
 #include <math.h>
@@ -45,7 +45,7 @@ void	get_normal_closed_cone(t_thread *t, t_obj *obj)
     {
       t->normal.x = 0;
       t->normal.y = 0;
-      t->normal.z = -100;
+      t->normal.z = -1;
       return ;
     }
   t->normal.z *= -tanr(obj->aper);

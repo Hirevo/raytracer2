@@ -1,12 +1,8 @@
 <obj>
 	<1
 		pos="0,0,-25"
+		reflect=30
 		material="blanc"
-	/>
-	<1
-		pos="150,0,0"
-		material="blanc"
-		rot="0,-60,0"
 	/>
 	<0
 		pos="0,0,0"
@@ -15,7 +11,7 @@
 		reflect=20
 		material="saumon"
 		spec_coef=50
-	/>						
+	/>
 </obj>
 <material>
 	<color
@@ -30,16 +26,33 @@
 		name="saumon"
 		color="226,120,81"
 	/>
+	<color
+		name="vert"
+		color="0,255,0"
+	/>
+	<color
+		name="bleu"
+		color="0,0,255"
+	/>
 </material>
 <light>
 	<point
 		pos="-150,100,100"
-		color="blanc"
+		color="bleu"
+	/>
+	<point
+		pos="-150,-100,100"
+		color="vert"
+	/>
+	<point
+		pos="-150,0,100"
+		color="rouge"
 	/>
 	<ambient
 		val=10
 	/>
 </light>
 <camera
-	pos="-200,0,0"
+	pos="0,-300,150"
+	rot="0,30,90"
 />

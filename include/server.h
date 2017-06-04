@@ -15,7 +15,7 @@
 
 # define PORT		33000
 # define SIZE_SOCK	4096
-# define CLIENTS	2
+# define CLIENTS	3
 # define PERCENT	45
 
 # define REDD		"\033[31;1m"
